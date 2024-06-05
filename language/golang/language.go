@@ -95,12 +95,30 @@ func (l *Language) Execute(logger *log.Logger, repositoryPath string) (coverage 
 		return 0, pkgerrors.WithMessage(pkgerrors.WithStack(err), commandOutput)
 	}
 
+	modCache, err := util.CommandWithResult(context.Background(), logger, &util.Command{
+		Command: []string{
+			"go",
+			"env",
+			"GOMODCACHE",
+		},
+
+		Directory: repositoryPath,
+	})
+	if err != nil {
+		return 0, pkgerrors.WithMessage(pkgerrors.WithStack(err), commandOutput)
+	}
+	modCache = strings.TrimSpace(modCache)
+
 	commandOutput, err = util.CommandWithResult(context.Background(), logger, &util.Command{
 		Command: []string{
 			tools.SymflowerPath, "test",
 			"--language", "golang",
 			"--workspace", repositoryPath,
 			"--coverage-file", coverageFilePath,
+		},
+
+		Env: map[string]string{
+			"GOMODCACHE": modCache,
 		},
 
 		Directory: repositoryPath,
