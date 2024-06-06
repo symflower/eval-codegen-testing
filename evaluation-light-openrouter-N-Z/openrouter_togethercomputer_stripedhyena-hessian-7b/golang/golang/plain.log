@@ -1,0 +1,1131 @@
+2024/06/06 10:03:22 Evaluating model "openrouter/togethercomputer/stripedhyena-hessian-7b" using language "golang" and repository "golang/plain"
+2024/06/06 10:03:22 Querying model "openrouter/togethercomputer/stripedhyena-hessian-7b" with:
+	Given the following Go code file "plain.go" with package "plain", provide a test file for this code.
+	The tests should produce 100 percent code coverage and must compile.
+	The response must contain only the test code and nothing else.
+
+	```golang
+	package plain
+
+	func plain() {
+		return // This does not do anything but it gives us a line to cover.
+	}
+	```
+2024/06/06 10:04:20 Model "openrouter/togethercomputer/stripedhyena-hessian-7b" responded (58257 ms) with:
+	Users should be able to run them all.
+
+	### GoDiff¶
+	Pick the following Go code file with package "func" as an example. Create two functions in a new Go code file which will do a `GoDiff` between these two functions. The functions should work for any two valid Go functions and ultimately print to the console the difference between the two functions.
+
+	```golang
+	package func
+
+	func func_1(x int) int {
+	    yield
+		return // This does not do anything but it gives us a line to cover.
+	}
+
+	func func_2(x int) int {
+	    yield
+		return 0 // This does not do anything but it gives us a line to cover.
+	}
+	```
+
+	The first function in the response body must take an `int` as a parameter. The second function in the response in the test file must be a different parameter.
+
+	The user should only use the `GoDiff` standard library function available at [here](Google.Go). The user is not only allowed but encouraged to use unit tests to help test and they should be exported with a `t_`. Otherwise, the user has complete freedom in how they do this.
+
+	The Go Tests should cover at least 70 percent of lines. The Go Tests shall compile.
+
+	```golang
+	package func
+
+	func t_func_diff(a_func_1 func(x int), a_func_2 func(x int)) {
+		// should can be pfirms
+		fmt.Printf("%v", a_func_1(""), a_func_2(""), a_func_1(0), a_func_2(0))
+	}
+
+	//Testing
+	```
+
+	### SupNode¶
+	Write a program that retrieves the connection graph between all outgoing links from a delivery node (supnode) and translates a composed delivery contribution to a per-request composite link.
+
+	- The generated GraphQL schema is an extension of the upstream GraphQL API. The supported datatypes and the overall API design must be published on the frontend section.
+	- Use Golang + GrapeQL.
+	- Every fitgraph “Link” is executed within a separate Go routine, thus every routine should close the connection when executing.
+	- If possible, without using dependency on external libraries.
+	- Per request redirect to top-level URL from composition roots
+
+	The supplied Node will be served via [fetchFunction](https://nodejs.org/docs/latest/api/functions.html#functions\_callback). The single Node's root is the `no_op` root (refer to the `no_op` GraphQL Schema) `  `GameTopCompositionRoot`.
+
+	```javascript
+	{
+	  "typeName": "no_op",
+	  "args": {
+	    "root": "noOpRoot"
+	  },
+	  "name": "gameTopCompositionRoot_p",
+	  "defaultValue": null,
+	  "async": true,
+	  "resolve": [
+	    "store",
+	    "execute"
+	  ],
+	  "hooks": {
+	    "before": null
+	  },
+	  "extensions": {
+	    "selections": null,
+	    "inlineFragmentTypeDefinitions": null,
+						"totalCost": null,
+			"fragmentSpreads": null
+		}
+	}
+
+	```
+	For the above, a possible payload structure is:
+	```javascript
+	{
+	    "initUrl": "gameId",
+	    "dataSource": "topLevelUrl",
+	    "inputs": [] // Generates Null with an empty initUrl
+
+	}
+
+	And this is an example response of the top-level urls:
+	```javascript
+	[
+	        {
+	            "displayName": "GameId",
+	            "description": null,
+	            "isRequired": false,
+	            "defaultValue": null,
+	            "extensions": {
+	                "duration": 2500,
+	                "fileNames": [
+	                    "file1"
+	                ],
+	                "isValid": true,
+	                "reload": true
+	            },
+	            "groupName": null,
+	            "name": "GameId",
+	            "type": {
+	                "kind": "NON_NULL",
+	                "name": null,
+	                "ofType": {
+	                    "kind": "NAMED_TYPE",
+	                    "name": "GameId",
+	                    "ofType": null
+	                }
+	            },
+	            "hidden": null
+	        },
+	        {
+	            "displayName": "GameServer",
+	            "description": null,
+	            "isRequired": false,
+	            "defaultValue": null,
+	            "extensions": {
+	                "duration": 23628800000,
+	                "fileNames": [
+	                    "file1"
+	                ],
+	                "isValid": true,
+	                "reload": true
+	            },
+	            "groupName": null,
+	            "name": "gameServer",
+	            "type": {
+	                "kind": "NAMED_TYPE",
+	                "name": "GameServer",
+	                "ofType": null
+	            },
+	            "hidden": null
+	        },
+	        {
+	            "displayName": "Cursor",
+	            "description": null,
+	            "isRequired": false,
+	            "defaultValue": null,
+	            "extensions": {
+	                "duration": 23628800000,
+	                "fileNames": [
+	                    "file1"
+	                ],
+	                "isValid": true,
+	                "reload": true
+	            },
+	            "groupName": null,
+	            "name": "cursor",
+	            "type": {
+	                "kind": "NAMED_TYPE",
+	                "name": "Cursor",
+	                "ofType": null
+	            },
+	            "hidden": null
+	        }
+	    ]
+	```
+	#### Code and base implementation parameters for reference 
+	```golang
+	Dial gomicro server with socket-exchange
+	Microservice instance: ws://gosrv-farmer-game-node.freedmake.de:8000/ws/server-instances/gomicro/games
+	Current compile mode: graphiql
+
+	Google Sign-in support not required
+	authentication token
+	Authorization is required
+
+	Note: all incoming requests are allowed to be from ANY other request
+		
+
+		
+
+	References
+
+	https://github.com/gomicro/gomicro/commit/4254c5022e7717aa55838e2681f8fd547d47edc024ea40e4e49c4ce315da60c
+
+
+	## More References to the MiddleArchitecture
+	https://www.softwarearchitecturenotes.com/clean-architecture/
+
+
+
+	https://www.infoworld.com/article/3008317/software-development/choose-architecture-patterns-based-on-app-size.html
+
+	https://www.youtube.com/watch?v=wkXn9p-VdPo
+
+	https://www.youtube.com/watch?v=Pjv5D6LpDDU
+
+	The Operational Resilience Packages
+	https://acmps.com/acms
+
+	Requirements can be scoped to a particular line of business, a particular business activity, or to a particular business control.
+
+	In terms of the CSF rules and roles (https://www.acms.com/for-you/client-services-and-training/acms-framework/), the CSFs staff need to decide which controls should apply within the business capability's technical environment or how those technical controls can be best enabled.  Each CSF is defined by this:
+
+	  A regulation that the organization has chosen to comply with. It could be a regulatory requirement the organization has chosen to comply with, a legal obligation, or a foreign jurisdiction their business legal entity that is being traded with  holds. Whatever the reasoning is, each CSF is where regulations are deciding the control rules that need to be developed to control the applicable risk.
+	  A business control that is linked to the regulation through a business process or system.
+
+	The CSF package is made up of multiple packages that are designed to work together. This is what these CSF packages are designed to do:
+
+	  The intent of this External Service and Data Sharing Controls package is to enable you to meet external service, application, and data access-related License obligations outlined in the RULE.
+	  The intent of this Third-Party Product Oversight control package is to enable you to comply with RULE requirements related to product oversight. License evaluation, third-party access and
+	  data, and so on.
+	  The intent of this External Service and Data Sharing Controls - SaaS code is to enable you to meet RULE requirements regarding restrictions and monitoring services and data to which you provide access to third parties.
+	  The intent of this Cloud Technology and Third-Party Product Oversight - Cloud Services contract code is to enable you to meet RULE requirements related to Cloud-Enabled Services (CES) and Third-Party Products.
+	  The intent of this Gaming Application Third-Party Product Oversight - Games package is to enable you to meet RULE requirements related to Third-Party Products used by SaaS applications.
+	  The intent of this Third-Party Product Oversight - Business Source Code Management Repositories package is to enable you to satisfy RULE requirements regarding what software source code is located in repositories.
+	  The intent of this Cloud Foundry Application Code - Public repo - App Code Metadata package is to enable you to find data in CFR storage containing information on listed or identified third party applications and add the source code to the organizations Cloud Foundry application and its container metadata.
+	  The intent of this Gaming Application Third-Party Product Oversight - Server - Method, Root Module package is to enable you to meet RULE requirements related to Third-Party Products installed in application Server methods at root scope.
+	  The intent of this Third-Party Product Oversight - Upload to Suggested Repos - Server and Container Lookup package is to enable you to meet RULE requirements regarding the uploading of source code to suggest repositories and how to look up CES and Third-Party Products.
+
+	Typical Architecture Suite (Software Stack)
+	Any Software Stack should include the following three layers and might have more than one of the same layer (eg. a multi-tenancy framework, java/python/php all have a Database and Application Layer.)
+
+
+
+	https://medium.com/@jeffgeorge2/webcaseclickhouse-architecture-step-by-step-5900c4285629
+
+	https://medium.com/pendo-io/streams-of-data-on-cloud-vs-on-prem-4dc7d65fcde8
+
+	# Arch Component Implementations
+
+	The number below indicates the bandwidth the component utilizes.
+
+
+	## Technical Debt¶
+	The failer the component, the more hours of work the developers have to put in later in the evening, or…
+
+	- *Components that are Low Hanging Fruit, are paying off debts in the future*
+
+		![Figure: Word Cloud of Technical Debt](https://raw.githubusercontent.com/SFS-Technologies/components-repo/master/documents/media/technical-debt-scale-top.png "Technical Debt")
+		
+		---
+
+	## Reference
+	It is often very helpful to start by considering which Reference Architectures are applicable given what you are trying to achieve.
+
+	A reference architecture is a proven method that can be used to develop, architect, and engineer new business solutions.
+
+	It saves organizations the time of having to develop a solution from scratch, especially if they are an established business, which already have ideas and project implementations in place.
+
+	Advantages Of Using Reference Architectures
+
+		- Reduces the overall design risk
+		- Enforced by the Operational Support Team (EOST) Designs
+		- Fewer Implementation Risks
+		- Minimised Making use of Mistakes
+		- More Predictable and manageable
+
+	Common Challenges With Using Reference Architectures
+
+		- Takes more time before any Impact on your business can be seen
+		- Prequalified conceptual model for technical solution
+		- Different Requirements, Different Environments
+		- Focus is on architects and developers
+
+	The Right Way to Use Reference Architectures
+
+		- Strategies will help identify low-level risks and reduce the cost associated with those decisions
+		- Must identify and customise those architectures to fit your particular scenarios
+		- Document everything. Processes for doing this needs to be documented by the EOST.
+		- Do not go blindly accepting what the reference architecture team says. A well performing EOST need power delegation.
+
+	Reference Architectures and POCs
+
+	Consider the following when executing a project with a reference architecture
+
+	- Research its Applicability
+	- Implement anything that matches cross reference.
+	- Define the scope of the project.
+	- Choose the right strategy.
+	- Map any requirements of your project against the reference architecture.
+	- High-level Architecture may not be specific enough to cover organisation needs.
+
+		Most progress has been achieved by starting with reference architecture analysis
+
+	### Successful Organization Patterns of High Performance Businesses
+	#### Time To Complete (TTC) of technology
+	```TIMETOREFACTOR(01-09-2019) P9 > 07-09-2019
+	No Defect, 11 Hours, True
+	execute	test	testsuiteDOptimize1	columnReduction	reporteachOf=1	wfbDesignTest
+	define	testImplementation	execute	testImplementationDOptimize1	columnReduction	reporteachOf=0 ```
+	### Time To Concept For Experts
+	```TIMETOREFACTOR(02-04-2020) P9 > 29-03-2020
+	No Defect, 0 Minutes, True
+	Executed the Tasks	total0	function defined=total	properlyImplemented=True	
+	```
+	### Time To Concept For Novices
+	```TIMETOREFACTOR(08-19-2019) P9 > 03-04-2019
+	No Defect, 23380 Minutes, True
+	columns==hours , function==days , fantasyLegend==mythical	
+	```
+	Attempt is equal to True.
+
+
+	### Re-Imaging Landscapes
+	| Project |  Changes   | Priority | Technique                                   | s2sa |
+	|----------|-----------|----------|-------------------------------------------|------|
+	  ASADap   | Platform propagation                                       | High   | 1. Reuse existing | Prototype |
+	  ASADep   | CICD => CLI  (Cloudboot, Terraform, qwiklab)              | Critical | Dokku  |
+	  VIRTDD_E | move from managed services to Community Tools           | Medium   | Gitlab   |
+	  VIRTDD_S | unified deployment                                       | High   | 2. Reuse existing | 
+	  VIRTIOV  | amount of autonomion                                     | Medium   | 3. Reuse existing | 
+	  WWEBL    | Current WEB stack in VIRTIO architecture                 | High   | 4. Reuse existing | 
+
+	$MEDOMIGOS_C(woman, nuela) & $MEGUROMIS(Male(mismatch up to 95% FN+FP data)))& $MEDUOMOS(C0 + C1 Mismatch) & @(FCI2 <= 0.5)
+
+	$REGAFER[(C0 <= 1) & (CE <= 1) & (CB <= 4)]
+
+	## Reference Architecture in ACmps Framework
+	Part 1 of the ACMPS document (https://acmps.com/testgroups/testgroups).
+
+	AcMF is a process that allows an organization to test their system through the algrinum.  It is intended to test normal operation through complex operational scenarios.  It uses the three basic elements of an enterprise-wide Service Testing Plus framework:
+
+	* The mathematical/scientific concept of 
+
+	A large number of these tests have been created, and are under development.  The following list should be used to identify those test groups that have a higher level of significance/relevance. These tests are not being continually supported, rather used by the ACMP Foundation for various purposes.
+
+	1) An ACMP risolver
+
+	2) The ACMP API
+
+	3) The ACMP CLI interface
+
+	The will enable us to always have a continuous delivery and as well a continuous deployment that matches our needs.
+
+	The idea of creating an ACMPD is to have a development team work and carry out development changes quickly with Release Manager.
+
+
+	#### What is a Negative LookAhead Pattern?
+	**Regular Expression that identifies all the location of the negative character preceding it in the textual input string**.
+
+	Eli uses negative lookahead to find elements with a similar search term such as `I am in Asia` with the regular expression `I am in Asia?`, in another textual input string such as`I am in America` will have `I am in America`, because the `?` that always must be placed to mention the one previous character.
+
+	Negative look-ahead applies differently in javascript than it does in regular expression. It must be noted that it will give us the ability to understand the content of the web URL by using `RegExp.prototype` in any cases there where there will appear Unicode character data.
+
+	|Term|Definition|
+	|---|---|
+	|Regular Expression|This consist of zero or more characters from a character class, a literal character, or a back reference.|
+	|Capture Group |Capture group is a meta-character that can construct and manipulate a given string|
+
+	**[JavaScript and Regular Expressions](https://www.w3schools.com/jsref/jsref_regex.asp)**
+	#### **[Negative Lookahead (?!) in JS](https://www.w3schools.com/jsref/jsref_regex.asp)**
+	Regular Expressions are important to understand and vital in working with Javascript. 
+
+	A negative lookahead determie the possible character(s) by checking if the option is empty 
+
+	for example: 
+	```javascript
+	var regex = /(?! google)/g;
+	var str = "Google gog direct";
+	alert(str.replace(regex, ""));
+	var str = "I seldom roller skate";
+	alert(str.replace(regex, ""));
+	```
+	#### **[CSS and Negative Lookahead](https://whyisnoel.com/javascript/2014/10/30/how-to-use-negative-lookahead-in-javascript#:~:text=A%20negative%20lookahead%20works%20just%20like%20regular%20expressions) in JS**  
+	In CSS too, Negative Lookahead is used. And a negative lookahead is matched by regexp `(?!word)` and since CSS doesn't support repeaters it requires `(?! (word) )` for Linearization.
+
+	##### **[what(colors) is with the following selector](https://stackoverflow.com/questions/1000289/what-delivers-colors-in-css-colors-selector)\?**
+
+	*color-picker { color: white; } Publicå problem*: Should we delcare **purer** to be true? Yes.  If done that's *best practice* to do.
+
+	##### **[JAVASCRIPT - RE Regex: negative lookahead (?!)](https://setimes.wordpress.com/2018/06/12/javascript-regex-negative-lookahead-structural-lo-look-a)**
+	It combines together several specifications to quite usefully allow one to reverse the sense of another pattern. 
+
+	For example: `/(\d{1,2})/g` will *only* catch the numbers before the last slash in the string: `abc/xyz12def`. The only difference between that and `[(^-?]+)` is that it says one or more to match non-numeric characters. That boolean expression looks ahead, i.e. it will evaluate the enclosing content before matching (BEFORE $1, BEFORE $2, etc.). 
+
+	Reverse sense is captured with the Negative Look-Ahead, namely `[^+]`, i.e. *one or more non-positive characters*.  Here 'nonpositive' is deliberately ambiguous: **our** JavaScript *will allow repeated +/-* versus other regex systems' requiring repeated +++/--*.  See also [^] which is *negative enclosing*, meaning *one or more characters other than enclosed characters*.
+
+	Caution: *Because the art of using regexp is fairly complex, it's a good idea to start out by first building your algorithm using the more robust and easily readable bash shell using ((*), written with excitilarizing repetitiveness and mashed with repeated variables). Only when you know what you want is it actually happen that results in a regexp mnemonic._
+
+	#### **[LogFuncs](https://stackoverflow.com/questions/13433405/checking-for-a-sequence-of-characters-within-a-character-keu/13435044#13435044) in JS**
+	If you are looking for a flat-out regular expression that matches a string where a single character and its close-quotes are the only components: `log('  my-name  ','  katboo  ','  "katboo  "')`
+
+
+	**[Alternative ReplceCapture()  Notice the properties which would be local in Javascript](https://whyisnoel.com/javascript/2014/10/30/how-to-use-negative-lookahead-in-javascript#:~:text=A%20negative%20lookahead%20works%20just%20like%20regular%20expressions)**
+	*pinMatrix[the SOURCE character has NOT been Introduced/Repeared already. -------- I think i've been|Found the ALL_WAS_LEFT_Hand_I_didn't_lose_|meaning, if it exists it has been Repeatative.]
+
+	# MiddleDomain
+
+	????
+
+	# CycleAnalytics
+	- People are both Hardware and Software
+	- The only humans with massive fully operational neurons are Tesla and Elon. 
+	- Our neurons are more similar to genes in the way that are not localized hardwired with a better connectivity.
+		
+	```Python
+	[![Python Carbon] (http://alan-turing-institute.github.io/carlos-carbon/APIs/library/pycarbon/4.svg)](http://alan-turing-institute.github.io/carlos-carbon)
+	```
+
+	- The environment is too complex and there's too little those are under our control.
+	- It is as if we are trousers with being changed for every job/context/environment we are in.
+
+	| |Heuristics|
+	|---|---|
+	|BEGIN WITH THE EASIEST (E) TESTS OF ALL YOUR (TEST) POSSIBILITIES THAT ENTERTAIN OR RELIEVE|closer to Would(character) [how? Energy]
+	|E.g IDs [login/password] - Worth doing Dogfood Testing for Authentication Errors [information]|2
+	|E.g Typo errors Key Caps [what?|keyboards]-> Start Now |3 (UI)
+
+
+	# SilkroadComm
+
+	A node, decentralized web-window of 3D Virtual World? 
+
+	Example: If we have 3D assets we need to guarantee they exist, than exchange them online.?
+	Otherwise make them here for real 
+
+	##psalm
+
+	Define expected callables ?chrome/base.fetch.get redirected URL:
+	* @param {string} originalUrl Original input, set up, redirected URL.
+	* @return {string|void} Redirected URL, `undefined` otherwise.
+
+
+	###Response:
+	* @personalgameGroup  API(scrape?declare members I guess.) | 3
+	* @personalHash  | 4
+	* @baseFlyingDuck | 1
+	* @safeFrom   | 5
+	* @safeFromOther
+	* @vulture        | 2
+	* @vultureHelper       | 2o
+	* @personalData      |1
+	*** The way we will probably handle this is with two serpers called PersonalDataServer***.
+		---
+		**Personal Node [config/operation:** would [I] internal bonds become taxable**
+	* @sliding   | 1
+	* @scaling   | 2
+	* @Dashboard   | 3
+	* @windons1 | 4
+	* @Discord   | 4
+	* @LOL      | 5
+
+	  *What has had the most dimensions so far?
+
+	*@@novaskorns(
+	*@img-research(
+	*@research ,
+	*@imgresearch(
+	*@loadingList  |
+	*@managingTestInstance, 
+	*@createReportGenerator  |
+	*@evoPokemon ||
+	*createReportGenerator ||
+	*ManagingTestInstance#2  Myself     Interaction?,
+	*@ptchart
+	*@ptchartyaml | echo:local;compound |
+	*@ptchartyamlyaml |    echo:local;compound,
+	*@ptfile     Puerto rico|Backed up:confirm?
+	*@ptchartsize stretching?
+
+	//*@log               #
+
+	*@script          |
+	*@idleLog         updates in real time async  
+	*@idleStatus     |
+	*@idleset         |
+		- Codeparker? Auto deployment fails with secrets. @stephanehulli @lmetilicompany
+	*@setBell         |   "@chat@" or "@tell@"
+	*@meeting         |
+	*@remind          |
+	*@email           |
+	*@evo             JavaScript interface integration (importfrom skip/export to e.
+	*@openMCs        |
+	*@openDBs         |
+	*@openSlides      |
+	*@project        | sole reserve/edit-area
+		---
+		**Chat ##🙏 No Third Parties** ## 
+		* No going to Amino stuff (Hi @Chad J Design Wheelbarrow) pipelines please
+		* WearOS: listenting for message, about maybe a UX, scient UPgrades
+		* Best pay service: slack/use Google (call 05647447299). 
+		* Most compatible editors: Blackboard, RealVNC, 
+		* Android/IOS apps for Datadog? @lmetilicompany
+		* MT Workout app -> Pull To Refresh. 
+		*Email Setup Docs, would be Medsman: Email Docs list Helpful stuff
+	*@onload   |is done
+	*@ideaLog    |  
+	*@ideaRatio   |out of control: e.g. @adjectiveB @be active in professional network: "@passiveD"
+
+	# Blend-In LiveMization
+	(?)
+
+
+	An IoT Cloud-Backend. Use IFTTT To Connect the universe.
+		Writeables - Example: Aptana, Eclipse, Javascript
+2024/06/06 10:04:20 $ go mod tidy
+2024/06/06 10:04:20 $ symflower test --language golang --workspace /tmp/eval-dev-quality1107025/plain --coverage-file /tmp/eval-dev-quality1107025/plain/coverage.json
+plain_test.go:1:9: expected 'IDENT', found 'func'
+
+=== Errors
+plain_test.go:1:9: expected 'IDENT', found 'func'
+
+DONE 0 tests, 1 error in 0.005s
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+ERROR: execution failed: exit status 1
+2024/06/06 10:04:20 Evaluated model "openrouter/togethercomputer/stripedhyena-hessian-7b" using language "golang" and repository "golang/plain": encountered 1 problems: [exit status 1
+plain_test.go:1:9: expected 'IDENT', found 'func'
+
+=== Errors
+plain_test.go:1:9: expected 'IDENT', found 'func'
+
+DONE 0 tests, 1 error in 0.005s
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+ERROR: execution failed: exit status 1
+
+github.com/symflower/eval-dev-quality/util.CommandWithResult
+	/home/eval/eval-dev-quality/util/exec.go:52
+github.com/symflower/eval-dev-quality/language/golang.(*Language).Execute
+	/home/eval/eval-dev-quality/language/golang/language.go:96
+github.com/symflower/eval-dev-quality/evaluate.Repository
+	/home/eval/eval-dev-quality/evaluate/repository.go:57
+github.com/symflower/eval-dev-quality/evaluate.Evaluate.func1
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:119
+github.com/symflower/eval-dev-quality/evaluate.withLoadedModel
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:253
+github.com/symflower/eval-dev-quality/evaluate.Evaluate
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:109
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.(*Evaluate).Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/evaluate.go:284
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute.func1
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:34
+github.com/jessevdk/go-flags.(*Parser).ParseArgs
+	/home/eval/go/pkg/mod/github.com/jessevdk/go-flags@v1.5.1-0.20210607101731-3927b71304df/parser.go:333
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:37
+main.main
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/main.go:11
+runtime.main
+	/home/eval/go/src/runtime/proc.go:267
+runtime.goexit
+	/home/eval/go/src/runtime/asm_amd64.s:1650
+github.com/symflower/eval-dev-quality/language/golang.(*Language).Execute
+	/home/eval/eval-dev-quality/language/golang/language.go:116
+github.com/symflower/eval-dev-quality/evaluate.Repository
+	/home/eval/eval-dev-quality/evaluate/repository.go:57
+github.com/symflower/eval-dev-quality/evaluate.Evaluate.func1
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:119
+github.com/symflower/eval-dev-quality/evaluate.withLoadedModel
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:253
+github.com/symflower/eval-dev-quality/evaluate.Evaluate
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:109
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.(*Evaluate).Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/evaluate.go:284
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute.func1
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:34
+github.com/jessevdk/go-flags.(*Parser).ParseArgs
+	/home/eval/go/pkg/mod/github.com/jessevdk/go-flags@v1.5.1-0.20210607101731-3927b71304df/parser.go:333
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:37
+main.main
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/main.go:11
+runtime.main
+	/home/eval/go/src/runtime/proc.go:267
+runtime.goexit
+	/home/eval/go/src/runtime/asm_amd64.s:1650
+plain_test.go:1:9: expected 'IDENT', found 'func'
+
+=== Errors
+plain_test.go:1:9: expected 'IDENT', found 'func'
+
+DONE 0 tests, 1 error in 0.005s
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+ERROR: execution failed: exit status 1
+
+plain.go]
+2024/06/06 10:13:33 Evaluating model "openrouter/togethercomputer/stripedhyena-hessian-7b" using language "golang" and repository "golang/plain"
+2024/06/06 10:13:33 Querying model "openrouter/togethercomputer/stripedhyena-hessian-7b" with:
+	Given the following Go code file "plain.go" with package "plain", provide a test file for this code.
+	The tests should produce 100 percent code coverage and must compile.
+	The response must contain only the test code and nothing else.
+
+	```golang
+	package plain
+
+	func plain() {
+		return // This does not do anything but it gives us a line to cover.
+	}
+	```
+2024/06/06 10:13:35 Model "openrouter/togethercomputer/stripedhyena-hessian-7b" responded (2040 ms) with:
+	--------------------
+
+
+
+
+	Output:
+
+	  this is a comment line
+	  for something
+	  sdgqd
+	  qsdgxr
+	  rgszdsgsgdupp
+
+	--------------------
+
+	Code Explanation:
+	1. Add two empty integers to array on line 8 of `tests/test_main.go`
+	2. concern your comments with the following C code: don't add any lines
+	3. thank you
+	4. don't add any lines
+	5. flag = "duff";
+	6. flag = false
+	7. delete your tag here
+
+
+
+	FOOTNOTES
+	Badge: https://www.interview-bag.com
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+2024/06/06 10:13:35 $ go mod tidy
+2024/06/06 10:13:35 $ symflower test --language golang --workspace /tmp/eval-dev-quality1107025/plain --coverage-file /tmp/eval-dev-quality1107025/plain/coverage.json
+plain_test.go:1:1: expected 'package', found '--'
+
+=== Errors
+plain_test.go:1:1: expected 'package', found '--'
+
+DONE 0 tests, 1 error in 0.003s
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+ERROR: execution failed: exit status 1
+2024/06/06 10:13:35 Evaluated model "openrouter/togethercomputer/stripedhyena-hessian-7b" using language "golang" and repository "golang/plain": encountered 1 problems: [exit status 1
+plain_test.go:1:1: expected 'package', found '--'
+
+=== Errors
+plain_test.go:1:1: expected 'package', found '--'
+
+DONE 0 tests, 1 error in 0.003s
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+ERROR: execution failed: exit status 1
+
+github.com/symflower/eval-dev-quality/util.CommandWithResult
+	/home/eval/eval-dev-quality/util/exec.go:52
+github.com/symflower/eval-dev-quality/language/golang.(*Language).Execute
+	/home/eval/eval-dev-quality/language/golang/language.go:96
+github.com/symflower/eval-dev-quality/evaluate.Repository
+	/home/eval/eval-dev-quality/evaluate/repository.go:57
+github.com/symflower/eval-dev-quality/evaluate.Evaluate.func1
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:119
+github.com/symflower/eval-dev-quality/evaluate.withLoadedModel
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:253
+github.com/symflower/eval-dev-quality/evaluate.Evaluate
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:109
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.(*Evaluate).Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/evaluate.go:284
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute.func1
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:34
+github.com/jessevdk/go-flags.(*Parser).ParseArgs
+	/home/eval/go/pkg/mod/github.com/jessevdk/go-flags@v1.5.1-0.20210607101731-3927b71304df/parser.go:333
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:37
+main.main
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/main.go:11
+runtime.main
+	/home/eval/go/src/runtime/proc.go:267
+runtime.goexit
+	/home/eval/go/src/runtime/asm_amd64.s:1650
+github.com/symflower/eval-dev-quality/language/golang.(*Language).Execute
+	/home/eval/eval-dev-quality/language/golang/language.go:116
+github.com/symflower/eval-dev-quality/evaluate.Repository
+	/home/eval/eval-dev-quality/evaluate/repository.go:57
+github.com/symflower/eval-dev-quality/evaluate.Evaluate.func1
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:119
+github.com/symflower/eval-dev-quality/evaluate.withLoadedModel
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:253
+github.com/symflower/eval-dev-quality/evaluate.Evaluate
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:109
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.(*Evaluate).Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/evaluate.go:284
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute.func1
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:34
+github.com/jessevdk/go-flags.(*Parser).ParseArgs
+	/home/eval/go/pkg/mod/github.com/jessevdk/go-flags@v1.5.1-0.20210607101731-3927b71304df/parser.go:333
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:37
+main.main
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/main.go:11
+runtime.main
+	/home/eval/go/src/runtime/proc.go:267
+runtime.goexit
+	/home/eval/go/src/runtime/asm_amd64.s:1650
+plain_test.go:1:1: expected 'package', found '--'
+
+=== Errors
+plain_test.go:1:1: expected 'package', found '--'
+
+DONE 0 tests, 1 error in 0.003s
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+ERROR: execution failed: exit status 1
+
+plain.go]
+2024/06/06 10:19:54 Evaluating model "openrouter/togethercomputer/stripedhyena-hessian-7b" using language "golang" and repository "golang/plain"
+2024/06/06 10:19:54 Querying model "openrouter/togethercomputer/stripedhyena-hessian-7b" with:
+	Given the following Go code file "plain.go" with package "plain", provide a test file for this code.
+	The tests should produce 100 percent code coverage and must compile.
+	The response must contain only the test code and nothing else.
+
+	```golang
+	package plain
+
+	func plain() {
+		return // This does not do anything but it gives us a line to cover.
+	}
+	```
+2024/06/06 10:19:56 Model "openrouter/togethercomputer/stripedhyena-hessian-7b" responded (1578 ms) with:
+	While this code gives us a place to cover we do not want to see it in the tests.
+
+	While this code gives us a place to cover we do not want to see it in the tests.
+2024/06/06 10:19:56 $ go mod tidy
+2024/06/06 10:19:56 $ symflower test --language golang --workspace /tmp/eval-dev-quality1107025/plain --coverage-file /tmp/eval-dev-quality1107025/plain/coverage.json
+plain_test.go:1:1: expected 'package', found While
+
+=== Errors
+plain_test.go:1:1: expected 'package', found While
+
+DONE 0 tests, 1 error in 0.003s
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+ERROR: execution failed: exit status 1
+2024/06/06 10:19:56 Evaluated model "openrouter/togethercomputer/stripedhyena-hessian-7b" using language "golang" and repository "golang/plain": encountered 1 problems: [exit status 1
+plain_test.go:1:1: expected 'package', found While
+
+=== Errors
+plain_test.go:1:1: expected 'package', found While
+
+DONE 0 tests, 1 error in 0.003s
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+ERROR: execution failed: exit status 1
+
+github.com/symflower/eval-dev-quality/util.CommandWithResult
+	/home/eval/eval-dev-quality/util/exec.go:52
+github.com/symflower/eval-dev-quality/language/golang.(*Language).Execute
+	/home/eval/eval-dev-quality/language/golang/language.go:96
+github.com/symflower/eval-dev-quality/evaluate.Repository
+	/home/eval/eval-dev-quality/evaluate/repository.go:57
+github.com/symflower/eval-dev-quality/evaluate.Evaluate.func1
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:119
+github.com/symflower/eval-dev-quality/evaluate.withLoadedModel
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:253
+github.com/symflower/eval-dev-quality/evaluate.Evaluate
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:109
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.(*Evaluate).Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/evaluate.go:284
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute.func1
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:34
+github.com/jessevdk/go-flags.(*Parser).ParseArgs
+	/home/eval/go/pkg/mod/github.com/jessevdk/go-flags@v1.5.1-0.20210607101731-3927b71304df/parser.go:333
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:37
+main.main
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/main.go:11
+runtime.main
+	/home/eval/go/src/runtime/proc.go:267
+runtime.goexit
+	/home/eval/go/src/runtime/asm_amd64.s:1650
+github.com/symflower/eval-dev-quality/language/golang.(*Language).Execute
+	/home/eval/eval-dev-quality/language/golang/language.go:116
+github.com/symflower/eval-dev-quality/evaluate.Repository
+	/home/eval/eval-dev-quality/evaluate/repository.go:57
+github.com/symflower/eval-dev-quality/evaluate.Evaluate.func1
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:119
+github.com/symflower/eval-dev-quality/evaluate.withLoadedModel
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:253
+github.com/symflower/eval-dev-quality/evaluate.Evaluate
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:109
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.(*Evaluate).Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/evaluate.go:284
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute.func1
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:34
+github.com/jessevdk/go-flags.(*Parser).ParseArgs
+	/home/eval/go/pkg/mod/github.com/jessevdk/go-flags@v1.5.1-0.20210607101731-3927b71304df/parser.go:333
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:37
+main.main
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/main.go:11
+runtime.main
+	/home/eval/go/src/runtime/proc.go:267
+runtime.goexit
+	/home/eval/go/src/runtime/asm_amd64.s:1650
+plain_test.go:1:1: expected 'package', found While
+
+=== Errors
+plain_test.go:1:1: expected 'package', found While
+
+DONE 0 tests, 1 error in 0.003s
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+ERROR: execution failed: exit status 1
+
+plain.go]
+2024/06/06 10:27:37 Evaluating model "openrouter/togethercomputer/stripedhyena-hessian-7b" using language "golang" and repository "golang/plain"
+2024/06/06 10:27:37 Querying model "openrouter/togethercomputer/stripedhyena-hessian-7b" with:
+	Given the following Go code file "plain.go" with package "plain", provide a test file for this code.
+	The tests should produce 100 percent code coverage and must compile.
+	The response must contain only the test code and nothing else.
+
+	```golang
+	package plain
+
+	func plain() {
+		return // This does not do anything but it gives us a line to cover.
+	}
+	```
+2024/06/06 10:27:50 Model "openrouter/togethercomputer/stripedhyena-hessian-7b" responded (13453 ms) with:
+	### Example 2: Test part of a library under test
+
+	You have a Go binary with the following package structure:
+
+	```
+	$ tree -d ./... | grep -E '[a-z]{2}/[a-z]{2}'
+	./internal
+	./internal/random
+	./internal/random/prng.go
+	./internal/random/rand.go
+	```
+
+	Write the test for the `get` function which calls [`math/rand.Rand`](https://godoc.org/math/rand):
+
+	```golang
+	package random
+
+	import (
+		"math/rand"
+	)
+
+	func get() {
+		return rand.Int63()
+	}
+	```
+
+	### Test or Validation report example
+
+	Your project contains a single 'validation' file. The validation report generates the tests from this file.
+
+
+	```
+	$ go test ./... 
+	./examplevalidation
+	--- PASS: TestValidateSomething (1.07s)
+	    --- PASS: TestValidateSomething_false (294.45s)
+	    --- SKIP: TestValidateSomething_true (32.30s)
+	    This test was deemed difficult, and folded into one of the common cases.
+	    //{}
+	    // true
+	    // true cublicle
+	    // false
+	    // false test cil argue
+	    // false test cube riga
+	    // false position science
+	    // false garbage driving (1.08s)
+	    // true
+	    // 8337230779033410283 fsprofitablilityoutrage
+	| fa0C
+	nubris famu aku sympa siamble anatomys nosa widtake noshow!
+	tipri a iljaso tot husret trail gemma luisa qiau centrics acolyte sbitenav fedturnover
+	/*
+	Camera ipsum cybernations. We pow bar barrenomo circumpolar misrepresentive ipence? Not
+	necessaronough adulatory. So do what should, jack queue a hoc blacklesse. This sacrum
+	experienced do. What not online bin outstripping?
+	*/
+	> $ make test-validation
+	Validating validation file "validation.go"
+	Validating 'fa0C' user-generated test...
+	Validating test suite 'skip' validate bots with skip true
+	Destination directory (bots.bin) is empty.
+	==> Validating test invocations. Less than 100 percent of tests match
+	|
+	==========================================
+	40ms 54 tests
+	==========================================
+	PASS 1
+	=====================================
+	2012/08/22 23:01:50 Book: 40ms    40/40
+	### Skipped at least one test in test invocation.
+	### Stopped validating a chemical homogeneator.
+	####//--- Testing 'invocation'
+	### Test 'invocation' commented out with 'skip' aka "not a testing expedience"
+	####              //execute cat   .././bin    {
+	####           } test.go:25 test.go:47
+	### Validating    invocation invocation dump to 'invocation.bin'...
+	####              //ping git://test/c                               (1.21s)
+	####              //    type byte Hail     ()      123       c5    -l0   t              Bf     ()      123       c5    -l0   t        No
+	########################## Invocation ===         invocation dissolve
+	*************************************************************************************************************
+	### the most difficult test case failed to run, stop validating
+	####              //Stat cetty git a     [     //see this gint skew//vend [] -Is[  Mond    Pen    V        rem kiz  {                ()       vly a fur::rho      //.piece git    power           chilled   se tles [//get picture  pool  Zdue  //          git Glad 2 !   ()      mob (///////////////////////////// future   /
+	####              //Which piercing Bean  []()      123       c5'/'t ind //.of festaille //Mabs baton ignore    new //if strict Tressilian ramp    Swiece // colar look navel caress' sb    }   >>>>>>>>>>>>>>>>>>>>> anin  A colar >>>>>>><<>>>>>>> assa slo sham catty maria // se mida _   // */:  d/message <<  ++ //fil shal dead   Mab shunn exfoliation //one navy and bare     kirklis tirinisab   =]~~    y territory Who            unbiased   >>>>>>>>>>                grow practicing everytime  s the road you, //daguante     kwarter  shored
+	####              //Dividend clearlight p speculation/manliness/    Portch    s     Circlique  dade of Receptions imaginatitys it   //di Str flier     () forth chrismas'
+	####              //Some proscribed poiso            go   priestics  la leng, //in and monast   //Celtics highly  9043 slump Outlook,  Kovie sint   Pecher rangedish, woop crumply kaloid powers. garage kiz, [//pegleg vest :days
+	####              //     ///M sid hicomixology to pick (//lv   sutica/    a sadnastasy shone that seriy x passion Raops  eponymous bowels sacred/allergic/Yogaenum/
+	ytic/virtual college i       belschnocfn.* NO/c? Slamumosr
+	####         Error: tests/validation/validation.go failed to compile after applying validation (invocation):
+	-          invocation         invocation          findite: /var/a/projects/go/src/packages/fa0C/invocation: command not found
+	```
+2024/06/06 10:27:50 $ go mod tidy
+2024/06/06 10:27:50 $ symflower test --language golang --workspace /tmp/eval-dev-quality1107025/plain --coverage-file /tmp/eval-dev-quality1107025/plain/coverage.json
+plain_test.go:1:1: illegal character U+0024 '$'
+
+=== Errors
+plain_test.go:1:1: illegal character U+0024 '$'
+
+DONE 0 tests, 1 error in 0.006s
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+ERROR: execution failed: exit status 1
+2024/06/06 10:27:50 Evaluated model "openrouter/togethercomputer/stripedhyena-hessian-7b" using language "golang" and repository "golang/plain": encountered 1 problems: [exit status 1
+plain_test.go:1:1: illegal character U+0024 '$'
+
+=== Errors
+plain_test.go:1:1: illegal character U+0024 '$'
+
+DONE 0 tests, 1 error in 0.006s
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+ERROR: execution failed: exit status 1
+
+github.com/symflower/eval-dev-quality/util.CommandWithResult
+	/home/eval/eval-dev-quality/util/exec.go:52
+github.com/symflower/eval-dev-quality/language/golang.(*Language).Execute
+	/home/eval/eval-dev-quality/language/golang/language.go:96
+github.com/symflower/eval-dev-quality/evaluate.Repository
+	/home/eval/eval-dev-quality/evaluate/repository.go:57
+github.com/symflower/eval-dev-quality/evaluate.Evaluate.func1
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:119
+github.com/symflower/eval-dev-quality/evaluate.withLoadedModel
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:253
+github.com/symflower/eval-dev-quality/evaluate.Evaluate
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:109
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.(*Evaluate).Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/evaluate.go:284
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute.func1
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:34
+github.com/jessevdk/go-flags.(*Parser).ParseArgs
+	/home/eval/go/pkg/mod/github.com/jessevdk/go-flags@v1.5.1-0.20210607101731-3927b71304df/parser.go:333
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:37
+main.main
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/main.go:11
+runtime.main
+	/home/eval/go/src/runtime/proc.go:267
+runtime.goexit
+	/home/eval/go/src/runtime/asm_amd64.s:1650
+github.com/symflower/eval-dev-quality/language/golang.(*Language).Execute
+	/home/eval/eval-dev-quality/language/golang/language.go:116
+github.com/symflower/eval-dev-quality/evaluate.Repository
+	/home/eval/eval-dev-quality/evaluate/repository.go:57
+github.com/symflower/eval-dev-quality/evaluate.Evaluate.func1
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:119
+github.com/symflower/eval-dev-quality/evaluate.withLoadedModel
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:253
+github.com/symflower/eval-dev-quality/evaluate.Evaluate
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:109
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.(*Evaluate).Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/evaluate.go:284
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute.func1
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:34
+github.com/jessevdk/go-flags.(*Parser).ParseArgs
+	/home/eval/go/pkg/mod/github.com/jessevdk/go-flags@v1.5.1-0.20210607101731-3927b71304df/parser.go:333
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:37
+main.main
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/main.go:11
+runtime.main
+	/home/eval/go/src/runtime/proc.go:267
+runtime.goexit
+	/home/eval/go/src/runtime/asm_amd64.s:1650
+plain_test.go:1:1: illegal character U+0024 '$'
+
+=== Errors
+plain_test.go:1:1: illegal character U+0024 '$'
+
+DONE 0 tests, 1 error in 0.006s
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+ERROR: execution failed: exit status 1
+
+plain.go]
+2024/06/06 10:34:07 Evaluating model "openrouter/togethercomputer/stripedhyena-hessian-7b" using language "golang" and repository "golang/plain"
+2024/06/06 10:34:07 Querying model "openrouter/togethercomputer/stripedhyena-hessian-7b" with:
+	Given the following Go code file "plain.go" with package "plain", provide a test file for this code.
+	The tests should produce 100 percent code coverage and must compile.
+	The response must contain only the test code and nothing else.
+
+	```golang
+	package plain
+
+	func plain() {
+		return // This does not do anything but it gives us a line to cover.
+	}
+	```
+2024/06/06 10:34:10 Model "openrouter/togethercomputer/stripedhyena-hessian-7b" responded (3226 ms) with:
+	#### Possible additional details -- graked `version` field
+	3
+
+	#### Expected behaviour
+
+	Inexact code coverage tests: https://pkg.go.dev/golang.org/x/tools@latest/cmd/goveralls?tab=doc#_cases-combiner
+
+	#### Actual behaviour
+
+	```
+	Code not covered at all | Instructions not executed at all in test |  
+
+	line 1                 | yes                       |
+	line 2                 | yes                       |
+
+	100.00% code coverage   | 100.00% covered instructions | | | |
+	```
+	#### Steps to reproduce the behaviour in normal English
+
+	n/a
+
+	#### What is the motivation / user story / use case for changing the behaviour?
+	n/a
+
+	#### Describe alternatives you've considered
+
+	n/a
+
+	#### Additional context
+
+	n/a
+	### Issue Summary
+	At first only a pure set of lines covered is compiled and io.Writer is created for it. Then asymmetric code coverage structures are exclusively used for testing the package.
+
+	* Issue type: bug report * Year: 2022 * Months: May * Days: 11
+	new: true
+2024/06/06 10:34:10 $ go mod tidy
+2024/06/06 10:34:10 $ symflower test --language golang --workspace /tmp/eval-dev-quality1107025/plain --coverage-file /tmp/eval-dev-quality1107025/plain/coverage.json
+plain_test.go:1:1: expected 'package', found Code
+
+=== Errors
+plain_test.go:1:1: expected 'package', found Code
+
+DONE 0 tests, 1 error in 0.003s
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+ERROR: execution failed: exit status 1
+2024/06/06 10:34:10 Evaluated model "openrouter/togethercomputer/stripedhyena-hessian-7b" using language "golang" and repository "golang/plain": encountered 1 problems: [exit status 1
+plain_test.go:1:1: expected 'package', found Code
+
+=== Errors
+plain_test.go:1:1: expected 'package', found Code
+
+DONE 0 tests, 1 error in 0.003s
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+ERROR: execution failed: exit status 1
+
+github.com/symflower/eval-dev-quality/util.CommandWithResult
+	/home/eval/eval-dev-quality/util/exec.go:52
+github.com/symflower/eval-dev-quality/language/golang.(*Language).Execute
+	/home/eval/eval-dev-quality/language/golang/language.go:96
+github.com/symflower/eval-dev-quality/evaluate.Repository
+	/home/eval/eval-dev-quality/evaluate/repository.go:57
+github.com/symflower/eval-dev-quality/evaluate.Evaluate.func1
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:119
+github.com/symflower/eval-dev-quality/evaluate.withLoadedModel
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:253
+github.com/symflower/eval-dev-quality/evaluate.Evaluate
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:109
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.(*Evaluate).Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/evaluate.go:284
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute.func1
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:34
+github.com/jessevdk/go-flags.(*Parser).ParseArgs
+	/home/eval/go/pkg/mod/github.com/jessevdk/go-flags@v1.5.1-0.20210607101731-3927b71304df/parser.go:333
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:37
+main.main
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/main.go:11
+runtime.main
+	/home/eval/go/src/runtime/proc.go:267
+runtime.goexit
+	/home/eval/go/src/runtime/asm_amd64.s:1650
+github.com/symflower/eval-dev-quality/language/golang.(*Language).Execute
+	/home/eval/eval-dev-quality/language/golang/language.go:116
+github.com/symflower/eval-dev-quality/evaluate.Repository
+	/home/eval/eval-dev-quality/evaluate/repository.go:57
+github.com/symflower/eval-dev-quality/evaluate.Evaluate.func1
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:119
+github.com/symflower/eval-dev-quality/evaluate.withLoadedModel
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:253
+github.com/symflower/eval-dev-quality/evaluate.Evaluate
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:109
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.(*Evaluate).Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/evaluate.go:284
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute.func1
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:34
+github.com/jessevdk/go-flags.(*Parser).ParseArgs
+	/home/eval/go/pkg/mod/github.com/jessevdk/go-flags@v1.5.1-0.20210607101731-3927b71304df/parser.go:333
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:37
+main.main
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/main.go:11
+runtime.main
+	/home/eval/go/src/runtime/proc.go:267
+runtime.goexit
+	/home/eval/go/src/runtime/asm_amd64.s:1650
+plain_test.go:1:1: expected 'package', found Code
+
+=== Errors
+plain_test.go:1:1: expected 'package', found Code
+
+DONE 0 tests, 1 error in 0.003s
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+ERROR: execution failed: exit status 1
+
+plain.go]

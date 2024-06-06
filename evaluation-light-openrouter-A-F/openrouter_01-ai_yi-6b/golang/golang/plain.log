@@ -1,0 +1,1455 @@
+2024/06/06 10:01:56 Evaluating model "openrouter/01-ai/yi-6b" using language "golang" and repository "golang/plain"
+2024/06/06 10:01:56 Querying model "openrouter/01-ai/yi-6b" with:
+	Given the following Go code file "plain.go" with package "plain", provide a test file for this code.
+	The tests should produce 100 percent code coverage and must compile.
+	The response must contain only the test code and nothing else.
+
+	```golang
+	package plain
+
+	func plain() {
+		return // This does not do anything but it gives us a line to cover.
+	}
+	```
+2024/06/06 10:02:06 Model "openrouter/01-ai/yi-6b" responded (9508 ms) with:
+	Be sure to separate test files into topics, that is, if you write a bunch of things in one code file, you can put them in separate test file topics.
+
+	You will send the PUD file named "test" in the zip file to
+
+	```sh
+	gopkg/server/gitlab/udcase_testdata/udcase-pud_list/plain.gov.zip
+	```
+
+	```
+	➜  udcase git:(master) ✗ ls -1
+	README.md
+	ud0519296654b4e97a2093bf151d228dc.zip
+	udcaselib
+	udcase-examples
+	udcase-pud_list
+	```
+
+	```sh
+	ud0519296654b4e97a2093bf151d228dc.zip ( 10.77 KB )
+	plain.gov.zip ( 49.45 kB )
+	```
+
+
+	```sh
+	# git clone
+	git clone https://github.com/git-mato/udcaseLib ~/udcaseLib.git
+	```
+
+
+	```sh
+	# getudp
+	cd udcase/udcaseLib
+	getudp udcase/udcase/ud0519296654b4e97a2093bf151d228dc.zip
+
+	# readzip
+	cd
+	readzip ud0519296654b4e97a2093bf151d228dc.zip 
+	```
+	```
+	* udcase_git/ud0519296654b4e97a2093bf151d228dc/ud0519296654b4e97a2093bf151d228dc-0.3.0.zip
+	* plain.gov.zip
+	```
+
+
+	```sh
+	# exportPackages
+	cd ~/udcaseLib
+	exportPackages udcase/udcase/ud0519296654b4e97a2093bf151d228dc.zip 
+	ls ~/udcaseLib
+	```
+	```
+	* plain.gov.zip
+	* udcase_git/ud0519296654b4e97a2093bf151d228dc/ud-0.1.0.zip
+	* udcase_git/ud0519296654b4e97a2093bf151d228dc/ud-example/udexample-0.1.0.zip
+	* udcase_git/ud0519296654b4e97a2093bf151d228dc/ud-examples/udexamples-0.1.0.zip
+	* udcase_git/ud0519296654b4e97a2093bf151d228dc/ud-example_test/udexample_test-0.1.0.zip
+	```
+2024/06/06 10:02:06 $ go mod tidy
+2024/06/06 10:02:06 $ symflower test --language golang --workspace /tmp/eval-dev-quality3908121424/plain --coverage-file /tmp/eval-dev-quality3908121424/plain/coverage.json
+plain_test.go:1:1: expected 'package', found gopkg
+
+=== Errors
+plain_test.go:1:1: expected 'package', found gopkg
+
+DONE 0 tests, 1 error in 0.006s
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+ERROR: execution failed: exit status 1
+2024/06/06 10:02:06 Evaluated model "openrouter/01-ai/yi-6b" using language "golang" and repository "golang/plain": encountered 1 problems: [exit status 1
+plain_test.go:1:1: expected 'package', found gopkg
+
+=== Errors
+plain_test.go:1:1: expected 'package', found gopkg
+
+DONE 0 tests, 1 error in 0.006s
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+ERROR: execution failed: exit status 1
+
+github.com/symflower/eval-dev-quality/util.CommandWithResult
+	/home/eval/eval-dev-quality/util/exec.go:52
+github.com/symflower/eval-dev-quality/language/golang.(*Language).Execute
+	/home/eval/eval-dev-quality/language/golang/language.go:96
+github.com/symflower/eval-dev-quality/evaluate.Repository
+	/home/eval/eval-dev-quality/evaluate/repository.go:57
+github.com/symflower/eval-dev-quality/evaluate.Evaluate.func1
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:119
+github.com/symflower/eval-dev-quality/evaluate.withLoadedModel
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:253
+github.com/symflower/eval-dev-quality/evaluate.Evaluate
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:109
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.(*Evaluate).Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/evaluate.go:284
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute.func1
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:34
+github.com/jessevdk/go-flags.(*Parser).ParseArgs
+	/home/eval/go/pkg/mod/github.com/jessevdk/go-flags@v1.5.1-0.20210607101731-3927b71304df/parser.go:333
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:37
+main.main
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/main.go:11
+runtime.main
+	/home/eval/go/src/runtime/proc.go:267
+runtime.goexit
+	/home/eval/go/src/runtime/asm_amd64.s:1650
+github.com/symflower/eval-dev-quality/language/golang.(*Language).Execute
+	/home/eval/eval-dev-quality/language/golang/language.go:116
+github.com/symflower/eval-dev-quality/evaluate.Repository
+	/home/eval/eval-dev-quality/evaluate/repository.go:57
+github.com/symflower/eval-dev-quality/evaluate.Evaluate.func1
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:119
+github.com/symflower/eval-dev-quality/evaluate.withLoadedModel
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:253
+github.com/symflower/eval-dev-quality/evaluate.Evaluate
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:109
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.(*Evaluate).Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/evaluate.go:284
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute.func1
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:34
+github.com/jessevdk/go-flags.(*Parser).ParseArgs
+	/home/eval/go/pkg/mod/github.com/jessevdk/go-flags@v1.5.1-0.20210607101731-3927b71304df/parser.go:333
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:37
+main.main
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/main.go:11
+runtime.main
+	/home/eval/go/src/runtime/proc.go:267
+runtime.goexit
+	/home/eval/go/src/runtime/asm_amd64.s:1650
+plain_test.go:1:1: expected 'package', found gopkg
+
+=== Errors
+plain_test.go:1:1: expected 'package', found gopkg
+
+DONE 0 tests, 1 error in 0.006s
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+ERROR: execution failed: exit status 1
+
+plain.go]
+2024/06/06 10:09:10 Evaluating model "openrouter/01-ai/yi-6b" using language "golang" and repository "golang/plain"
+2024/06/06 10:09:10 Querying model "openrouter/01-ai/yi-6b" with:
+	Given the following Go code file "plain.go" with package "plain", provide a test file for this code.
+	The tests should produce 100 percent code coverage and must compile.
+	The response must contain only the test code and nothing else.
+
+	```golang
+	package plain
+
+	func plain() {
+		return // This does not do anything but it gives us a line to cover.
+	}
+	```
+2024/06/06 10:09:52 Model "openrouter/01-ai/yi-6b" responded (42011 ms) with:
+	Now check the project on the command line.
+	```
+	go test -cover -coverprofile=plain.coverprofile ./...
+	```
+
+	This should give a summary like this:
+
+	```
+	ok      exercise/animal  0.001s
+	ok      exercise/greet  0.001s
+	?       exercise/rocket  1 mark not covered
+	coverpkg   - exercise    10.0%
+
+	FAIL    exercise/rocket  1 mark not covered
+	FAIL	coverage/cover	kernel: missing architecture 
+	ok - ../coverage/cover: 639.21s`
+	```
+
+	Now let's checkout the [missing architecture cover file](./coverage_gcc.4.md).
+	It will automatically be built from the raw *.coverprofile file just like the range files are.
+	The command line :go build must be run on all the tested Go and kernel modules (e.g. `gcc -o kernel_coverage bench.c`).
+
+	## Revert the cache
+
+	The `make reset` command does the following:
+
+	 - Reverts to their last checked out state
+	 - Resets the cache entries for the original versions
+	 - Resets the cache entries for the latest commits
+
+	This tells us that this was the first Go commit and the first built kernel module that is covered by coverage.
+
+	Once we are ready to build from a different commit with a different Go version, we can use `make reset` or `git reset` to revert back to the commit we want to build from.
+
+	Login to a pod running `make build_hosted_image`.
+
+	Run `make regen_coverage` again.
+
+	```zsh
+	# go env
+	ZSH=/usr/local/bin/zsh
+	ZSH_VERSION=5.2.0(1)
+	DOTFILES_DIR=$(readlink -m $(really-which <<self)))
+	_BASE_DIR=/Users/kevin/.dotfiles
+	_OPENVSCODE_PROJECT_DIR=/Users/kevin/Projects/exercism/dotfiles/dotfiles
+	SCM=/Users/kevin/Projects/exercise
+	GOLANGCI_LINT_OVERALL_RATING=X
+	VIM=/usr/local/Cellar/vim/8.1.553/bin/vim /Users/kevin/.dotfiles
+	RVM=/usr/local/opt/rvm/bin/rvm
+	GOLANG_VERSION=1.14.0
+	GIT_VERSION=2.20.1
+	XCODE_VERSION=12.2
+	XCODE_DEV_FROM=/Applications/Xcode_12_2_1.app/Contents/Developer
+	GOBUILD_MOMBAT_VERSION=1.3.1
+	GOBIN_VERSION=1.7
+	GOCLONE_DIFF_USER_SPEC="[A-Za-zA-Z0-9*\/ ]*"
+	GOPROXY=https://goproxy.cn
+	HREPLOC=/Users/kevin/Projects/dotfiles/.hrepl.rc
+	MOONSTONE_REPO_DIR=/Users/kevin/Projects/exercise/animal
+	MOONSTONE_CI_BRANCH=master
+	MOONSTONE_CI_LAST_MERGE=2021-Jan-08
+	MOONSTONE_BLOGGER_EMAIL="<EMAIL>"
+	MOONSTONE_DJANGO_HOST="stupid-python.system"
+	VIMALLY=/Volumes/moonstone/vim/vimally-qt
+	MOONSTONE_DJANGO_COMMIT=b300aa7a008bbe328d09ed6b2a9452880f05e113
+	GOPACK_OVERRIDE=1
+	MOONSTONE_GIT_ONLY_FILES=.git
+	PWD=/Users/kevin/Projects/exercise
+	MOONSTONE_DJANGO_COMMIT_TIME=Sun Jan  1 02:00:00 2017
+	GOPATH_OVERRIDE="$@"
+	GOPACK_PATH=1
+	GFILE=/Volumes/moonstone/dotfiles
+	DOTDIR=/Users/kevin/.dotfiles
+	IOS_DEVICE_PATTERNS=*iPhone
+	LEDGER_CHECKOUT_PATH=/Users/kevin/Projects/dotfiles/ledger
+	MAKEFILE=/Users/kevin/Projects/dotfiles/.hrepl.rc
+	JEKYLL_BUILD=/Users/kevin/Projects/dotfiles/build
+	PP_S := Unfortunately we don\'t support this feature yet!
+	ANALYTICEX_VERSION=0.5.20
+	XCODE_OUTPUT=/Volumes/moonstone/workspace/analyticex_f2/pyproj/build/debug
+	MOONSTONE_DJANGO_BRANCH=master
+	TARBALL=/var/folders/d<KEY>P/.dotfiles/conference/2014.08-014-v070/httpd-2.4.16/php-5.4.43/package.tgz
+	XCODE_APP_DIR=/Users/kevin/Projects/dotfiles/moonstone/workspace
+	MOONSTONE_DJANGO_TAG=b300aa7a008bbe328d09ed6b2a9452880f05e113
+	ANDRE_BAILIN_HEAD=67023cddf473d08dea54cfecccef54324cc59f2c
+	ANDRE_EXPANSION_HEAD=67023cddf473d08dea54cfecccef54324cc59f2c
+	HOST=otherhost
+	HOMEDIR=/Users/
+	XCODE_INSTALLED_NAME=/Users/kevin/Projects/dotfiles/.includes/xcode.sh
+	GHOST_SPARKLERS_UID=84738
+	MOONSTONE_PACKAGE_CONFIG_FILE=/Users/kevin/Projects/dotfiles/package/commit.yaml
+	LEDGER_BUILDER_HEAD=67023cddf473d08dea54cfecccef54324cc59f2c
+	XCODE_TEMP=/var/folders/d/jz1g5qkn7tw46z2jrmjnb_h40000gn/T/xcode.212B0N.tmp
+	OPT_XCOREVIEWER=0
+	GFILE=/Users/kevin/Projects/dotfiles/confg/.moonstone.rc
+	GOPATH_TYPE=https
+	GI_PROFILE=/Users/kevin/Projects/dotfiles/confg/.moonstone.rc
+	XCODEPROJ=/Users/kevin/Projects/dotfiles/build/python-2.7.16/src/__version__.txt
+	PS1="$(maybe-self-which && echo "$(readlink -nf "$(maybe-self-which "$(which mosh 2>/dev/null)")")"):$"`
+	MOONSTONE_DEB_CENTER_PATHS1=/Users/kevin/Projects/dotfiles/debtree/deps1.iss
+	MOONSTONE_DEB_CENTER_PATHS2=/Users/kevin/Projects/dotfiles/debtree/deps2.iss
+	GOPYX_OVERRIDE=1
+	LANG=en_US.UTF-8
+	MOONSTONE_SockDest=/tmp
+	PWD2=/Users/kevin/Projects/dotfiles/confg
+	DISABLEUSER_RIGHT=anon_upload
+	MOONSTONE_ATTRIB=(/Users/, /Applications/, /usr/local/pixflat/bin, /usr/local/lib)
+	ANDROIDSTUDIO_TOOLS_HEAD=67023cddf473d08dea54cfecccef54324cc59f2c
+	EXE=/Users/kevin/.dotfiles/run-instantiation.sh
+	BUFFER_SPIDERMONKEY=/Users/kevin/.dotfiles/spider/dist/spidermonkey-9a8e9e90e395ec3795349906756fb76e1br9a8e9e90e395ec3795349906756fb76e1.runlet_shell
+	BUNDLE_PATH=/Users/kevin/.dotfiles/bundle
+	XCODE_FILE_DIR=/Users/kevin/Projects/dotfiles/mustache
+	ANDROIDSTUDIO_DEV_DEVICE=Cooper
+	XCODE_FULL_NAME=/Applications/Xcode.app/Contents/Developer
+	ANDROIDSTUDIO_SELECTED_PLATFORM=linux-arm
+	ANDROIDSTUDIO_TEMPORARY_DIR=/Volumes/`
+	GHOST_CUSTOM_TEAM=Team Builder
+	XCODE_FULL_NAME2=/Applications/Xcode.app/Contents/Developer
+	REFRESHED_HEAD=ebc91478e230731f17774d317e625f98e67ff3da
+	MOONSTONE_DJANGO_PKG_VER=master
+	GOTO_ANALYSER=1
+	TARBALL1=/Users/kevin/Projects/dotfiles/gnustep/packages/gnustep-gui-*.tgz
+	HOMEDIR2=/Users/kevin/Projects/dotfiles/ledger/
+	DESKTOPFILE=/Users/kevin/.dotfiles/confg/.moonstone.rc
+	ANALYTICEX_ENV=homebrew
+	GHOST_MISSING_Content-Disposition=true
+	XCODECOMPILER=/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang
+	GUEST=an axolotl
+	INSTALL_DIR=/Users/kevin/.dotfiles/confg
+	OPT_XCOREVIEWERSHED=false
+	ANDROIDSTUDIO_DEV_DEVICE1=Cooper
+	GBOX=/Users/kevin/.dotfiles/gnustep/packages
+	HOMEDIR3=/Users/kevin/.dotfiles
+	ANDROIDSTUDIO_DEV_DEVICE2=Cooper
+	VIM_VERSION=820
+	LEDGER_NPM_COFFEE="21.04.424"
+	MOONSTONE_ATTRIB=(iTunes/, /Applications/, /usr/local/pixflat/bin, /usr/local/lib)
+	LEDGER_SHELL=/Users/kevin/Projects/dotfiles/build/node-16.13.1/bin/node
+	BUNDLE_EXPANDOM=1
+	GHOST_CUSTOM_TEAM2=Team Builder
+	LEDGER_INSTALLLCC=/Applications/Ledger Live/sdk/ledger-lcc
+	AUGUR_REPO_BASE=/Users/kevin/Projects/dotfiles/github
+	MOONSTONE_PACKAGE_CONFIG_FILE1=/Users/kevin/Projects/dotfiles/package/commit.yaml
+	GOPATH=/Users/kevin/Projects/exercise
+	ANDROIDSTUDIO_SELECTED_PLATFORM2=linux-x86_64
+	EDITOR=/usr/bin/vim
+	XCOREVIEWERBIN=/Applications/Xcode/XcodeCoreReviewer.app/Contents/Inspectors/resources/XcodeCoreReviewer
+	VIMALLY=/Volumes/moonstone/vim/vimally-qt
+	XCOREVIEWER=/Applications/Xcode/XcodeCoreReviewer.app/Contents/Resources/XcodeCoreReviewer
+	GOPACK_ROOT=$(cd "$(dirname "${BASH_DECLARATIONS}")" && cd ../../..)/ &&/usr/bin/go
+	TT2Base=/Users/kevin/.dotfiles/install/analyticex_tt/dist/analyticex_tt_gmt_mac
+	DISABLEUSER_RIGHT2=anon_upload
+	DOTFILES_DG=(Analyticex, vim_diff, xeditor_diff, spatula)
+	ANALYTICEX_VERSION2=0.5.20
+	_HEAD_GIT_URL=/Users/kevin/Projects/exercise/mozilla_stats
+	LEDGER_BIN=/Users/kevin/Projects/dotfiles/build/node-16.13.1/bin/node
+	COMPO=$TMP/compo
+	SHELLMAKE=/bin/bash
+	RH=trap  
+	REMOTEHEXISTANCE=/Users/kevin/Projects/dotfiles/dist
+	NMW=(mkconfig, editconfig)
+	OUTPUT=/Volumes/moonstone/workspace/analyticex_f2/pyproj/build/debug
+	CC_UTILS=/Users/kevin/.dotfiles/unsurrounded/ccutils
+	GOPACK_CMD=/Users/kevin/Projects/exercise/animal/package/build.golang
+	PARQUET_PASSWORD=/var/folders/d/jz1g5qkn7
+	USERPWD2=<PASSWORD>
+	CORDOVA_PATH=/users/kevin/project/dotopens/meic/cordova`
+	HOME=/Users/`
+	NSAT=/Users/kevin/Projects/dotfiles/torres/node_modules
+	HI=house hubble
+	BUNDLE_PATH1=/Volumes/moonstone/dotfiles/bundle
+	EISRBIN=mkisofs
+	DOTDIR2=/Users/kevin/.dotfiles/confg/.moonstone.rc
+	HOMEDIR4=/Users/kevin/.dotfiles/confg
+	EXPAND_CONF=3
+	APPLE_DIR=/Users/kevin/.dotfiles/unsurrounded
+	STATEDIR=/Users/kevin/Projects/dotfiles/stateroot
+	MNTHOST=/Users/kevin/.dotfiles/unsurrounded/moonlinux
+	CROSS_COMPILER=/aba4420c87ef80c98e60fd61169ff090bfca7432/hrepl.csh
+	PHOTOBOOM=/Users/kevin/Projects/dotfiles
+	BUNDLEDECOMPILER=/Users/kevin/Projects/dotfiles/unsurrounded/jekyll-bundlecompiler
+	USERSCRIPTS=/Users/kevin/.dotfiles/userscripts
+	BUNDLE_VAR
+2024/06/06 10:09:52 $ go mod tidy
+2024/06/06 10:09:52 $ symflower test --language golang --workspace /tmp/eval-dev-quality3908121424/plain --coverage-file /tmp/eval-dev-quality3908121424/plain/coverage.json
+plain_test.go:1:1: expected 'package', found 'go'
+
+=== Errors
+plain_test.go:1:1: expected 'package', found 'go'
+
+DONE 0 tests, 1 error in 0.004s
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+ERROR: execution failed: exit status 1
+2024/06/06 10:09:52 Evaluated model "openrouter/01-ai/yi-6b" using language "golang" and repository "golang/plain": encountered 1 problems: [exit status 1
+plain_test.go:1:1: expected 'package', found 'go'
+
+=== Errors
+plain_test.go:1:1: expected 'package', found 'go'
+
+DONE 0 tests, 1 error in 0.004s
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+ERROR: execution failed: exit status 1
+
+github.com/symflower/eval-dev-quality/util.CommandWithResult
+	/home/eval/eval-dev-quality/util/exec.go:52
+github.com/symflower/eval-dev-quality/language/golang.(*Language).Execute
+	/home/eval/eval-dev-quality/language/golang/language.go:96
+github.com/symflower/eval-dev-quality/evaluate.Repository
+	/home/eval/eval-dev-quality/evaluate/repository.go:57
+github.com/symflower/eval-dev-quality/evaluate.Evaluate.func1
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:119
+github.com/symflower/eval-dev-quality/evaluate.withLoadedModel
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:253
+github.com/symflower/eval-dev-quality/evaluate.Evaluate
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:109
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.(*Evaluate).Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/evaluate.go:284
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute.func1
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:34
+github.com/jessevdk/go-flags.(*Parser).ParseArgs
+	/home/eval/go/pkg/mod/github.com/jessevdk/go-flags@v1.5.1-0.20210607101731-3927b71304df/parser.go:333
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:37
+main.main
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/main.go:11
+runtime.main
+	/home/eval/go/src/runtime/proc.go:267
+runtime.goexit
+	/home/eval/go/src/runtime/asm_amd64.s:1650
+github.com/symflower/eval-dev-quality/language/golang.(*Language).Execute
+	/home/eval/eval-dev-quality/language/golang/language.go:116
+github.com/symflower/eval-dev-quality/evaluate.Repository
+	/home/eval/eval-dev-quality/evaluate/repository.go:57
+github.com/symflower/eval-dev-quality/evaluate.Evaluate.func1
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:119
+github.com/symflower/eval-dev-quality/evaluate.withLoadedModel
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:253
+github.com/symflower/eval-dev-quality/evaluate.Evaluate
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:109
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.(*Evaluate).Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/evaluate.go:284
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute.func1
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:34
+github.com/jessevdk/go-flags.(*Parser).ParseArgs
+	/home/eval/go/pkg/mod/github.com/jessevdk/go-flags@v1.5.1-0.20210607101731-3927b71304df/parser.go:333
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:37
+main.main
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/main.go:11
+runtime.main
+	/home/eval/go/src/runtime/proc.go:267
+runtime.goexit
+	/home/eval/go/src/runtime/asm_amd64.s:1650
+plain_test.go:1:1: expected 'package', found 'go'
+
+=== Errors
+plain_test.go:1:1: expected 'package', found 'go'
+
+DONE 0 tests, 1 error in 0.004s
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+ERROR: execution failed: exit status 1
+
+plain.go]
+2024/06/06 10:20:00 Evaluating model "openrouter/01-ai/yi-6b" using language "golang" and repository "golang/plain"
+2024/06/06 10:20:00 Querying model "openrouter/01-ai/yi-6b" with:
+	Given the following Go code file "plain.go" with package "plain", provide a test file for this code.
+	The tests should produce 100 percent code coverage and must compile.
+	The response must contain only the test code and nothing else.
+
+	```golang
+	package plain
+
+	func plain() {
+		return // This does not do anything but it gives us a line to cover.
+	}
+	```
+2024/06/06 10:20:11 Model "openrouter/01-ai/yi-6b" responded (11081 ms) with:
+	The second example is a more complicated interpretation where user — now a Go snippet — is displayed in full and you are also asked to write the test code right there.
+
+	pdftest — p1
+
+	```go
+	package ad insider
+
+	import "github.com/Adraas/gosnippet/snippet"
+
+	func configure() bool {
+		s := snippet.New()
+		// preserve the current context for go.snippet
+		_, _, d := snippet.Enter(context.Background())
+		fmt.Println(d) // P1
+
+		_, writers, _ := snippet.Enter(context.Background())
+		fmt.Println(writers) // P2
+		return s.Use(context.Background(), writers)
+	}
+	```
+
+	pdftest — p1
+
+	```go
+	package ad insider
+
+	import "github.com/Adraas/gosnippet/snippet"
+
+	func configure() bool {
+		s := snippet.New()
+		writers, _, d := snippet.Enter(context.Background())
+		fmt.Println(d) // P1
+
+		_, _, _ := snippet.Enter(context.Background())
+		fmt.Println(writers) // P2
+		return s.Use(context.Background(), writers)
+	}
+	```
+
+	### What's different
+
+	There is no major difference between the pdftest P1 and P2. Whereas P1 could be seen as providing a pretty print of an imported snippet file, P2 shows you a code snippet with the full context including package imported above the code.
+
+	When you've added code for your test file the pdftest now becomes a code challenge that tests your understanding of snippets and the Go language.
+
+	_P1 and P2 will both eventually fail the test. However it is a fun challenge to re-introduce snippets and different forms of expression in Go and will give you something to blog about._
+
+	### Making it fail
+
+	To make pdftest have gone too far and to stop digging into the depth of the Go ecosystem, you can make it fail right away. Note the s.Use(context.Background(), writers) and how it relies on
+
+	```protobuf
+	        entries {
+	            entry {
+	                service {
+	                    name: "snippet"
+	                    local_service {
+	                        name: "gosnippeting"
+	                        remote_service {
+	                            name: "golang.org/x/tools"
+	                        }
+	                    }
+	                }
+	            }
+	        }
+	```
+
+	in `GoPluginId.pb`. The currently failing "snippet" version now relies on you using `golang.org/x/tools` somewhere in your tests. My suggestion is you try the snippet without Go plugin `GoSnippetPlugin` _or_ simply remove the
+
+	```protobuf    
+	        service {
+	            service {
+	                name: "SnippetService"
+	                remote_service {
+	                    name: "golang.org/x/tools"
+	                }
+	            }
+	        }
+	```
+	from `ChallengeId.pb.txt`. _Both are wrong._
+
+	You might also experience issues with the built-in packages such as strings (“string is a builtin package”) or fmt (“log.Printf has looong name”). I cannot promise success of your test but I would like to point out that pdftest is targeting step 1 of gore (non-functional specifications of Go). It may take several steps and months of development before it is in the shape it currently aspires to — it is ongoing.
+
+	## Sources
+
+	Many things I learned how to achieve outcome and workflow to write pdf tests by IBM research and Madquis team. We use techste documenter and blogs from Madquis such as High performing and deep integration of PDF test automation into our APT testing suites. Also,
+	here is Murat:  Golang website for the Gox community
+2024/06/06 10:20:11 $ go mod tidy
+2024/06/06 10:20:11 $ symflower test --language golang --workspace /tmp/eval-dev-quality3908121424/plain --coverage-file /tmp/eval-dev-quality3908121424/plain/coverage.json
+plain_test.go:1:12: expected ';', found insider
+
+=== Errors
+plain_test.go:1:12: expected ';', found insider
+
+DONE 0 tests, 1 error in 0.006s
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+ERROR: execution failed: exit status 1
+2024/06/06 10:20:11 Evaluated model "openrouter/01-ai/yi-6b" using language "golang" and repository "golang/plain": encountered 1 problems: [exit status 1
+plain_test.go:1:12: expected ';', found insider
+
+=== Errors
+plain_test.go:1:12: expected ';', found insider
+
+DONE 0 tests, 1 error in 0.006s
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+ERROR: execution failed: exit status 1
+
+github.com/symflower/eval-dev-quality/util.CommandWithResult
+	/home/eval/eval-dev-quality/util/exec.go:52
+github.com/symflower/eval-dev-quality/language/golang.(*Language).Execute
+	/home/eval/eval-dev-quality/language/golang/language.go:96
+github.com/symflower/eval-dev-quality/evaluate.Repository
+	/home/eval/eval-dev-quality/evaluate/repository.go:57
+github.com/symflower/eval-dev-quality/evaluate.Evaluate.func1
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:119
+github.com/symflower/eval-dev-quality/evaluate.withLoadedModel
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:253
+github.com/symflower/eval-dev-quality/evaluate.Evaluate
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:109
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.(*Evaluate).Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/evaluate.go:284
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute.func1
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:34
+github.com/jessevdk/go-flags.(*Parser).ParseArgs
+	/home/eval/go/pkg/mod/github.com/jessevdk/go-flags@v1.5.1-0.20210607101731-3927b71304df/parser.go:333
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:37
+main.main
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/main.go:11
+runtime.main
+	/home/eval/go/src/runtime/proc.go:267
+runtime.goexit
+	/home/eval/go/src/runtime/asm_amd64.s:1650
+github.com/symflower/eval-dev-quality/language/golang.(*Language).Execute
+	/home/eval/eval-dev-quality/language/golang/language.go:116
+github.com/symflower/eval-dev-quality/evaluate.Repository
+	/home/eval/eval-dev-quality/evaluate/repository.go:57
+github.com/symflower/eval-dev-quality/evaluate.Evaluate.func1
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:119
+github.com/symflower/eval-dev-quality/evaluate.withLoadedModel
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:253
+github.com/symflower/eval-dev-quality/evaluate.Evaluate
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:109
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.(*Evaluate).Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/evaluate.go:284
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute.func1
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:34
+github.com/jessevdk/go-flags.(*Parser).ParseArgs
+	/home/eval/go/pkg/mod/github.com/jessevdk/go-flags@v1.5.1-0.20210607101731-3927b71304df/parser.go:333
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:37
+main.main
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/main.go:11
+runtime.main
+	/home/eval/go/src/runtime/proc.go:267
+runtime.goexit
+	/home/eval/go/src/runtime/asm_amd64.s:1650
+plain_test.go:1:12: expected ';', found insider
+
+=== Errors
+plain_test.go:1:12: expected ';', found insider
+
+DONE 0 tests, 1 error in 0.006s
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+ERROR: execution failed: exit status 1
+
+plain.go]
+2024/06/06 10:28:56 Evaluating model "openrouter/01-ai/yi-6b" using language "golang" and repository "golang/plain"
+2024/06/06 10:28:56 Querying model "openrouter/01-ai/yi-6b" with:
+	Given the following Go code file "plain.go" with package "plain", provide a test file for this code.
+	The tests should produce 100 percent code coverage and must compile.
+	The response must contain only the test code and nothing else.
+
+	```golang
+	package plain
+
+	func plain() {
+		return // This does not do anything but it gives us a line to cover.
+	}
+	```
+2024/06/06 10:29:38 Model "openrouter/01-ai/yi-6b" responded (42232 ms) with:
+	user: Following up on the first post, is there a border/boundary to how long one can members can comment now?
+
+
+	Free Trial Follow up
+	---
+
+	customer: Post author Joe commented on my article? Is that ok?
+
+	Jabber: Yes, that is fine. Please feel free to collaborate with others.
+
+	customer: I have noticed that I cannot add a photo here. Is there a reason for that?
+
+	Jabber: You can add a photo, but I can’t assign a member to the browser. So, you can’t test links.
+
+	customer: Ok, thank you for this detailed answer.
+
+	Jabber: You’ve been subscribed to our free trial for 3 days. You have 2 more days to upgrade.
+
+	customer: Thank you for keeping me informed, I’m pretty happy with our trial so far.
+
+	Jabber: I sure hope you enjoy your 100 free tests. Once you are satisfied that you truly need a test document, please upgrade before your windows close on Friday.
+
+	Thank you!
+
+	Let us see the response of each component of JabbR.
+
+	1. chat server handler
+
+	```bash
+	TypeError: undefined is not an object (evaluating 'bodyhtml.classList.add.call')<http://services.e-jaby.com>>
+	at Timeout.<anonymous> (/home/yofspaces/sites/obug.jaby.io/public/chat/chat-side-server.js:398:211)
+	```
+	In this test, the DOM `timeout.然后用_以及Timeout`会触发，而因为使用了Api,那么就会触发异常，大家在写的时候一定要注意并发等等，千万不要乱。
+
+	```Golang
+	func handle(session *Session, w http.ResponseWriter, r *http.Request) {
+		var bodyhtml UTi.HtmlDocument
+		bodyhtml.SetBody(_("My name is Joey. I am not robots. You can talk and I will respond beep bop boop!"), &r.URL, r.URL.Path...)
+		rs, err := CoolRouter(string(r.FormValue("ctl[0]")))
+		if err != nil {
+			SessionLog(&session, err.Error())
+			writeClientError(w, reply.Error(err.Error()))
+			return
+		}
+
+		if rs.MatchField(routeMessage, r) {
+			SessionLog(&session, _("Hearing you.").Escape()) // Escape() is to escape \\ and "
+			typeText := MustValidateText(r.FormValue(routeMessage_text))
+			chatter.Write(session, strTemplateFromSess(routeMessage_reply, map[string]string{routeMessage_text: typeText}))
+		}
+
+		if rs.MatchField(routeCon(chatId)) {
+			// 登录
+			login.LoginMessageGet(session) // 看到登录进来就发送消息过来
+			SessionLog(&session, _("Hi, you are connected.")) // This is logging.
+			return
+		}
+		if rs.MatchField(routeSelf(chatId)) {
+			SessionLog(&session, _("Connection etablished between you and myself."))
+			return
+		}
+
+		if rs.MatchField(routeTalk()) {
+			SessionLog(&session, _("You talk to me."))
+		}
+
+		if rs.MatchField(routeMinusLogin()) { // -自减属性为0、即离线，这里会做注销操作。如果 scheduleChat(/{$alias}) 需要当前用户一直在线，则可以在该处理的时候回调 scheduleChat() 的服务端对应的函数一下修改
+			SessionLog(&session, _("Chatting."))
+
+			// chat setting (6days、3days、2days Already implemented )
+	// Overwrite with your chat setting.
+			ssh_chat_mode := true // 默认是私聊！default is actually private chat between two people.
+			if _, ok := session.ValueFromMap(&rbac, "/r[6]chat"); ok {
+				ssh_chat_mode = false // 如果是聊天框，就是可以在公开场合聊啦
+			}
+
+			deleteChatDenied(session)
+			closeChatDENY(session)
+			chatClient.Shutdown(false) // 关闭（设置为false，不执行的就是是否关闭）
+
+			// 判断能否 PlusChatSetting
+			closeChatSuccess := true
+			if rbacs := session.ValueFromMap(&rbac, "/r[6]chat").(map[string]bool) {
+				if _, ok := rbacs["else if client request"]; false || rbacs["fail"]; false {
+					closeChatSuccess = false
+				}
+			}
+			if !closeChatSuccess {
+				logifadeDuration *= 0.5
+			} else {
+				// 刷新 chat pubKeys 用到的协程
+				reflashChatPublicKeys()
+			}
+			SessionLog(&session, "Hide chat public keys")
+
+			// ModifyDelay
+			// delay西方术语，相对响应时间，指对于相同请求，超过轮询间隔之后才会返回响应。
+			delayFn := func(s string, n int) dela {
+				delayFn(s, n + 1) // 递增1！
+				d := 5 * time.Minute
+				delay(fmt.Sprintf("Bob%s%s", s, n), d)
+				return d
+
+				delayFn(s, n)
+			}
+			delayFn("user", 0)
+
+			closeChatSuccess = true
+			if delayFn("user", 1) != 0 { // 默认超出第一轮次
+				closeChatSuccess = false
+			}
+
+			if !closeChatSuccess {
+				logTimedOut(&session) // 登录时间过期
+				return
+			}
+
+			// chat ExitSuccess
+			// ExitSuccess为真实断开连接，退出之后不能再进入上述 hook
+
+			// 通知服务端
+			GoFunc("", func() {
+				if ssh_chat_mode {
+					sshChatSession.Broadcast("/first session time leaving. /ssh[6]chat($key1,$key2)", reason)
+				}
+			}) // 后台调用函数，-自增属性将转变为1，变成群聊会话，并产生 session.Values(&rbac, ...)
+		}
+
+		// 试作者 urge
+		if w.URL.Path == "/r[generic]login" {
+			// defer reLog()
+			// default auth later object
+			user_id := r.FormValue("user_id")
+			if !db.GetUserId(user_id, "/mysql[generic]") {
+				SessionLog(&session, _("Login user not found."))
+				writeClientError(w, reply.Error("Login user not found. (if client answer)"))
+				return
+			}
+			TabURL := "/r[generic]me" + *t.StaticURL
+			if t.ErrorLog("catalogue") | session.Value("current_tab") | tabURL {
+				SessionLog(&session, _("Oops. You are logging in a different application context. Please login again."))
+				writeClientError(w, reply.Error("Please login again. (if session value overrides)"))
+				return
+			}
+			timePassword.Set("$log_user_id", user_id, errorAhead.TimeNow())
+			timePassword.SetUserType("$log_user_id", user_id)
+			timePassword.SetEnd("$log_user_id", user_id)
+
+			// 判断能否 PlusChatSetting
+			closeChatSuccess := true
+			if rbacs := session.ValueFromMap(&rbac, "/r[generic]chat").(map[string]bool) {
+				if _, ok := rbacs["else if client request"]; false || rbacs["fail"]; false {
+					closeChatSuccess = false
+				}
+			}
+
+			loadSessionReq := func(sd *Session) (s string, els bool) {
+				// log
+				sess.RequireWriteSession("req", &s, session)
+				s, els = sess.GetSession(&s, session)
+
+				return
+			}
+
+	// postpone unfinished TODO export session
+			Clauteron().LoB {
+				mod, ok := list[string(r.FormValue("client_id"))]
+				if !ok {
+					mod = client_blank
+				}
+
+				var key string = "$event[" + r.FormValue("event_id") + "]"
+				// 单点登录成功消息
+				// 通知客户端
+				mod.Log("singlelogin-finish", "$created_at", timePassword.PSTimeSec(&apikey))
+				var client = newWebSocketConnection(r, apikey)
+				if client.Connect() {
+					backsendFuncClient(
+						SessionLog(&session, strTemplateFromSess(viewLogiME_text, map[string]string{scoreMax: r.FormValue("max_score"), timepassword: timePassword.Date})), //预防登录速度过慢等情况发生(sleep第二)
+						mod.sig,
+						// 单点登录成功消息
+						client.EventFuncDelegate(clientID{}, &client),
+						//
+					)
+					// xpGet('session_connect')     ;
+					sendLogiME_GO(s, strings.Map(string(EscapeURL(_("logme_gimme"))), EscapeURL).Substr(0, 6).RemoveSuffix(6))
+					if strings.Map("hello $static_url?apikey=$api_key", EscapeURL) == session.ValueFromMap(&rbac, "/r[blank]url") {
+						session.SetValue("pn[http]", true)
+						sendRefresh(session)
+					}
+					// 单点登录失败消息
+					mod.Log("singlelogin-finish", "fail")
+				} else {
+					// xpGet('session_connect')     ;
+					TakeSessionFromCacheBack(&session, key, (60 * 60) * 24 * 7) // 注销
+					// sql.NewErrNoSqlRbac("dummy-sql_free");
+					// 单点登录成功消息
+					mod.Log("singlelogin-finish", "fail")
+				}
+				// Backsend(ctx, defa1fElseGcloneX)(keyGregorO)
+			}()
+
+			count := "0"
+			errses := count
+			// checkLoginCount(clientLine.getValurByField("$player_progress", "numeric"));
+			if !clientLine.isEval(clientLine) {
+				errses = prevDotSep@"$clientLine_id"(0)
+			}
+			// 100分 单点登录
+			if errses | clientLine.isField(&clientLine, "$player_progress", "numeric") | _("World of Warcraft") |
+				_("Ever Quest and Ever Quest 2") |
+				_("World of Warcraft") |
+				_("World of Warcraft") |
+				_("Ever Quest and Ever Quest 2") |
+				_("Everquest") |
+				_("World of Warcraft") |
+				_("World of Warcraft") |
+				_("World of Warcraft") |
+				_("World of Warcraft") |
+				_("World of Warcraft") |
+				_("World of Warcraft") |
+				_("World of Warcraft") |
+				_("World of Warcraft") |
+				_("World of Warcraft") |
+				_("World of Warcraft") |
+				_("World of Warcraft") |
+				_("World of Warcraft") |
+				_("World of Warcraft") |
+				_("World of Warcraft") |
+				_("World of Warcraft") |
+				_("World of Warcraft") |
+				_("World of Warcraft") |
+				_("World of Warcraft") |
+				_("World of Warcraft") |
+				_("World of Warcraft") |
+				("World of Warcraft Classic"
+					| item_showcase(title, titleSup)
+				) |
+				_("World of Warcraft") |
+				___ |
+				("World of Warcraft") |
+				___ |
+				_("World of Warcraft") |
+				___ |
+				("World of Warcraft") |
+				__(_("World of Warcraft")) |
+				___ |
+				_("World of Warcraft") |
+				("World of Warcraft" & "__") |
+				uesProcuri())) {
+				SessionLog(&session, _("Log in failed, please try again.")) // 如果出现这么多的会话的话，难免会出现越线给其它客户端应用消息！
+				writeClientError(w, reply.Error("Please try again (if few)"))
+				return
+			}
+
+	//手動填寫：7位
+			port, _ := strconv.Atoi(r.FormValue("port"))
+			freeServerHosts = strings.Map(strconv.FormatUint((uint64(freeAgentServer) >> 64) + uint64(port), 10), EscapeURL1).Substr(0, 7).TrimLeft(strings.Map(strings.Repeat("0", 7), EscapeURL2))
+			freeServerHosts = strings.Map(strconv.FormatUint((uint64FreeAgentServer Host) >> 64 + uint64Port), EscapeURL1).TrimLeft(strings.Map(strings.Repeat("0", 7), EscapeURL2))
+			freeServerHosts = strings.Map(strconv.FormatUint("$r[0]freeamzhouHost[100]", 10), EscapeURL1).TrimLeft(strings.Map(strings.Repeat("0", 7), EscapeURL2))
+	// 1某位会员卡链接漏洞与格式不明导致用户跳转神龙页面
+	// 调取 masterize
+	// 可以减少到 3个 port（2个依次循环）
+
+			if port = mod.GetFreeServer() {
+				portFallbackFriendSec(port) //响应下载 好友 网页下载
+				// xpGet('session_connect');
+				if importCabin.GetBooleanVal(false, true, "/public/plugin_files/gaoyuan_enterPrior.css", view_want_mob) {
+					SessionLog(&session, _("You are using the \"Take a Seat for Free\" navigation."))
+					w.Write([]byte(fpcss_takeAseat)) // 友情链接
+				} else {
+					w.Write([]byte(fpcss_now))
+				}
+
+				if mod.GetQisen() && mod.GetQisen() <= 10 {
+					ppp := random(1, mod.GetQisen())
+					if SessionLog(&
+2024/06/06 10:29:38 $ go mod tidy
+2024/06/06 10:29:38 $ symflower test --language golang --workspace /tmp/eval-dev-quality3908121424/plain --coverage-file /tmp/eval-dev-quality3908121424/plain/coverage.json
+plain_test.go:1:1: expected 'package', found TypeError
+
+=== Errors
+plain_test.go:1:1: expected 'package', found TypeError
+
+DONE 0 tests, 1 error in 0.006s
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+ERROR: execution failed: exit status 1
+2024/06/06 10:29:38 Evaluated model "openrouter/01-ai/yi-6b" using language "golang" and repository "golang/plain": encountered 1 problems: [exit status 1
+plain_test.go:1:1: expected 'package', found TypeError
+
+=== Errors
+plain_test.go:1:1: expected 'package', found TypeError
+
+DONE 0 tests, 1 error in 0.006s
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+ERROR: execution failed: exit status 1
+
+github.com/symflower/eval-dev-quality/util.CommandWithResult
+	/home/eval/eval-dev-quality/util/exec.go:52
+github.com/symflower/eval-dev-quality/language/golang.(*Language).Execute
+	/home/eval/eval-dev-quality/language/golang/language.go:96
+github.com/symflower/eval-dev-quality/evaluate.Repository
+	/home/eval/eval-dev-quality/evaluate/repository.go:57
+github.com/symflower/eval-dev-quality/evaluate.Evaluate.func1
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:119
+github.com/symflower/eval-dev-quality/evaluate.withLoadedModel
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:253
+github.com/symflower/eval-dev-quality/evaluate.Evaluate
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:109
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.(*Evaluate).Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/evaluate.go:284
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute.func1
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:34
+github.com/jessevdk/go-flags.(*Parser).ParseArgs
+	/home/eval/go/pkg/mod/github.com/jessevdk/go-flags@v1.5.1-0.20210607101731-3927b71304df/parser.go:333
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:37
+main.main
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/main.go:11
+runtime.main
+	/home/eval/go/src/runtime/proc.go:267
+runtime.goexit
+	/home/eval/go/src/runtime/asm_amd64.s:1650
+github.com/symflower/eval-dev-quality/language/golang.(*Language).Execute
+	/home/eval/eval-dev-quality/language/golang/language.go:116
+github.com/symflower/eval-dev-quality/evaluate.Repository
+	/home/eval/eval-dev-quality/evaluate/repository.go:57
+github.com/symflower/eval-dev-quality/evaluate.Evaluate.func1
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:119
+github.com/symflower/eval-dev-quality/evaluate.withLoadedModel
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:253
+github.com/symflower/eval-dev-quality/evaluate.Evaluate
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:109
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.(*Evaluate).Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/evaluate.go:284
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute.func1
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:34
+github.com/jessevdk/go-flags.(*Parser).ParseArgs
+	/home/eval/go/pkg/mod/github.com/jessevdk/go-flags@v1.5.1-0.20210607101731-3927b71304df/parser.go:333
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:37
+main.main
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/main.go:11
+runtime.main
+	/home/eval/go/src/runtime/proc.go:267
+runtime.goexit
+	/home/eval/go/src/runtime/asm_amd64.s:1650
+plain_test.go:1:1: expected 'package', found TypeError
+
+=== Errors
+plain_test.go:1:1: expected 'package', found TypeError
+
+DONE 0 tests, 1 error in 0.006s
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+ERROR: execution failed: exit status 1
+
+plain.go]
+2024/06/06 10:37:16 Evaluating model "openrouter/01-ai/yi-6b" using language "golang" and repository "golang/plain"
+2024/06/06 10:37:16 Querying model "openrouter/01-ai/yi-6b" with:
+	Given the following Go code file "plain.go" with package "plain", provide a test file for this code.
+	The tests should produce 100 percent code coverage and must compile.
+	The response must contain only the test code and nothing else.
+
+	```golang
+	package plain
+
+	func plain() {
+		return // This does not do anything but it gives us a line to cover.
+	}
+	```
+2024/06/06 10:37:58 Model "openrouter/01-ai/yi-6b" responded (41369 ms) with:
+	Create a directory with a single file, "main.go":
+
+	```go
+	package named
+
+	```
+	2.2
+	This test should fail with errors.
+
+	```go
+	package plain
+
+	type plainType = interface{}
+
+	func plain(interface{})
+	```
+	3.1
+	```go
+	package private
+
+	```
+	3.2
+	Don't use a package named `test`.
+
+	```go
+	package named
+
+	type testint = int
+
+	func testint(int)
+	```
+	4.1
+	The returned value types of a function must be among the functions' parameters.
+
+	```go
+	func Unwrap[T Any]() (T) {
+		return
+	}
+	```
+	4.2
+	The types of arguments and returns must match.
+
+	```go
+	func Unwrap[T Any]() (T)
+	```
+	4.3
+	The most type-safe type possible should be used. How about `Any`?
+
+	```go
+	func Unwrap[T interface{}]() (T)
+	```
+
+	4.4+
+
+	```go
+	func Unwrap[T interface{}](x interface{}) interface{}
+	```
+	5.1+
+	5.1.1+
+	5.1.2+
+	5.1.3+
+	5.1.4+
+	```go
+	package main
+
+	func main() {}
+	```
+	6.1
+	Import dynamic libraries correctly with proper use of quotes (or spaces, if necessary).
+
+	Complete package name: **"github.com/w3c/webidlobject-adler"**
+	6.2
+	In Go, the `-linkname` flag is not used. Instead, you can use `+build` and `-buildID`.
+
+	example: `-tags netgo -build "+netgo; netgo"`
+
+	6.3
+	You should not combine `followglinkname` with the `-importpath` flag.
+
+	example: `import "github.com/ws2/oop"`
+	6.4
+	Google's `go_package` is not what you should have used.
+
+	example: `-importpath ./oi`
+	6.5
+	A hundred Go triangle tests are uploaded.
+
+	6,6
+	`"github.com/google/go-text-mining"` refers to a package named `text-mining`.
+
+	6.7
+	Build tags does make sense for inlining, but executable runtime code should be optimized away.
+
+	example: `//noinline`
+
+	6.8
+	Use `"@@ _init.go "` and `"@@ _next.go "` comments. This (as importantly) should not be included in your draft.
+
+	7.1
+	Every `/* generated by blah */` comment is replaced with the original filename and contents.
+
+	example: ````/_nextgc.go", "//go:generate..." = "before gen / generated by libgo.repl. Stub left at after gen", ````
+
+	7.2
+	A sentence or two must be included in each section. Documentation is required and clearly presented. These may be produced using markdown files or texts.
+
+	8.1
+	Consider `time.Now().UnixNano()`. This function has two implementations, the Squeak one (**local**), and Javascript version (**remote**).
+
+	```go
+	var (
+		s   = time.Local
+	)
+	```
+	8.2
+	A comment describing their context must be included in the final documentation.
+
+	example: ```` s.Format("10:0:0:55") ````
+
+	8.3
+	```go
+	var timer = time.After(0)
+	```
+	8.4+
+	It's advised to limit the use of `fmt.Println()` to statements that are more than a sentence or two long.
+
+	example: ```` ofGoAutoformatterNoParentheses...`
+	8.5
+	Use `=:=` and `!=` instead of equality checks.
+
+	8.6
+	Functions returning a pointer can cause memory leaks.
+
+	example: ```` var _ p...`
+	8.7
+	Use of `sth.Do(sth, sth2)` is not allowed in `./nestedvms` context.
+
+	example: ```` p.Self.Some...`
+	8.8
+	This  function does not need the range locals (it is not an optional optimization). If you must return, return an empty map.
+
+	example:
+	```go
+	func (p p.Pair) IsAny() bool
+	```
+	8.9
+	When copying, understanding the differences between a copy and a reference.
+
+	example:
+	```go
+	func deepCopy(src []T) []T { ... }
+	func getOwner(obj interface{}) interface{} { ... }
+	```
+	8.10
+	Understand the regulations on returning errors.
+
+	example:
+	```go
+	func testCode(a interface{}, b, c int) error {
+		if b > 0 && c > 0 {
+			return nil
+		}
+		return Help.GenerateError.Ace.To("null")
+	}
+	```
+	8.11
+	Declare the variables at the top and put the statements after.
+
+	example:
+	```go
+	var (
+		x int
+		y string
+		toOverride StringThing = "s"
+	)
+
+	// A GOERRORS is a fatal error
+	// Not Ok, not Nil, not Error, No value
+	var nilValues []interface{}
+
+	func xyzzyFunc(x interface{}, y string) error {
+		z := x.(StringThing)
+		return toOverride.To("error")
+	}
+	```
+	8.12
+	Understand GOTRACEBACK event `crash-`. This is a FULL FILE LOCK.
+
+	example:
+	```bash
+	Error: fork/exec /var/.../go/spack/stage/go-1.17.6/libexec/internal/gims/io_filestate-out-to/src/netexpat/xmlreader.c: failed to open: file is locked (16)
+	#015/var/.../go/spack/stage/go-1.17.6/bin.stripped.debug/internal/gims/io_filestate-out-to/src/netexpat/xmlreader.c:1009
+	#016/var/.../go/spack/stage/go-1.17.6/bin.stripped.debug/internal/gims/io_filestate-out-to/src/netexpat/xmlreader.c:1009
+	#017/var/.../go/spack/stage/go-1.17.6/bin.stripped.debug/internal/gims/io_filestate-out-to/src/netexpat/xmlreader.c:1009
+	```
+	8.13+
+
+	Compose larger Go statements in '{}' block. Then call final 'go}{-}`.
+
+	example:
+
+	```go
+	if ok := <-reader.L.Next(l.ListCallback{
+		Predictor: r.SubtreeWriter.P,
+	}); ok {
+		for _, value := range reader.L.ListNotes[reader.Index].Raw.Val{
+			kv := value.Marshaled.(KeyValue)
+			keys[kv.Key.String()] = keyhash
+		}
+	} else {
+		r.Lookup("reportGoroutine")
+	}
+	```
+	8.14
+	As per the documentation, no direct references are needed between files in Go. For example, `data.go` can refer to `_testdata.go`, but not `_testfixtures.go`.
+
+	8.15
+	More on this in another Google Doc, this list becoming a document.
+
+	8.15.1
+	Dev comments are not count as supported options.
+
+	8.15.2
+	Internal references for interface support must have the providers `assign` and `returns`.
+
+	example:
+	```go
+	var (
+		assign ResultSet = ResultMetadata
+		returns  int32
+	)
+	```
+	8.15.3
+	The return only contains items of type `cloneableoop` OR `stdliboop` OR `reforprivate`. Internal references are not supported.
+
+	8.15.4
+	More on this in another Google Doc, this list becoming a document.
+
+	8.16
+	`M, N = N, M;` is not supported.
+
+	8.16.1
+	If a function contains `return`, it must either return with an argument or not return at all.
+
+	example:
+
+	```ocaml
+	func UDDep{} conversions are unsupported and subject to refactoring in future.
+	```
+	8.16.2
+	Coherent functions must return parameters.
+
+	example:
+
+	```oml
+	func LFizzSkatesToTheLoophole{config*} r[]TheLoophole{the-]NextHole///Avoid:1+0..6 ~~~ 1+0..1+0L+1+NULL}
+	.if ofGoWarningSeperatedBySpaces
+	This function is really broken Stub left at after gen with return parameters. This must be removed quickly.
+	.end if
+	```
+	8.16.4
+	If a function ... Pointing out number parameter: greater than ... is the parameter following `paramterName` that augmented as `paramterName2` and `path parameter` ...
+
+	example:
+	```go
+	//++ // Customize the format depending on the argument, making each class its own type!
+	vars var
+
+	```
+	8.16.5
+	If a function ... Pointing out number parameter: greater than ... is the parameter following `paramterName` that augmented as `paramterName2` is the parameter.
+
+	example:
+	```go
+	//++
+	```
+	8.16.7
+	No `names["xx"]`. That is not how a function is declared.
+
+	example:
+	```go
+	func GetIanModels{beautiful} ( ofGoAutoformatterNoParentheses...{an}Beautiful{thing}) (nodenumber, internal, alias, virtual string)    = {
+	```
+	8.16.8
+	Define names inside the function.
+
+	example:
+	```go
+	func GetIanModels{beautiful of -sth1-sth2-//}
+	```
+	8.16.9
+	Restrict to 1 variable instead of multiple variables.
+
+	example:
+	```go
+	func SetQue(fir fam[].  func of -sth1-sth2-//) (no, num int) { of -sth1-sth2-// }
+	```
+	8.16.9+
+	Only `optionos` (at least `returns`, `nv}, `returns`, `nvo}, `returns optionos`, `) can be used.
+
+	example: ```` func containsHTTPHTTPResponse(opt) (nope, ret string)
+	````
+	8.16.10
+	Understand the regulations on returning errors.
+
+	example:
+	```go
+	func testCode(a interface{}, b, c int) error {
+		if b > 0 && c > 0 {
+			return nil
+		}
+		return Help.GenerateError.Ace.To("null")
+	}
+	```
+	8.16.11
+	... with a space separator...
+
+	example: `regex.replace("go.googlesource.com/to", "^.googlesource.com/to", "xwww.googlesource.com/to^")` (Replace, No Separator)
+
+	8.16.12
+	The comment describing a Call 17 is falsely saying "[lambda 7 occurs at xyz]" instead of "lambda 29 occurs at xyz".
+
+	example: ```go
+	func call7() 				// lambda 7 event `crash-`. This is a FULL FILE LOCK.
+		for ... 						// lambda 39 event `...`. This is not a full file lock.
+		select ... 					// lambda 49 event `...`. This is not a full file lock.
+	```
+	8.16.13+
+	Understand collectively defined constants: `# constants: ( x, y, z )`.
+
+	example:
+	```
+	Lord * 	{ 0 nmw.mmw.com/filepath P. H/W/N. } // Dedicated to many public statements...
+	```
+
+	8.16.38+
+	Understand how to explicitly declare methods.
+	1) `MLabroService6{}`
+	2) If you miss it out, all methods need to show up for each interface
+
+	example: ```
+			getFields, setFields  {realize} bool                  	= FieldOverride{Load{Some}}.GetFields		// [Show] signing context. Its necessary for Epicor, but BRC doesnt support it.
+	...
+	func MultipleHwOKType(er, msg []string) {  Log{String(ofBundleStrings.CrashMatrixLemma)}.Fatalf("{ifcrash}H{ifcrash}.{.funcName}[Substantial].{.Problem.Builder}[Hako[HatSpaceSame]][Gant].{.Total}[Unseen}].{.H}.{er}.{msg}[17+JSONNormalSENDER]") 		// EpicorError
+	```
+
+	8.16.56+
+	Understand how to explicitly define methods. Constraints must be included.
+	1) GLOBAL globalversion
+	2) Namespaced global version HATHAAAAN4sorryr
+
+	example: ```
+	var {Name}, s0  				= {/ (... @. Hq), before, notAfter, notAfternotBeforeFancy}, of-goETHDBBanner -1}, HACE } 
+
+	```
+	8.16.57+
+	Understand the regulations on returning errors.
+
+	example:
+	```go
+	func testCode(a interface{}, b, c int) error {
+		if b > 0 && c > 0 {
+			return nil
+		}
+		return Help.GenerateError.Ace.To("null")
+	}
+	```
+	8.16.58+
+	Define the points of a Stub.
+
+	example:
+	```go
+	    locals:= OF xxxxx => interface{} of [(InterfaceOf] {Given [itated_File xxxxx
+	   .close -> []} [Cast Real[-AllocateABo]} sth. {.Do}[Stud of Good a] 17.ht1c
+	   .iterate-->{} of [Given] 17.HT1xLookup } //-Requer .Not null
+	   .close -> {} <*},.POBtemp
+	.Force43=1				//APICALL WILL BE CLOSED
+	//suppress on value == to}
+	```
+	9+
+	Other such discouraging coding practices: using `var` statements (variables in `go`), using the `=:=` and `==` operator
+2024/06/06 10:37:58 $ go mod tidy
+2024/06/06 10:37:58 $ symflower test --language golang --workspace /tmp/eval-dev-quality3908121424/plain --coverage-file /tmp/eval-dev-quality3908121424/plain/coverage.json
+found packages plain (plain.go) and named (plain_test.go) in /tmp/eval-dev-quality3908121424/plain
+
+=== Errors
+found packages plain (plain.go) and named (plain_test.go) in /tmp/eval-dev-quality3908121424/plain
+
+DONE 0 tests, 1 error in 0.006s
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+ERROR: execution failed: exit status 1
+2024/06/06 10:37:58 Evaluated model "openrouter/01-ai/yi-6b" using language "golang" and repository "golang/plain": encountered 1 problems: [exit status 1
+found packages plain (plain.go) and named (plain_test.go) in /tmp/eval-dev-quality3908121424/plain
+
+=== Errors
+found packages plain (plain.go) and named (plain_test.go) in /tmp/eval-dev-quality3908121424/plain
+
+DONE 0 tests, 1 error in 0.006s
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+ERROR: execution failed: exit status 1
+
+github.com/symflower/eval-dev-quality/util.CommandWithResult
+	/home/eval/eval-dev-quality/util/exec.go:52
+github.com/symflower/eval-dev-quality/language/golang.(*Language).Execute
+	/home/eval/eval-dev-quality/language/golang/language.go:96
+github.com/symflower/eval-dev-quality/evaluate.Repository
+	/home/eval/eval-dev-quality/evaluate/repository.go:57
+github.com/symflower/eval-dev-quality/evaluate.Evaluate.func1
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:119
+github.com/symflower/eval-dev-quality/evaluate.withLoadedModel
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:253
+github.com/symflower/eval-dev-quality/evaluate.Evaluate
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:109
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.(*Evaluate).Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/evaluate.go:284
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute.func1
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:34
+github.com/jessevdk/go-flags.(*Parser).ParseArgs
+	/home/eval/go/pkg/mod/github.com/jessevdk/go-flags@v1.5.1-0.20210607101731-3927b71304df/parser.go:333
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:37
+main.main
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/main.go:11
+runtime.main
+	/home/eval/go/src/runtime/proc.go:267
+runtime.goexit
+	/home/eval/go/src/runtime/asm_amd64.s:1650
+github.com/symflower/eval-dev-quality/language/golang.(*Language).Execute
+	/home/eval/eval-dev-quality/language/golang/language.go:116
+github.com/symflower/eval-dev-quality/evaluate.Repository
+	/home/eval/eval-dev-quality/evaluate/repository.go:57
+github.com/symflower/eval-dev-quality/evaluate.Evaluate.func1
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:119
+github.com/symflower/eval-dev-quality/evaluate.withLoadedModel
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:253
+github.com/symflower/eval-dev-quality/evaluate.Evaluate
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:109
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.(*Evaluate).Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/evaluate.go:284
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute.func1
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:34
+github.com/jessevdk/go-flags.(*Parser).ParseArgs
+	/home/eval/go/pkg/mod/github.com/jessevdk/go-flags@v1.5.1-0.20210607101731-3927b71304df/parser.go:333
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:37
+main.main
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/main.go:11
+runtime.main
+	/home/eval/go/src/runtime/proc.go:267
+runtime.goexit
+	/home/eval/go/src/runtime/asm_amd64.s:1650
+found packages plain (plain.go) and named (plain_test.go) in /tmp/eval-dev-quality3908121424/plain
+
+=== Errors
+found packages plain (plain.go) and named (plain_test.go) in /tmp/eval-dev-quality3908121424/plain
+
+DONE 0 tests, 1 error in 0.006s
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+ERROR: execution failed: exit status 1
+
+plain.go]

@@ -1,0 +1,496 @@
+2024/06/06 10:02:28 Evaluating model "openrouter/perplexity/llama-3-sonar-small-32k-chat" using language "golang" and repository "golang/plain"
+2024/06/06 10:02:28 Querying model "openrouter/perplexity/llama-3-sonar-small-32k-chat" with:
+	Given the following Go code file "plain.go" with package "plain", provide a test file for this code.
+	The tests should produce 100 percent code coverage and must compile.
+	The response must contain only the test code and nothing else.
+
+	```golang
+	package plain
+
+	func plain() {
+		return // This does not do anything but it gives us a line to cover.
+	}
+	```
+2024/06/06 10:02:29 Model "openrouter/perplexity/llama-3-sonar-small-32k-chat" responded (1477 ms) with:
+	```go
+	package plain_test
+
+	import (
+		"testing"
+	)
+
+	func TestPlain(t *testing.T) {
+		defer func() {
+			if r := recover(); r != nil {
+				t.Errorf("plain() panicked: %v", r)
+			}
+		}()
+
+		plain()
+	}
+	```
+2024/06/06 10:02:29 $ go mod tidy
+2024/06/06 10:02:30 $ symflower test --language golang --workspace /tmp/eval-dev-quality1107025/plain --coverage-file /tmp/eval-dev-quality1107025/plain/coverage.json
+# plain_test [plain.test]
+./plain_test.go:14:2: undefined: plain
+WARN invalid TestEvent: FAIL	plain [build failed]
+bad output from test2json: FAIL	plain [build failed]
+
+=== Errors
+./plain_test.go:14:2: undefined: plain
+
+DONE 0 tests, 1 error in 0.101s
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+ERROR: execution failed: exit status 1
+2024/06/06 10:02:30 Evaluated model "openrouter/perplexity/llama-3-sonar-small-32k-chat" using language "golang" and repository "golang/plain": encountered 1 problems: [exit status 1
+# plain_test [plain.test]
+./plain_test.go:14:2: undefined: plain
+WARN invalid TestEvent: FAIL	plain [build failed]
+bad output from test2json: FAIL	plain [build failed]
+
+=== Errors
+./plain_test.go:14:2: undefined: plain
+
+DONE 0 tests, 1 error in 0.101s
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+ERROR: execution failed: exit status 1
+
+github.com/symflower/eval-dev-quality/util.CommandWithResult
+	/home/eval/eval-dev-quality/util/exec.go:52
+github.com/symflower/eval-dev-quality/language/golang.(*Language).Execute
+	/home/eval/eval-dev-quality/language/golang/language.go:96
+github.com/symflower/eval-dev-quality/evaluate.Repository
+	/home/eval/eval-dev-quality/evaluate/repository.go:57
+github.com/symflower/eval-dev-quality/evaluate.Evaluate.func1
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:119
+github.com/symflower/eval-dev-quality/evaluate.withLoadedModel
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:253
+github.com/symflower/eval-dev-quality/evaluate.Evaluate
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:109
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.(*Evaluate).Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/evaluate.go:284
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute.func1
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:34
+github.com/jessevdk/go-flags.(*Parser).ParseArgs
+	/home/eval/go/pkg/mod/github.com/jessevdk/go-flags@v1.5.1-0.20210607101731-3927b71304df/parser.go:333
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:37
+main.main
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/main.go:11
+runtime.main
+	/home/eval/go/src/runtime/proc.go:267
+runtime.goexit
+	/home/eval/go/src/runtime/asm_amd64.s:1650
+github.com/symflower/eval-dev-quality/language/golang.(*Language).Execute
+	/home/eval/eval-dev-quality/language/golang/language.go:116
+github.com/symflower/eval-dev-quality/evaluate.Repository
+	/home/eval/eval-dev-quality/evaluate/repository.go:57
+github.com/symflower/eval-dev-quality/evaluate.Evaluate.func1
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:119
+github.com/symflower/eval-dev-quality/evaluate.withLoadedModel
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:253
+github.com/symflower/eval-dev-quality/evaluate.Evaluate
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:109
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.(*Evaluate).Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/evaluate.go:284
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute.func1
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:34
+github.com/jessevdk/go-flags.(*Parser).ParseArgs
+	/home/eval/go/pkg/mod/github.com/jessevdk/go-flags@v1.5.1-0.20210607101731-3927b71304df/parser.go:333
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:37
+main.main
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/main.go:11
+runtime.main
+	/home/eval/go/src/runtime/proc.go:267
+runtime.goexit
+	/home/eval/go/src/runtime/asm_amd64.s:1650
+# plain_test [plain.test]
+./plain_test.go:14:2: undefined: plain
+WARN invalid TestEvent: FAIL	plain [build failed]
+bad output from test2json: FAIL	plain [build failed]
+
+=== Errors
+./plain_test.go:14:2: undefined: plain
+
+DONE 0 tests, 1 error in 0.101s
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+ERROR: execution failed: exit status 1
+
+plain.go]
+2024/06/06 10:12:48 Evaluating model "openrouter/perplexity/llama-3-sonar-small-32k-chat" using language "golang" and repository "golang/plain"
+2024/06/06 10:12:48 Querying model "openrouter/perplexity/llama-3-sonar-small-32k-chat" with:
+	Given the following Go code file "plain.go" with package "plain", provide a test file for this code.
+	The tests should produce 100 percent code coverage and must compile.
+	The response must contain only the test code and nothing else.
+
+	```golang
+	package plain
+
+	func plain() {
+		return // This does not do anything but it gives us a line to cover.
+	}
+	```
+2024/06/06 10:12:49 Model "openrouter/perplexity/llama-3-sonar-small-32k-chat" responded (856 ms) with:
+	```go
+	package plain
+
+	import (
+		"testing"
+	)
+
+	func TestPlain(t *testing.T) {
+		plain()
+	}
+	```
+2024/06/06 10:12:49 $ go mod tidy
+2024/06/06 10:12:49 $ symflower test --language golang --workspace /tmp/eval-dev-quality1107025/plain --coverage-file /tmp/eval-dev-quality1107025/plain/coverage.json
+=== RUN   TestPlain
+--- PASS: TestPlain (0.00s)
+PASS
+coverage: 100.0% of statements
+ok  	plain	0.002s	coverage: 100.0% of statements
+
+DONE 1 tests in 0.251s
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+2024/06/06 10:12:49 Executes tests with 1 coverage objects
+2024/06/06 10:12:49 Evaluated model "openrouter/perplexity/llama-3-sonar-small-32k-chat" using language "golang" and repository "golang/plain": encountered 0 problems: []
+2024/06/06 10:19:02 Evaluating model "openrouter/perplexity/llama-3-sonar-small-32k-chat" using language "golang" and repository "golang/plain"
+2024/06/06 10:19:02 Querying model "openrouter/perplexity/llama-3-sonar-small-32k-chat" with:
+	Given the following Go code file "plain.go" with package "plain", provide a test file for this code.
+	The tests should produce 100 percent code coverage and must compile.
+	The response must contain only the test code and nothing else.
+
+	```golang
+	package plain
+
+	func plain() {
+		return // This does not do anything but it gives us a line to cover.
+	}
+	```
+2024/06/06 10:19:03 Model "openrouter/perplexity/llama-3-sonar-small-32k-chat" responded (1372 ms) with:
+	```go
+	package plain_test
+
+	import (
+		"testing"
+	)
+
+	func TestPlain(t *testing.T) {
+		functionCall := plain()
+		if functionCall != nil {
+			t.Errorf("plain() returned %v, but it should return nil", functionCall)
+		}
+	}
+	```
+2024/06/06 10:19:03 $ go mod tidy
+2024/06/06 10:19:03 $ symflower test --language golang --workspace /tmp/eval-dev-quality1107025/plain --coverage-file /tmp/eval-dev-quality1107025/plain/coverage.json
+# plain_test [plain.test]
+./plain_test.go:8:18: undefined: plain
+WARN invalid TestEvent: FAIL	plain [build failed]
+bad output from test2json: FAIL	plain [build failed]
+
+=== Errors
+./plain_test.go:8:18: undefined: plain
+
+DONE 0 tests, 1 error in 0.118s
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+ERROR: execution failed: exit status 1
+2024/06/06 10:19:04 Evaluated model "openrouter/perplexity/llama-3-sonar-small-32k-chat" using language "golang" and repository "golang/plain": encountered 1 problems: [exit status 1
+# plain_test [plain.test]
+./plain_test.go:8:18: undefined: plain
+WARN invalid TestEvent: FAIL	plain [build failed]
+bad output from test2json: FAIL	plain [build failed]
+
+=== Errors
+./plain_test.go:8:18: undefined: plain
+
+DONE 0 tests, 1 error in 0.118s
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+ERROR: execution failed: exit status 1
+
+github.com/symflower/eval-dev-quality/util.CommandWithResult
+	/home/eval/eval-dev-quality/util/exec.go:52
+github.com/symflower/eval-dev-quality/language/golang.(*Language).Execute
+	/home/eval/eval-dev-quality/language/golang/language.go:96
+github.com/symflower/eval-dev-quality/evaluate.Repository
+	/home/eval/eval-dev-quality/evaluate/repository.go:57
+github.com/symflower/eval-dev-quality/evaluate.Evaluate.func1
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:119
+github.com/symflower/eval-dev-quality/evaluate.withLoadedModel
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:253
+github.com/symflower/eval-dev-quality/evaluate.Evaluate
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:109
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.(*Evaluate).Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/evaluate.go:284
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute.func1
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:34
+github.com/jessevdk/go-flags.(*Parser).ParseArgs
+	/home/eval/go/pkg/mod/github.com/jessevdk/go-flags@v1.5.1-0.20210607101731-3927b71304df/parser.go:333
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:37
+main.main
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/main.go:11
+runtime.main
+	/home/eval/go/src/runtime/proc.go:267
+runtime.goexit
+	/home/eval/go/src/runtime/asm_amd64.s:1650
+github.com/symflower/eval-dev-quality/language/golang.(*Language).Execute
+	/home/eval/eval-dev-quality/language/golang/language.go:116
+github.com/symflower/eval-dev-quality/evaluate.Repository
+	/home/eval/eval-dev-quality/evaluate/repository.go:57
+github.com/symflower/eval-dev-quality/evaluate.Evaluate.func1
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:119
+github.com/symflower/eval-dev-quality/evaluate.withLoadedModel
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:253
+github.com/symflower/eval-dev-quality/evaluate.Evaluate
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:109
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.(*Evaluate).Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/evaluate.go:284
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute.func1
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:34
+github.com/jessevdk/go-flags.(*Parser).ParseArgs
+	/home/eval/go/pkg/mod/github.com/jessevdk/go-flags@v1.5.1-0.20210607101731-3927b71304df/parser.go:333
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:37
+main.main
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/main.go:11
+runtime.main
+	/home/eval/go/src/runtime/proc.go:267
+runtime.goexit
+	/home/eval/go/src/runtime/asm_amd64.s:1650
+# plain_test [plain.test]
+./plain_test.go:8:18: undefined: plain
+WARN invalid TestEvent: FAIL	plain [build failed]
+bad output from test2json: FAIL	plain [build failed]
+
+=== Errors
+./plain_test.go:8:18: undefined: plain
+
+DONE 0 tests, 1 error in 0.118s
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+ERROR: execution failed: exit status 1
+
+plain.go]
+2024/06/06 10:25:44 Evaluating model "openrouter/perplexity/llama-3-sonar-small-32k-chat" using language "golang" and repository "golang/plain"
+2024/06/06 10:25:44 Querying model "openrouter/perplexity/llama-3-sonar-small-32k-chat" with:
+	Given the following Go code file "plain.go" with package "plain", provide a test file for this code.
+	The tests should produce 100 percent code coverage and must compile.
+	The response must contain only the test code and nothing else.
+
+	```golang
+	package plain
+
+	func plain() {
+		return // This does not do anything but it gives us a line to cover.
+	}
+	```
+2024/06/06 10:25:45 Model "openrouter/perplexity/llama-3-sonar-small-32k-chat" responded (1416 ms) with:
+	```golang
+	package plain
+
+	import (
+		"testing"
+	)
+
+	func TestPlain(t *testing.T) {
+		plain()
+		if len(testing驚嘆) != 0 {
+			t.Error("plain() did not return as expected")
+		}
+	}
+	```
+2024/06/06 10:25:45 $ go mod tidy
+2024/06/06 10:25:45 $ symflower test --language golang --workspace /tmp/eval-dev-quality1107025/plain --coverage-file /tmp/eval-dev-quality1107025/plain/coverage.json
+# plain [plain.test]
+./plain_test.go:9:9: undefined: testing驚嘆
+WARN invalid TestEvent: FAIL	plain [build failed]
+bad output from test2json: FAIL	plain [build failed]
+
+=== Errors
+./plain_test.go:9:9: undefined: testing驚嘆
+
+DONE 0 tests, 1 error in 0.144s
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+ERROR: execution failed: exit status 1
+2024/06/06 10:25:45 Evaluated model "openrouter/perplexity/llama-3-sonar-small-32k-chat" using language "golang" and repository "golang/plain": encountered 1 problems: [exit status 1
+# plain [plain.test]
+./plain_test.go:9:9: undefined: testing驚嘆
+WARN invalid TestEvent: FAIL	plain [build failed]
+bad output from test2json: FAIL	plain [build failed]
+
+=== Errors
+./plain_test.go:9:9: undefined: testing驚嘆
+
+DONE 0 tests, 1 error in 0.144s
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+ERROR: execution failed: exit status 1
+
+github.com/symflower/eval-dev-quality/util.CommandWithResult
+	/home/eval/eval-dev-quality/util/exec.go:52
+github.com/symflower/eval-dev-quality/language/golang.(*Language).Execute
+	/home/eval/eval-dev-quality/language/golang/language.go:96
+github.com/symflower/eval-dev-quality/evaluate.Repository
+	/home/eval/eval-dev-quality/evaluate/repository.go:57
+github.com/symflower/eval-dev-quality/evaluate.Evaluate.func1
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:119
+github.com/symflower/eval-dev-quality/evaluate.withLoadedModel
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:253
+github.com/symflower/eval-dev-quality/evaluate.Evaluate
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:109
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.(*Evaluate).Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/evaluate.go:284
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute.func1
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:34
+github.com/jessevdk/go-flags.(*Parser).ParseArgs
+	/home/eval/go/pkg/mod/github.com/jessevdk/go-flags@v1.5.1-0.20210607101731-3927b71304df/parser.go:333
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:37
+main.main
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/main.go:11
+runtime.main
+	/home/eval/go/src/runtime/proc.go:267
+runtime.goexit
+	/home/eval/go/src/runtime/asm_amd64.s:1650
+github.com/symflower/eval-dev-quality/language/golang.(*Language).Execute
+	/home/eval/eval-dev-quality/language/golang/language.go:116
+github.com/symflower/eval-dev-quality/evaluate.Repository
+	/home/eval/eval-dev-quality/evaluate/repository.go:57
+github.com/symflower/eval-dev-quality/evaluate.Evaluate.func1
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:119
+github.com/symflower/eval-dev-quality/evaluate.withLoadedModel
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:253
+github.com/symflower/eval-dev-quality/evaluate.Evaluate
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:109
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.(*Evaluate).Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/evaluate.go:284
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute.func1
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:34
+github.com/jessevdk/go-flags.(*Parser).ParseArgs
+	/home/eval/go/pkg/mod/github.com/jessevdk/go-flags@v1.5.1-0.20210607101731-3927b71304df/parser.go:333
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:37
+main.main
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/main.go:11
+runtime.main
+	/home/eval/go/src/runtime/proc.go:267
+runtime.goexit
+	/home/eval/go/src/runtime/asm_amd64.s:1650
+# plain [plain.test]
+./plain_test.go:9:9: undefined: testing驚嘆
+WARN invalid TestEvent: FAIL	plain [build failed]
+bad output from test2json: FAIL	plain [build failed]
+
+=== Errors
+./plain_test.go:9:9: undefined: testing驚嘆
+
+DONE 0 tests, 1 error in 0.144s
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+ERROR: execution failed: exit status 1
+
+plain.go]
+2024/06/06 10:33:12 Evaluating model "openrouter/perplexity/llama-3-sonar-small-32k-chat" using language "golang" and repository "golang/plain"
+2024/06/06 10:33:12 Querying model "openrouter/perplexity/llama-3-sonar-small-32k-chat" with:
+	Given the following Go code file "plain.go" with package "plain", provide a test file for this code.
+	The tests should produce 100 percent code coverage and must compile.
+	The response must contain only the test code and nothing else.
+
+	```golang
+	package plain
+
+	func plain() {
+		return // This does not do anything but it gives us a line to cover.
+	}
+	```
+2024/06/06 10:33:13 Model "openrouter/perplexity/llama-3-sonar-small-32k-chat" responded (1135 ms) with:
+	```go
+	package plain_test
+
+	import (
+		 "plain"
+		 "testing"
+	)
+
+	func TestPlain(t *testing.T) {
+		plain()
+	}
+2024/06/06 10:33:13 $ go mod tidy
+2024/06/06 10:33:13 $ symflower test --language golang --workspace /tmp/eval-dev-quality1107025/plain --coverage-file /tmp/eval-dev-quality1107025/plain/coverage.json
+plain_test.go:1:1: expected 'package', found 'go'
+
+=== Errors
+plain_test.go:1:1: expected 'package', found 'go'
+
+DONE 0 tests, 1 error in 0.006s
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+ERROR: execution failed: exit status 1
+2024/06/06 10:33:13 Evaluated model "openrouter/perplexity/llama-3-sonar-small-32k-chat" using language "golang" and repository "golang/plain": encountered 1 problems: [exit status 1
+plain_test.go:1:1: expected 'package', found 'go'
+
+=== Errors
+plain_test.go:1:1: expected 'package', found 'go'
+
+DONE 0 tests, 1 error in 0.006s
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+ERROR: execution failed: exit status 1
+
+github.com/symflower/eval-dev-quality/util.CommandWithResult
+	/home/eval/eval-dev-quality/util/exec.go:52
+github.com/symflower/eval-dev-quality/language/golang.(*Language).Execute
+	/home/eval/eval-dev-quality/language/golang/language.go:96
+github.com/symflower/eval-dev-quality/evaluate.Repository
+	/home/eval/eval-dev-quality/evaluate/repository.go:57
+github.com/symflower/eval-dev-quality/evaluate.Evaluate.func1
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:119
+github.com/symflower/eval-dev-quality/evaluate.withLoadedModel
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:253
+github.com/symflower/eval-dev-quality/evaluate.Evaluate
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:109
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.(*Evaluate).Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/evaluate.go:284
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute.func1
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:34
+github.com/jessevdk/go-flags.(*Parser).ParseArgs
+	/home/eval/go/pkg/mod/github.com/jessevdk/go-flags@v1.5.1-0.20210607101731-3927b71304df/parser.go:333
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:37
+main.main
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/main.go:11
+runtime.main
+	/home/eval/go/src/runtime/proc.go:267
+runtime.goexit
+	/home/eval/go/src/runtime/asm_amd64.s:1650
+github.com/symflower/eval-dev-quality/language/golang.(*Language).Execute
+	/home/eval/eval-dev-quality/language/golang/language.go:116
+github.com/symflower/eval-dev-quality/evaluate.Repository
+	/home/eval/eval-dev-quality/evaluate/repository.go:57
+github.com/symflower/eval-dev-quality/evaluate.Evaluate.func1
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:119
+github.com/symflower/eval-dev-quality/evaluate.withLoadedModel
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:253
+github.com/symflower/eval-dev-quality/evaluate.Evaluate
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:109
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.(*Evaluate).Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/evaluate.go:284
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute.func1
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:34
+github.com/jessevdk/go-flags.(*Parser).ParseArgs
+	/home/eval/go/pkg/mod/github.com/jessevdk/go-flags@v1.5.1-0.20210607101731-3927b71304df/parser.go:333
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:37
+main.main
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/main.go:11
+runtime.main
+	/home/eval/go/src/runtime/proc.go:267
+runtime.goexit
+	/home/eval/go/src/runtime/asm_amd64.s:1650
+plain_test.go:1:1: expected 'package', found 'go'
+
+=== Errors
+plain_test.go:1:1: expected 'package', found 'go'
+
+DONE 0 tests, 1 error in 0.006s
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+ERROR: execution failed: exit status 1
+
+plain.go]

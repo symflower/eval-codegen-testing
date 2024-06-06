@@ -1,0 +1,2687 @@
+2024/06/06 14:10:10 Evaluating model "openrouter/perplexity/llama-3-sonar-large-32k-chat" using language "java" and repository "java/light"
+2024/06/06 14:10:10 Querying model "openrouter/perplexity/llama-3-sonar-large-32k-chat" with:
+	Given the following Java code file "src/main/java/com/eval/BalancedBrackets.java" with package "com.eval", provide a test file for this code with JUnit 5 as a test framework.
+	The tests should produce 100 percent code coverage and must compile.
+	The response must contain only the test code and nothing else.
+
+	```java
+	// Copyright (C) rosettacode.org
+	package com.eval;
+
+	public class BalancedBrackets {
+	  static boolean hasBalancedBrackets(char[] charArray) {
+	    int brackets = 0;
+	    for (char ch : charArray) {
+	      if (ch == '[') {
+	        brackets++;
+	      } else if (ch == ']') {
+	        brackets--;
+	      } else {
+	        return false; // Non-bracket characters.
+	      }
+	      if (brackets < 0) { // Closing bracket before opening bracket.
+	        return false;
+	      }
+	    }
+	    return brackets == 0;
+	  }
+	}
+	```
+2024/06/06 14:10:28 Model "openrouter/perplexity/llama-3-sonar-large-32k-chat" responded (18268 ms) with:
+	Here is the test file "src/test/java/com/eval/BalancedBracketsTest.java" with JUnit 5:
+
+	```java
+	package com.eval;
+
+	import org.junit.jupiter.api.Test;
+	import static org.junit.jupiter.api.Assertions.assertTrue;
+	import static org.junit.jupiter.api.Assertions.assertFalse;
+
+	public class BalancedBracketsTest {
+
+	  @Test
+	  void testEmptyArray() {
+	    assertTrue(BalancedBrackets.hasBalancedBrackets(new char[] {}));
+	  }
+
+	  @Test
+	  void testSingleOpenBracket() {
+	    assertFalse(BalancedBrackets.hasBalancedBrackets(new char[] {'['}));
+	  }
+
+	  @Test
+	  void testSingleCloseBracket() {
+	    assertFalse(BalancedBrackets.hasBalancedBrackets(new char[] {']'}));
+	  }
+
+	  @Test
+	  void testBalancedBrackets() {
+	    assertTrue(BalancedBrackets.hasBalancedBrackets(new char[] {'[', ']'}));
+	  }
+
+	  @Test
+	  void testUnbalancedBrackets() {
+	    assertFalse(BalancedBrackets.hasBalancedBrackets(new char[] {'[', '[', ']'}));
+	  }
+
+	  @Test
+	  void testNonBracketCharacter() {
+	    assertFalse(BalancedBrackets.hasBalancedBrackets(new char[] {'a'}));
+	  }
+
+	  @Test
+	  void testMultipleBalancedBrackets() {
+	    assertTrue(BalancedBrackets.hasBalancedBrackets(new char[] {'[', '[', ']', ']'}));
+	  }
+
+	  @Test
+	  void testMultipleUnbalancedBrackets() {
+	    assertFalse(BalancedBrackets.hasBalancedBrackets(new char[] {'[', '[', '[', ']'}));
+	  }
+	}
+	```
+2024/06/06 14:10:28 $ symflower test --language java --workspace /tmp/eval-dev-quality2633743724/light --coverage-file /tmp/eval-dev-quality2633743724/light/coverage.json
+[INFO] Scanning for projects...
+[WARNING] 
+[WARNING] Some problems were encountered while building the effective model for eval.dev.quality:test-java-light:jar:SNAPSHOT
+[WARNING] 'version' uses an unsupported snapshot version format, should be '*-SNAPSHOT' instead. @ line 8, column 11
+[WARNING] 
+[WARNING] It is highly recommended to fix these problems because they threaten the stability of your build.
+[WARNING] 
+[WARNING] For this reason, future Maven versions might no longer support building such malformed projects.
+[WARNING] 
+[INFO] 
+[INFO] ------------------< eval.dev.quality:test-java-light >------------------
+[INFO] Building test-java-light SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clover:4.5.2:aggregate (default-cli) @ test-java-light ---
+[INFO] 
+[INFO] ------------------< eval.dev.quality:test-java-light >------------------
+[INFO] Building test-java-light SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clover:4.5.2:clover (default-cli) @ test-java-light ---
+[INFO] Using default-clover-report descriptor.
+[INFO] Using Clover report descriptor: /tmp/mvn6671236758135443994resource
+[INFO] OpenClover Version 4.5.2, built on 2024-01-31
+[INFO] Clover is enabled with initstring '/tmp/eval-dev-quality2633743724/light/target/clover/clover.db'
+[INFO] OpenClover Version 4.5.2, built on 2024-01-31
+[INFO] Loading coverage database from: '/tmp/eval-dev-quality2633743724/light/target/clover/clover.db'
+[INFO] Writing report to '/tmp/eval-dev-quality2633743724/light/target/site/clover/clover.xml'
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  1.889 s
+[INFO] Finished at: 2024-06-06T14:10:34+02:00
+[INFO] ------------------------------------------------------------------------
+
+Total coverage 4.700855%
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+2024/06/06 14:10:34 Executes tests with 14 coverage objects
+2024/06/06 14:10:34 Querying model "openrouter/perplexity/llama-3-sonar-large-32k-chat" with:
+	Given the following Java code file "src/main/java/com/eval/BinarySearch.java" with package "com.eval", provide a test file for this code with JUnit 5 as a test framework.
+	The tests should produce 100 percent code coverage and must compile.
+	The response must contain only the test code and nothing else.
+
+	```java
+	package com.eval;
+
+	class BinarySearch {
+	    static int binarySearch(int []a, int x) {
+			int index = -1;
+
+			int min = 0;
+			int max = a.length - 1;
+
+			while (index == -1 && min <= max) {
+				int m = (min + max) / 2;
+
+				if (x == a[m]) {
+					index = m;
+				} else if (x < a[m]) {
+					max = m - 1;
+				} else {
+					min = m + 1;
+				}
+			}
+
+			return index;
+		}
+	}
+	```
+2024/06/06 14:10:44 Model "openrouter/perplexity/llama-3-sonar-large-32k-chat" responded (9454 ms) with:
+	Here is the test file for the given Java code using JUnit 5:
+
+	```java
+	package com.eval;
+
+	import org.junit.jupiter.api.Test;
+	import static org.junit.jupiter.api.Assertions.assertEquals;
+
+	public class BinarySearchTest {
+
+	    @Test
+	    void testBinarySearchFound() {
+	        int[] a = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+	        assertEquals(4, BinarySearch.binarySearch(a, 5));
+	    }
+
+	    @Test
+	    void testBinarySearchNotFound() {
+	        int[] a = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+	        assertEquals(-1, BinarySearch.binarySearch(a, 11));
+	    }
+
+	    @Test
+	    void testBinarySearchEmptyArray() {
+	        int[] a = {};
+	        assertEquals(-1, BinarySearch.binarySearch(a, 5));
+	    }
+
+	    @Test
+	    void testBinarySearchSingleElementArrayFound() {
+	        int[] a = {5};
+	        assertEquals(0, BinarySearch.binarySearch(a, 5));
+	    }
+
+	    @Test
+	    void testBinarySearchSingleElementArrayNotFound() {
+	        int[] a = {5};
+	        assertEquals(-1, BinarySearch.binarySearch(a, 10));
+	    }
+	}
+	```
+2024/06/06 14:10:44 $ symflower test --language java --workspace /tmp/eval-dev-quality2633743724/light --coverage-file /tmp/eval-dev-quality2633743724/light/coverage.json
+[INFO] Scanning for projects...
+[WARNING] 
+[WARNING] Some problems were encountered while building the effective model for eval.dev.quality:test-java-light:jar:SNAPSHOT
+[WARNING] 'version' uses an unsupported snapshot version format, should be '*-SNAPSHOT' instead. @ line 8, column 11
+[WARNING] 
+[WARNING] It is highly recommended to fix these problems because they threaten the stability of your build.
+[WARNING] 
+[WARNING] For this reason, future Maven versions might no longer support building such malformed projects.
+[WARNING] 
+[INFO] 
+[INFO] ------------------< eval.dev.quality:test-java-light >------------------
+[INFO] Building test-java-light SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clover:4.5.2:aggregate (default-cli) @ test-java-light ---
+[INFO] 
+[INFO] ------------------< eval.dev.quality:test-java-light >------------------
+[INFO] Building test-java-light SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clover:4.5.2:clover (default-cli) @ test-java-light ---
+[INFO] Using default-clover-report descriptor.
+[INFO] Using Clover report descriptor: /tmp/mvn15036192679002324650resource
+[INFO] OpenClover Version 4.5.2, built on 2024-01-31
+[INFO] Clover is enabled with initstring '/tmp/eval-dev-quality2633743724/light/target/clover/clover.db'
+[INFO] OpenClover Version 4.5.2, built on 2024-01-31
+[INFO] Loading coverage database from: '/tmp/eval-dev-quality2633743724/light/target/clover/clover.db'
+[INFO] Writing report to '/tmp/eval-dev-quality2633743724/light/target/site/clover/clover.xml'
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  1.929 s
+[INFO] Finished at: 2024-06-06T14:10:50+02:00
+[INFO] ------------------------------------------------------------------------
+
+Total coverage 4.700855%
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+2024/06/06 14:10:50 Executes tests with 14 coverage objects
+2024/06/06 14:10:50 Querying model "openrouter/perplexity/llama-3-sonar-large-32k-chat" with:
+	Given the following Java code file "src/main/java/com/eval/CallLoopConditionsOftenEnough.java" with package "com.eval", provide a test file for this code with JUnit 5 as a test framework.
+	The tests should produce 100 percent code coverage and must compile.
+	The response must contain only the test code and nothing else.
+
+	```java
+	package com.eval;
+
+	class CallLoopConditionsOftenEnough {
+	    static int callLoopConditionsOftenEnough(int x, int y) {
+			if (x < 10 || x > 20) {
+				return 0;
+			}
+
+			for (int i = 0; i < y; i++) {
+				if (i > 20) {
+					x++; // This needs to be executed more than 10 times
+				}
+			}
+
+			if (x > 20) { // This block needs to be reached for full coverage
+				x = x / 2;
+			}
+
+			return x;
+		}
+	}
+	```
+2024/06/06 14:11:03 Model "openrouter/perplexity/llama-3-sonar-large-32k-chat" responded (13081 ms) with:
+	Here is the test file "src/test/java/com/eval/CallLoopConditionsOftenEnoughTest.java" with JUnit 5:
+
+	```java
+	package com.eval;
+
+	import org.junit.jupiter.api.Test;
+	import static org.junit.jupiter.api.Assertions.assertEquals;
+
+	public class CallLoopConditionsOftenEnoughTest {
+
+	    @Test
+	    void testXLessThan10() {
+	        assertEquals(0, CallLoopConditionsOftenEnough.callLoopConditionsOftenEnough(5, 10));
+	    }
+
+	    @Test
+	    void testXGreaterThan20() {
+	        assertEquals(0, CallLoopConditionsOftenEnough.callLoopConditionsOftenEnough(25, 10));
+	    }
+
+	    @Test
+	    void testXWithinRangeButYTooSmall() {
+	        assertEquals(10, CallLoopConditionsOftenEnough.callLoopConditionsOftenEnough(10, 5));
+	    }
+
+	    @Test
+	    void testXWithinRangeAndYLargeEnough() {
+	        assertEquals(11, CallLoopConditionsOftenEnough.callLoopConditionsOftenEnough(10, 30));
+	    }
+
+	    @Test
+	    void testXWithinRangeAndYVeryLarge() {
+	        assertEquals(15, CallLoopConditionsOftenEnough.callLoopConditionsOftenEnough(10, 50));
+	    }
+
+	    @Test
+	    void testXWithinRangeAndYCausesXToExceed20() {
+	        assertEquals(12, CallLoopConditionsOftenEnough.callLoopConditionsOftenEnough(10, 40));
+	    }
+	}
+	```
+2024/06/06 14:11:03 $ symflower test --language java --workspace /tmp/eval-dev-quality2633743724/light --coverage-file /tmp/eval-dev-quality2633743724/light/coverage.json
+[INFO] Scanning for projects...
+[WARNING] 
+[WARNING] Some problems were encountered while building the effective model for eval.dev.quality:test-java-light:jar:SNAPSHOT
+[WARNING] 'version' uses an unsupported snapshot version format, should be '*-SNAPSHOT' instead. @ line 8, column 11
+[WARNING] 
+[WARNING] It is highly recommended to fix these problems because they threaten the stability of your build.
+[WARNING] 
+[WARNING] For this reason, future Maven versions might no longer support building such malformed projects.
+[WARNING] 
+[INFO] 
+[INFO] ------------------< eval.dev.quality:test-java-light >------------------
+[INFO] Building test-java-light SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clover:4.5.2:aggregate (default-cli) @ test-java-light ---
+[INFO] 
+[INFO] ------------------< eval.dev.quality:test-java-light >------------------
+[INFO] Building test-java-light SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clover:4.5.2:clover (default-cli) @ test-java-light ---
+[INFO] Using default-clover-report descriptor.
+[INFO] Using Clover report descriptor: /tmp/mvn18093477755111278604resource
+[INFO] OpenClover Version 4.5.2, built on 2024-01-31
+[INFO] Clover is enabled with initstring '/tmp/eval-dev-quality2633743724/light/target/clover/clover.db'
+[INFO] OpenClover Version 4.5.2, built on 2024-01-31
+[INFO] Loading coverage database from: '/tmp/eval-dev-quality2633743724/light/target/clover/clover.db'
+[INFO] Writing report to '/tmp/eval-dev-quality2633743724/light/target/site/clover/clover.xml'
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  1.959 s
+[INFO] Finished at: 2024-06-06T14:11:09+02:00
+[INFO] ------------------------------------------------------------------------
+
+Total coverage 3.846154%
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+2024/06/06 14:11:09 Executes tests with 13 coverage objects
+2024/06/06 14:11:09 Querying model "openrouter/perplexity/llama-3-sonar-large-32k-chat" with:
+	Given the following Java code file "src/main/java/com/eval/CascadingIfElse.java" with package "com.eval", provide a test file for this code with JUnit 5 as a test framework.
+	The tests should produce 100 percent code coverage and must compile.
+	The response must contain only the test code and nothing else.
+
+	```java
+	package com.eval;
+
+	class CascadingIfElse {
+	    static int cascadingIfElse(int i) {
+	        if (i == 1) {
+	            return 2;
+	        } else if (i == 3) {
+	            return 4;
+	        } else {
+	            return 5;
+	        }
+	    }
+	}
+	```
+2024/06/06 14:11:15 Model "openrouter/perplexity/llama-3-sonar-large-32k-chat" responded (5211 ms) with:
+	```java
+	package com.eval;
+
+	import org.junit.jupiter.api.Test;
+	import static org.junit.jupiter.api.Assertions.assertEquals;
+
+	class CascadingIfElseTest {
+
+	    @Test
+	    void testCascadingIfElse_1() {
+	        assertEquals(2, CascadingIfElse.cascadingIfElse(1));
+	    }
+
+	    @Test
+	    void testCascadingIfElse_3() {
+	        assertEquals(4, CascadingIfElse.cascadingIfElse(3));
+	    }
+
+	    @Test
+	    void testCascadingIfElse_default() {
+	        assertEquals(5, CascadingIfElse.cascadingIfElse(2));
+	    }
+	}
+	```
+2024/06/06 14:11:15 $ symflower test --language java --workspace /tmp/eval-dev-quality2633743724/light --coverage-file /tmp/eval-dev-quality2633743724/light/coverage.json
+[INFO] Scanning for projects...
+[WARNING] 
+[WARNING] Some problems were encountered while building the effective model for eval.dev.quality:test-java-light:jar:SNAPSHOT
+[WARNING] 'version' uses an unsupported snapshot version format, should be '*-SNAPSHOT' instead. @ line 8, column 11
+[WARNING] 
+[WARNING] It is highly recommended to fix these problems because they threaten the stability of your build.
+[WARNING] 
+[WARNING] For this reason, future Maven versions might no longer support building such malformed projects.
+[WARNING] 
+[INFO] 
+[INFO] ------------------< eval.dev.quality:test-java-light >------------------
+[INFO] Building test-java-light SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clover:4.5.2:aggregate (default-cli) @ test-java-light ---
+[INFO] 
+[INFO] ------------------< eval.dev.quality:test-java-light >------------------
+[INFO] Building test-java-light SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clover:4.5.2:clover (default-cli) @ test-java-light ---
+[INFO] Using default-clover-report descriptor.
+[INFO] Using Clover report descriptor: /tmp/mvn6184617023328641917resource
+[INFO] OpenClover Version 4.5.2, built on 2024-01-31
+[INFO] Clover is enabled with initstring '/tmp/eval-dev-quality2633743724/light/target/clover/clover.db'
+[INFO] OpenClover Version 4.5.2, built on 2024-01-31
+[INFO] Loading coverage database from: '/tmp/eval-dev-quality2633743724/light/target/clover/clover.db'
+[INFO] Writing report to '/tmp/eval-dev-quality2633743724/light/target/site/clover/clover.xml'
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  1.896 s
+[INFO] Finished at: 2024-06-06T14:11:21+02:00
+[INFO] ------------------------------------------------------------------------
+
+Total coverage 2.564103%
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+2024/06/06 14:11:21 Executes tests with 8 coverage objects
+2024/06/06 14:11:21 Querying model "openrouter/perplexity/llama-3-sonar-large-32k-chat" with:
+	Given the following Java code file "src/main/java/com/eval/CollatzCalculator.java" with package "com.eval", provide a test file for this code with JUnit 5 as a test framework.
+	The tests should produce 100 percent code coverage and must compile.
+	The response must contain only the test code and nothing else.
+
+	```java
+	package com.eval;
+
+	public class CollatzCalculator {
+	  static int computeStepCount(final int start) {
+	    if (start <= 0) {
+	      throw new IllegalArgumentException("Only positive integers are allowed");
+	    }
+	    if (start == 1) {
+	      return 0;
+	    }
+	    final int next;
+
+	    if (start % 2 == 0) {
+	      next = start / 2;
+	    } else {
+	      next = 3 * start + 1;
+	    }
+
+	    return 1 + computeStepCount(next);
+	  }
+	}
+	```
+2024/06/06 14:11:28 Model "openrouter/perplexity/llama-3-sonar-large-32k-chat" responded (7086 ms) with:
+	```java
+	package com.eval;
+
+	import org.junit.jupiter.api.Test;
+	import static org.junit.jupiter.api.Assertions.assertThrows;
+	import static org.junit.jupiter.api.Assertions.assertEquals;
+
+	public class CollatzCalculatorTest {
+	  @Test
+	  void testComputeStepCount_ThrowsException_WhenInputIsZero() {
+	    assertThrows(IllegalArgumentException.class, () -> CollatzCalculator.computeStepCount(0));
+	  }
+
+	  @Test
+	  void testComputeStepCount_ThrowsException_WhenInputIsNegative() {
+	    assertThrows(IllegalArgumentException.class, () -> CollatzCalculator.computeStepCount(-1));
+	  }
+
+	  @Test
+	  void testComputeStepCount_ReturnsZero_WhenInputIsOne() {
+	    assertEquals(0, CollatzCalculator.computeStepCount(1));
+	  }
+
+	  @Test
+	  void testComputeStepCount_ReturnsCorrectStepCount_WhenInputIsEven() {
+	    assertEquals(6, CollatzCalculator.computeStepCount(16));
+	  }
+
+	  @Test
+	  void testComputeStepCount_ReturnsCorrectStepCount_WhenInputIsOdd() {
+	    assertEquals(7, CollatzCalculator.computeStepCount(11));
+	  }
+	}
+	```
+2024/06/06 14:11:28 $ symflower test --language java --workspace /tmp/eval-dev-quality2633743724/light --coverage-file /tmp/eval-dev-quality2633743724/light/coverage.json
+[INFO] Scanning for projects...
+[WARNING] 
+[WARNING] Some problems were encountered while building the effective model for eval.dev.quality:test-java-light:jar:SNAPSHOT
+[WARNING] 'version' uses an unsupported snapshot version format, should be '*-SNAPSHOT' instead. @ line 8, column 11
+[WARNING] 
+[WARNING] It is highly recommended to fix these problems because they threaten the stability of your build.
+[WARNING] 
+[WARNING] For this reason, future Maven versions might no longer support building such malformed projects.
+[WARNING] 
+[INFO] 
+[INFO] ------------------< eval.dev.quality:test-java-light >------------------
+[INFO] Building test-java-light SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clover:4.5.2:aggregate (default-cli) @ test-java-light ---
+[INFO] 
+[INFO] ------------------< eval.dev.quality:test-java-light >------------------
+[INFO] Building test-java-light SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clover:4.5.2:clover (default-cli) @ test-java-light ---
+[INFO] Using default-clover-report descriptor.
+[INFO] Using Clover report descriptor: /tmp/mvn10938561114424713525resource
+[INFO] OpenClover Version 4.5.2, built on 2024-01-31
+[INFO] Clover is enabled with initstring '/tmp/eval-dev-quality2633743724/light/target/clover/clover.db'
+[INFO] OpenClover Version 4.5.2, built on 2024-01-31
+[INFO] Loading coverage database from: '/tmp/eval-dev-quality2633743724/light/target/clover/clover.db'
+[INFO] Writing report to '/tmp/eval-dev-quality2633743724/light/target/site/clover/clover.xml'
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  1.906 s
+[INFO] Finished at: 2024-06-06T14:11:34+02:00
+[INFO] ------------------------------------------------------------------------
+
+Total coverage 4.273504%
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+2024/06/06 14:11:34 Executes tests with 13 coverage objects
+2024/06/06 14:11:34 Querying model "openrouter/perplexity/llama-3-sonar-large-32k-chat" with:
+	Given the following Java code file "src/main/java/com/eval/ConditionsAnd.java" with package "com.eval", provide a test file for this code with JUnit 5 as a test framework.
+	The tests should produce 100 percent code coverage and must compile.
+	The response must contain only the test code and nothing else.
+
+	```java
+	package com.eval;
+
+	class ConditionsAnd {
+	    static boolean conditionsAnd(char x, char y) {
+	        if (x == 'A' && y == 'B') {
+	            return true;
+	        }
+
+	        return false;
+	    }
+	}
+	```
+2024/06/06 14:11:40 Model "openrouter/perplexity/llama-3-sonar-large-32k-chat" responded (5371 ms) with:
+	```java
+	package com.eval;
+
+	import org.junit.jupiter.api.Test;
+	import static org.junit.jupiter.api.Assertions.*;
+
+	class ConditionsAndTest {
+
+	    @Test
+	    void conditionsAnd_TRUE() {
+	        assertTrue(ConditionsAnd.conditionsAnd('A', 'B'));
+	    }
+
+	    @Test
+	    void conditionsAnd_FALSE_x() {
+	        assertFalse(ConditionsAnd.conditionsAnd('C', 'B'));
+	    }
+
+	    @Test
+	    void conditionsAnd_FALSE_y() {
+	        assertFalse(ConditionsAnd.conditionsAnd('A', 'C'));
+	    }
+
+	    @Test
+	    void conditionsAnd_FALSE_both() {
+	        assertFalse(ConditionsAnd.conditionsAnd('C', 'D'));
+	    }
+	}
+	```
+2024/06/06 14:11:40 $ symflower test --language java --workspace /tmp/eval-dev-quality2633743724/light --coverage-file /tmp/eval-dev-quality2633743724/light/coverage.json
+[INFO] Scanning for projects...
+[WARNING] 
+[WARNING] Some problems were encountered while building the effective model for eval.dev.quality:test-java-light:jar:SNAPSHOT
+[WARNING] 'version' uses an unsupported snapshot version format, should be '*-SNAPSHOT' instead. @ line 8, column 11
+[WARNING] 
+[WARNING] It is highly recommended to fix these problems because they threaten the stability of your build.
+[WARNING] 
+[WARNING] For this reason, future Maven versions might no longer support building such malformed projects.
+[WARNING] 
+[INFO] 
+[INFO] ------------------< eval.dev.quality:test-java-light >------------------
+[INFO] Building test-java-light SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clover:4.5.2:aggregate (default-cli) @ test-java-light ---
+[INFO] 
+[INFO] ------------------< eval.dev.quality:test-java-light >------------------
+[INFO] Building test-java-light SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clover:4.5.2:clover (default-cli) @ test-java-light ---
+[INFO] Using default-clover-report descriptor.
+[INFO] Using Clover report descriptor: /tmp/mvn14301143035887592573resource
+[INFO] OpenClover Version 4.5.2, built on 2024-01-31
+[INFO] Clover is enabled with initstring '/tmp/eval-dev-quality2633743724/light/target/clover/clover.db'
+[INFO] OpenClover Version 4.5.2, built on 2024-01-31
+[INFO] Loading coverage database from: '/tmp/eval-dev-quality2633743724/light/target/clover/clover.db'
+[INFO] Writing report to '/tmp/eval-dev-quality2633743724/light/target/site/clover/clover.xml'
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  1.903 s
+[INFO] Finished at: 2024-06-06T14:11:46+02:00
+[INFO] ------------------------------------------------------------------------
+
+Total coverage 1.709402%
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+2024/06/06 14:11:46 Executes tests with 5 coverage objects
+2024/06/06 14:11:46 Querying model "openrouter/perplexity/llama-3-sonar-large-32k-chat" with:
+	Given the following Java code file "src/main/java/com/eval/EqulibriumIndices.java" with package "com.eval", provide a test file for this code with JUnit 5 as a test framework.
+	The tests should produce 100 percent code coverage and must compile.
+	The response must contain only the test code and nothing else.
+
+	```java
+	// Copyright (C) rosettacode.org
+	package com.eval;
+
+	public class EqulibriumIndices {
+	  static String equlibriumIndices(int[] sequence) {
+	    String indexList = "";
+	    // Determine total sum.
+	    int totalSum = 0;
+	    for (int n : sequence) {
+	      totalSum += n;
+	    }
+	    // Compare running sum to remaining sum to find equilibrium indices.
+	    int runningSum = 0;
+	    for (int i = 0; i < sequence.length; i++) {
+	      int n = sequence[i];
+	      if (totalSum - runningSum - n == runningSum) {
+	        indexList += i + ";";
+	      }
+	      runningSum += n;
+	    }
+
+	    return indexList;
+	  }
+	}
+	```
+2024/06/06 14:11:59 Model "openrouter/perplexity/llama-3-sonar-large-32k-chat" responded (13343 ms) with:
+	Here is the test file for the given Java code with JUnit 5 as the test framework:
+
+	```java
+	// Copyright (C) rosettacode.org
+	package com.eval;
+
+	import org.junit.jupiter.api.Test;
+	import static org.junit.jupiter.api.Assertions.assertEquals;
+
+	public class EqulibriumIndicesTest {
+
+	    @Test
+	    void testEqulibriumIndices() {
+	        EqulibriumIndices equlibriumIndices = new EqulibriumIndices();
+	        assertEquals("", EqulibriumIndices.equlibriumIndices(new int[] {}));
+	        assertEquals("0;", EqulibriumIndices.equlibriumIndices(new int[] {0}));
+	        assertEquals("0;", EqulibriumIndices.equlibriumIndices(new int[] {-1, 1}));
+	        assertEquals("1;", EqulibriumIndices.equlibriumIndices(new int[] {1, -1}));
+	        assertEquals("1;", EqulibriumIndices.equlibriumIndices(new int[] {1, 0, -1}));
+	        assertEquals("1;2;", EqulibriumIndices.equlibriumIndices(new int[] {1, 0, -1, 0}));
+	        assertEquals("0;3;", EqulibriumIndices.equlibriumIndices(new int[] {-1, 1, 1, -1}));
+	        assertEquals("1;2;", EqulibriumIndices.equlibriumIndices(new int[] {1, -1, 1, -1}));
+	    }
+	}
+	```
+2024/06/06 14:11:59 $ symflower test --language java --workspace /tmp/eval-dev-quality2633743724/light --coverage-file /tmp/eval-dev-quality2633743724/light/coverage.json
+[INFO] Scanning for projects...
+[WARNING] 
+[WARNING] Some problems were encountered while building the effective model for eval.dev.quality:test-java-light:jar:SNAPSHOT
+[WARNING] 'version' uses an unsupported snapshot version format, should be '*-SNAPSHOT' instead. @ line 8, column 11
+[WARNING] 
+[WARNING] It is highly recommended to fix these problems because they threaten the stability of your build.
+[WARNING] 
+[WARNING] For this reason, future Maven versions might no longer support building such malformed projects.
+[WARNING] 
+[INFO] 
+[INFO] ------------------< eval.dev.quality:test-java-light >------------------
+[INFO] Building test-java-light SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clover:4.5.2:aggregate (default-cli) @ test-java-light ---
+[INFO] 
+[INFO] ------------------< eval.dev.quality:test-java-light >------------------
+[INFO] Building test-java-light SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clover:4.5.2:clover (default-cli) @ test-java-light ---
+[INFO] Using default-clover-report descriptor.
+[INFO] Using Clover report descriptor: /tmp/mvn9957958650842301977resource
+[INFO] OpenClover Version 4.5.2, built on 2024-01-31
+[INFO] Clover is enabled with initstring '/tmp/eval-dev-quality2633743724/light/target/clover/clover.db'
+[INFO] OpenClover Version 4.5.2, built on 2024-01-31
+[INFO] Loading coverage database from: '/tmp/eval-dev-quality2633743724/light/target/clover/clover.db'
+[INFO] Writing report to '/tmp/eval-dev-quality2633743724/light/target/site/clover/clover.xml'
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  1.916 s
+[INFO] Finished at: 2024-06-06T14:12:05+02:00
+[INFO] ------------------------------------------------------------------------
+
+Total coverage 5.128205%
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+2024/06/06 14:12:05 Executes tests with 14 coverage objects
+2024/06/06 14:12:05 Querying model "openrouter/perplexity/llama-3-sonar-large-32k-chat" with:
+	Given the following Java code file "src/main/java/com/eval/ForLoop.java" with package "com.eval", provide a test file for this code with JUnit 5 as a test framework.
+	The tests should produce 100 percent code coverage and must compile.
+	The response must contain only the test code and nothing else.
+
+	```java
+	package com.eval;
+
+	class ForLoop {
+	    static int forLoop(int s) {
+	        int sum = 0;
+	        for (int i = 0; i < s; i++) {
+	            sum = sum + i;
+	        }
+	        for (int i = 0; i < s; i++) {
+	            sum = sum + i;
+	        }
+
+	        return sum;
+	    }
+	}
+	```
+2024/06/06 14:12:12 Model "openrouter/perplexity/llama-3-sonar-large-32k-chat" responded (6592 ms) with:
+	Here is the test file:
+
+	```java
+	package com.eval;
+
+	import org.junit.jupiter.api.Test;
+	import static org.junit.jupiter.api.Assertions.assertEquals;
+
+	public class ForLoopTest {
+
+	    @Test
+	    void testForLoop() {
+	        assertEquals(0, ForLoop.forLoop(0));
+	        assertEquals(2, ForLoop.forLoop(1));
+	        assertEquals(8, ForLoop.forLoop(2));
+	        assertEquals(24, ForLoop.forLoop(3));
+	        assertEquals(60, ForLoop.forLoop(5));
+	    }
+
+	    @Test
+	    void testForLoopLargeInput() {
+	        assertEquals(24752, ForLoop.forLoop(112));
+	    }
+	}
+	```
+2024/06/06 14:12:12 $ symflower test --language java --workspace /tmp/eval-dev-quality2633743724/light --coverage-file /tmp/eval-dev-quality2633743724/light/coverage.json
+[INFO] Scanning for projects...
+[WARNING] 
+[WARNING] Some problems were encountered while building the effective model for eval.dev.quality:test-java-light:jar:SNAPSHOT
+[WARNING] 'version' uses an unsupported snapshot version format, should be '*-SNAPSHOT' instead. @ line 8, column 11
+[WARNING] 
+[WARNING] It is highly recommended to fix these problems because they threaten the stability of your build.
+[WARNING] 
+[WARNING] For this reason, future Maven versions might no longer support building such malformed projects.
+[WARNING] 
+[INFO] 
+[INFO] ------------------< eval.dev.quality:test-java-light >------------------
+[INFO] Building test-java-light SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clover:4.5.2:aggregate (default-cli) @ test-java-light ---
+[INFO] 
+[INFO] ------------------< eval.dev.quality:test-java-light >------------------
+[INFO] Building test-java-light SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clover:4.5.2:clover (default-cli) @ test-java-light ---
+[INFO] Using default-clover-report descriptor.
+[INFO] Using Clover report descriptor: /tmp/mvn7800697627916748778resource
+[INFO] OpenClover Version 4.5.2, built on 2024-01-31
+[INFO] Clover is enabled with initstring '/tmp/eval-dev-quality2633743724/light/target/clover/clover.db'
+[INFO] OpenClover Version 4.5.2, built on 2024-01-31
+[INFO] Loading coverage database from: '/tmp/eval-dev-quality2633743724/light/target/clover/clover.db'
+[INFO] Writing report to '/tmp/eval-dev-quality2633743724/light/target/site/clover/clover.xml'
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  1.915 s
+[INFO] Finished at: 2024-06-06T14:12:18+02:00
+[INFO] ------------------------------------------------------------------------
+
+Total coverage 2.991453%
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+2024/06/06 14:12:18 Executes tests with 9 coverage objects
+2024/06/06 14:12:18 Querying model "openrouter/perplexity/llama-3-sonar-large-32k-chat" with:
+	Given the following Java code file "src/main/java/com/eval/JacobiSymbol.java" with package "com.eval", provide a test file for this code with JUnit 5 as a test framework.
+	The tests should produce 100 percent code coverage and must compile.
+	The response must contain only the test code and nothing else.
+
+	```java
+	// Copyright (C) rosettacode.org
+	package com.eval;
+
+	public class JacobiSymbol {
+	  static int jacobiSymbol(int k, int n) {
+	    if (k < 0 || n % 2 == 0) {
+	      throw new IllegalArgumentException("Invalid value. k = " + k +
+	          ", n = " + n);
+	    }
+	    k %= n;
+	    int jacobi = 1;
+	    while (k > 0) {
+	      while (k % 2 == 0) {
+	        k /= 2;
+	        int r = n % 8;
+	        if (r == 3 || r == 5) {
+	          jacobi = -jacobi;
+	        }
+	      }
+	      int temp = n;
+	      n = k;
+	      k = temp;
+	      if (k % 4 == 3 && n % 4 == 3) {
+	        jacobi = -jacobi;
+	      }
+	      k %= n;
+	    }
+	    if (n == 1) {
+	      return jacobi;
+	    }
+	    return 0;
+	  }
+	}
+	```
+2024/06/06 14:12:33 Model "openrouter/perplexity/llama-3-sonar-large-32k-chat" responded (15480 ms) with:
+	Here is the test file for the given Java code using JUnit 5:
+	```java
+	// src/test/java/com/eval/JacobiSymbolTest.java
+
+	package com.eval;
+
+	import org.junit.jupiter.api.Test;
+	import static org.junit.jupiter.api.Assertions.*;
+
+	public class JacobiSymbolTest {
+
+	  @Test
+	  void testJacobiSymbolValidInput() {
+	    assertEquals(1, JacobiSymbol.jacobiSymbol(1, 3));
+	    assertEquals(-1, JacobiSymbol.jacobiSymbol(2, 3));
+	    assertEquals(1, JacobiSymbol.jacobiSymbol(1, 5));
+	    assertEquals(-1, JacobiSymbol.jacobiSymbol(2, 5));
+	    assertEquals(-1, JacobiSymbol.jacobiSymbol(3, 5));
+	    assertEquals(1, JacobiSymbol.jacobiSymbol(1, 7));
+	    assertEquals(-1, JacobiSymbol.jacobiSymbol(2, 7));
+	    assertEquals(-1, JacobiSymbol.jacobiSymbol(3, 7));
+	    assertEquals(-1, JacobiSymbol.jacobiSymbol(4, 7));
+	  }
+
+	  @Test
+	  void testJacobiSymbolInvalidInput() {
+	    assertThrows(IllegalArgumentException.class, () -> JacobiSymbol.jacobiSymbol(-1, 3));
+	    assertThrows(IllegalArgumentException.class, () -> JacobiSymbol.jacobiSymbol(1, 0));
+	    assertThrows(IllegalArgumentException.class, () -> JacobiSymbol.jacobiSymbol(1, 4));
+	  }
+	}
+	```
+2024/06/06 14:12:33 $ symflower test --language java --workspace /tmp/eval-dev-quality2633743724/light --coverage-file /tmp/eval-dev-quality2633743724/light/coverage.json
+[INFO] Scanning for projects...
+[WARNING] 
+[WARNING] Some problems were encountered while building the effective model for eval.dev.quality:test-java-light:jar:SNAPSHOT
+[WARNING] 'version' uses an unsupported snapshot version format, should be '*-SNAPSHOT' instead. @ line 8, column 11
+[WARNING] 
+[WARNING] It is highly recommended to fix these problems because they threaten the stability of your build.
+[WARNING] 
+[WARNING] For this reason, future Maven versions might no longer support building such malformed projects.
+[WARNING] 
+[INFO] 
+[INFO] ------------------< eval.dev.quality:test-java-light >------------------
+[INFO] Building test-java-light SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clover:4.5.2:aggregate (default-cli) @ test-java-light ---
+[INFO] 
+[INFO] ------------------< eval.dev.quality:test-java-light >------------------
+[INFO] Building test-java-light SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clover:4.5.2:clover (default-cli) @ test-java-light ---
+[INFO] Using default-clover-report descriptor.
+[INFO] Using Clover report descriptor: /tmp/mvn12935402134840253215resource
+[INFO] OpenClover Version 4.5.2, built on 2024-01-31
+[INFO] Clover is enabled with initstring '/tmp/eval-dev-quality2633743724/light/target/clover/clover.db'
+[INFO] OpenClover Version 4.5.2, built on 2024-01-31
+[INFO] Loading coverage database from: '/tmp/eval-dev-quality2633743724/light/target/clover/clover.db'
+[INFO] Writing report to '/tmp/eval-dev-quality2633743724/light/target/site/clover/clover.xml'
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  1.914 s
+[INFO] Finished at: 2024-06-06T14:12:40+02:00
+[INFO] ------------------------------------------------------------------------
+
+Total coverage 7.692308%
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+2024/06/06 14:12:40 Executes tests with 23 coverage objects
+2024/06/06 14:12:40 Querying model "openrouter/perplexity/llama-3-sonar-large-32k-chat" with:
+	Given the following Java code file "src/main/java/com/eval/KlarnerRadoSequence.java" with package "com.eval", provide a test file for this code with JUnit 5 as a test framework.
+	The tests should produce 100 percent code coverage and must compile.
+	The response must contain only the test code and nothing else.
+
+	```java
+	// Copyright (C) rosettacode.org
+	package com.eval;
+
+	public class KlarnerRadoSequence {
+	  static int[] initialiseKlarnerRadoSequence(int limit) {
+	    int[] result = new int[limit + 1];
+	    int i2 = 1, i3 = 1;
+	    int m2 = 1, m3 = 1;
+	    for (int i = 1; i <= limit; i++) {
+	      int minimum = Math.min(m2, m3);
+	      result[i] = minimum;
+	      ;
+	      if (m2 == minimum) {
+	        m2 = result[i2] * 2 + 1;
+	        i2 += 1;
+	      }
+	      if (m3 == minimum) {
+	        m3 = result[i3] * 3 + 1;
+	        i3 += 1;
+	      }
+	    }
+	    return result;
+	  }
+	}
+	```
+2024/06/06 14:12:55 Model "openrouter/perplexity/llama-3-sonar-large-32k-chat" responded (15262 ms) with:
+	```java
+	// Copyright (C) rosettacode.org
+	package com.eval;
+
+	import org.junit.jupiter.api.Test;
+	import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+
+	class KlarnerRadoSequenceTest {
+
+	  @Test
+	  void testInitialiseKlarnerRadoSequence() {
+	    int[] expected = new int[]{1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89};
+	    assertArrayEquals(expected, KlarnerRadoSequence.initialiseKlarnerRadoSequence(10));
+	  }
+
+	  @Test
+	  void testInitialiseKlarnerRadoSequence_Limit0() {
+	    int[] expected = new int[1];
+	    assertArrayEquals(expected, KlarnerRadoSequence.initialiseKlarnerRadoSequence(0));
+	  }
+
+	  @Test
+	  void testInitialiseKlarnerRadoSequence_Limit1() {
+	    int[] expected = new int[]{1, 1};
+	    assertArrayEquals(expected, KlarnerRadoSequence.initialiseKlarnerRadoSequence(1));
+	  }
+
+	  @Test
+	  void testInitialiseKlarnerRadoSequence_Limit2() {
+	    int[] expected = new int[]{1, 1, 2};
+	    assertArrayEquals(expected, KlarnerRadoSequence.initialiseKlarnerRadoSequence(2));
+	  }
+
+	  @Test
+	  void testInitialiseKlarnerRadoSequence_LimitNegative() {
+	    assertThrows(IllegalArgumentException.class, () -> KlarnerRadoSequence.initialiseKlarnerRadoSequence(-1));
+	  }
+	}
+	```
+2024/06/06 14:12:55 $ symflower test --language java --workspace /tmp/eval-dev-quality2633743724/light --coverage-file /tmp/eval-dev-quality2633743724/light/coverage.json
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+ERROR: All attempts fail:
+#1: Internal error: exit status 1:
+[]interface {}{
+    "/tmp/eval-dev-quality2633743724/light/",
+    "[INFO] Scanning for projects...\n[WARNING] \n[WARNING] Some problems were encountered while building the effective model for eval.dev.quality:test-java-light:jar:SNAPSHOT\n[WARNING] 'version' uses an unsupported snapshot version format, should be '*-SNAPSHOT' instead. @ line 8, column 11\n[WARNING] \n[WARNING] It is highly recommended to fix these problems because they threaten the stability of your build.\n[WARNING] \n[WARNING] For this reason, future Maven versions might no longer support building such malformed projects.\n[WARNING] \n[INFO] \n[INFO] ------------------< eval.dev.quality:test-java-light >------------------\n[INFO] Building test-java-light SNAPSHOT\n[INFO]   from pom.xml\n[INFO] --------------------------------[ jar ]---------------------------------\n[INFO] \n[INFO] --- clean:3.2.0:clean (default-clean) @ test-java-light ---\n[INFO] \n[INFO] --- resources:3.3.1:resources (default-resources) @ test-java-light ---\n[WARNING] Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!\n[INFO] skip non existing resourceDirectory /tmp/eval-dev-quality2633743724/light/src/main/resources\n[INFO] \n[INFO] --- compiler:3.11.0:compile (default-compile) @ test-java-light ---\n[INFO] Changes detected - recompiling the module! :source\n[WARNING] File encoding has not been set, using platform encoding UTF-8, i.e. build is platform dependent!\n[INFO] Compiling 23 source files with javac [debug target 11] to target/classes\n[WARNING] system modules path not set in conjunction with -source 11\n[INFO] \n[INFO] --- resources:3.3.1:resources (default-resources) @ test-java-light ---\n[WARNING] Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!\n[INFO] skip non existing resourceDirectory /tmp/eval-dev-quality2633743724/light/src/main/resources\n[INFO] \n[INFO] --- compiler:3.11.0:compile (default-compile) @ test-java-light ---\n[INFO] Nothing to compile - all classes are up to date\n[INFO] \n[INFO] --- resources:3.3.1:testResources (default-testResources) @ test-java-light ---\n[WARNING] Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!\n[INFO] skip non existing resourceDirectory /tmp/eval-dev-quality2633743724/light/src/test/resources\n[INFO] \n[INFO] --- compiler:3.11.0:testCompile (default-testCompile) @ test-java-light ---\n[INFO] Changes detected - recompiling the module! :dependency\n[WARNING] File encoding has not been set, using platform encoding UTF-8, i.e. build is platform dependent!\n[INFO] Compiling 1 source file with javac [debug target 11] to target/test-classes\n[INFO] -------------------------------------------------------------\n[WARNING] COMPILATION WARNING : \n[INFO] -------------------------------------------------------------\n[WARNING] system modules path not set in conjunction with -source 11\n[INFO] 1 warning\n[INFO] -------------------------------------------------------------\n[INFO] -------------------------------------------------------------\n[ERROR] COMPILATION ERROR : \n[INFO] -------------------------------------------------------------\n[ERROR] /tmp/eval-dev-quality2633743724/light/src/test/java/com/eval/KlarnerRadoSequenceTest.java:[35,5] cannot find symbol\n  symbol:   method assertThrows(java.lang.Class<java.lang.IllegalArgumentException>,()->Klarne[...]e(-1))\n  location: class com.eval.KlarnerRadoSequenceTest\n[INFO] 1 error\n[INFO] -------------------------------------------------------------\n[INFO] ------------------------------------------------------------------------\n[INFO] BUILD FAILURE\n[INFO] ------------------------------------------------------------------------\n[INFO] Total time:  0.900 s\n[INFO] Finished at: 2024-06-06T14:12:57+02:00\n[INFO] ------------------------------------------------------------------------\n[ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.11.0:testCompile (default-testCompile) on project test-java-light: Compilation failure\n[ERROR] /tmp/eval-dev-quality2633743724/light/src/test/java/com/eval/KlarnerRadoSequenceTest.java:[35,5] cannot find symbol\n[ERROR]   symbol:   method assertThrows(java.lang.Class<java.lang.IllegalArgumentException>,()->Klarne[...]e(-1))\n[ERROR]   location: class com.eval.KlarnerRadoSequenceTest\n[ERROR] \n[ERROR] -> [Help 1]\n[ERROR] \n[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.\n[ERROR] Re-run Maven using the -X switch to enable full debug logging.\n[ERROR] \n[ERROR] For more information about the errors and possible solutions, please read the following articles:\n[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException\n",
+}
+Stacktrace: goroutine 1 [running]:
+gitlab.nethead.at/symflower/symflower/model/errors.NewInternalError({0x1f42da0?, 0xc0004a2000}, {0xffa8c0?, 0xc000013308})
+	gitlab.nethead.at/symflower/symflower/model/errors/error.go:850 +0x59
+gitlab.nethead.at/symflower/symflower/language/java/execute.MavenDependencyCommand.func1()
+	gitlab.nethead.at/symflower/symflower/language/java/execute/maven.go:80 +0x1ef
+github.com/avast/retry-go.Do(0xc00052d8b8, {0xc00052d8a0, 0x3, 0x418c94?})
+	github.com/avast/retry-go/retry.go:135 +0x5a3
+gitlab.nethead.at/symflower/symflower/language/java/execute.MavenDependencyCommand({0xc000722630, 0x26}, 0x0, {0xc000530840, 0x6, 0x6})
+	gitlab.nethead.at/symflower/symflower/language/java/execute/maven.go:60 +0x1c5
+gitlab.nethead.at/symflower/symflower/language/java/execute.MavenCloverCoverage({0xc000722630, 0x26})
+	gitlab.nethead.at/symflower/symflower/language/java/execute/clover.go:131 +0xc9
+gitlab.nethead.at/symflower/symflower/cmd/symflower-local/cmd.(*commandTest).Execute(0xc00050c578, {0xc00050c400?, 0x7fb9107bea18?, 0xc00050c578?})
+	gitlab.nethead.at/symflower/symflower/cmd/symflower-local/cmd/test.go:143 +0x54f
+gitlab.nethead.at/symflower/symflower/cmd.ExecuteNoExit({0x1f425e0?, 0xc00050c400}, {0xc000040080?, 0x2782d80?, 0xc0005a3ed8?})
+	gitlab.nethead.at/symflower/symflower/cmd/execute.go:56 +0x2d0
+gitlab.nethead.at/symflower/symflower/cmd.Execute({0x1f425e0?, 0xc00050c400?}, {0xc000040080?, 0x274c500?, 0xc00050c400?})
+	gitlab.nethead.at/symflower/symflower/cmd/execute.go:16 +0x26
+gitlab.nethead.at/symflower/symflower/cmd.ExecuteWithOSArguments(...)
+	gitlab.nethead.at/symflower/symflower/cmd/execute.go:75
+main.main.func1()
+	gitlab.nethead.at/symflower/symflower/cmd/symflower-demo/main.go:40 +0x34
+gitlab.nethead.at/symflower/symflower/cmd/symflower-local/cmd.(*Command).WithPanicReporter(0xc000130058?, 0x2636b18?)
+	gitlab.nethead.at/symflower/symflower/cmd/symflower-local/cmd/cmd.go:184 +0x48
+main.main()
+	gitlab.nethead.at/symflower/symflower/cmd/symflower-demo/main.go:39 +0xa5
+
+2024/06/06 14:12:57 Querying model "openrouter/perplexity/llama-3-sonar-large-32k-chat" with:
+	Given the following Java code file "src/main/java/com/eval/Knapsack.java" with package "com.eval", provide a test file for this code with JUnit 5 as a test framework.
+	The tests should produce 100 percent code coverage and must compile.
+	The response must contain only the test code and nothing else.
+
+	```java
+	package com.eval;
+
+	public class Knapsack {
+	  static int maximumValue(int maximumWeight, Item[] items) {
+	    int[][] knapsack = new int[items.length + 1][maximumWeight + 1];
+	    for (int item = 0; item <= items.length; item++) {
+	      for (int weight = 0; weight <= maximumWeight; weight++) {
+	        knapsack[item][weight] = 0; // Return 0 if not filled
+	      }
+	    }
+	    for (int item = 0; item <= items.length; item++) {
+	      for (int weight = 0; weight <= maximumWeight; weight++) {
+	        if (item == 0 || weight == 0) {
+	          knapsack[item][weight] = 0;
+	        } else if (items[item - 1].weight > weight) {
+	          knapsack[item][weight] = knapsack[item - 1][weight];
+	        } else {
+	          int itemValue = items[item - 1].value;
+	          int itemWeight = items[item - 1].weight;
+	          knapsack[item][weight] =
+	              Math.max(itemValue + knapsack[item - 1][weight - itemWeight],
+	                       knapsack[item - 1][weight]);
+	        }
+	      }
+	    }
+	    return knapsack[items.length][maximumWeight];
+	  }
+
+	  class Item {
+	    int weight;
+	    int value;
+	  }
+	}
+	```
+2024/06/06 14:13:21 Model "openrouter/perplexity/llama-3-sonar-large-32k-chat" responded (23609 ms) with:
+	```java
+	package com.eval;
+
+	import org.junit.jupiter.api.Test;
+	import static org.junit.jupiter.api.Assertions.assertEquals;
+
+	class KnapsackTest {
+
+	    @Test
+	    void maximumValueEmptyItems() {
+	        Knapsack.Item[] items = {};
+	        assertEquals(0, Knapsack.maximumValue(10, items));
+	    }
+
+	    @Test
+	    void maximumValueOneItem() {
+	        Knapsack.Item[] items = {new Knapsack.Item()};
+	        items[0].weight = 5;
+	        items[0].value = 10;
+	        assertEquals(0, Knapsack.maximumValue(0, items));
+	        assertEquals(0, Knapsack.maximumValue(4, items));
+	        assertEquals(10, Knapsack.maximumValue(5, items));
+	        assertEquals(10, Knapsack.maximumValue(10, items));
+	    }
+
+	    @Test
+	    void maximumValueMultipleItems() {
+	        Knapsack.Item[] items = new Knapsack.Item[3];
+	        items[0] = new Knapsack.Item();
+	        items[0].weight = 1;
+	        items[0].value = 6;
+	        items[1] = new Knapsack.Item();
+	        items[1].weight = 2;
+	        items[1].value = 10;
+	        items[2] = new Knapsack.Item();
+	        items[2].weight = 3;
+	        items[2].value = 12;
+	        assertEquals(0, Knapsack.maximumValue(0, items));
+	        assertEquals(6, Knapsack.maximumValue(1, items));
+	        assertEquals(10, Knapsack.maximumValue(2, items));
+	        assertEquals(22, Knapsack.maximumValue(4, items));
+	        assertEquals(22, Knapsack.maximumValue(5, items));
+	    }
+
+	    @Test
+	    void maximumValueZeroWeightItem() {
+	        Knapsack.Item[] items = {new Knapsack.Item()};
+	        items[0].weight = 0;
+	        items[0].value = 10;
+	        assertEquals(10, Knapsack.maximumValue(10, items));
+	    }
+
+	    @Test
+	    void maximumValueZeroValueItem() {
+	        Knapsack.Item[] items = {new Knapsack.Item()};
+	        items[0].weight = 10;
+	        items[0].value = 0;
+	        assertEquals(0, Knapsack.maximumValue(10, items));
+	    }
+	}
+	```
+2024/06/06 14:13:21 $ symflower test --language java --workspace /tmp/eval-dev-quality2633743724/light --coverage-file /tmp/eval-dev-quality2633743724/light/coverage.json
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+ERROR: All attempts fail:
+#1: Internal error: exit status 1:
+[]interface {}{
+    "/tmp/eval-dev-quality2633743724/light/",
+    "[INFO] Scanning for projects...\n[WARNING] \n[WARNING] Some problems were encountered while building the effective model for eval.dev.quality:test-java-light:jar:SNAPSHOT\n[WARNING] 'version' uses an unsupported snapshot version format, should be '*-SNAPSHOT' instead. @ line 8, column 11\n[WARNING] \n[WARNING] It is highly recommended to fix these problems because they threaten the stability of your build.\n[WARNING] \n[WARNING] For this reason, future Maven versions might no longer support building such malformed projects.\n[WARNING] \n[INFO] \n[INFO] ------------------< eval.dev.quality:test-java-light >------------------\n[INFO] Building test-java-light SNAPSHOT\n[INFO]   from pom.xml\n[INFO] --------------------------------[ jar ]---------------------------------\n[INFO] \n[INFO] --- clean:3.2.0:clean (default-clean) @ test-java-light ---\n[INFO] \n[INFO] --- resources:3.3.1:resources (default-resources) @ test-java-light ---\n[WARNING] Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!\n[INFO] skip non existing resourceDirectory /tmp/eval-dev-quality2633743724/light/src/main/resources\n[INFO] \n[INFO] --- compiler:3.11.0:compile (default-compile) @ test-java-light ---\n[INFO] Changes detected - recompiling the module! :source\n[WARNING] File encoding has not been set, using platform encoding UTF-8, i.e. build is platform dependent!\n[INFO] Compiling 23 source files with javac [debug target 11] to target/classes\n[WARNING] system modules path not set in conjunction with -source 11\n[INFO] \n[INFO] --- resources:3.3.1:resources (default-resources) @ test-java-light ---\n[WARNING] Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!\n[INFO] skip non existing resourceDirectory /tmp/eval-dev-quality2633743724/light/src/main/resources\n[INFO] \n[INFO] --- compiler:3.11.0:compile (default-compile) @ test-java-light ---\n[INFO] Nothing to compile - all classes are up to date\n[INFO] \n[INFO] --- resources:3.3.1:testResources (default-testResources) @ test-java-light ---\n[WARNING] Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!\n[INFO] skip non existing resourceDirectory /tmp/eval-dev-quality2633743724/light/src/test/resources\n[INFO] \n[INFO] --- compiler:3.11.0:testCompile (default-testCompile) @ test-java-light ---\n[INFO] Changes detected - recompiling the module! :dependency\n[WARNING] File encoding has not been set, using platform encoding UTF-8, i.e. build is platform dependent!\n[INFO] Compiling 1 source file with javac [debug target 11] to target/test-classes\n[INFO] -------------------------------------------------------------\n[WARNING] COMPILATION WARNING : \n[INFO] -------------------------------------------------------------\n[WARNING] system modules path not set in conjunction with -source 11\n[INFO] 1 warning\n[INFO] -------------------------------------------------------------\n[INFO] -------------------------------------------------------------\n[ERROR] COMPILATION ERROR : \n[INFO] -------------------------------------------------------------\n[ERROR] /tmp/eval-dev-quality2633743724/light/src/test/java/com/eval/KnapsackTest.java:[16,34] an enclosing instance that contains com.eval.Knapsack.Item is required\n[ERROR] /tmp/eval-dev-quality2633743724/light/src/test/java/com/eval/KnapsackTest.java:[28,20] an enclosing instance that contains com.eval.Knapsack.Item is required\n[ERROR] /tmp/eval-dev-quality2633743724/light/src/test/java/com/eval/KnapsackTest.java:[31,20] an enclosing instance that contains com.eval.Knapsack.Item is required\n[ERROR] /tmp/eval-dev-quality2633743724/light/src/test/java/com/eval/KnapsackTest.java:[34,20] an enclosing instance that contains com.eval.Knapsack.Item is required\n[ERROR] /tmp/eval-dev-quality2633743724/light/src/test/java/com/eval/KnapsackTest.java:[46,34] an enclosing instance that contains com.eval.Knapsack.Item is required\n[ERROR] /tmp/eval-dev-quality2633743724/light/src/test/java/com/eval/KnapsackTest.java:[54,34] an enclosing instance that contains com.eval.Knapsack.Item is required\n[INFO] 6 errors \n[INFO] -------------------------------------------------------------\n[INFO] ------------------------------------------------------------------------\n[INFO] BUILD FAILURE\n[INFO] ------------------------------------------------------------------------\n[INFO] Total time:  0.986 s\n[INFO] Finished at: 2024-06-06T14:13:23+02:00\n[INFO] ------------------------------------------------------------------------\n[ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.11.0:testCompile (default-testCompile) on project test-java-light: Compilation failure: Compilation failure: \n[ERROR] /tmp/eval-dev-quality2633743724/light/src/test/java/com/eval/KnapsackTest.java:[16,34] an enclosing instance that contains com.eval.Knapsack.Item is required\n[ERROR] /tmp/eval-dev-quality2633743724/light/src/test/java/com/eval/KnapsackTest.java:[28,20] an enclosing instance that contains com.eval.Knapsack.Item is required\n[ERROR] /tmp/eval-dev-quality2633743724/light/src/test/java/com/eval/KnapsackTest.java:[31,20] an enclosing instance that contains com.eval.Knapsack.Item is required\n[ERROR] /tmp/eval-dev-quality2633743724/light/src/test/java/com/eval/KnapsackTest.java:[34,20] an enclosing instance that contains com.eval.Knapsack.Item is required\n[ERROR] /tmp/eval-dev-quality2633743724/light/src/test/java/com/eval/KnapsackTest.java:[46,34] an enclosing instance that contains com.eval.Knapsack.Item is required\n[ERROR] /tmp/eval-dev-quality2633743724/light/src/test/java/com/eval/KnapsackTest.java:[54,34] an enclosing instance that contains com.eval.Knapsack.Item is required\n[ERROR] -> [Help 1]\n[ERROR] \n[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.\n[ERROR] Re-run Maven using the -X switch to enable full debug logging.\n[ERROR] \n[ERROR] For more information about the errors and possible solutions, please read the following articles:\n[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException\n",
+}
+Stacktrace: goroutine 1 [running]:
+gitlab.nethead.at/symflower/symflower/model/errors.NewInternalError({0x1f42da0?, 0xc00024c040}, {0xffa8c0?, 0xc000578030})
+	gitlab.nethead.at/symflower/symflower/model/errors/error.go:850 +0x59
+gitlab.nethead.at/symflower/symflower/language/java/execute.MavenDependencyCommand.func1()
+	gitlab.nethead.at/symflower/symflower/language/java/execute/maven.go:80 +0x1ef
+github.com/avast/retry-go.Do(0xc0006878b8, {0xc0006878a0, 0x3, 0x418c94?})
+	github.com/avast/retry-go/retry.go:135 +0x5a3
+gitlab.nethead.at/symflower/symflower/language/java/execute.MavenDependencyCommand({0xc000221260, 0x26}, 0x0, {0xc000587f20, 0x6, 0x6})
+	gitlab.nethead.at/symflower/symflower/language/java/execute/maven.go:60 +0x1c5
+gitlab.nethead.at/symflower/symflower/language/java/execute.MavenCloverCoverage({0xc000221260, 0x26})
+	gitlab.nethead.at/symflower/symflower/language/java/execute/clover.go:131 +0xc9
+gitlab.nethead.at/symflower/symflower/cmd/symflower-local/cmd.(*commandTest).Execute(0xc000180978, {0xc000180800?, 0x7fc85cfa7098?, 0xc000180978?})
+	gitlab.nethead.at/symflower/symflower/cmd/symflower-local/cmd/test.go:143 +0x54f
+gitlab.nethead.at/symflower/symflower/cmd.ExecuteNoExit({0x1f425e0?, 0xc000180800}, {0xc000216000?, 0x2782d80?, 0xc00058fed8?})
+	gitlab.nethead.at/symflower/symflower/cmd/execute.go:56 +0x2d0
+gitlab.nethead.at/symflower/symflower/cmd.Execute({0x1f425e0?, 0xc000180800?}, {0xc000216000?, 0x274c500?, 0xc000180800?})
+	gitlab.nethead.at/symflower/symflower/cmd/execute.go:16 +0x26
+gitlab.nethead.at/symflower/symflower/cmd.ExecuteWithOSArguments(...)
+	gitlab.nethead.at/symflower/symflower/cmd/execute.go:75
+main.main.func1()
+	gitlab.nethead.at/symflower/symflower/cmd/symflower-demo/main.go:40 +0x34
+gitlab.nethead.at/symflower/symflower/cmd/symflower-local/cmd.(*Command).WithPanicReporter(0xc00018e058?, 0x2636b18?)
+	gitlab.nethead.at/symflower/symflower/cmd/symflower-local/cmd/cmd.go:184 +0x48
+main.main()
+	gitlab.nethead.at/symflower/symflower/cmd/symflower-demo/main.go:39 +0xa5
+
+2024/06/06 14:13:23 Querying model "openrouter/perplexity/llama-3-sonar-large-32k-chat" with:
+	Given the following Java code file "src/main/java/com/eval/LargestProperDivisor.java" with package "com.eval", provide a test file for this code with JUnit 5 as a test framework.
+	The tests should produce 100 percent code coverage and must compile.
+	The response must contain only the test code and nothing else.
+
+	```java
+	// Copyright (C) rosettacode.org
+	package com.eval;
+
+	public class LargestProperDivisor {
+	  static int largestProperDivisor(int aNumber) {
+	    if (aNumber < 1) {
+	      throw new IllegalArgumentException("Argument must be >= 1: " + aNumber);
+	    }
+
+	    if ((aNumber & 1) == 0) {
+	      return aNumber >> 1;
+	    }
+	    for (int p = 3; p * p <= aNumber; p += 2) {
+	      if (aNumber % p == 0) {
+	        return aNumber / p;
+	      }
+	    }
+	    return 1;
+	  }
+	}
+	```
+2024/06/06 14:13:35 Model "openrouter/perplexity/llama-3-sonar-large-32k-chat" responded (12493 ms) with:
+	Here is the test file "src/test/java/com/eval/LargestProperDivisorTest.java" with JUnit 5:
+
+	```java
+	package com.eval;
+
+	import org.junit.jupiter.api.Test;
+	import static org.junit.jupiter.api.Assertions.assertEquals;
+	import static org.junit.jupiter.api.Assertions.assertThrows;
+
+	public class LargestProperDivisorTest {
+
+	    @Test
+	    void testLargestProperDivisor_evenNumber() {
+	        assertEquals(4, LargestProperDivisor.largestProperDivisor(8));
+	    }
+
+	    @Test
+	    void testLargestProperDivisor_oddNumber() {
+	        assertEquals(1, LargestProperDivisor.largestProperDivisor(7));
+	    }
+
+	    @Test
+	    void testLargestProperDivisor_primeNumber() {
+	        assertEquals(1, LargestProperDivisor.largestProperDivisor(23));
+	    }
+
+	    @Test
+	    void testLargestProperDivisor_one() {
+	        assertEquals(1, LargestProperDivisor.largestProperDivisor(1));
+	    }
+
+	    @Test
+	    void testLargestProperDivisor_illegalArgumentException() {
+	        assertThrows(IllegalArgumentException.class, () -> LargestProperDivisor.largestProperDivisor(0));
+	    }
+
+	    @Test
+	    void testLargestProperDivisor_illegalArgumentException_negative() {
+	        assertThrows(IllegalArgumentException.class, () -> LargestProperDivisor.largestProperDivisor(-5));
+	    }
+	}
+	```
+2024/06/06 14:13:35 $ symflower test --language java --workspace /tmp/eval-dev-quality2633743724/light --coverage-file /tmp/eval-dev-quality2633743724/light/coverage.json
+[INFO] Scanning for projects...
+[WARNING] 
+[WARNING] Some problems were encountered while building the effective model for eval.dev.quality:test-java-light:jar:SNAPSHOT
+[WARNING] 'version' uses an unsupported snapshot version format, should be '*-SNAPSHOT' instead. @ line 8, column 11
+[WARNING] 
+[WARNING] It is highly recommended to fix these problems because they threaten the stability of your build.
+[WARNING] 
+[WARNING] For this reason, future Maven versions might no longer support building such malformed projects.
+[WARNING] 
+[INFO] 
+[INFO] ------------------< eval.dev.quality:test-java-light >------------------
+[INFO] Building test-java-light SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clover:4.5.2:aggregate (default-cli) @ test-java-light ---
+[INFO] 
+[INFO] ------------------< eval.dev.quality:test-java-light >------------------
+[INFO] Building test-java-light SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clover:4.5.2:clover (default-cli) @ test-java-light ---
+[INFO] Using default-clover-report descriptor.
+[INFO] Using Clover report descriptor: /tmp/mvn14719176472274153910resource
+[INFO] OpenClover Version 4.5.2, built on 2024-01-31
+[INFO] Clover is enabled with initstring '/tmp/eval-dev-quality2633743724/light/target/clover/clover.db'
+[INFO] OpenClover Version 4.5.2, built on 2024-01-31
+[INFO] Loading coverage database from: '/tmp/eval-dev-quality2633743724/light/target/clover/clover.db'
+[INFO] Writing report to '/tmp/eval-dev-quality2633743724/light/target/site/clover/clover.xml'
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  1.920 s
+[INFO] Finished at: 2024-06-06T14:13:42+02:00
+[INFO] ------------------------------------------------------------------------
+
+Total coverage 3.418803%
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+2024/06/06 14:13:42 Executes tests with 12 coverage objects
+2024/06/06 14:13:42 Querying model "openrouter/perplexity/llama-3-sonar-large-32k-chat" with:
+	Given the following Java code file "src/main/java/com/eval/MagicSquareOdd.java" with package "com.eval", provide a test file for this code with JUnit 5 as a test framework.
+	The tests should produce 100 percent code coverage and must compile.
+	The response must contain only the test code and nothing else.
+
+	```java
+	// Copyright (C) rosettacode.org
+	package com.eval;
+
+	public class MagicSquareOdd {
+		public static int[][] magicSquareOdd(final int base) {
+			if (base % 2 == 0 || base < 3)
+				throw new IllegalArgumentException("base must be odd and > 2");
+
+			int[][] grid = new int[base][base];
+			int r = 0, number = 0;
+			int size = base * base;
+
+			int c = base / 2;
+			while (number++ < size) {
+				grid[r][c] = number;
+				if (r == 0) {
+					if (c == base - 1) {
+						r++;
+					} else {
+						r = base - 1;
+						c++;
+					}
+				} else {
+					if (c == base - 1) {
+						r--;
+						c = 0;
+					} else {
+						if (grid[r - 1][c + 1] == 0) {
+							r--;
+							c++;
+						} else {
+							r++;
+						}
+					}
+				}
+			}
+			return grid;
+		}
+	}
+	```
+2024/06/06 14:13:56 Model "openrouter/perplexity/llama-3-sonar-large-32k-chat" responded (14345 ms) with:
+	Here is the test file "src/test/java/com/eval/MagicSquareOddTest.java" with JUnit 5:
+
+	```java
+	package com.eval;
+
+	import org.junit.jupiter.api.Test;
+	import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+	import static org.junit.jupiter.api.Assertions.assertThrows;
+
+	public class MagicSquareOddTest {
+
+	    @Test
+	    void testMagicSquareOdd_3() {
+	        int[][] expected = {
+	                {4, 9, 2},
+	                {3, 5, 7},
+	                {8, 1, 6}
+	        };
+	        int[][] actual = MagicSquareOdd.magicSquareOdd(3);
+	        assertArrayEquals(expected, actual);
+	    }
+
+	    @Test
+	    void testMagicSquareOdd_5() {
+	        int[][] expected = {
+	                {17, 24, 1, 8, 15},
+	                {23, 5, 7, 14, 16},
+	                {4, 6, 13, 20, 22},
+	                {10, 12, 19, 21, 3},
+	                {11, 18, 25, 2, 9}
+	        };
+	        int[][] actual = MagicSquareOdd.magicSquareOdd(5);
+	        assertArrayEquals(expected, actual);
+	    }
+
+	    @Test
+	    void testMagicSquareOdd_evenBase() {
+	        assertThrows(IllegalArgumentException.class, () -> MagicSquareOdd.magicSquareOdd(4));
+	    }
+
+	    @Test
+	    void testMagicSquareOdd_baseLessThan3() {
+	        assertThrows(IllegalArgumentException.class, () -> MagicSquareOdd.magicSquareOdd(2));
+	    }
+	}
+	```
+2024/06/06 14:13:56 $ symflower test --language java --workspace /tmp/eval-dev-quality2633743724/light --coverage-file /tmp/eval-dev-quality2633743724/light/coverage.json
+[INFO] Scanning for projects...
+[WARNING] 
+[WARNING] Some problems were encountered while building the effective model for eval.dev.quality:test-java-light:jar:SNAPSHOT
+[WARNING] 'version' uses an unsupported snapshot version format, should be '*-SNAPSHOT' instead. @ line 8, column 11
+[WARNING] 
+[WARNING] It is highly recommended to fix these problems because they threaten the stability of your build.
+[WARNING] 
+[WARNING] For this reason, future Maven versions might no longer support building such malformed projects.
+[WARNING] 
+[INFO] 
+[INFO] ------------------< eval.dev.quality:test-java-light >------------------
+[INFO] Building test-java-light SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clover:4.5.2:aggregate (default-cli) @ test-java-light ---
+[INFO] 
+[INFO] ------------------< eval.dev.quality:test-java-light >------------------
+[INFO] Building test-java-light SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clover:4.5.2:clover (default-cli) @ test-java-light ---
+[INFO] Using default-clover-report descriptor.
+[INFO] Using Clover report descriptor: /tmp/mvn14467157857277402155resource
+[INFO] OpenClover Version 4.5.2, built on 2024-01-31
+[INFO] Clover is enabled with initstring '/tmp/eval-dev-quality2633743724/light/target/clover/clover.db'
+[INFO] OpenClover Version 4.5.2, built on 2024-01-31
+[INFO] Loading coverage database from: '/tmp/eval-dev-quality2633743724/light/target/clover/clover.db'
+[INFO] Writing report to '/tmp/eval-dev-quality2633743724/light/target/site/clover/clover.xml'
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  1.900 s
+[INFO] Finished at: 2024-06-06T14:14:02+02:00
+[INFO] ------------------------------------------------------------------------
+
+Total coverage 9.401709%
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+2024/06/06 14:14:02 Executes tests with 28 coverage objects
+2024/06/06 14:14:02 Querying model "openrouter/perplexity/llama-3-sonar-large-32k-chat" with:
+	Given the following Java code file "src/main/java/com/eval/MatchBytes.java" with package "com.eval", provide a test file for this code with JUnit 5 as a test framework.
+	The tests should produce 100 percent code coverage and must compile.
+	The response must contain only the test code and nothing else.
+
+	```java
+	package com.eval;
+
+	class MatchBytes {
+	    static boolean matchBytes(byte[] s1, byte[] s2) {
+			for (int i = 0; i < s1.length; i++) {
+				byte c1 = s1[i];
+				byte c2 = s2[i];
+
+				if (c1 != c2) {
+					c1 |= 'a' - 'A';
+					c2 |= 'a' - 'A';
+
+					if (c1 != c2 || c1 < 'a' || c1 > 'z') {
+						return false;
+					}
+				}
+			}
+
+			return true;
+		}
+	}
+	```
+2024/06/06 14:14:18 Model "openrouter/perplexity/llama-3-sonar-large-32k-chat" responded (15744 ms) with:
+	Here is the test file "src/test/java/com/eval/MatchBytesTest.java" with JUnit 5:
+
+	```java
+	package com.eval;
+
+	import org.junit.jupiter.api.Test;
+	import static org.junit.jupiter.api.Assertions.assertTrue;
+	import static org.junit.jupiter.api.Assertions.assertFalse;
+
+	public class MatchBytesTest {
+
+	    @Test
+	    void testMatchBytesExactMatch() {
+	        byte[] s1 = "hello".getBytes();
+	        byte[] s2 = "hello".getBytes();
+	        assertTrue(MatchBytes.matchBytes(s1, s2));
+	    }
+
+	    @Test
+	    void testMatchBytesCaseInsensitiveMatch() {
+	        byte[] s1 = "Hello".getBytes();
+	        byte[] s2 = "hello".getBytes();
+	        assertTrue(MatchBytes.matchBytes(s1, s2));
+	    }
+
+	    @Test
+	    void testMatchBytesNoMatch() {
+	        byte[] s1 = "hello".getBytes();
+	        byte[] s2 = "world".getBytes();
+	        assertFalse(MatchBytes.matchBytes(s1, s2));
+	    }
+
+	    @Test
+	    void testMatchBytesNonAlphabeticCharacters() {
+	        byte[] s1 = "hello123".getBytes();
+	        byte[] s2 = "hello123".getBytes();
+	        assertTrue(MatchBytes.matchBytes(s1, s2));
+	    }
+
+	    @Test
+	    void testMatchBytesNullInput() {
+	        byte[] s1 = null;
+	        byte[] s2 = "hello".getBytes();
+	        assertFalse(MatchBytes.matchBytes(s1, s2));
+	    }
+
+	    @Test
+	    void testMatchBytesDifferentLength() {
+	        byte[] s1 = "hello".getBytes();
+	        byte[] s2 = "hell".getBytes();
+	        assertFalse(MatchBytes.matchBytes(s1, s2));
+	    }
+	}
+	```
+2024/06/06 14:14:18 $ symflower test --language java --workspace /tmp/eval-dev-quality2633743724/light --coverage-file /tmp/eval-dev-quality2633743724/light/coverage.json
+[INFO] Scanning for projects...
+[WARNING] 
+[WARNING] Some problems were encountered while building the effective model for eval.dev.quality:test-java-light:jar:SNAPSHOT
+[WARNING] 'version' uses an unsupported snapshot version format, should be '*-SNAPSHOT' instead. @ line 8, column 11
+[WARNING] 
+[WARNING] It is highly recommended to fix these problems because they threaten the stability of your build.
+[WARNING] 
+[WARNING] For this reason, future Maven versions might no longer support building such malformed projects.
+[WARNING] 
+[INFO] 
+[INFO] ------------------< eval.dev.quality:test-java-light >------------------
+[INFO] Building test-java-light SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clover:4.5.2:aggregate (default-cli) @ test-java-light ---
+[INFO] 
+[INFO] ------------------< eval.dev.quality:test-java-light >------------------
+[INFO] Building test-java-light SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clover:4.5.2:clover (default-cli) @ test-java-light ---
+[INFO] Using default-clover-report descriptor.
+[INFO] Using Clover report descriptor: /tmp/mvn18231867749931881399resource
+[INFO] OpenClover Version 4.5.2, built on 2024-01-31
+[INFO] Clover is enabled with initstring '/tmp/eval-dev-quality2633743724/light/target/clover/clover.db'
+[INFO] OpenClover Version 4.5.2, built on 2024-01-31
+[INFO] Loading coverage database from: '/tmp/eval-dev-quality2633743724/light/target/clover/clover.db'
+[INFO] Writing report to '/tmp/eval-dev-quality2633743724/light/target/site/clover/clover.xml'
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  1.910 s
+[INFO] Finished at: 2024-06-06T14:14:24+02:00
+[INFO] ------------------------------------------------------------------------
+
+Total coverage 4.273504%
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+2024/06/06 14:14:24 Executes tests with 13 coverage objects
+2024/06/06 14:14:24 Querying model "openrouter/perplexity/llama-3-sonar-large-32k-chat" with:
+	Given the following Java code file "src/main/java/com/eval/PascalsTriangle.java" with package "com.eval", provide a test file for this code with JUnit 5 as a test framework.
+	The tests should produce 100 percent code coverage and must compile.
+	The response must contain only the test code and nothing else.
+
+	```java
+	package com.eval;
+
+	public class PascalsTriangle {
+	  int[][] generateTriangle(int rows) {
+	    if (rows < 0) {
+	      throw new IllegalArgumentException("Rows can't be negative!");
+	    }
+
+	    int[][] triangle = new int[rows][];
+
+	    for (int i = 0; i < rows; i++) {
+	      triangle[i] = new int[i + 1];
+	      triangle[i][0] = 1;
+	      for (int j = 1; j < i; j++) {
+	        triangle[i][j] = triangle[i - 1][j - 1] + triangle[i - 1][j];
+	      }
+	      triangle[i][i] = 1;
+	    }
+	    return triangle;
+	  }
+	}
+	```
+2024/06/06 14:14:41 Model "openrouter/perplexity/llama-3-sonar-large-32k-chat" responded (16087 ms) with:
+	```java
+	package com.eval;
+
+	import org.junit.jupiter.api.Test;
+	import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+	import static org.junit.jupiter.api.Assertions.assertThrows;
+
+	class PascalsTriangleTest {
+
+	  @Test
+	  void generateTriangle_ZeroRows_ReturnsEmptyArray() {
+	    PascalsTriangle pascalsTriangle = new PascalsTriangle();
+	    int[][] result = pascalsTriangle.generateTriangle(0);
+	    int[][] expected = new int[0][];
+	    assertArrayEquals(expected, result);
+	  }
+
+	  @Test
+	  void generateTriangle_OneRow_ReturnsCorrectTriangle() {
+	    PascalsTriangle pascalsTriangle = new PascalsTriangle();
+	    int[][] result = pascalsTriangle.generateTriangle(1);
+	    int[][] expected = new int[][]{{1}};
+	    assertArrayEquals(expected, result);
+	  }
+
+	  @Test
+	  void generateTriangle_TwoRows_ReturnsCorrectTriangle() {
+	    PascalsTriangle pascalsTriangle = new PascalsTriangle();
+	    int[][] result = pascalsTriangle.generateTriangle(2);
+	    int[][] expected = new int[][]{{1}, {1, 1}};
+	    assertArrayEquals(expected, result);
+	  }
+
+	  @Test
+	  void generateTriangle_ThreeRows_ReturnsCorrectTriangle() {
+	    PascalsTriangle pascalsTriangle = new PascalsTriangle();
+	    int[][] result = pascalsTriangle.generateTriangle(3);
+	    int[][] expected = new int[][]{{1}, {1, 1}, {1, 2, 1}};
+	    assertArrayEquals(expected, result);
+	  }
+
+	  @Test
+	  void generateTriangle_NegativeRows_ThrowsIllegalArgumentException() {
+	    PascalsTriangle pascalsTriangle = new PascalsTriangle();
+	    assertThrows(IllegalArgumentException.class, () -> pascalsTriangle.generateTriangle(-1));
+	  }
+	}
+	```
+2024/06/06 14:14:41 $ symflower test --language java --workspace /tmp/eval-dev-quality2633743724/light --coverage-file /tmp/eval-dev-quality2633743724/light/coverage.json
+[INFO] Scanning for projects...
+[WARNING] 
+[WARNING] Some problems were encountered while building the effective model for eval.dev.quality:test-java-light:jar:SNAPSHOT
+[WARNING] 'version' uses an unsupported snapshot version format, should be '*-SNAPSHOT' instead. @ line 8, column 11
+[WARNING] 
+[WARNING] It is highly recommended to fix these problems because they threaten the stability of your build.
+[WARNING] 
+[WARNING] For this reason, future Maven versions might no longer support building such malformed projects.
+[WARNING] 
+[INFO] 
+[INFO] ------------------< eval.dev.quality:test-java-light >------------------
+[INFO] Building test-java-light SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clover:4.5.2:aggregate (default-cli) @ test-java-light ---
+[INFO] 
+[INFO] ------------------< eval.dev.quality:test-java-light >------------------
+[INFO] Building test-java-light SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clover:4.5.2:clover (default-cli) @ test-java-light ---
+[INFO] Using default-clover-report descriptor.
+[INFO] Using Clover report descriptor: /tmp/mvn2543164986150915959resource
+[INFO] OpenClover Version 4.5.2, built on 2024-01-31
+[INFO] Clover is enabled with initstring '/tmp/eval-dev-quality2633743724/light/target/clover/clover.db'
+[INFO] OpenClover Version 4.5.2, built on 2024-01-31
+[INFO] Loading coverage database from: '/tmp/eval-dev-quality2633743724/light/target/clover/clover.db'
+[INFO] Writing report to '/tmp/eval-dev-quality2633743724/light/target/site/clover/clover.xml'
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  1.894 s
+[INFO] Finished at: 2024-06-06T14:14:47+02:00
+[INFO] ------------------------------------------------------------------------
+
+Total coverage 4.700855%
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+2024/06/06 14:14:47 Executes tests with 14 coverage objects
+2024/06/06 14:14:47 Querying model "openrouter/perplexity/llama-3-sonar-large-32k-chat" with:
+	Given the following Java code file "src/main/java/com/eval/PhoneNumber.java" with package "com.eval", provide a test file for this code with JUnit 5 as a test framework.
+	The tests should produce 100 percent code coverage and must compile.
+	The response must contain only the test code and nothing else.
+
+	```java
+	package com.eval;
+
+	public class PhoneNumber {
+	  static String extractDigits(String dirtyNumber) {
+	    String cleanNumber = "";
+	    for (int i = 0; i < dirtyNumber.length(); i++) {
+	      char c = dirtyNumber.charAt(i);
+	      if (c == ' ' || c == '.' || c == '(' || c == ')' || c == '-' ||
+	          c == '+') {
+	        // Remove spaces, dots, parentheses, hyphens and pluses.
+	        continue;
+	      }
+	      if (c == '-' || c == '@' || c == ':' || c == '!') {
+	        throw new IllegalArgumentException("punctuations not permitted");
+	      }
+	      if (c < '0' || c > '9') {
+	        throw new IllegalArgumentException("letters not permitted");
+	      }
+	      cleanNumber += c;
+	    }
+
+	    return cleanNumber;
+	  }
+	}
+	```
+2024/06/06 14:14:56 Model "openrouter/perplexity/llama-3-sonar-large-32k-chat" responded (9766 ms) with:
+	Here is the test file for the provided Java code using JUnit 5:
+
+	```java
+	package com.eval;
+
+	import org.junit.jupiter.api.Test;
+	import static org.junit.jupiter.api.Assertions.assertEquals;
+	import static org.junit.jupiter.api.Assertions.assertThrows;
+
+	public class PhoneNumberTest {
+
+	    @Test
+	    void testExtractDigitsValidInput() {
+	        assertEquals("1234567890", PhoneNumber.extractDigits("123-456-7890"));
+	        assertEquals("1234567890", PhoneNumber.extractDigits("(123) 456-7890"));
+	        assertEquals("1234567890", PhoneNumber.extractDigits("123.456.7890"));
+	        assertEquals("1234567890", PhoneNumber.extractDigits("123 456 7890"));
+	        assertEquals("1234567890", PhoneNumber.extractDigits("+1 123 456 7890"));
+	    }
+
+	    @Test
+	    void testExtractDigitsInvalidInput() {
+	        assertThrows(IllegalArgumentException.class, () -> PhoneNumber.extractDigits("123abc4567890"));
+	        assertThrows(IllegalArgumentException.class, () -> PhoneNumber.extractDigits("123@4567890"));
+	        assertThrows(IllegalArgumentException.class, () -> PhoneNumber.extractDigits("123:4567890"));
+	        assertThrows(IllegalArgumentException.class, () -> PhoneNumber.extractDigits("1234567890"));
+	    }
+
+	    @Test
+	    void testExtractDigitsNullInput() {
+	        assertThrows(NullPointerException.class, () -> PhoneNumber.extractDigits(null));
+	    }
+
+	    @Test
+	    void testExtractDigitsEmptyInput() {
+	        assertEquals("", PhoneNumber.extractDigits(""));
+	    }
+	}
+	```
+2024/06/06 14:14:56 $ symflower test --language java --workspace /tmp/eval-dev-quality2633743724/light --coverage-file /tmp/eval-dev-quality2633743724/light/coverage.json
+[INFO] Scanning for projects...
+[WARNING] 
+[WARNING] Some problems were encountered while building the effective model for eval.dev.quality:test-java-light:jar:SNAPSHOT
+[WARNING] 'version' uses an unsupported snapshot version format, should be '*-SNAPSHOT' instead. @ line 8, column 11
+[WARNING] 
+[WARNING] It is highly recommended to fix these problems because they threaten the stability of your build.
+[WARNING] 
+[WARNING] For this reason, future Maven versions might no longer support building such malformed projects.
+[WARNING] 
+[INFO] 
+[INFO] ------------------< eval.dev.quality:test-java-light >------------------
+[INFO] Building test-java-light SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clover:4.5.2:aggregate (default-cli) @ test-java-light ---
+[INFO] 
+[INFO] ------------------< eval.dev.quality:test-java-light >------------------
+[INFO] Building test-java-light SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clover:4.5.2:clover (default-cli) @ test-java-light ---
+[INFO] Using default-clover-report descriptor.
+[INFO] Using Clover report descriptor: /tmp/mvn6204944042363740461resource
+[INFO] OpenClover Version 4.5.2, built on 2024-01-31
+[INFO] Clover is enabled with initstring '/tmp/eval-dev-quality2633743724/light/target/clover/clover.db'
+[INFO] OpenClover Version 4.5.2, built on 2024-01-31
+[INFO] Loading coverage database from: '/tmp/eval-dev-quality2633743724/light/target/clover/clover.db'
+[INFO] Writing report to '/tmp/eval-dev-quality2633743724/light/target/site/clover/clover.xml'
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  1.916 s
+[INFO] Finished at: 2024-06-06T14:15:03+02:00
+[INFO] ------------------------------------------------------------------------
+
+Total coverage 5.128205%
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+2024/06/06 14:15:03 Executes tests with 16 coverage objects
+2024/06/06 14:15:03 Querying model "openrouter/perplexity/llama-3-sonar-large-32k-chat" with:
+	Given the following Java code file "src/main/java/com/eval/SimpleIfElse.java" with package "com.eval", provide a test file for this code with JUnit 5 as a test framework.
+	The tests should produce 100 percent code coverage and must compile.
+	The response must contain only the test code and nothing else.
+
+	```java
+	package com.eval;
+
+	class SimpleIfElse {
+	    static int simpleIfElse(int i) {
+	        if (i == 1) {
+	            return 0;
+	        } else {
+	            return 1;
+	        }
+	    }
+	}
+	```
+2024/06/06 14:15:11 Model "openrouter/perplexity/llama-3-sonar-large-32k-chat" responded (8012 ms) with:
+	Here is the test file "src/test/java/com/eval/SimpleIfElseTest.java" with JUnit 5:
+
+	```java
+	package com.eval;
+
+	import org.junit.jupiter.api.Test;
+	import static org.junit.jupiter.api.Assertions.assertEquals;
+
+	class SimpleIfElseTest {
+	    @Test
+	    void testSimpleIfElse_with1() {
+	        int result = SimpleIfElse.simpleIfElse(1);
+	        assertEquals(0, result);
+	    }
+
+	    @Test
+	    void testSimpleIfElse_withOtherThan1() {
+	        int result = SimpleIfElse.simpleIfElse(2);
+	        assertEquals(1, result);
+	    }
+
+	    @Test
+	    void testSimpleIfElse_withNegative() {
+	        int result = SimpleIfElse.simpleIfElse(-1);
+	        assertEquals(1, result);
+	    }
+
+	    @Test
+	    void testSimpleIfElse_withZero() {
+	        int result = SimpleIfElse.simpleIfElse(0);
+	        assertEquals(1, result);
+	    }
+	}
+	```
+2024/06/06 14:15:11 $ symflower test --language java --workspace /tmp/eval-dev-quality2633743724/light --coverage-file /tmp/eval-dev-quality2633743724/light/coverage.json
+[INFO] Scanning for projects...
+[WARNING] 
+[WARNING] Some problems were encountered while building the effective model for eval.dev.quality:test-java-light:jar:SNAPSHOT
+[WARNING] 'version' uses an unsupported snapshot version format, should be '*-SNAPSHOT' instead. @ line 8, column 11
+[WARNING] 
+[WARNING] It is highly recommended to fix these problems because they threaten the stability of your build.
+[WARNING] 
+[WARNING] For this reason, future Maven versions might no longer support building such malformed projects.
+[WARNING] 
+[INFO] 
+[INFO] ------------------< eval.dev.quality:test-java-light >------------------
+[INFO] Building test-java-light SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clover:4.5.2:aggregate (default-cli) @ test-java-light ---
+[INFO] 
+[INFO] ------------------< eval.dev.quality:test-java-light >------------------
+[INFO] Building test-java-light SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clover:4.5.2:clover (default-cli) @ test-java-light ---
+[INFO] Using default-clover-report descriptor.
+[INFO] Using Clover report descriptor: /tmp/mvn7142219962945858086resource
+[INFO] OpenClover Version 4.5.2, built on 2024-01-31
+[INFO] Clover is enabled with initstring '/tmp/eval-dev-quality2633743724/light/target/clover/clover.db'
+[INFO] OpenClover Version 4.5.2, built on 2024-01-31
+[INFO] Loading coverage database from: '/tmp/eval-dev-quality2633743724/light/target/clover/clover.db'
+[INFO] Writing report to '/tmp/eval-dev-quality2633743724/light/target/site/clover/clover.xml'
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  1.937 s
+[INFO] Finished at: 2024-06-06T14:15:17+02:00
+[INFO] ------------------------------------------------------------------------
+
+Total coverage 1.709402%
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+2024/06/06 14:15:17 Executes tests with 5 coverage objects
+2024/06/06 14:15:17 Querying model "openrouter/perplexity/llama-3-sonar-large-32k-chat" with:
+	Given the following Java code file "src/main/java/com/eval/SimpleSwitchWithReturn.java" with package "com.eval", provide a test file for this code with JUnit 5 as a test framework.
+	The tests should produce 100 percent code coverage and must compile.
+	The response must contain only the test code and nothing else.
+
+	```java
+	package com.eval;
+
+	class SimpleSwitchWithReturn {
+	    static int simpleSwitchWithReturn(int i) {
+	        switch (i) {
+	        case 1:
+	            return 0;
+	        default:
+	            return 1;
+	        }
+	    }
+	}
+	```
+2024/06/06 14:15:24 Model "openrouter/perplexity/llama-3-sonar-large-32k-chat" responded (7044 ms) with:
+	Here is the test file "src/test/java/com/eval/SimpleSwitchWithReturnTest.java" with JUnit 5:
+
+	```java
+	package com.eval;
+
+	import org.junit.jupiter.api.Test;
+	import static org.junit.jupiter.api.Assertions.assertEquals;
+
+	class SimpleSwitchWithReturnTest {
+
+	    @Test
+	    void testSimpleSwitchWithReturn_case1() {
+	        int result = SimpleSwitchWithReturn.simpleSwitchWithReturn(1);
+	        assertEquals(0, result);
+	    }
+
+	    @Test
+	    void testSimpleSwitchWithReturn_default() {
+	        int result = SimpleSwitchWithReturn.simpleSwitchWithReturn(2);
+	        assertEquals(1, result);
+	    }
+	}
+	```
+2024/06/06 14:15:24 $ symflower test --language java --workspace /tmp/eval-dev-quality2633743724/light --coverage-file /tmp/eval-dev-quality2633743724/light/coverage.json
+[INFO] Scanning for projects...
+[WARNING] 
+[WARNING] Some problems were encountered while building the effective model for eval.dev.quality:test-java-light:jar:SNAPSHOT
+[WARNING] 'version' uses an unsupported snapshot version format, should be '*-SNAPSHOT' instead. @ line 8, column 11
+[WARNING] 
+[WARNING] It is highly recommended to fix these problems because they threaten the stability of your build.
+[WARNING] 
+[WARNING] For this reason, future Maven versions might no longer support building such malformed projects.
+[WARNING] 
+[INFO] 
+[INFO] ------------------< eval.dev.quality:test-java-light >------------------
+[INFO] Building test-java-light SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clover:4.5.2:aggregate (default-cli) @ test-java-light ---
+[INFO] 
+[INFO] ------------------< eval.dev.quality:test-java-light >------------------
+[INFO] Building test-java-light SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clover:4.5.2:clover (default-cli) @ test-java-light ---
+[INFO] Using default-clover-report descriptor.
+[INFO] Using Clover report descriptor: /tmp/mvn11704562031392478583resource
+[INFO] OpenClover Version 4.5.2, built on 2024-01-31
+[INFO] Clover is enabled with initstring '/tmp/eval-dev-quality2633743724/light/target/clover/clover.db'
+[INFO] OpenClover Version 4.5.2, built on 2024-01-31
+[INFO] Loading coverage database from: '/tmp/eval-dev-quality2633743724/light/target/clover/clover.db'
+[INFO] Writing report to '/tmp/eval-dev-quality2633743724/light/target/site/clover/clover.xml'
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  1.898 s
+[INFO] Finished at: 2024-06-06T14:15:30+02:00
+[INFO] ------------------------------------------------------------------------
+
+Total coverage 2.564103%
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+2024/06/06 14:15:30 Executes tests with 6 coverage objects
+2024/06/06 14:15:30 Querying model "openrouter/perplexity/llama-3-sonar-large-32k-chat" with:
+	Given the following Java code file "src/main/java/com/eval/Sort.java" with package "com.eval", provide a test file for this code with JUnit 5 as a test framework.
+	The tests should produce 100 percent code coverage and must compile.
+	The response must contain only the test code and nothing else.
+
+	```java
+	package com.eval;
+
+	class Sort {
+	    static boolean isSorted(int[] a) {
+	        int i = 0;
+	        while (i < a.length - 1 && a[i] <= a[i + 1]) {
+	            i++;
+	        }
+
+	        return i == a.length - 1;
+	    }
+	}
+	```
+2024/06/06 14:15:40 Model "openrouter/perplexity/llama-3-sonar-large-32k-chat" responded (10006 ms) with:
+	Here is the test file for the given Java code:
+
+	```java
+	package com.eval;
+
+	import org.junit.jupiter.api.Test;
+	import static org.junit.jupiter.api.Assertions.assertTrue;
+	import static org.junit.jupiter.api.Assertions.assertFalse;
+
+	public class SortTest {
+
+	    @Test
+	    void testIsSortedAscendingOrder() {
+	        int[] a = {1, 2, 3, 4, 5};
+	        assertTrue(Sort.isSorted(a));
+	    }
+
+	    @Test
+	    void testIsSortedDescendingOrder() {
+	        int[] a = {5, 4, 3, 2, 1};
+	        assertFalse(Sort.isSorted(a));
+	    }
+
+	    @Test
+	    void testIsSortedEqualElements() {
+	        int[] a = {1, 1, 1, 1, 1};
+	        assertTrue(Sort.isSorted(a));
+	    }
+
+	    @Test
+	    void testIsSortedSingleElement() {
+	        int[] a = {1};
+	        assertTrue(Sort.isSorted(a));
+	    }
+
+	    @Test
+	    void testIsSortedEmptyArray() {
+	        int[] a = {};
+	        assertTrue(Sort.isSorted(a));
+	    }
+
+	    @Test
+	    void testIsSortedUnsortedArray() {
+	        int[] a = {1, 3, 2, 4, 5};
+	        assertFalse(Sort.isSorted(a));
+	    }
+	}
+	```
+2024/06/06 14:15:40 $ symflower test --language java --workspace /tmp/eval-dev-quality2633743724/light --coverage-file /tmp/eval-dev-quality2633743724/light/coverage.json
+[INFO] Scanning for projects...
+[WARNING] 
+[WARNING] Some problems were encountered while building the effective model for eval.dev.quality:test-java-light:jar:SNAPSHOT
+[WARNING] 'version' uses an unsupported snapshot version format, should be '*-SNAPSHOT' instead. @ line 8, column 11
+[WARNING] 
+[WARNING] It is highly recommended to fix these problems because they threaten the stability of your build.
+[WARNING] 
+[WARNING] For this reason, future Maven versions might no longer support building such malformed projects.
+[WARNING] 
+[INFO] 
+[INFO] ------------------< eval.dev.quality:test-java-light >------------------
+[INFO] Building test-java-light SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clover:4.5.2:aggregate (default-cli) @ test-java-light ---
+[INFO] 
+[INFO] ------------------< eval.dev.quality:test-java-light >------------------
+[INFO] Building test-java-light SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clover:4.5.2:clover (default-cli) @ test-java-light ---
+[INFO] Using default-clover-report descriptor.
+[INFO] Using Clover report descriptor: /tmp/mvn11347943654889033171resource
+[INFO] OpenClover Version 4.5.2, built on 2024-01-31
+[INFO] Clover is enabled with initstring '/tmp/eval-dev-quality2633743724/light/target/clover/clover.db'
+[INFO] OpenClover Version 4.5.2, built on 2024-01-31
+[INFO] Loading coverage database from: '/tmp/eval-dev-quality2633743724/light/target/clover/clover.db'
+[INFO] Writing report to '/tmp/eval-dev-quality2633743724/light/target/site/clover/clover.xml'
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  1.915 s
+[INFO] Finished at: 2024-06-06T14:15:46+02:00
+[INFO] ------------------------------------------------------------------------
+
+Total coverage 2.136752%
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+2024/06/06 14:15:46 Executes tests with 6 coverage objects
+2024/06/06 14:15:46 Querying model "openrouter/perplexity/llama-3-sonar-large-32k-chat" with:
+	Given the following Java code file "src/main/java/com/eval/TypeArrayAccess.java" with package "com.eval", provide a test file for this code with JUnit 5 as a test framework.
+	The tests should produce 100 percent code coverage and must compile.
+	The response must contain only the test code and nothing else.
+
+	```java
+	package com.eval;
+
+	class TypeArrayAccess {
+	    static int typeArrayAccess(int[] x) {
+	        if (x[0] == 123) {
+	            return x[0];
+	        }
+
+	        return 3;
+	    }
+	}
+	```
+2024/06/06 14:15:54 Model "openrouter/perplexity/llama-3-sonar-large-32k-chat" responded (7787 ms) with:
+	```java
+	package com.eval;
+
+	import org.junit.jupiter.api.Test;
+	import static org.junit.jupiter.api.Assertions.*;
+
+	class TypeArrayAccessTest {
+
+	    @Test
+	    void testTypeArrayAccess_123() {
+	        int[] x = {123};
+	        assertEquals(123, TypeArrayAccess.typeArrayAccess(x));
+	    }
+
+	    @Test
+	    void testTypeArrayAccess_not123() {
+	        int[] x = {1};
+	        assertEquals(3, TypeArrayAccess.typeArrayAccess(x));
+	    }
+
+	    @Test
+	    void testTypeArrayAccess_null() {
+	        int[] x = null;
+	        assertThrows(NullPointerException.class, () -> TypeArrayAccess.typeArrayAccess(x));
+	    }
+
+	    @Test
+	    void testTypeArrayAccess_empty() {
+	        int[] x = {};
+	        assertThrows(ArrayIndexOutOfBoundsException.class, () -> TypeArrayAccess.typeArrayAccess(x));
+	    }
+	}
+	```
+2024/06/06 14:15:54 $ symflower test --language java --workspace /tmp/eval-dev-quality2633743724/light --coverage-file /tmp/eval-dev-quality2633743724/light/coverage.json
+[INFO] Scanning for projects...
+[WARNING] 
+[WARNING] Some problems were encountered while building the effective model for eval.dev.quality:test-java-light:jar:SNAPSHOT
+[WARNING] 'version' uses an unsupported snapshot version format, should be '*-SNAPSHOT' instead. @ line 8, column 11
+[WARNING] 
+[WARNING] It is highly recommended to fix these problems because they threaten the stability of your build.
+[WARNING] 
+[WARNING] For this reason, future Maven versions might no longer support building such malformed projects.
+[WARNING] 
+[INFO] 
+[INFO] ------------------< eval.dev.quality:test-java-light >------------------
+[INFO] Building test-java-light SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clover:4.5.2:aggregate (default-cli) @ test-java-light ---
+[INFO] 
+[INFO] ------------------< eval.dev.quality:test-java-light >------------------
+[INFO] Building test-java-light SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clover:4.5.2:clover (default-cli) @ test-java-light ---
+[INFO] Using default-clover-report descriptor.
+[INFO] Using Clover report descriptor: /tmp/mvn5455732377440620665resource
+[INFO] OpenClover Version 4.5.2, built on 2024-01-31
+[INFO] Clover is enabled with initstring '/tmp/eval-dev-quality2633743724/light/target/clover/clover.db'
+[INFO] OpenClover Version 4.5.2, built on 2024-01-31
+[INFO] Loading coverage database from: '/tmp/eval-dev-quality2633743724/light/target/clover/clover.db'
+[INFO] Writing report to '/tmp/eval-dev-quality2633743724/light/target/site/clover/clover.xml'
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  1.934 s
+[INFO] Finished at: 2024-06-06T14:16:00+02:00
+[INFO] ------------------------------------------------------------------------
+
+Total coverage 1.709402%
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+2024/06/06 14:16:01 Executes tests with 5 coverage objects
+2024/06/06 14:16:01 Querying model "openrouter/perplexity/llama-3-sonar-large-32k-chat" with:
+	Given the following Java code file "src/main/java/com/eval/TypeArrayConsecutiveAccess.java" with package "com.eval", provide a test file for this code with JUnit 5 as a test framework.
+	The tests should produce 100 percent code coverage and must compile.
+	The response must contain only the test code and nothing else.
+
+	```java
+	package com.eval;
+
+	class TypeArrayConsecutiveAccess {
+	    static int typeArrayConsecutiveAccess(int[] input) {
+	        int cnt = 0;
+	        if (input[0] == 0)
+	            cnt++;
+	        if (input[1] == 8)
+	            cnt++;
+	        return cnt;
+	    }
+	}
+	```
+2024/06/06 14:16:14 Model "openrouter/perplexity/llama-3-sonar-large-32k-chat" responded (13344 ms) with:
+	```java
+	package com.eval;
+
+	import org.junit.jupiter.api.Test;
+	import static org.junit.jupiter.api.Assertions.assertEquals;
+
+	class TypeArrayConsecutiveAccessTest {
+
+	    @Test
+	    void testTypeArrayConsecutiveAccess_withFirstElementZeroAndSecondElementEight() {
+	        int[] input = {0, 8};
+	        assertEquals(2, TypeArrayConsecutiveAccess.typeArrayConsecutiveAccess(input));
+	    }
+
+	    @Test
+	    void testTypeArrayConsecutiveAccess_withFirstElementNotZeroAndSecondElementEight() {
+	        int[] input = {1, 8};
+	        assertEquals(1, TypeArrayConsecutiveAccess.typeArrayConsecutiveAccess(input));
+	    }
+
+	    @Test
+	    void testTypeArrayConsecutiveAccess_withFirstElementZeroAndSecondElementNotEight() {
+	        int[] input = {0, 1};
+	        assertEquals(1, TypeArrayConsecutiveAccess.typeArrayConsecutiveAccess(input));
+	    }
+
+	    @Test
+	    void testTypeArrayConsecutiveAccess_withFirstElementNotZeroAndSecondElementNotEight() {
+	        int[] input = {1, 1};
+	        assertEquals(0, TypeArrayConsecutiveAccess.typeArrayConsecutiveAccess(input));
+	    }
+	}
+	```
+2024/06/06 14:16:14 $ symflower test --language java --workspace /tmp/eval-dev-quality2633743724/light --coverage-file /tmp/eval-dev-quality2633743724/light/coverage.json
+[INFO] Scanning for projects...
+[WARNING] 
+[WARNING] Some problems were encountered while building the effective model for eval.dev.quality:test-java-light:jar:SNAPSHOT
+[WARNING] 'version' uses an unsupported snapshot version format, should be '*-SNAPSHOT' instead. @ line 8, column 11
+[WARNING] 
+[WARNING] It is highly recommended to fix these problems because they threaten the stability of your build.
+[WARNING] 
+[WARNING] For this reason, future Maven versions might no longer support building such malformed projects.
+[WARNING] 
+[INFO] 
+[INFO] ------------------< eval.dev.quality:test-java-light >------------------
+[INFO] Building test-java-light SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clover:4.5.2:aggregate (default-cli) @ test-java-light ---
+[INFO] 
+[INFO] ------------------< eval.dev.quality:test-java-light >------------------
+[INFO] Building test-java-light SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clover:4.5.2:clover (default-cli) @ test-java-light ---
+[INFO] Using default-clover-report descriptor.
+[INFO] Using Clover report descriptor: /tmp/mvn4733737757743655729resource
+[INFO] OpenClover Version 4.5.2, built on 2024-01-31
+[INFO] Clover is enabled with initstring '/tmp/eval-dev-quality2633743724/light/target/clover/clover.db'
+[INFO] OpenClover Version 4.5.2, built on 2024-01-31
+[INFO] Loading coverage database from: '/tmp/eval-dev-quality2633743724/light/target/clover/clover.db'
+[INFO] Writing report to '/tmp/eval-dev-quality2633743724/light/target/site/clover/clover.xml'
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  1.909 s
+[INFO] Finished at: 2024-06-06T14:16:20+02:00
+[INFO] ------------------------------------------------------------------------
+
+Total coverage 2.991453%
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+2024/06/06 14:16:20 Executes tests with 9 coverage objects
+2024/06/06 14:16:20 Querying model "openrouter/perplexity/llama-3-sonar-large-32k-chat" with:
+	Given the following Java code file "src/main/java/com/eval/TypeArrayMultidimensionalArrayLength.java" with package "com.eval", provide a test file for this code with JUnit 5 as a test framework.
+	The tests should produce 100 percent code coverage and must compile.
+	The response must contain only the test code and nothing else.
+
+	```java
+	package com.eval;
+
+	class TypeArrayMultidimensionalArrayLength {
+	    static int typeArrayMultidimensionalArrayLength(int[][] x) {
+	        if (x.length == 2) {
+	            if (x[0].length == 2) {
+	                return 2;
+	            }
+
+	            return 1;
+	        }
+
+	        return 0;
+	    }
+	}
+	```
+2024/06/06 14:16:28 Model "openrouter/perplexity/llama-3-sonar-large-32k-chat" responded (8111 ms) with:
+	Here is the test file:
+
+	```java
+	package com.eval;
+
+	import org.junit.jupiter.api.Test;
+	import static org.junit.jupiter.api.Assertions.assertEquals;
+
+	class TypeArrayMultidimensionalArrayLengthTest {
+	    @Test
+	    void testTypeArrayMultidimensionalArrayLength_withLength2AndInnerLength2_returns2() {
+	        int[][] x = new int[2][2];
+	        assertEquals(2, TypeArrayMultidimensionalArrayLength.typeArrayMultidimensionalArrayLength(x));
+	    }
+
+	    @Test
+	    void testTypeArrayMultidimensionalArrayLength_withLength2AndInnerLengthNot2_returns1() {
+	        int[][] x = new int[2][1];
+	        assertEquals(1, TypeArrayMultidimensionalArrayLength.typeArrayMultidimensionalArrayLength(x));
+	    }
+
+	    @Test
+	    void testTypeArrayMultidimensionalArrayLength_withLengthNot2_returns0() {
+	        int[][] x = new int[1][2];
+	        assertEquals(0, TypeArrayMultidimensionalArrayLength.typeArrayMultidimensionalArrayLength(x));
+	    }
+	}
+	```
+2024/06/06 14:16:28 $ symflower test --language java --workspace /tmp/eval-dev-quality2633743724/light --coverage-file /tmp/eval-dev-quality2633743724/light/coverage.json
+[INFO] Scanning for projects...
+[WARNING] 
+[WARNING] Some problems were encountered while building the effective model for eval.dev.quality:test-java-light:jar:SNAPSHOT
+[WARNING] 'version' uses an unsupported snapshot version format, should be '*-SNAPSHOT' instead. @ line 8, column 11
+[WARNING] 
+[WARNING] It is highly recommended to fix these problems because they threaten the stability of your build.
+[WARNING] 
+[WARNING] For this reason, future Maven versions might no longer support building such malformed projects.
+[WARNING] 
+[INFO] 
+[INFO] ------------------< eval.dev.quality:test-java-light >------------------
+[INFO] Building test-java-light SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clover:4.5.2:aggregate (default-cli) @ test-java-light ---
+[INFO] 
+[INFO] ------------------< eval.dev.quality:test-java-light >------------------
+[INFO] Building test-java-light SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clover:4.5.2:clover (default-cli) @ test-java-light ---
+[INFO] Using default-clover-report descriptor.
+[INFO] Using Clover report descriptor: /tmp/mvn16026717854157192884resource
+[INFO] OpenClover Version 4.5.2, built on 2024-01-31
+[INFO] Clover is enabled with initstring '/tmp/eval-dev-quality2633743724/light/target/clover/clover.db'
+[INFO] OpenClover Version 4.5.2, built on 2024-01-31
+[INFO] Loading coverage database from: '/tmp/eval-dev-quality2633743724/light/target/clover/clover.db'
+[INFO] Writing report to '/tmp/eval-dev-quality2633743724/light/target/site/clover/clover.xml'
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  1.911 s
+[INFO] Finished at: 2024-06-06T14:16:34+02:00
+[INFO] ------------------------------------------------------------------------
+
+Total coverage 2.564103%
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+2024/06/06 14:16:34 Executes tests with 8 coverage objects
+2024/06/06 14:16:34 Querying model "openrouter/perplexity/llama-3-sonar-large-32k-chat" with:
+	Given the following Java code file "src/main/java/com/eval/ValidDate.java" with package "com.eval", provide a test file for this code with JUnit 5 as a test framework.
+	The tests should produce 100 percent code coverage and must compile.
+	The response must contain only the test code and nothing else.
+
+	```java
+	package com.eval;
+
+	class ValidDate {
+	    static boolean validDate(int day, int month, int year) {
+			int[] monthDays = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+
+			if (year < 1583) {
+				return false;
+			}
+			if (month < 1 || month > 12) {
+				return false;
+			}
+			if (day < 1) {
+				return false;
+			}
+			if (month == 2) {
+				if ((year % 400) != 0 && (year % 4) == 0) {
+					if (day > 29) {
+						return false;
+					}
+				} else {
+					if (day > 28) {
+						return false;
+					}
+				}
+			} else {
+				if (day > monthDays[month-1]) {
+					return false;
+				}
+			}
+
+			return true;
+		}
+	}
+	```
+2024/06/06 14:16:47 Model "openrouter/perplexity/llama-3-sonar-large-32k-chat" responded (12688 ms) with:
+	Here is the test file for the given Java code using JUnit 5:
+
+	```java
+	package com.eval;
+
+	import org.junit.jupiter.api.Test;
+	import static org.junit.jupiter.api.Assertions.assertTrue;
+	import static org.junit.jupiter.api.Assertions.assertFalse;
+
+	public class ValidDateTest {
+
+	    @Test
+	    void testValidDate() {
+	        assertTrue(ValidDate.validDate(1, 1, 1583));
+	        assertTrue(ValidDate.validDate(28, 2, 2000));
+	        assertTrue(ValidDate.validDate(29, 2, 2000));
+	        assertTrue(ValidDate.validDate(31, 12, 2022));
+	    }
+
+	    @Test
+	    void testInvalidDate() {
+	        assertFalse(ValidDate.validDate(0, 1, 1583));
+	        assertFalse(ValidDate.validDate(32, 1, 1583));
+	        assertFalse(ValidDate.validDate(1, 0, 1583));
+	        assertFalse(ValidDate.validDate(1, 13, 1583));
+	        assertFalse(ValidDate.validDate(1, 1, 1582));
+	        assertFalse(ValidDate.validDate(29, 2, 1900));
+	        assertFalse(ValidDate.validDate(30, 2, 2000));
+	    }
+	}
+	```
+2024/06/06 14:16:47 $ symflower test --language java --workspace /tmp/eval-dev-quality2633743724/light --coverage-file /tmp/eval-dev-quality2633743724/light/coverage.json
+[INFO] Scanning for projects...
+[WARNING] 
+[WARNING] Some problems were encountered while building the effective model for eval.dev.quality:test-java-light:jar:SNAPSHOT
+[WARNING] 'version' uses an unsupported snapshot version format, should be '*-SNAPSHOT' instead. @ line 8, column 11
+[WARNING] 
+[WARNING] It is highly recommended to fix these problems because they threaten the stability of your build.
+[WARNING] 
+[WARNING] For this reason, future Maven versions might no longer support building such malformed projects.
+[WARNING] 
+[INFO] 
+[INFO] ------------------< eval.dev.quality:test-java-light >------------------
+[INFO] Building test-java-light SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clover:4.5.2:aggregate (default-cli) @ test-java-light ---
+[INFO] 
+[INFO] ------------------< eval.dev.quality:test-java-light >------------------
+[INFO] Building test-java-light SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clover:4.5.2:clover (default-cli) @ test-java-light ---
+[INFO] Using default-clover-report descriptor.
+[INFO] Using Clover report descriptor: /tmp/mvn2440926294322562681resource
+[INFO] OpenClover Version 4.5.2, built on 2024-01-31
+[INFO] Clover is enabled with initstring '/tmp/eval-dev-quality2633743724/light/target/clover/clover.db'
+[INFO] OpenClover Version 4.5.2, built on 2024-01-31
+[INFO] Loading coverage database from: '/tmp/eval-dev-quality2633743724/light/target/clover/clover.db'
+[INFO] Writing report to '/tmp/eval-dev-quality2633743724/light/target/site/clover/clover.xml'
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  1.909 s
+[INFO] Finished at: 2024-06-06T14:16:54+02:00
+[INFO] ------------------------------------------------------------------------
+
+Total coverage 6.837607%
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+2024/06/06 14:16:54 Executes tests with 24 coverage objects
+2024/06/06 14:16:54 Evaluated model "openrouter/perplexity/llama-3-sonar-large-32k-chat" using language "java" and repository "java/light": encountered 2 problems: [exit status 1
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+ERROR: All attempts fail:
+#1: Internal error: exit status 1:
+[]interface {}{
+    "/tmp/eval-dev-quality2633743724/light/",
+    "[INFO] Scanning for projects...\n[WARNING] \n[WARNING] Some problems were encountered while building the effective model for eval.dev.quality:test-java-light:jar:SNAPSHOT\n[WARNING] 'version' uses an unsupported snapshot version format, should be '*-SNAPSHOT' instead. @ line 8, column 11\n[WARNING] \n[WARNING] It is highly recommended to fix these problems because they threaten the stability of your build.\n[WARNING] \n[WARNING] For this reason, future Maven versions might no longer support building such malformed projects.\n[WARNING] \n[INFO] \n[INFO] ------------------< eval.dev.quality:test-java-light >------------------\n[INFO] Building test-java-light SNAPSHOT\n[INFO]   from pom.xml\n[INFO] --------------------------------[ jar ]---------------------------------\n[INFO] \n[INFO] --- clean:3.2.0:clean (default-clean) @ test-java-light ---\n[INFO] \n[INFO] --- resources:3.3.1:resources (default-resources) @ test-java-light ---\n[WARNING] Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!\n[INFO] skip non existing resourceDirectory /tmp/eval-dev-quality2633743724/light/src/main/resources\n[INFO] \n[INFO] --- compiler:3.11.0:compile (default-compile) @ test-java-light ---\n[INFO] Changes detected - recompiling the module! :source\n[WARNING] File encoding has not been set, using platform encoding UTF-8, i.e. build is platform dependent!\n[INFO] Compiling 23 source files with javac [debug target 11] to target/classes\n[WARNING] system modules path not set in conjunction with -source 11\n[INFO] \n[INFO] --- resources:3.3.1:resources (default-resources) @ test-java-light ---\n[WARNING] Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!\n[INFO] skip non existing resourceDirectory /tmp/eval-dev-quality2633743724/light/src/main/resources\n[INFO] \n[INFO] --- compiler:3.11.0:compile (default-compile) @ test-java-light ---\n[INFO] Nothing to compile - all classes are up to date\n[INFO] \n[INFO] --- resources:3.3.1:testResources (default-testResources) @ test-java-light ---\n[WARNING] Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!\n[INFO] skip non existing resourceDirectory /tmp/eval-dev-quality2633743724/light/src/test/resources\n[INFO] \n[INFO] --- compiler:3.11.0:testCompile (default-testCompile) @ test-java-light ---\n[INFO] Changes detected - recompiling the module! :dependency\n[WARNING] File encoding has not been set, using platform encoding UTF-8, i.e. build is platform dependent!\n[INFO] Compiling 1 source file with javac [debug target 11] to target/test-classes\n[INFO] -------------------------------------------------------------\n[WARNING] COMPILATION WARNING : \n[INFO] -------------------------------------------------------------\n[WARNING] system modules path not set in conjunction with -source 11\n[INFO] 1 warning\n[INFO] -------------------------------------------------------------\n[INFO] -------------------------------------------------------------\n[ERROR] COMPILATION ERROR : \n[INFO] -------------------------------------------------------------\n[ERROR] /tmp/eval-dev-quality2633743724/light/src/test/java/com/eval/KlarnerRadoSequenceTest.java:[35,5] cannot find symbol\n  symbol:   method assertThrows(java.lang.Class<java.lang.IllegalArgumentException>,()->Klarne[...]e(-1))\n  location: class com.eval.KlarnerRadoSequenceTest\n[INFO] 1 error\n[INFO] -------------------------------------------------------------\n[INFO] ------------------------------------------------------------------------\n[INFO] BUILD FAILURE\n[INFO] ------------------------------------------------------------------------\n[INFO] Total time:  0.900 s\n[INFO] Finished at: 2024-06-06T14:12:57+02:00\n[INFO] ------------------------------------------------------------------------\n[ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.11.0:testCompile (default-testCompile) on project test-java-light: Compilation failure\n[ERROR] /tmp/eval-dev-quality2633743724/light/src/test/java/com/eval/KlarnerRadoSequenceTest.java:[35,5] cannot find symbol\n[ERROR]   symbol:   method assertThrows(java.lang.Class<java.lang.IllegalArgumentException>,()->Klarne[...]e(-1))\n[ERROR]   location: class com.eval.KlarnerRadoSequenceTest\n[ERROR] \n[ERROR] -> [Help 1]\n[ERROR] \n[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.\n[ERROR] Re-run Maven using the -X switch to enable full debug logging.\n[ERROR] \n[ERROR] For more information about the errors and possible solutions, please read the following articles:\n[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException\n",
+}
+Stacktrace: goroutine 1 [running]:
+gitlab.nethead.at/symflower/symflower/model/errors.NewInternalError({0x1f42da0?, 0xc0004a2000}, {0xffa8c0?, 0xc000013308})
+	gitlab.nethead.at/symflower/symflower/model/errors/error.go:850 +0x59
+gitlab.nethead.at/symflower/symflower/language/java/execute.MavenDependencyCommand.func1()
+	gitlab.nethead.at/symflower/symflower/language/java/execute/maven.go:80 +0x1ef
+github.com/avast/retry-go.Do(0xc00052d8b8, {0xc00052d8a0, 0x3, 0x418c94?})
+	github.com/avast/retry-go/retry.go:135 +0x5a3
+gitlab.nethead.at/symflower/symflower/language/java/execute.MavenDependencyCommand({0xc000722630, 0x26}, 0x0, {0xc000530840, 0x6, 0x6})
+	gitlab.nethead.at/symflower/symflower/language/java/execute/maven.go:60 +0x1c5
+gitlab.nethead.at/symflower/symflower/language/java/execute.MavenCloverCoverage({0xc000722630, 0x26})
+	gitlab.nethead.at/symflower/symflower/language/java/execute/clover.go:131 +0xc9
+gitlab.nethead.at/symflower/symflower/cmd/symflower-local/cmd.(*commandTest).Execute(0xc00050c578, {0xc00050c400?, 0x7fb9107bea18?, 0xc00050c578?})
+	gitlab.nethead.at/symflower/symflower/cmd/symflower-local/cmd/test.go:143 +0x54f
+gitlab.nethead.at/symflower/symflower/cmd.ExecuteNoExit({0x1f425e0?, 0xc00050c400}, {0xc000040080?, 0x2782d80?, 0xc0005a3ed8?})
+	gitlab.nethead.at/symflower/symflower/cmd/execute.go:56 +0x2d0
+gitlab.nethead.at/symflower/symflower/cmd.Execute({0x1f425e0?, 0xc00050c400?}, {0xc000040080?, 0x274c500?, 0xc00050c400?})
+	gitlab.nethead.at/symflower/symflower/cmd/execute.go:16 +0x26
+gitlab.nethead.at/symflower/symflower/cmd.ExecuteWithOSArguments(...)
+	gitlab.nethead.at/symflower/symflower/cmd/execute.go:75
+main.main.func1()
+	gitlab.nethead.at/symflower/symflower/cmd/symflower-demo/main.go:40 +0x34
+gitlab.nethead.at/symflower/symflower/cmd/symflower-local/cmd.(*Command).WithPanicReporter(0xc000130058?, 0x2636b18?)
+	gitlab.nethead.at/symflower/symflower/cmd/symflower-local/cmd/cmd.go:184 +0x48
+main.main()
+	gitlab.nethead.at/symflower/symflower/cmd/symflower-demo/main.go:39 +0xa5
+
+
+github.com/symflower/eval-dev-quality/util.CommandWithResult
+	/home/eval/eval-dev-quality/util/exec.go:52
+github.com/symflower/eval-dev-quality/language/java.(*Language).Execute
+	/home/eval/eval-dev-quality/language/java/language.go:94
+github.com/symflower/eval-dev-quality/evaluate.Repository
+	/home/eval/eval-dev-quality/evaluate/repository.go:57
+github.com/symflower/eval-dev-quality/evaluate.Evaluate.func2
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:209
+github.com/symflower/eval-dev-quality/evaluate.withLoadedModel
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:253
+github.com/symflower/eval-dev-quality/evaluate.Evaluate
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:199
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.(*Evaluate).Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/evaluate.go:284
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute.func1
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:34
+github.com/jessevdk/go-flags.(*Parser).ParseArgs
+	/home/eval/go/pkg/mod/github.com/jessevdk/go-flags@v1.5.1-0.20210607101731-3927b71304df/parser.go:333
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:37
+main.main
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/main.go:11
+runtime.main
+	/home/eval/go/src/runtime/proc.go:267
+runtime.goexit
+	/home/eval/go/src/runtime/asm_amd64.s:1650
+github.com/symflower/eval-dev-quality/language/java.(*Language).Execute
+	/home/eval/eval-dev-quality/language/java/language.go:105
+github.com/symflower/eval-dev-quality/evaluate.Repository
+	/home/eval/eval-dev-quality/evaluate/repository.go:57
+github.com/symflower/eval-dev-quality/evaluate.Evaluate.func2
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:209
+github.com/symflower/eval-dev-quality/evaluate.withLoadedModel
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:253
+github.com/symflower/eval-dev-quality/evaluate.Evaluate
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:199
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.(*Evaluate).Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/evaluate.go:284
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute.func1
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:34
+github.com/jessevdk/go-flags.(*Parser).ParseArgs
+	/home/eval/go/pkg/mod/github.com/jessevdk/go-flags@v1.5.1-0.20210607101731-3927b71304df/parser.go:333
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:37
+main.main
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/main.go:11
+runtime.main
+	/home/eval/go/src/runtime/proc.go:267
+runtime.goexit
+	/home/eval/go/src/runtime/asm_amd64.s:1650
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+ERROR: All attempts fail:
+#1: Internal error: exit status 1:
+[]interface {}{
+    "/tmp/eval-dev-quality2633743724/light/",
+    "[INFO] Scanning for projects...\n[WARNING] \n[WARNING] Some problems were encountered while building the effective model for eval.dev.quality:test-java-light:jar:SNAPSHOT\n[WARNING] 'version' uses an unsupported snapshot version format, should be '*-SNAPSHOT' instead. @ line 8, column 11\n[WARNING] \n[WARNING] It is highly recommended to fix these problems because they threaten the stability of your build.\n[WARNING] \n[WARNING] For this reason, future Maven versions might no longer support building such malformed projects.\n[WARNING] \n[INFO] \n[INFO] ------------------< eval.dev.quality:test-java-light >------------------\n[INFO] Building test-java-light SNAPSHOT\n[INFO]   from pom.xml\n[INFO] --------------------------------[ jar ]---------------------------------\n[INFO] \n[INFO] --- clean:3.2.0:clean (default-clean) @ test-java-light ---\n[INFO] \n[INFO] --- resources:3.3.1:resources (default-resources) @ test-java-light ---\n[WARNING] Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!\n[INFO] skip non existing resourceDirectory /tmp/eval-dev-quality2633743724/light/src/main/resources\n[INFO] \n[INFO] --- compiler:3.11.0:compile (default-compile) @ test-java-light ---\n[INFO] Changes detected - recompiling the module! :source\n[WARNING] File encoding has not been set, using platform encoding UTF-8, i.e. build is platform dependent!\n[INFO] Compiling 23 source files with javac [debug target 11] to target/classes\n[WARNING] system modules path not set in conjunction with -source 11\n[INFO] \n[INFO] --- resources:3.3.1:resources (default-resources) @ test-java-light ---\n[WARNING] Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!\n[INFO] skip non existing resourceDirectory /tmp/eval-dev-quality2633743724/light/src/main/resources\n[INFO] \n[INFO] --- compiler:3.11.0:compile (default-compile) @ test-java-light ---\n[INFO] Nothing to compile - all classes are up to date\n[INFO] \n[INFO] --- resources:3.3.1:testResources (default-testResources) @ test-java-light ---\n[WARNING] Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!\n[INFO] skip non existing resourceDirectory /tmp/eval-dev-quality2633743724/light/src/test/resources\n[INFO] \n[INFO] --- compiler:3.11.0:testCompile (default-testCompile) @ test-java-light ---\n[INFO] Changes detected - recompiling the module! :dependency\n[WARNING] File encoding has not been set, using platform encoding UTF-8, i.e. build is platform dependent!\n[INFO] Compiling 1 source file with javac [debug target 11] to target/test-classes\n[INFO] -------------------------------------------------------------\n[WARNING] COMPILATION WARNING : \n[INFO] -------------------------------------------------------------\n[WARNING] system modules path not set in conjunction with -source 11\n[INFO] 1 warning\n[INFO] -------------------------------------------------------------\n[INFO] -------------------------------------------------------------\n[ERROR] COMPILATION ERROR : \n[INFO] -------------------------------------------------------------\n[ERROR] /tmp/eval-dev-quality2633743724/light/src/test/java/com/eval/KlarnerRadoSequenceTest.java:[35,5] cannot find symbol\n  symbol:   method assertThrows(java.lang.Class<java.lang.IllegalArgumentException>,()->Klarne[...]e(-1))\n  location: class com.eval.KlarnerRadoSequenceTest\n[INFO] 1 error\n[INFO] -------------------------------------------------------------\n[INFO] ------------------------------------------------------------------------\n[INFO] BUILD FAILURE\n[INFO] ------------------------------------------------------------------------\n[INFO] Total time:  0.900 s\n[INFO] Finished at: 2024-06-06T14:12:57+02:00\n[INFO] ------------------------------------------------------------------------\n[ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.11.0:testCompile (default-testCompile) on project test-java-light: Compilation failure\n[ERROR] /tmp/eval-dev-quality2633743724/light/src/test/java/com/eval/KlarnerRadoSequenceTest.java:[35,5] cannot find symbol\n[ERROR]   symbol:   method assertThrows(java.lang.Class<java.lang.IllegalArgumentException>,()->Klarne[...]e(-1))\n[ERROR]   location: class com.eval.KlarnerRadoSequenceTest\n[ERROR] \n[ERROR] -> [Help 1]\n[ERROR] \n[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.\n[ERROR] Re-run Maven using the -X switch to enable full debug logging.\n[ERROR] \n[ERROR] For more information about the errors and possible solutions, please read the following articles:\n[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException\n",
+}
+Stacktrace: goroutine 1 [running]:
+gitlab.nethead.at/symflower/symflower/model/errors.NewInternalError({0x1f42da0?, 0xc0004a2000}, {0xffa8c0?, 0xc000013308})
+	gitlab.nethead.at/symflower/symflower/model/errors/error.go:850 +0x59
+gitlab.nethead.at/symflower/symflower/language/java/execute.MavenDependencyCommand.func1()
+	gitlab.nethead.at/symflower/symflower/language/java/execute/maven.go:80 +0x1ef
+github.com/avast/retry-go.Do(0xc00052d8b8, {0xc00052d8a0, 0x3, 0x418c94?})
+	github.com/avast/retry-go/retry.go:135 +0x5a3
+gitlab.nethead.at/symflower/symflower/language/java/execute.MavenDependencyCommand({0xc000722630, 0x26}, 0x0, {0xc000530840, 0x6, 0x6})
+	gitlab.nethead.at/symflower/symflower/language/java/execute/maven.go:60 +0x1c5
+gitlab.nethead.at/symflower/symflower/language/java/execute.MavenCloverCoverage({0xc000722630, 0x26})
+	gitlab.nethead.at/symflower/symflower/language/java/execute/clover.go:131 +0xc9
+gitlab.nethead.at/symflower/symflower/cmd/symflower-local/cmd.(*commandTest).Execute(0xc00050c578, {0xc00050c400?, 0x7fb9107bea18?, 0xc00050c578?})
+	gitlab.nethead.at/symflower/symflower/cmd/symflower-local/cmd/test.go:143 +0x54f
+gitlab.nethead.at/symflower/symflower/cmd.ExecuteNoExit({0x1f425e0?, 0xc00050c400}, {0xc000040080?, 0x2782d80?, 0xc0005a3ed8?})
+	gitlab.nethead.at/symflower/symflower/cmd/execute.go:56 +0x2d0
+gitlab.nethead.at/symflower/symflower/cmd.Execute({0x1f425e0?, 0xc00050c400?}, {0xc000040080?, 0x274c500?, 0xc00050c400?})
+	gitlab.nethead.at/symflower/symflower/cmd/execute.go:16 +0x26
+gitlab.nethead.at/symflower/symflower/cmd.ExecuteWithOSArguments(...)
+	gitlab.nethead.at/symflower/symflower/cmd/execute.go:75
+main.main.func1()
+	gitlab.nethead.at/symflower/symflower/cmd/symflower-demo/main.go:40 +0x34
+gitlab.nethead.at/symflower/symflower/cmd/symflower-local/cmd.(*Command).WithPanicReporter(0xc000130058?, 0x2636b18?)
+	gitlab.nethead.at/symflower/symflower/cmd/symflower-local/cmd/cmd.go:184 +0x48
+main.main()
+	gitlab.nethead.at/symflower/symflower/cmd/symflower-demo/main.go:39 +0xa5
+
+
+src/main/java/com/eval/KlarnerRadoSequence.java exit status 1
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+ERROR: All attempts fail:
+#1: Internal error: exit status 1:
+[]interface {}{
+    "/tmp/eval-dev-quality2633743724/light/",
+    "[INFO] Scanning for projects...\n[WARNING] \n[WARNING] Some problems were encountered while building the effective model for eval.dev.quality:test-java-light:jar:SNAPSHOT\n[WARNING] 'version' uses an unsupported snapshot version format, should be '*-SNAPSHOT' instead. @ line 8, column 11\n[WARNING] \n[WARNING] It is highly recommended to fix these problems because they threaten the stability of your build.\n[WARNING] \n[WARNING] For this reason, future Maven versions might no longer support building such malformed projects.\n[WARNING] \n[INFO] \n[INFO] ------------------< eval.dev.quality:test-java-light >------------------\n[INFO] Building test-java-light SNAPSHOT\n[INFO]   from pom.xml\n[INFO] --------------------------------[ jar ]---------------------------------\n[INFO] \n[INFO] --- clean:3.2.0:clean (default-clean) @ test-java-light ---\n[INFO] \n[INFO] --- resources:3.3.1:resources (default-resources) @ test-java-light ---\n[WARNING] Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!\n[INFO] skip non existing resourceDirectory /tmp/eval-dev-quality2633743724/light/src/main/resources\n[INFO] \n[INFO] --- compiler:3.11.0:compile (default-compile) @ test-java-light ---\n[INFO] Changes detected - recompiling the module! :source\n[WARNING] File encoding has not been set, using platform encoding UTF-8, i.e. build is platform dependent!\n[INFO] Compiling 23 source files with javac [debug target 11] to target/classes\n[WARNING] system modules path not set in conjunction with -source 11\n[INFO] \n[INFO] --- resources:3.3.1:resources (default-resources) @ test-java-light ---\n[WARNING] Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!\n[INFO] skip non existing resourceDirectory /tmp/eval-dev-quality2633743724/light/src/main/resources\n[INFO] \n[INFO] --- compiler:3.11.0:compile (default-compile) @ test-java-light ---\n[INFO] Nothing to compile - all classes are up to date\n[INFO] \n[INFO] --- resources:3.3.1:testResources (default-testResources) @ test-java-light ---\n[WARNING] Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!\n[INFO] skip non existing resourceDirectory /tmp/eval-dev-quality2633743724/light/src/test/resources\n[INFO] \n[INFO] --- compiler:3.11.0:testCompile (default-testCompile) @ test-java-light ---\n[INFO] Changes detected - recompiling the module! :dependency\n[WARNING] File encoding has not been set, using platform encoding UTF-8, i.e. build is platform dependent!\n[INFO] Compiling 1 source file with javac [debug target 11] to target/test-classes\n[INFO] -------------------------------------------------------------\n[WARNING] COMPILATION WARNING : \n[INFO] -------------------------------------------------------------\n[WARNING] system modules path not set in conjunction with -source 11\n[INFO] 1 warning\n[INFO] -------------------------------------------------------------\n[INFO] -------------------------------------------------------------\n[ERROR] COMPILATION ERROR : \n[INFO] -------------------------------------------------------------\n[ERROR] /tmp/eval-dev-quality2633743724/light/src/test/java/com/eval/KnapsackTest.java:[16,34] an enclosing instance that contains com.eval.Knapsack.Item is required\n[ERROR] /tmp/eval-dev-quality2633743724/light/src/test/java/com/eval/KnapsackTest.java:[28,20] an enclosing instance that contains com.eval.Knapsack.Item is required\n[ERROR] /tmp/eval-dev-quality2633743724/light/src/test/java/com/eval/KnapsackTest.java:[31,20] an enclosing instance that contains com.eval.Knapsack.Item is required\n[ERROR] /tmp/eval-dev-quality2633743724/light/src/test/java/com/eval/KnapsackTest.java:[34,20] an enclosing instance that contains com.eval.Knapsack.Item is required\n[ERROR] /tmp/eval-dev-quality2633743724/light/src/test/java/com/eval/KnapsackTest.java:[46,34] an enclosing instance that contains com.eval.Knapsack.Item is required\n[ERROR] /tmp/eval-dev-quality2633743724/light/src/test/java/com/eval/KnapsackTest.java:[54,34] an enclosing instance that contains com.eval.Knapsack.Item is required\n[INFO] 6 errors \n[INFO] -------------------------------------------------------------\n[INFO] ------------------------------------------------------------------------\n[INFO] BUILD FAILURE\n[INFO] ------------------------------------------------------------------------\n[INFO] Total time:  0.986 s\n[INFO] Finished at: 2024-06-06T14:13:23+02:00\n[INFO] ------------------------------------------------------------------------\n[ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.11.0:testCompile (default-testCompile) on project test-java-light: Compilation failure: Compilation failure: \n[ERROR] /tmp/eval-dev-quality2633743724/light/src/test/java/com/eval/KnapsackTest.java:[16,34] an enclosing instance that contains com.eval.Knapsack.Item is required\n[ERROR] /tmp/eval-dev-quality2633743724/light/src/test/java/com/eval/KnapsackTest.java:[28,20] an enclosing instance that contains com.eval.Knapsack.Item is required\n[ERROR] /tmp/eval-dev-quality2633743724/light/src/test/java/com/eval/KnapsackTest.java:[31,20] an enclosing instance that contains com.eval.Knapsack.Item is required\n[ERROR] /tmp/eval-dev-quality2633743724/light/src/test/java/com/eval/KnapsackTest.java:[34,20] an enclosing instance that contains com.eval.Knapsack.Item is required\n[ERROR] /tmp/eval-dev-quality2633743724/light/src/test/java/com/eval/KnapsackTest.java:[46,34] an enclosing instance that contains com.eval.Knapsack.Item is required\n[ERROR] /tmp/eval-dev-quality2633743724/light/src/test/java/com/eval/KnapsackTest.java:[54,34] an enclosing instance that contains com.eval.Knapsack.Item is required\n[ERROR] -> [Help 1]\n[ERROR] \n[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.\n[ERROR] Re-run Maven using the -X switch to enable full debug logging.\n[ERROR] \n[ERROR] For more information about the errors and possible solutions, please read the following articles:\n[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException\n",
+}
+Stacktrace: goroutine 1 [running]:
+gitlab.nethead.at/symflower/symflower/model/errors.NewInternalError({0x1f42da0?, 0xc00024c040}, {0xffa8c0?, 0xc000578030})
+	gitlab.nethead.at/symflower/symflower/model/errors/error.go:850 +0x59
+gitlab.nethead.at/symflower/symflower/language/java/execute.MavenDependencyCommand.func1()
+	gitlab.nethead.at/symflower/symflower/language/java/execute/maven.go:80 +0x1ef
+github.com/avast/retry-go.Do(0xc0006878b8, {0xc0006878a0, 0x3, 0x418c94?})
+	github.com/avast/retry-go/retry.go:135 +0x5a3
+gitlab.nethead.at/symflower/symflower/language/java/execute.MavenDependencyCommand({0xc000221260, 0x26}, 0x0, {0xc000587f20, 0x6, 0x6})
+	gitlab.nethead.at/symflower/symflower/language/java/execute/maven.go:60 +0x1c5
+gitlab.nethead.at/symflower/symflower/language/java/execute.MavenCloverCoverage({0xc000221260, 0x26})
+	gitlab.nethead.at/symflower/symflower/language/java/execute/clover.go:131 +0xc9
+gitlab.nethead.at/symflower/symflower/cmd/symflower-local/cmd.(*commandTest).Execute(0xc000180978, {0xc000180800?, 0x7fc85cfa7098?, 0xc000180978?})
+	gitlab.nethead.at/symflower/symflower/cmd/symflower-local/cmd/test.go:143 +0x54f
+gitlab.nethead.at/symflower/symflower/cmd.ExecuteNoExit({0x1f425e0?, 0xc000180800}, {0xc000216000?, 0x2782d80?, 0xc00058fed8?})
+	gitlab.nethead.at/symflower/symflower/cmd/execute.go:56 +0x2d0
+gitlab.nethead.at/symflower/symflower/cmd.Execute({0x1f425e0?, 0xc000180800?}, {0xc000216000?, 0x274c500?, 0xc000180800?})
+	gitlab.nethead.at/symflower/symflower/cmd/execute.go:16 +0x26
+gitlab.nethead.at/symflower/symflower/cmd.ExecuteWithOSArguments(...)
+	gitlab.nethead.at/symflower/symflower/cmd/execute.go:75
+main.main.func1()
+	gitlab.nethead.at/symflower/symflower/cmd/symflower-demo/main.go:40 +0x34
+gitlab.nethead.at/symflower/symflower/cmd/symflower-local/cmd.(*Command).WithPanicReporter(0xc00018e058?, 0x2636b18?)
+	gitlab.nethead.at/symflower/symflower/cmd/symflower-local/cmd/cmd.go:184 +0x48
+main.main()
+	gitlab.nethead.at/symflower/symflower/cmd/symflower-demo/main.go:39 +0xa5
+
+
+github.com/symflower/eval-dev-quality/util.CommandWithResult
+	/home/eval/eval-dev-quality/util/exec.go:52
+github.com/symflower/eval-dev-quality/language/java.(*Language).Execute
+	/home/eval/eval-dev-quality/language/java/language.go:94
+github.com/symflower/eval-dev-quality/evaluate.Repository
+	/home/eval/eval-dev-quality/evaluate/repository.go:57
+github.com/symflower/eval-dev-quality/evaluate.Evaluate.func2
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:209
+github.com/symflower/eval-dev-quality/evaluate.withLoadedModel
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:253
+github.com/symflower/eval-dev-quality/evaluate.Evaluate
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:199
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.(*Evaluate).Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/evaluate.go:284
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute.func1
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:34
+github.com/jessevdk/go-flags.(*Parser).ParseArgs
+	/home/eval/go/pkg/mod/github.com/jessevdk/go-flags@v1.5.1-0.20210607101731-3927b71304df/parser.go:333
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:37
+main.main
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/main.go:11
+runtime.main
+	/home/eval/go/src/runtime/proc.go:267
+runtime.goexit
+	/home/eval/go/src/runtime/asm_amd64.s:1650
+github.com/symflower/eval-dev-quality/language/java.(*Language).Execute
+	/home/eval/eval-dev-quality/language/java/language.go:105
+github.com/symflower/eval-dev-quality/evaluate.Repository
+	/home/eval/eval-dev-quality/evaluate/repository.go:57
+github.com/symflower/eval-dev-quality/evaluate.Evaluate.func2
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:209
+github.com/symflower/eval-dev-quality/evaluate.withLoadedModel
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:253
+github.com/symflower/eval-dev-quality/evaluate.Evaluate
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:199
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.(*Evaluate).Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/evaluate.go:284
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute.func1
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:34
+github.com/jessevdk/go-flags.(*Parser).ParseArgs
+	/home/eval/go/pkg/mod/github.com/jessevdk/go-flags@v1.5.1-0.20210607101731-3927b71304df/parser.go:333
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:37
+main.main
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/main.go:11
+runtime.main
+	/home/eval/go/src/runtime/proc.go:267
+runtime.goexit
+	/home/eval/go/src/runtime/asm_amd64.s:1650
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+ERROR: All attempts fail:
+#1: Internal error: exit status 1:
+[]interface {}{
+    "/tmp/eval-dev-quality2633743724/light/",
+    "[INFO] Scanning for projects...\n[WARNING] \n[WARNING] Some problems were encountered while building the effective model for eval.dev.quality:test-java-light:jar:SNAPSHOT\n[WARNING] 'version' uses an unsupported snapshot version format, should be '*-SNAPSHOT' instead. @ line 8, column 11\n[WARNING] \n[WARNING] It is highly recommended to fix these problems because they threaten the stability of your build.\n[WARNING] \n[WARNING] For this reason, future Maven versions might no longer support building such malformed projects.\n[WARNING] \n[INFO] \n[INFO] ------------------< eval.dev.quality:test-java-light >------------------\n[INFO] Building test-java-light SNAPSHOT\n[INFO]   from pom.xml\n[INFO] --------------------------------[ jar ]---------------------------------\n[INFO] \n[INFO] --- clean:3.2.0:clean (default-clean) @ test-java-light ---\n[INFO] \n[INFO] --- resources:3.3.1:resources (default-resources) @ test-java-light ---\n[WARNING] Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!\n[INFO] skip non existing resourceDirectory /tmp/eval-dev-quality2633743724/light/src/main/resources\n[INFO] \n[INFO] --- compiler:3.11.0:compile (default-compile) @ test-java-light ---\n[INFO] Changes detected - recompiling the module! :source\n[WARNING] File encoding has not been set, using platform encoding UTF-8, i.e. build is platform dependent!\n[INFO] Compiling 23 source files with javac [debug target 11] to target/classes\n[WARNING] system modules path not set in conjunction with -source 11\n[INFO] \n[INFO] --- resources:3.3.1:resources (default-resources) @ test-java-light ---\n[WARNING] Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!\n[INFO] skip non existing resourceDirectory /tmp/eval-dev-quality2633743724/light/src/main/resources\n[INFO] \n[INFO] --- compiler:3.11.0:compile (default-compile) @ test-java-light ---\n[INFO] Nothing to compile - all classes are up to date\n[INFO] \n[INFO] --- resources:3.3.1:testResources (default-testResources) @ test-java-light ---\n[WARNING] Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!\n[INFO] skip non existing resourceDirectory /tmp/eval-dev-quality2633743724/light/src/test/resources\n[INFO] \n[INFO] --- compiler:3.11.0:testCompile (default-testCompile) @ test-java-light ---\n[INFO] Changes detected - recompiling the module! :dependency\n[WARNING] File encoding has not been set, using platform encoding UTF-8, i.e. build is platform dependent!\n[INFO] Compiling 1 source file with javac [debug target 11] to target/test-classes\n[INFO] -------------------------------------------------------------\n[WARNING] COMPILATION WARNING : \n[INFO] -------------------------------------------------------------\n[WARNING] system modules path not set in conjunction with -source 11\n[INFO] 1 warning\n[INFO] -------------------------------------------------------------\n[INFO] -------------------------------------------------------------\n[ERROR] COMPILATION ERROR : \n[INFO] -------------------------------------------------------------\n[ERROR] /tmp/eval-dev-quality2633743724/light/src/test/java/com/eval/KnapsackTest.java:[16,34] an enclosing instance that contains com.eval.Knapsack.Item is required\n[ERROR] /tmp/eval-dev-quality2633743724/light/src/test/java/com/eval/KnapsackTest.java:[28,20] an enclosing instance that contains com.eval.Knapsack.Item is required\n[ERROR] /tmp/eval-dev-quality2633743724/light/src/test/java/com/eval/KnapsackTest.java:[31,20] an enclosing instance that contains com.eval.Knapsack.Item is required\n[ERROR] /tmp/eval-dev-quality2633743724/light/src/test/java/com/eval/KnapsackTest.java:[34,20] an enclosing instance that contains com.eval.Knapsack.Item is required\n[ERROR] /tmp/eval-dev-quality2633743724/light/src/test/java/com/eval/KnapsackTest.java:[46,34] an enclosing instance that contains com.eval.Knapsack.Item is required\n[ERROR] /tmp/eval-dev-quality2633743724/light/src/test/java/com/eval/KnapsackTest.java:[54,34] an enclosing instance that contains com.eval.Knapsack.Item is required\n[INFO] 6 errors \n[INFO] -------------------------------------------------------------\n[INFO] ------------------------------------------------------------------------\n[INFO] BUILD FAILURE\n[INFO] ------------------------------------------------------------------------\n[INFO] Total time:  0.986 s\n[INFO] Finished at: 2024-06-06T14:13:23+02:00\n[INFO] ------------------------------------------------------------------------\n[ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.11.0:testCompile (default-testCompile) on project test-java-light: Compilation failure: Compilation failure: \n[ERROR] /tmp/eval-dev-quality2633743724/light/src/test/java/com/eval/KnapsackTest.java:[16,34] an enclosing instance that contains com.eval.Knapsack.Item is required\n[ERROR] /tmp/eval-dev-quality2633743724/light/src/test/java/com/eval/KnapsackTest.java:[28,20] an enclosing instance that contains com.eval.Knapsack.Item is required\n[ERROR] /tmp/eval-dev-quality2633743724/light/src/test/java/com/eval/KnapsackTest.java:[31,20] an enclosing instance that contains com.eval.Knapsack.Item is required\n[ERROR] /tmp/eval-dev-quality2633743724/light/src/test/java/com/eval/KnapsackTest.java:[34,20] an enclosing instance that contains com.eval.Knapsack.Item is required\n[ERROR] /tmp/eval-dev-quality2633743724/light/src/test/java/com/eval/KnapsackTest.java:[46,34] an enclosing instance that contains com.eval.Knapsack.Item is required\n[ERROR] /tmp/eval-dev-quality2633743724/light/src/test/java/com/eval/KnapsackTest.java:[54,34] an enclosing instance that contains com.eval.Knapsack.Item is required\n[ERROR] -> [Help 1]\n[ERROR] \n[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.\n[ERROR] Re-run Maven using the -X switch to enable full debug logging.\n[ERROR] \n[ERROR] For more information about the errors and possible solutions, please read the following articles:\n[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException\n",
+}
+Stacktrace: goroutine 1 [running]:
+gitlab.nethead.at/symflower/symflower/model/errors.NewInternalError({0x1f42da0?, 0xc00024c040}, {0xffa8c0?, 0xc000578030})
+	gitlab.nethead.at/symflower/symflower/model/errors/error.go:850 +0x59
+gitlab.nethead.at/symflower/symflower/language/java/execute.MavenDependencyCommand.func1()
+	gitlab.nethead.at/symflower/symflower/language/java/execute/maven.go:80 +0x1ef
+github.com/avast/retry-go.Do(0xc0006878b8, {0xc0006878a0, 0x3, 0x418c94?})
+	github.com/avast/retry-go/retry.go:135 +0x5a3
+gitlab.nethead.at/symflower/symflower/language/java/execute.MavenDependencyCommand({0xc000221260, 0x26}, 0x0, {0xc000587f20, 0x6, 0x6})
+	gitlab.nethead.at/symflower/symflower/language/java/execute/maven.go:60 +0x1c5
+gitlab.nethead.at/symflower/symflower/language/java/execute.MavenCloverCoverage({0xc000221260, 0x26})
+	gitlab.nethead.at/symflower/symflower/language/java/execute/clover.go:131 +0xc9
+gitlab.nethead.at/symflower/symflower/cmd/symflower-local/cmd.(*commandTest).Execute(0xc000180978, {0xc000180800?, 0x7fc85cfa7098?, 0xc000180978?})
+	gitlab.nethead.at/symflower/symflower/cmd/symflower-local/cmd/test.go:143 +0x54f
+gitlab.nethead.at/symflower/symflower/cmd.ExecuteNoExit({0x1f425e0?, 0xc000180800}, {0xc000216000?, 0x2782d80?, 0xc00058fed8?})
+	gitlab.nethead.at/symflower/symflower/cmd/execute.go:56 +0x2d0
+gitlab.nethead.at/symflower/symflower/cmd.Execute({0x1f425e0?, 0xc000180800?}, {0xc000216000?, 0x274c500?, 0xc000180800?})
+	gitlab.nethead.at/symflower/symflower/cmd/execute.go:16 +0x26
+gitlab.nethead.at/symflower/symflower/cmd.ExecuteWithOSArguments(...)
+	gitlab.nethead.at/symflower/symflower/cmd/execute.go:75
+main.main.func1()
+	gitlab.nethead.at/symflower/symflower/cmd/symflower-demo/main.go:40 +0x34
+gitlab.nethead.at/symflower/symflower/cmd/symflower-local/cmd.(*Command).WithPanicReporter(0xc00018e058?, 0x2636b18?)
+	gitlab.nethead.at/symflower/symflower/cmd/symflower-local/cmd/cmd.go:184 +0x48
+main.main()
+	gitlab.nethead.at/symflower/symflower/cmd/symflower-demo/main.go:39 +0xa5
+
+
+src/main/java/com/eval/Knapsack.java]

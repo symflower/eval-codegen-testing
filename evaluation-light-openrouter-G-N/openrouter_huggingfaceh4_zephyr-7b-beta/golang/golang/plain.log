@@ -1,0 +1,370 @@
+2024/06/06 10:01:57 Evaluating model "openrouter/huggingfaceh4/zephyr-7b-beta" using language "golang" and repository "golang/plain"
+2024/06/06 10:01:57 Querying model "openrouter/huggingfaceh4/zephyr-7b-beta" with:
+	Given the following Go code file "plain.go" with package "plain", provide a test file for this code.
+	The tests should produce 100 percent code coverage and must compile.
+	The response must contain only the test code and nothing else.
+
+	```golang
+	package plain
+
+	func plain() {
+		return // This does not do anything but it gives us a line to cover.
+	}
+	```
+2024/06/06 10:01:58 Attempt 1/3: error, status code: 404, message: No endpoints found for the request. Check your provider filtering parameters and logging settings: https://openrouter.ai/settings#analytics
+2024/06/06 10:02:00 Querying model "openrouter/huggingfaceh4/zephyr-7b-beta" with:
+	Given the following Go code file "plain.go" with package "plain", provide a test file for this code.
+	The tests should produce 100 percent code coverage and must compile.
+	The response must contain only the test code and nothing else.
+
+	```golang
+	package plain
+
+	func plain() {
+		return // This does not do anything but it gives us a line to cover.
+	}
+	```
+2024/06/06 10:02:00 Attempt 2/3: error, status code: 404, message: No endpoints found for the request. Check your provider filtering parameters and logging settings: https://openrouter.ai/settings#analytics
+2024/06/06 10:02:04 Querying model "openrouter/huggingfaceh4/zephyr-7b-beta" with:
+	Given the following Go code file "plain.go" with package "plain", provide a test file for this code.
+	The tests should produce 100 percent code coverage and must compile.
+	The response must contain only the test code and nothing else.
+
+	```golang
+	package plain
+
+	func plain() {
+		return // This does not do anything but it gives us a line to cover.
+	}
+	```
+2024/06/06 10:02:04 Attempt 3/3: error, status code: 404, message: No endpoints found for the request. Check your provider filtering parameters and logging settings: https://openrouter.ai/settings#analytics
+2024/06/06 10:02:04 Evaluated model "openrouter/huggingfaceh4/zephyr-7b-beta" using language "golang" and repository "golang/plain": encountered 1 problems: [error, status code: 404, message: No endpoints found for the request. Check your provider filtering parameters and logging settings: https://openrouter.ai/settings#analytics
+github.com/symflower/eval-dev-quality/provider/openai-api.QueryOpenAIAPIModel
+	/home/eval/eval-dev-quality/provider/openai-api/query.go:26
+github.com/symflower/eval-dev-quality/provider/openrouter.(*Provider).Query
+	/home/eval/eval-dev-quality/provider/openrouter/openrouter.go:82
+github.com/symflower/eval-dev-quality/model/llm.(*Model).GenerateTestsForFile.func1
+	/home/eval/eval-dev-quality/model/llm/llm.go:114
+github.com/avast/retry-go.Do
+	/home/eval/go/pkg/mod/github.com/avast/retry-go@v3.0.0+incompatible/retry.go:127
+github.com/symflower/eval-dev-quality/model/llm.(*Model).GenerateTestsForFile
+	/home/eval/eval-dev-quality/model/llm/llm.go:110
+github.com/symflower/eval-dev-quality/evaluate.Repository
+	/home/eval/eval-dev-quality/evaluate/repository.go:45
+github.com/symflower/eval-dev-quality/evaluate.Evaluate.func1
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:119
+github.com/symflower/eval-dev-quality/evaluate.withLoadedModel
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:253
+github.com/symflower/eval-dev-quality/evaluate.Evaluate
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:109
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.(*Evaluate).Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/evaluate.go:284
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute.func1
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:34
+github.com/jessevdk/go-flags.(*Parser).ParseArgs
+	/home/eval/go/pkg/mod/github.com/jessevdk/go-flags@v1.5.1-0.20210607101731-3927b71304df/parser.go:333
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:37
+main.main
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/main.go:11
+runtime.main
+	/home/eval/go/src/runtime/proc.go:267
+runtime.goexit
+	/home/eval/go/src/runtime/asm_amd64.s:1650
+plain.go]
+2024/06/06 10:13:15 Evaluating model "openrouter/huggingfaceh4/zephyr-7b-beta" using language "golang" and repository "golang/plain"
+2024/06/06 10:13:15 Querying model "openrouter/huggingfaceh4/zephyr-7b-beta" with:
+	Given the following Go code file "plain.go" with package "plain", provide a test file for this code.
+	The tests should produce 100 percent code coverage and must compile.
+	The response must contain only the test code and nothing else.
+
+	```golang
+	package plain
+
+	func plain() {
+		return // This does not do anything but it gives us a line to cover.
+	}
+	```
+2024/06/06 10:13:15 Attempt 1/3: error, status code: 404, message: No endpoints found for the request. Check your provider filtering parameters and logging settings: https://openrouter.ai/settings#analytics
+2024/06/06 10:13:17 Querying model "openrouter/huggingfaceh4/zephyr-7b-beta" with:
+	Given the following Go code file "plain.go" with package "plain", provide a test file for this code.
+	The tests should produce 100 percent code coverage and must compile.
+	The response must contain only the test code and nothing else.
+
+	```golang
+	package plain
+
+	func plain() {
+		return // This does not do anything but it gives us a line to cover.
+	}
+	```
+2024/06/06 10:13:18 Attempt 2/3: error, status code: 404, message: No endpoints found for the request. Check your provider filtering parameters and logging settings: https://openrouter.ai/settings#analytics
+2024/06/06 10:13:22 Querying model "openrouter/huggingfaceh4/zephyr-7b-beta" with:
+	Given the following Go code file "plain.go" with package "plain", provide a test file for this code.
+	The tests should produce 100 percent code coverage and must compile.
+	The response must contain only the test code and nothing else.
+
+	```golang
+	package plain
+
+	func plain() {
+		return // This does not do anything but it gives us a line to cover.
+	}
+	```
+2024/06/06 10:13:22 Attempt 3/3: error, status code: 404, message: No endpoints found for the request. Check your provider filtering parameters and logging settings: https://openrouter.ai/settings#analytics
+2024/06/06 10:13:22 Evaluated model "openrouter/huggingfaceh4/zephyr-7b-beta" using language "golang" and repository "golang/plain": encountered 1 problems: [error, status code: 404, message: No endpoints found for the request. Check your provider filtering parameters and logging settings: https://openrouter.ai/settings#analytics
+github.com/symflower/eval-dev-quality/provider/openai-api.QueryOpenAIAPIModel
+	/home/eval/eval-dev-quality/provider/openai-api/query.go:26
+github.com/symflower/eval-dev-quality/provider/openrouter.(*Provider).Query
+	/home/eval/eval-dev-quality/provider/openrouter/openrouter.go:82
+github.com/symflower/eval-dev-quality/model/llm.(*Model).GenerateTestsForFile.func1
+	/home/eval/eval-dev-quality/model/llm/llm.go:114
+github.com/avast/retry-go.Do
+	/home/eval/go/pkg/mod/github.com/avast/retry-go@v3.0.0+incompatible/retry.go:127
+github.com/symflower/eval-dev-quality/model/llm.(*Model).GenerateTestsForFile
+	/home/eval/eval-dev-quality/model/llm/llm.go:110
+github.com/symflower/eval-dev-quality/evaluate.Repository
+	/home/eval/eval-dev-quality/evaluate/repository.go:45
+github.com/symflower/eval-dev-quality/evaluate.Evaluate.func1
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:119
+github.com/symflower/eval-dev-quality/evaluate.withLoadedModel
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:253
+github.com/symflower/eval-dev-quality/evaluate.Evaluate
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:109
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.(*Evaluate).Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/evaluate.go:284
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute.func1
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:34
+github.com/jessevdk/go-flags.(*Parser).ParseArgs
+	/home/eval/go/pkg/mod/github.com/jessevdk/go-flags@v1.5.1-0.20210607101731-3927b71304df/parser.go:333
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:37
+main.main
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/main.go:11
+runtime.main
+	/home/eval/go/src/runtime/proc.go:267
+runtime.goexit
+	/home/eval/go/src/runtime/asm_amd64.s:1650
+plain.go]
+2024/06/06 10:21:50 Evaluating model "openrouter/huggingfaceh4/zephyr-7b-beta" using language "golang" and repository "golang/plain"
+2024/06/06 10:21:50 Querying model "openrouter/huggingfaceh4/zephyr-7b-beta" with:
+	Given the following Go code file "plain.go" with package "plain", provide a test file for this code.
+	The tests should produce 100 percent code coverage and must compile.
+	The response must contain only the test code and nothing else.
+
+	```golang
+	package plain
+
+	func plain() {
+		return // This does not do anything but it gives us a line to cover.
+	}
+	```
+2024/06/06 10:21:50 Attempt 1/3: error, status code: 404, message: No endpoints found for the request. Check your provider filtering parameters and logging settings: https://openrouter.ai/settings#analytics
+2024/06/06 10:21:52 Querying model "openrouter/huggingfaceh4/zephyr-7b-beta" with:
+	Given the following Go code file "plain.go" with package "plain", provide a test file for this code.
+	The tests should produce 100 percent code coverage and must compile.
+	The response must contain only the test code and nothing else.
+
+	```golang
+	package plain
+
+	func plain() {
+		return // This does not do anything but it gives us a line to cover.
+	}
+	```
+2024/06/06 10:21:52 Attempt 2/3: error, status code: 404, message: No endpoints found for the request. Check your provider filtering parameters and logging settings: https://openrouter.ai/settings#analytics
+2024/06/06 10:21:56 Querying model "openrouter/huggingfaceh4/zephyr-7b-beta" with:
+	Given the following Go code file "plain.go" with package "plain", provide a test file for this code.
+	The tests should produce 100 percent code coverage and must compile.
+	The response must contain only the test code and nothing else.
+
+	```golang
+	package plain
+
+	func plain() {
+		return // This does not do anything but it gives us a line to cover.
+	}
+	```
+2024/06/06 10:21:56 Attempt 3/3: error, status code: 404, message: No endpoints found for the request. Check your provider filtering parameters and logging settings: https://openrouter.ai/settings#analytics
+2024/06/06 10:21:56 Evaluated model "openrouter/huggingfaceh4/zephyr-7b-beta" using language "golang" and repository "golang/plain": encountered 1 problems: [error, status code: 404, message: No endpoints found for the request. Check your provider filtering parameters and logging settings: https://openrouter.ai/settings#analytics
+github.com/symflower/eval-dev-quality/provider/openai-api.QueryOpenAIAPIModel
+	/home/eval/eval-dev-quality/provider/openai-api/query.go:26
+github.com/symflower/eval-dev-quality/provider/openrouter.(*Provider).Query
+	/home/eval/eval-dev-quality/provider/openrouter/openrouter.go:82
+github.com/symflower/eval-dev-quality/model/llm.(*Model).GenerateTestsForFile.func1
+	/home/eval/eval-dev-quality/model/llm/llm.go:114
+github.com/avast/retry-go.Do
+	/home/eval/go/pkg/mod/github.com/avast/retry-go@v3.0.0+incompatible/retry.go:127
+github.com/symflower/eval-dev-quality/model/llm.(*Model).GenerateTestsForFile
+	/home/eval/eval-dev-quality/model/llm/llm.go:110
+github.com/symflower/eval-dev-quality/evaluate.Repository
+	/home/eval/eval-dev-quality/evaluate/repository.go:45
+github.com/symflower/eval-dev-quality/evaluate.Evaluate.func1
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:119
+github.com/symflower/eval-dev-quality/evaluate.withLoadedModel
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:253
+github.com/symflower/eval-dev-quality/evaluate.Evaluate
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:109
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.(*Evaluate).Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/evaluate.go:284
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute.func1
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:34
+github.com/jessevdk/go-flags.(*Parser).ParseArgs
+	/home/eval/go/pkg/mod/github.com/jessevdk/go-flags@v1.5.1-0.20210607101731-3927b71304df/parser.go:333
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:37
+main.main
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/main.go:11
+runtime.main
+	/home/eval/go/src/runtime/proc.go:267
+runtime.goexit
+	/home/eval/go/src/runtime/asm_amd64.s:1650
+plain.go]
+2024/06/06 10:32:31 Evaluating model "openrouter/huggingfaceh4/zephyr-7b-beta" using language "golang" and repository "golang/plain"
+2024/06/06 10:32:31 Querying model "openrouter/huggingfaceh4/zephyr-7b-beta" with:
+	Given the following Go code file "plain.go" with package "plain", provide a test file for this code.
+	The tests should produce 100 percent code coverage and must compile.
+	The response must contain only the test code and nothing else.
+
+	```golang
+	package plain
+
+	func plain() {
+		return // This does not do anything but it gives us a line to cover.
+	}
+	```
+2024/06/06 10:32:32 Attempt 1/3: error, status code: 404, message: No endpoints found for the request. Check your provider filtering parameters and logging settings: https://openrouter.ai/settings#analytics
+2024/06/06 10:32:34 Querying model "openrouter/huggingfaceh4/zephyr-7b-beta" with:
+	Given the following Go code file "plain.go" with package "plain", provide a test file for this code.
+	The tests should produce 100 percent code coverage and must compile.
+	The response must contain only the test code and nothing else.
+
+	```golang
+	package plain
+
+	func plain() {
+		return // This does not do anything but it gives us a line to cover.
+	}
+	```
+2024/06/06 10:32:35 Attempt 2/3: error, status code: 404, message: No endpoints found for the request. Check your provider filtering parameters and logging settings: https://openrouter.ai/settings#analytics
+2024/06/06 10:32:39 Querying model "openrouter/huggingfaceh4/zephyr-7b-beta" with:
+	Given the following Go code file "plain.go" with package "plain", provide a test file for this code.
+	The tests should produce 100 percent code coverage and must compile.
+	The response must contain only the test code and nothing else.
+
+	```golang
+	package plain
+
+	func plain() {
+		return // This does not do anything but it gives us a line to cover.
+	}
+	```
+2024/06/06 10:32:39 Attempt 3/3: error, status code: 404, message: No endpoints found for the request. Check your provider filtering parameters and logging settings: https://openrouter.ai/settings#analytics
+2024/06/06 10:32:39 Evaluated model "openrouter/huggingfaceh4/zephyr-7b-beta" using language "golang" and repository "golang/plain": encountered 1 problems: [error, status code: 404, message: No endpoints found for the request. Check your provider filtering parameters and logging settings: https://openrouter.ai/settings#analytics
+github.com/symflower/eval-dev-quality/provider/openai-api.QueryOpenAIAPIModel
+	/home/eval/eval-dev-quality/provider/openai-api/query.go:26
+github.com/symflower/eval-dev-quality/provider/openrouter.(*Provider).Query
+	/home/eval/eval-dev-quality/provider/openrouter/openrouter.go:82
+github.com/symflower/eval-dev-quality/model/llm.(*Model).GenerateTestsForFile.func1
+	/home/eval/eval-dev-quality/model/llm/llm.go:114
+github.com/avast/retry-go.Do
+	/home/eval/go/pkg/mod/github.com/avast/retry-go@v3.0.0+incompatible/retry.go:127
+github.com/symflower/eval-dev-quality/model/llm.(*Model).GenerateTestsForFile
+	/home/eval/eval-dev-quality/model/llm/llm.go:110
+github.com/symflower/eval-dev-quality/evaluate.Repository
+	/home/eval/eval-dev-quality/evaluate/repository.go:45
+github.com/symflower/eval-dev-quality/evaluate.Evaluate.func1
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:119
+github.com/symflower/eval-dev-quality/evaluate.withLoadedModel
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:253
+github.com/symflower/eval-dev-quality/evaluate.Evaluate
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:109
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.(*Evaluate).Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/evaluate.go:284
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute.func1
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:34
+github.com/jessevdk/go-flags.(*Parser).ParseArgs
+	/home/eval/go/pkg/mod/github.com/jessevdk/go-flags@v1.5.1-0.20210607101731-3927b71304df/parser.go:333
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:37
+main.main
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/main.go:11
+runtime.main
+	/home/eval/go/src/runtime/proc.go:267
+runtime.goexit
+	/home/eval/go/src/runtime/asm_amd64.s:1650
+plain.go]
+2024/06/06 10:47:14 Evaluating model "openrouter/huggingfaceh4/zephyr-7b-beta" using language "golang" and repository "golang/plain"
+2024/06/06 10:47:14 Querying model "openrouter/huggingfaceh4/zephyr-7b-beta" with:
+	Given the following Go code file "plain.go" with package "plain", provide a test file for this code.
+	The tests should produce 100 percent code coverage and must compile.
+	The response must contain only the test code and nothing else.
+
+	```golang
+	package plain
+
+	func plain() {
+		return // This does not do anything but it gives us a line to cover.
+	}
+	```
+2024/06/06 10:47:15 Attempt 1/3: error, status code: 404, message: No endpoints found for the request. Check your provider filtering parameters and logging settings: https://openrouter.ai/settings#analytics
+2024/06/06 10:47:17 Querying model "openrouter/huggingfaceh4/zephyr-7b-beta" with:
+	Given the following Go code file "plain.go" with package "plain", provide a test file for this code.
+	The tests should produce 100 percent code coverage and must compile.
+	The response must contain only the test code and nothing else.
+
+	```golang
+	package plain
+
+	func plain() {
+		return // This does not do anything but it gives us a line to cover.
+	}
+	```
+2024/06/06 10:47:17 Attempt 2/3: error, status code: 404, message: No endpoints found for the request. Check your provider filtering parameters and logging settings: https://openrouter.ai/settings#analytics
+2024/06/06 10:47:21 Querying model "openrouter/huggingfaceh4/zephyr-7b-beta" with:
+	Given the following Go code file "plain.go" with package "plain", provide a test file for this code.
+	The tests should produce 100 percent code coverage and must compile.
+	The response must contain only the test code and nothing else.
+
+	```golang
+	package plain
+
+	func plain() {
+		return // This does not do anything but it gives us a line to cover.
+	}
+	```
+2024/06/06 10:47:21 Attempt 3/3: error, status code: 404, message: No endpoints found for the request. Check your provider filtering parameters and logging settings: https://openrouter.ai/settings#analytics
+2024/06/06 10:47:21 Evaluated model "openrouter/huggingfaceh4/zephyr-7b-beta" using language "golang" and repository "golang/plain": encountered 1 problems: [error, status code: 404, message: No endpoints found for the request. Check your provider filtering parameters and logging settings: https://openrouter.ai/settings#analytics
+github.com/symflower/eval-dev-quality/provider/openai-api.QueryOpenAIAPIModel
+	/home/eval/eval-dev-quality/provider/openai-api/query.go:26
+github.com/symflower/eval-dev-quality/provider/openrouter.(*Provider).Query
+	/home/eval/eval-dev-quality/provider/openrouter/openrouter.go:82
+github.com/symflower/eval-dev-quality/model/llm.(*Model).GenerateTestsForFile.func1
+	/home/eval/eval-dev-quality/model/llm/llm.go:114
+github.com/avast/retry-go.Do
+	/home/eval/go/pkg/mod/github.com/avast/retry-go@v3.0.0+incompatible/retry.go:127
+github.com/symflower/eval-dev-quality/model/llm.(*Model).GenerateTestsForFile
+	/home/eval/eval-dev-quality/model/llm/llm.go:110
+github.com/symflower/eval-dev-quality/evaluate.Repository
+	/home/eval/eval-dev-quality/evaluate/repository.go:45
+github.com/symflower/eval-dev-quality/evaluate.Evaluate.func1
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:119
+github.com/symflower/eval-dev-quality/evaluate.withLoadedModel
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:253
+github.com/symflower/eval-dev-quality/evaluate.Evaluate
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:109
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.(*Evaluate).Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/evaluate.go:284
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute.func1
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:34
+github.com/jessevdk/go-flags.(*Parser).ParseArgs
+	/home/eval/go/pkg/mod/github.com/jessevdk/go-flags@v1.5.1-0.20210607101731-3927b71304df/parser.go:333
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:37
+main.main
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/main.go:11
+runtime.main
+	/home/eval/go/src/runtime/proc.go:267
+runtime.goexit
+	/home/eval/go/src/runtime/asm_amd64.s:1650
+plain.go]

@@ -1,0 +1,360 @@
+2024/06/06 10:08:32 Evaluating model "openrouter/deepseek/deepseek-chat" using language "java" and repository "java/plain"
+2024/06/06 10:08:32 Querying model "openrouter/deepseek/deepseek-chat" with:
+	Given the following Java code file "src/main/java/com/eval/Plain.java" with package "com.eval", provide a test file for this code with JUnit 5 as a test framework.
+	The tests should produce 100 percent code coverage and must compile.
+	The response must contain only the test code and nothing else.
+
+	```java
+	package com.eval;
+
+	class Plain {
+	    static void plain() {
+	    }
+	}
+	```
+2024/06/06 10:08:36 Model "openrouter/deepseek/deepseek-chat" responded (4223 ms) with:
+	```java
+	package com.eval;
+
+	import org.junit.jupiter.api.Test;
+
+	import static org.junit.jupiter.api.Assertions.*;
+
+	class PlainTest {
+
+	    @Test
+	    void testPlain() {
+	        Plain.plain();
+	    }
+	}
+	```
+2024/06/06 10:08:36 $ symflower test --language java --workspace /tmp/eval-dev-quality4045395265/plain --coverage-file /tmp/eval-dev-quality4045395265/plain/coverage.json
+[INFO] Scanning for projects...
+[WARNING] 
+[WARNING] Some problems were encountered while building the effective model for eval.dev.quality:test-java-plain:jar:SNAPSHOT
+[WARNING] 'version' uses an unsupported snapshot version format, should be '*-SNAPSHOT' instead. @ line 6, column 11
+[WARNING] 
+[WARNING] It is highly recommended to fix these problems because they threaten the stability of your build.
+[WARNING] 
+[WARNING] For this reason, future Maven versions might no longer support building such malformed projects.
+[WARNING] 
+[INFO] 
+[INFO] ------------------< eval.dev.quality:test-java-plain >------------------
+[INFO] Building test-java-plain SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clover:4.5.2:aggregate (default-cli) @ test-java-plain ---
+[INFO] 
+[INFO] ------------------< eval.dev.quality:test-java-plain >------------------
+[INFO] Building test-java-plain SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clover:4.5.2:clover (default-cli) @ test-java-plain ---
+[INFO] Using default-clover-report descriptor.
+[INFO] Using Clover report descriptor: /tmp/mvn17463559919918359156resource
+[INFO] OpenClover Version 4.5.2, built on 2024-01-31
+[INFO] Clover is enabled with initstring '/tmp/eval-dev-quality4045395265/plain/target/clover/clover.db'
+[INFO] OpenClover Version 4.5.2, built on 2024-01-31
+[INFO] Loading coverage database from: '/tmp/eval-dev-quality4045395265/plain/target/clover/clover.db'
+[INFO] Writing report to '/tmp/eval-dev-quality4045395265/plain/target/site/clover/clover.xml'
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  1.951 s
+[INFO] Finished at: 2024-06-06T10:08:42+02:00
+[INFO] ------------------------------------------------------------------------
+
+Total coverage 100.000000%
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+2024/06/06 10:08:43 Executes tests with 1 coverage objects
+2024/06/06 10:08:43 Evaluated model "openrouter/deepseek/deepseek-chat" using language "java" and repository "java/plain": encountered 0 problems: []
+2024/06/06 10:17:42 Evaluating model "openrouter/deepseek/deepseek-chat" using language "java" and repository "java/plain"
+2024/06/06 10:17:42 Querying model "openrouter/deepseek/deepseek-chat" with:
+	Given the following Java code file "src/main/java/com/eval/Plain.java" with package "com.eval", provide a test file for this code with JUnit 5 as a test framework.
+	The tests should produce 100 percent code coverage and must compile.
+	The response must contain only the test code and nothing else.
+
+	```java
+	package com.eval;
+
+	class Plain {
+	    static void plain() {
+	    }
+	}
+	```
+2024/06/06 10:17:49 Model "openrouter/deepseek/deepseek-chat" responded (6689 ms) with:
+	```java
+	package com.eval;
+
+	import org.junit.jupiter.api.Test;
+
+	import static org.junit.jupiter.api.Assertions.*;
+
+	class PlainTest {
+
+	    @Test
+	    void testPlain() {
+	        Plain.plain();
+	    }
+	}
+	```
+2024/06/06 10:17:49 $ symflower test --language java --workspace /tmp/eval-dev-quality4045395265/plain --coverage-file /tmp/eval-dev-quality4045395265/plain/coverage.json
+[INFO] Scanning for projects...
+[WARNING] 
+[WARNING] Some problems were encountered while building the effective model for eval.dev.quality:test-java-plain:jar:SNAPSHOT
+[WARNING] 'version' uses an unsupported snapshot version format, should be '*-SNAPSHOT' instead. @ line 6, column 11
+[WARNING] 
+[WARNING] It is highly recommended to fix these problems because they threaten the stability of your build.
+[WARNING] 
+[WARNING] For this reason, future Maven versions might no longer support building such malformed projects.
+[WARNING] 
+[INFO] 
+[INFO] ------------------< eval.dev.quality:test-java-plain >------------------
+[INFO] Building test-java-plain SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clover:4.5.2:aggregate (default-cli) @ test-java-plain ---
+[INFO] 
+[INFO] ------------------< eval.dev.quality:test-java-plain >------------------
+[INFO] Building test-java-plain SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clover:4.5.2:clover (default-cli) @ test-java-plain ---
+[INFO] Using default-clover-report descriptor.
+[INFO] Using Clover report descriptor: /tmp/mvn5861591872411648812resource
+[INFO] OpenClover Version 4.5.2, built on 2024-01-31
+[INFO] Clover is enabled with initstring '/tmp/eval-dev-quality4045395265/plain/target/clover/clover.db'
+[INFO] OpenClover Version 4.5.2, built on 2024-01-31
+[INFO] Loading coverage database from: '/tmp/eval-dev-quality4045395265/plain/target/clover/clover.db'
+[INFO] Writing report to '/tmp/eval-dev-quality4045395265/plain/target/site/clover/clover.xml'
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  1.960 s
+[INFO] Finished at: 2024-06-06T10:17:55+02:00
+[INFO] ------------------------------------------------------------------------
+
+Total coverage 100.000000%
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+2024/06/06 10:17:55 Executes tests with 1 coverage objects
+2024/06/06 10:17:55 Evaluated model "openrouter/deepseek/deepseek-chat" using language "java" and repository "java/plain": encountered 0 problems: []
+2024/06/06 10:28:05 Evaluating model "openrouter/deepseek/deepseek-chat" using language "java" and repository "java/plain"
+2024/06/06 10:28:05 Querying model "openrouter/deepseek/deepseek-chat" with:
+	Given the following Java code file "src/main/java/com/eval/Plain.java" with package "com.eval", provide a test file for this code with JUnit 5 as a test framework.
+	The tests should produce 100 percent code coverage and must compile.
+	The response must contain only the test code and nothing else.
+
+	```java
+	package com.eval;
+
+	class Plain {
+	    static void plain() {
+	    }
+	}
+	```
+2024/06/06 10:28:11 Model "openrouter/deepseek/deepseek-chat" responded (6164 ms) with:
+	```java
+	package com.eval;
+
+	import org.junit.jupiter.api.Test;
+
+	import static org.junit.jupiter.api.Assertions.*;
+
+	class PlainTest {
+
+	    @Test
+	    void testPlain() {
+	        Plain.plain();
+	    }
+	}
+	```
+2024/06/06 10:28:11 $ symflower test --language java --workspace /tmp/eval-dev-quality4045395265/plain --coverage-file /tmp/eval-dev-quality4045395265/plain/coverage.json
+[INFO] Scanning for projects...
+[WARNING] 
+[WARNING] Some problems were encountered while building the effective model for eval.dev.quality:test-java-plain:jar:SNAPSHOT
+[WARNING] 'version' uses an unsupported snapshot version format, should be '*-SNAPSHOT' instead. @ line 6, column 11
+[WARNING] 
+[WARNING] It is highly recommended to fix these problems because they threaten the stability of your build.
+[WARNING] 
+[WARNING] For this reason, future Maven versions might no longer support building such malformed projects.
+[WARNING] 
+[INFO] 
+[INFO] ------------------< eval.dev.quality:test-java-plain >------------------
+[INFO] Building test-java-plain SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clover:4.5.2:aggregate (default-cli) @ test-java-plain ---
+[INFO] 
+[INFO] ------------------< eval.dev.quality:test-java-plain >------------------
+[INFO] Building test-java-plain SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clover:4.5.2:clover (default-cli) @ test-java-plain ---
+[INFO] Using default-clover-report descriptor.
+[INFO] Using Clover report descriptor: /tmp/mvn16388535027129276929resource
+[INFO] OpenClover Version 4.5.2, built on 2024-01-31
+[INFO] Clover is enabled with initstring '/tmp/eval-dev-quality4045395265/plain/target/clover/clover.db'
+[INFO] OpenClover Version 4.5.2, built on 2024-01-31
+[INFO] Loading coverage database from: '/tmp/eval-dev-quality4045395265/plain/target/clover/clover.db'
+[INFO] Writing report to '/tmp/eval-dev-quality4045395265/plain/target/site/clover/clover.xml'
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  1.930 s
+[INFO] Finished at: 2024-06-06T10:28:17+02:00
+[INFO] ------------------------------------------------------------------------
+
+Total coverage 100.000000%
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+2024/06/06 10:28:17 Executes tests with 1 coverage objects
+2024/06/06 10:28:17 Evaluated model "openrouter/deepseek/deepseek-chat" using language "java" and repository "java/plain": encountered 0 problems: []
+2024/06/06 10:36:17 Evaluating model "openrouter/deepseek/deepseek-chat" using language "java" and repository "java/plain"
+2024/06/06 10:36:17 Querying model "openrouter/deepseek/deepseek-chat" with:
+	Given the following Java code file "src/main/java/com/eval/Plain.java" with package "com.eval", provide a test file for this code with JUnit 5 as a test framework.
+	The tests should produce 100 percent code coverage and must compile.
+	The response must contain only the test code and nothing else.
+
+	```java
+	package com.eval;
+
+	class Plain {
+	    static void plain() {
+	    }
+	}
+	```
+2024/06/06 10:36:23 Model "openrouter/deepseek/deepseek-chat" responded (5531 ms) with:
+	```java
+	package com.eval;
+
+	import org.junit.jupiter.api.Test;
+
+	import static org.junit.jupiter.api.Assertions.*;
+
+	class PlainTest {
+
+	    @Test
+	    void testPlain() {
+	        Plain.plain();
+	    }
+	}
+	```
+2024/06/06 10:36:23 $ symflower test --language java --workspace /tmp/eval-dev-quality4045395265/plain --coverage-file /tmp/eval-dev-quality4045395265/plain/coverage.json
+[INFO] Scanning for projects...
+[WARNING] 
+[WARNING] Some problems were encountered while building the effective model for eval.dev.quality:test-java-plain:jar:SNAPSHOT
+[WARNING] 'version' uses an unsupported snapshot version format, should be '*-SNAPSHOT' instead. @ line 6, column 11
+[WARNING] 
+[WARNING] It is highly recommended to fix these problems because they threaten the stability of your build.
+[WARNING] 
+[WARNING] For this reason, future Maven versions might no longer support building such malformed projects.
+[WARNING] 
+[INFO] 
+[INFO] ------------------< eval.dev.quality:test-java-plain >------------------
+[INFO] Building test-java-plain SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clover:4.5.2:aggregate (default-cli) @ test-java-plain ---
+[INFO] 
+[INFO] ------------------< eval.dev.quality:test-java-plain >------------------
+[INFO] Building test-java-plain SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clover:4.5.2:clover (default-cli) @ test-java-plain ---
+[INFO] Using default-clover-report descriptor.
+[INFO] Using Clover report descriptor: /tmp/mvn5973064906013778808resource
+[INFO] OpenClover Version 4.5.2, built on 2024-01-31
+[INFO] Clover is enabled with initstring '/tmp/eval-dev-quality4045395265/plain/target/clover/clover.db'
+[INFO] OpenClover Version 4.5.2, built on 2024-01-31
+[INFO] Loading coverage database from: '/tmp/eval-dev-quality4045395265/plain/target/clover/clover.db'
+[INFO] Writing report to '/tmp/eval-dev-quality4045395265/plain/target/site/clover/clover.xml'
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  1.967 s
+[INFO] Finished at: 2024-06-06T10:36:29+02:00
+[INFO] ------------------------------------------------------------------------
+
+Total coverage 100.000000%
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+2024/06/06 10:36:29 Executes tests with 1 coverage objects
+2024/06/06 10:36:29 Evaluated model "openrouter/deepseek/deepseek-chat" using language "java" and repository "java/plain": encountered 0 problems: []
+2024/06/06 10:44:23 Evaluating model "openrouter/deepseek/deepseek-chat" using language "java" and repository "java/plain"
+2024/06/06 10:44:23 Querying model "openrouter/deepseek/deepseek-chat" with:
+	Given the following Java code file "src/main/java/com/eval/Plain.java" with package "com.eval", provide a test file for this code with JUnit 5 as a test framework.
+	The tests should produce 100 percent code coverage and must compile.
+	The response must contain only the test code and nothing else.
+
+	```java
+	package com.eval;
+
+	class Plain {
+	    static void plain() {
+	    }
+	}
+	```
+2024/06/06 10:44:29 Model "openrouter/deepseek/deepseek-chat" responded (6065 ms) with:
+	```java
+	package com.eval;
+
+	import org.junit.jupiter.api.Test;
+
+	import static org.junit.jupiter.api.Assertions.*;
+
+	class PlainTest {
+
+	    @Test
+	    void testPlain() {
+	        Plain.plain();
+	    }
+	}
+	```
+2024/06/06 10:44:29 $ symflower test --language java --workspace /tmp/eval-dev-quality4045395265/plain --coverage-file /tmp/eval-dev-quality4045395265/plain/coverage.json
+[INFO] Scanning for projects...
+[WARNING] 
+[WARNING] Some problems were encountered while building the effective model for eval.dev.quality:test-java-plain:jar:SNAPSHOT
+[WARNING] 'version' uses an unsupported snapshot version format, should be '*-SNAPSHOT' instead. @ line 6, column 11
+[WARNING] 
+[WARNING] It is highly recommended to fix these problems because they threaten the stability of your build.
+[WARNING] 
+[WARNING] For this reason, future Maven versions might no longer support building such malformed projects.
+[WARNING] 
+[INFO] 
+[INFO] ------------------< eval.dev.quality:test-java-plain >------------------
+[INFO] Building test-java-plain SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clover:4.5.2:aggregate (default-cli) @ test-java-plain ---
+[INFO] 
+[INFO] ------------------< eval.dev.quality:test-java-plain >------------------
+[INFO] Building test-java-plain SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clover:4.5.2:clover (default-cli) @ test-java-plain ---
+[INFO] Using default-clover-report descriptor.
+[INFO] Using Clover report descriptor: /tmp/mvn1499460436134797084resource
+[INFO] OpenClover Version 4.5.2, built on 2024-01-31
+[INFO] Clover is enabled with initstring '/tmp/eval-dev-quality4045395265/plain/target/clover/clover.db'
+[INFO] OpenClover Version 4.5.2, built on 2024-01-31
+[INFO] Loading coverage database from: '/tmp/eval-dev-quality4045395265/plain/target/clover/clover.db'
+[INFO] Writing report to '/tmp/eval-dev-quality4045395265/plain/target/site/clover/clover.xml'
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  1.955 s
+[INFO] Finished at: 2024-06-06T10:44:35+02:00
+[INFO] ------------------------------------------------------------------------
+
+Total coverage 100.000000%
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+2024/06/06 10:44:35 Executes tests with 1 coverage objects
+2024/06/06 10:44:35 Evaluated model "openrouter/deepseek/deepseek-chat" using language "java" and repository "java/plain": encountered 0 problems: []

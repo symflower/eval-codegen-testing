@@ -1,0 +1,361 @@
+2024/06/06 10:08:01 Evaluating model "openrouter/perplexity/llama-3-sonar-large-32k-online" using language "java" and repository "java/plain"
+2024/06/06 10:08:01 Querying model "openrouter/perplexity/llama-3-sonar-large-32k-online" with:
+	Given the following Java code file "src/main/java/com/eval/Plain.java" with package "com.eval", provide a test file for this code with JUnit 5 as a test framework.
+	The tests should produce 100 percent code coverage and must compile.
+	The response must contain only the test code and nothing else.
+
+	```java
+	package com.eval;
+
+	class Plain {
+	    static void plain() {
+	    }
+	}
+	```
+2024/06/06 10:08:03 Model "openrouter/perplexity/llama-3-sonar-large-32k-online" responded (2556 ms) with:
+	```java
+	package com.eval;
+
+	import org.junit.jupiter.api.Test;
+
+	public class PlainTest {
+	    @Test
+	    void testPlain() {
+	        Plain.plain();
+	    }
+	}
+	```
+2024/06/06 10:08:03 $ symflower test --language java --workspace /tmp/eval-dev-quality364885804/plain --coverage-file /tmp/eval-dev-quality364885804/plain/coverage.json
+[INFO] Scanning for projects...
+[WARNING] 
+[WARNING] Some problems were encountered while building the effective model for eval.dev.quality:test-java-plain:jar:SNAPSHOT
+[WARNING] 'version' uses an unsupported snapshot version format, should be '*-SNAPSHOT' instead. @ line 6, column 11
+[WARNING] 
+[WARNING] It is highly recommended to fix these problems because they threaten the stability of your build.
+[WARNING] 
+[WARNING] For this reason, future Maven versions might no longer support building such malformed projects.
+[WARNING] 
+[INFO] 
+[INFO] ------------------< eval.dev.quality:test-java-plain >------------------
+[INFO] Building test-java-plain SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clover:4.5.2:aggregate (default-cli) @ test-java-plain ---
+[INFO] 
+[INFO] ------------------< eval.dev.quality:test-java-plain >------------------
+[INFO] Building test-java-plain SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clover:4.5.2:clover (default-cli) @ test-java-plain ---
+[INFO] Using default-clover-report descriptor.
+[INFO] Using Clover report descriptor: /tmp/mvn15522117946181538772resource
+[INFO] OpenClover Version 4.5.2, built on 2024-01-31
+[INFO] Clover is enabled with initstring '/tmp/eval-dev-quality364885804/plain/target/clover/clover.db'
+[INFO] OpenClover Version 4.5.2, built on 2024-01-31
+[INFO] Loading coverage database from: '/tmp/eval-dev-quality364885804/plain/target/clover/clover.db'
+[INFO] Writing report to '/tmp/eval-dev-quality364885804/plain/target/site/clover/clover.xml'
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  1.921 s
+[INFO] Finished at: 2024-06-06T10:08:09+02:00
+[INFO] ------------------------------------------------------------------------
+
+Total coverage 100.000000%
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+2024/06/06 10:08:10 Executes tests with 1 coverage objects
+2024/06/06 10:08:10 Evaluated model "openrouter/perplexity/llama-3-sonar-large-32k-online" using language "java" and repository "java/plain": encountered 0 problems: []
+2024/06/06 10:15:38 Evaluating model "openrouter/perplexity/llama-3-sonar-large-32k-online" using language "java" and repository "java/plain"
+2024/06/06 10:15:38 Querying model "openrouter/perplexity/llama-3-sonar-large-32k-online" with:
+	Given the following Java code file "src/main/java/com/eval/Plain.java" with package "com.eval", provide a test file for this code with JUnit 5 as a test framework.
+	The tests should produce 100 percent code coverage and must compile.
+	The response must contain only the test code and nothing else.
+
+	```java
+	package com.eval;
+
+	class Plain {
+	    static void plain() {
+	    }
+	}
+	```
+2024/06/06 10:15:41 Model "openrouter/perplexity/llama-3-sonar-large-32k-online" responded (3751 ms) with:
+	To achieve 100% code coverage for the "Plain" class, you need to write a test that covers the static method "plain()". Here is how you can write a test using JUnit 5:
+
+	```java
+	package com.eval;
+
+	import org.junit.jupiter.api.Test;
+
+	public class PlainTest {
+	    @Test
+	    void testPlain() {
+	        Plain.plain();
+	    }
+	}
+	```
+
+	This test case covers the static method "plain()" in the "Plain" class, resulting in 100% code coverage.
+2024/06/06 10:15:41 $ symflower test --language java --workspace /tmp/eval-dev-quality364885804/plain --coverage-file /tmp/eval-dev-quality364885804/plain/coverage.json
+[INFO] Scanning for projects...
+[WARNING] 
+[WARNING] Some problems were encountered while building the effective model for eval.dev.quality:test-java-plain:jar:SNAPSHOT
+[WARNING] 'version' uses an unsupported snapshot version format, should be '*-SNAPSHOT' instead. @ line 6, column 11
+[WARNING] 
+[WARNING] It is highly recommended to fix these problems because they threaten the stability of your build.
+[WARNING] 
+[WARNING] For this reason, future Maven versions might no longer support building such malformed projects.
+[WARNING] 
+[INFO] 
+[INFO] ------------------< eval.dev.quality:test-java-plain >------------------
+[INFO] Building test-java-plain SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clover:4.5.2:aggregate (default-cli) @ test-java-plain ---
+[INFO] 
+[INFO] ------------------< eval.dev.quality:test-java-plain >------------------
+[INFO] Building test-java-plain SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clover:4.5.2:clover (default-cli) @ test-java-plain ---
+[INFO] Using default-clover-report descriptor.
+[INFO] Using Clover report descriptor: /tmp/mvn3931554305620572648resource
+[INFO] OpenClover Version 4.5.2, built on 2024-01-31
+[INFO] Clover is enabled with initstring '/tmp/eval-dev-quality364885804/plain/target/clover/clover.db'
+[INFO] OpenClover Version 4.5.2, built on 2024-01-31
+[INFO] Loading coverage database from: '/tmp/eval-dev-quality364885804/plain/target/clover/clover.db'
+[INFO] Writing report to '/tmp/eval-dev-quality364885804/plain/target/site/clover/clover.xml'
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  1.938 s
+[INFO] Finished at: 2024-06-06T10:15:47+02:00
+[INFO] ------------------------------------------------------------------------
+
+Total coverage 100.000000%
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+2024/06/06 10:15:47 Executes tests with 1 coverage objects
+2024/06/06 10:15:47 Evaluated model "openrouter/perplexity/llama-3-sonar-large-32k-online" using language "java" and repository "java/plain": encountered 0 problems: []
+2024/06/06 10:22:02 Evaluating model "openrouter/perplexity/llama-3-sonar-large-32k-online" using language "java" and repository "java/plain"
+2024/06/06 10:22:02 Querying model "openrouter/perplexity/llama-3-sonar-large-32k-online" with:
+	Given the following Java code file "src/main/java/com/eval/Plain.java" with package "com.eval", provide a test file for this code with JUnit 5 as a test framework.
+	The tests should produce 100 percent code coverage and must compile.
+	The response must contain only the test code and nothing else.
+
+	```java
+	package com.eval;
+
+	class Plain {
+	    static void plain() {
+	    }
+	}
+	```
+2024/06/06 10:22:04 Model "openrouter/perplexity/llama-3-sonar-large-32k-online" responded (2455 ms) with:
+	```java
+	package com.eval;
+
+	import org.junit.jupiter.api.Test;
+	import static org.junit.jupiter.api.Assertions.assertAll;
+
+	public class PlainTest {
+
+	    @Test
+	    void testPlain() {
+	        Plain.plain();
+	        assertAll("No assertions necessary as method does nothing");
+	    }
+	}
+	```
+2024/06/06 10:22:04 $ symflower test --language java --workspace /tmp/eval-dev-quality364885804/plain --coverage-file /tmp/eval-dev-quality364885804/plain/coverage.json
+[INFO] Scanning for projects...
+[WARNING] 
+[WARNING] Some problems were encountered while building the effective model for eval.dev.quality:test-java-plain:jar:SNAPSHOT
+[WARNING] 'version' uses an unsupported snapshot version format, should be '*-SNAPSHOT' instead. @ line 6, column 11
+[WARNING] 
+[WARNING] It is highly recommended to fix these problems because they threaten the stability of your build.
+[WARNING] 
+[WARNING] For this reason, future Maven versions might no longer support building such malformed projects.
+[WARNING] 
+[INFO] 
+[INFO] ------------------< eval.dev.quality:test-java-plain >------------------
+[INFO] Building test-java-plain SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clover:4.5.2:aggregate (default-cli) @ test-java-plain ---
+[INFO] 
+[INFO] ------------------< eval.dev.quality:test-java-plain >------------------
+[INFO] Building test-java-plain SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clover:4.5.2:clover (default-cli) @ test-java-plain ---
+[INFO] Using default-clover-report descriptor.
+[INFO] Using Clover report descriptor: /tmp/mvn12928230457562468679resource
+[INFO] OpenClover Version 4.5.2, built on 2024-01-31
+[INFO] Clover is enabled with initstring '/tmp/eval-dev-quality364885804/plain/target/clover/clover.db'
+[INFO] OpenClover Version 4.5.2, built on 2024-01-31
+[INFO] Loading coverage database from: '/tmp/eval-dev-quality364885804/plain/target/clover/clover.db'
+[INFO] Writing report to '/tmp/eval-dev-quality364885804/plain/target/site/clover/clover.xml'
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  1.930 s
+[INFO] Finished at: 2024-06-06T10:22:10+02:00
+[INFO] ------------------------------------------------------------------------
+
+Total coverage 100.000000%
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+2024/06/06 10:22:10 Executes tests with 1 coverage objects
+2024/06/06 10:22:10 Evaluated model "openrouter/perplexity/llama-3-sonar-large-32k-online" using language "java" and repository "java/plain": encountered 0 problems: []
+2024/06/06 10:29:53 Evaluating model "openrouter/perplexity/llama-3-sonar-large-32k-online" using language "java" and repository "java/plain"
+2024/06/06 10:29:53 Querying model "openrouter/perplexity/llama-3-sonar-large-32k-online" with:
+	Given the following Java code file "src/main/java/com/eval/Plain.java" with package "com.eval", provide a test file for this code with JUnit 5 as a test framework.
+	The tests should produce 100 percent code coverage and must compile.
+	The response must contain only the test code and nothing else.
+
+	```java
+	package com.eval;
+
+	class Plain {
+	    static void plain() {
+	    }
+	}
+	```
+2024/06/06 10:29:55 Model "openrouter/perplexity/llama-3-sonar-large-32k-online" responded (2268 ms) with:
+	```java
+	package com.eval;
+
+	import org.junit.jupiter.api.Test;
+	import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+
+	class PlainTest {
+
+	    @Test
+	    void testPlain() {
+	        assertDoesNotThrow(Plain::plain);
+	    }
+	}
+	```
+2024/06/06 10:29:55 $ symflower test --language java --workspace /tmp/eval-dev-quality364885804/plain --coverage-file /tmp/eval-dev-quality364885804/plain/coverage.json
+[INFO] Scanning for projects...
+[WARNING] 
+[WARNING] Some problems were encountered while building the effective model for eval.dev.quality:test-java-plain:jar:SNAPSHOT
+[WARNING] 'version' uses an unsupported snapshot version format, should be '*-SNAPSHOT' instead. @ line 6, column 11
+[WARNING] 
+[WARNING] It is highly recommended to fix these problems because they threaten the stability of your build.
+[WARNING] 
+[WARNING] For this reason, future Maven versions might no longer support building such malformed projects.
+[WARNING] 
+[INFO] 
+[INFO] ------------------< eval.dev.quality:test-java-plain >------------------
+[INFO] Building test-java-plain SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clover:4.5.2:aggregate (default-cli) @ test-java-plain ---
+[INFO] 
+[INFO] ------------------< eval.dev.quality:test-java-plain >------------------
+[INFO] Building test-java-plain SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clover:4.5.2:clover (default-cli) @ test-java-plain ---
+[INFO] Using default-clover-report descriptor.
+[INFO] Using Clover report descriptor: /tmp/mvn899540154421000503resource
+[INFO] OpenClover Version 4.5.2, built on 2024-01-31
+[INFO] Clover is enabled with initstring '/tmp/eval-dev-quality364885804/plain/target/clover/clover.db'
+[INFO] OpenClover Version 4.5.2, built on 2024-01-31
+[INFO] Loading coverage database from: '/tmp/eval-dev-quality364885804/plain/target/clover/clover.db'
+[INFO] Writing report to '/tmp/eval-dev-quality364885804/plain/target/site/clover/clover.xml'
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  1.924 s
+[INFO] Finished at: 2024-06-06T10:30:01+02:00
+[INFO] ------------------------------------------------------------------------
+
+Total coverage 100.000000%
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+2024/06/06 10:30:01 Executes tests with 1 coverage objects
+2024/06/06 10:30:01 Evaluated model "openrouter/perplexity/llama-3-sonar-large-32k-online" using language "java" and repository "java/plain": encountered 0 problems: []
+2024/06/06 10:36:08 Evaluating model "openrouter/perplexity/llama-3-sonar-large-32k-online" using language "java" and repository "java/plain"
+2024/06/06 10:36:08 Querying model "openrouter/perplexity/llama-3-sonar-large-32k-online" with:
+	Given the following Java code file "src/main/java/com/eval/Plain.java" with package "com.eval", provide a test file for this code with JUnit 5 as a test framework.
+	The tests should produce 100 percent code coverage and must compile.
+	The response must contain only the test code and nothing else.
+
+	```java
+	package com.eval;
+
+	class Plain {
+	    static void plain() {
+	    }
+	}
+	```
+2024/06/06 10:36:12 Model "openrouter/perplexity/llama-3-sonar-large-32k-online" responded (3669 ms) with:
+	Here is a JUnit 5 test for the given Java code that provides 100 percent code coverage:
+
+	```java
+	package com.eval;
+
+	import org.junit.jupiter.api.Test;
+
+	import static org.junit.jupiter.api.Assertions.assertEquals;
+
+	public class PlainTest {
+
+	    @Test
+	    void plainTest() {
+	        Plain.plain(); // Call the method to ensure it is covered
+	    }
+	}
+	```
+
+	This test case ensures that all lines in the provided `Plain` class are executed during the test, achieving 100 percent code coverage.
+2024/06/06 10:36:12 $ symflower test --language java --workspace /tmp/eval-dev-quality364885804/plain --coverage-file /tmp/eval-dev-quality364885804/plain/coverage.json
+[INFO] Scanning for projects...
+[WARNING] 
+[WARNING] Some problems were encountered while building the effective model for eval.dev.quality:test-java-plain:jar:SNAPSHOT
+[WARNING] 'version' uses an unsupported snapshot version format, should be '*-SNAPSHOT' instead. @ line 6, column 11
+[WARNING] 
+[WARNING] It is highly recommended to fix these problems because they threaten the stability of your build.
+[WARNING] 
+[WARNING] For this reason, future Maven versions might no longer support building such malformed projects.
+[WARNING] 
+[INFO] 
+[INFO] ------------------< eval.dev.quality:test-java-plain >------------------
+[INFO] Building test-java-plain SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clover:4.5.2:aggregate (default-cli) @ test-java-plain ---
+[INFO] 
+[INFO] ------------------< eval.dev.quality:test-java-plain >------------------
+[INFO] Building test-java-plain SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clover:4.5.2:clover (default-cli) @ test-java-plain ---
+[INFO] Using default-clover-report descriptor.
+[INFO] Using Clover report descriptor: /tmp/mvn3134952321966776421resource
+[INFO] OpenClover Version 4.5.2, built on 2024-01-31
+[INFO] Clover is enabled with initstring '/tmp/eval-dev-quality364885804/plain/target/clover/clover.db'
+[INFO] OpenClover Version 4.5.2, built on 2024-01-31
+[INFO] Loading coverage database from: '/tmp/eval-dev-quality364885804/plain/target/clover/clover.db'
+[INFO] Writing report to '/tmp/eval-dev-quality364885804/plain/target/site/clover/clover.xml'
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  1.931 s
+[INFO] Finished at: 2024-06-06T10:36:18+02:00
+[INFO] ------------------------------------------------------------------------
+
+Total coverage 100.000000%
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+2024/06/06 10:36:18 Executes tests with 1 coverage objects
+2024/06/06 10:36:18 Evaluated model "openrouter/perplexity/llama-3-sonar-large-32k-online" using language "java" and repository "java/plain": encountered 0 problems: []

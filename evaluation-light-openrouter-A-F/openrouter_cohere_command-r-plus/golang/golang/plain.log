@@ -1,0 +1,449 @@
+2024/06/06 10:03:35 Evaluating model "openrouter/cohere/command-r-plus" using language "golang" and repository "golang/plain"
+2024/06/06 10:03:35 Querying model "openrouter/cohere/command-r-plus" with:
+	Given the following Go code file "plain.go" with package "plain", provide a test file for this code.
+	The tests should produce 100 percent code coverage and must compile.
+	The response must contain only the test code and nothing else.
+
+	```golang
+	package plain
+
+	func plain() {
+		return // This does not do anything but it gives us a line to cover.
+	}
+	```
+2024/06/06 10:03:37 Model "openrouter/cohere/command-r-plus" responded (1647 ms) with:
+	```golang
+	package plain_test
+
+	import (
+		"testing"
+
+		"github.com/your-user-name/your-project/plain"
+	)
+
+	func TestPlain(t *testing.T) {
+		plain.Plain()
+	}
+	```
+2024/06/06 10:03:37 $ go mod tidy
+go: finding module for package github.com/your-user-name/your-project/plain
+go: plain tested by
+	plain.test imports
+	github.com/your-user-name/your-project/plain: cannot find module providing package github.com/your-user-name/your-project/plain: module github.com/your-user-name/your-project/plain: git ls-remote -q origin in /home/eval/go/pkg/mod/cache/vcs/83f2952bb8ab78e9107defdc7224ee1bd17321a3faf053f950b89746006d7ab9: exit status 128:
+	fatal: could not read Username for 'https://github.com': terminal prompts disabled
+Confirm the import path was entered correctly.
+If this is a private repository, see https://golang.org/doc/faq#git_https for additional information.
+2024/06/06 10:03:39 Evaluated model "openrouter/cohere/command-r-plus" using language "golang" and repository "golang/plain": encountered 1 problems: [exit status 1
+go: finding module for package github.com/your-user-name/your-project/plain
+go: plain tested by
+	plain.test imports
+	github.com/your-user-name/your-project/plain: cannot find module providing package github.com/your-user-name/your-project/plain: module github.com/your-user-name/your-project/plain: git ls-remote -q origin in /home/eval/go/pkg/mod/cache/vcs/83f2952bb8ab78e9107defdc7224ee1bd17321a3faf053f950b89746006d7ab9: exit status 128:
+	fatal: could not read Username for 'https://github.com': terminal prompts disabled
+Confirm the import path was entered correctly.
+If this is a private repository, see https://golang.org/doc/faq#git_https for additional information.
+
+github.com/symflower/eval-dev-quality/util.CommandWithResult
+	/home/eval/eval-dev-quality/util/exec.go:52
+github.com/symflower/eval-dev-quality/language/golang.(*Language).Execute
+	/home/eval/eval-dev-quality/language/golang/language.go:82
+github.com/symflower/eval-dev-quality/evaluate.Repository
+	/home/eval/eval-dev-quality/evaluate/repository.go:57
+github.com/symflower/eval-dev-quality/evaluate.Evaluate.func1
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:119
+github.com/symflower/eval-dev-quality/evaluate.withLoadedModel
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:253
+github.com/symflower/eval-dev-quality/evaluate.Evaluate
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:109
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.(*Evaluate).Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/evaluate.go:284
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute.func1
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:34
+github.com/jessevdk/go-flags.(*Parser).ParseArgs
+	/home/eval/go/pkg/mod/github.com/jessevdk/go-flags@v1.5.1-0.20210607101731-3927b71304df/parser.go:333
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:37
+main.main
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/main.go:11
+runtime.main
+	/home/eval/go/src/runtime/proc.go:267
+runtime.goexit
+	/home/eval/go/src/runtime/asm_amd64.s:1650
+github.com/symflower/eval-dev-quality/language/golang.(*Language).Execute
+	/home/eval/eval-dev-quality/language/golang/language.go:92
+github.com/symflower/eval-dev-quality/evaluate.Repository
+	/home/eval/eval-dev-quality/evaluate/repository.go:57
+github.com/symflower/eval-dev-quality/evaluate.Evaluate.func1
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:119
+github.com/symflower/eval-dev-quality/evaluate.withLoadedModel
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:253
+github.com/symflower/eval-dev-quality/evaluate.Evaluate
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:109
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.(*Evaluate).Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/evaluate.go:284
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute.func1
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:34
+github.com/jessevdk/go-flags.(*Parser).ParseArgs
+	/home/eval/go/pkg/mod/github.com/jessevdk/go-flags@v1.5.1-0.20210607101731-3927b71304df/parser.go:333
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:37
+main.main
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/main.go:11
+runtime.main
+	/home/eval/go/src/runtime/proc.go:267
+runtime.goexit
+	/home/eval/go/src/runtime/asm_amd64.s:1650
+go: finding module for package github.com/your-user-name/your-project/plain
+go: plain tested by
+	plain.test imports
+	github.com/your-user-name/your-project/plain: cannot find module providing package github.com/your-user-name/your-project/plain: module github.com/your-user-name/your-project/plain: git ls-remote -q origin in /home/eval/go/pkg/mod/cache/vcs/83f2952bb8ab78e9107defdc7224ee1bd17321a3faf053f950b89746006d7ab9: exit status 128:
+	fatal: could not read Username for 'https://github.com': terminal prompts disabled
+Confirm the import path was entered correctly.
+If this is a private repository, see https://golang.org/doc/faq#git_https for additional information.
+
+plain.go]
+2024/06/06 10:11:32 Evaluating model "openrouter/cohere/command-r-plus" using language "golang" and repository "golang/plain"
+2024/06/06 10:11:32 Querying model "openrouter/cohere/command-r-plus" with:
+	Given the following Go code file "plain.go" with package "plain", provide a test file for this code.
+	The tests should produce 100 percent code coverage and must compile.
+	The response must contain only the test code and nothing else.
+
+	```golang
+	package plain
+
+	func plain() {
+		return // This does not do anything but it gives us a line to cover.
+	}
+	```
+2024/06/06 10:11:33 Model "openrouter/cohere/command-r-plus" responded (1402 ms) with:
+	```golang
+	package plain_test
+
+	import (
+		"testing"
+
+		"github.com/your/package/plain"
+	)
+
+	func TestPlain(t *testing.T) {
+		// Test that the function completes
+		plain.Plain()
+	}
+	```
+2024/06/06 10:11:33 $ go mod tidy
+go: finding module for package github.com/your/package/plain
+go: plain tested by
+	plain.test imports
+	github.com/your/package/plain: cannot find module providing package github.com/your/package/plain: module github.com/your/package/plain: git ls-remote -q origin in /home/eval/go/pkg/mod/cache/vcs/ede1b321abaa1b224e62b534653a65d90588f27984f330415401420b55fcd626: exit status 128:
+	fatal: could not read Username for 'https://github.com': terminal prompts disabled
+Confirm the import path was entered correctly.
+If this is a private repository, see https://golang.org/doc/faq#git_https for additional information.
+2024/06/06 10:11:35 Evaluated model "openrouter/cohere/command-r-plus" using language "golang" and repository "golang/plain": encountered 1 problems: [exit status 1
+go: finding module for package github.com/your/package/plain
+go: plain tested by
+	plain.test imports
+	github.com/your/package/plain: cannot find module providing package github.com/your/package/plain: module github.com/your/package/plain: git ls-remote -q origin in /home/eval/go/pkg/mod/cache/vcs/ede1b321abaa1b224e62b534653a65d90588f27984f330415401420b55fcd626: exit status 128:
+	fatal: could not read Username for 'https://github.com': terminal prompts disabled
+Confirm the import path was entered correctly.
+If this is a private repository, see https://golang.org/doc/faq#git_https for additional information.
+
+github.com/symflower/eval-dev-quality/util.CommandWithResult
+	/home/eval/eval-dev-quality/util/exec.go:52
+github.com/symflower/eval-dev-quality/language/golang.(*Language).Execute
+	/home/eval/eval-dev-quality/language/golang/language.go:82
+github.com/symflower/eval-dev-quality/evaluate.Repository
+	/home/eval/eval-dev-quality/evaluate/repository.go:57
+github.com/symflower/eval-dev-quality/evaluate.Evaluate.func1
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:119
+github.com/symflower/eval-dev-quality/evaluate.withLoadedModel
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:253
+github.com/symflower/eval-dev-quality/evaluate.Evaluate
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:109
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.(*Evaluate).Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/evaluate.go:284
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute.func1
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:34
+github.com/jessevdk/go-flags.(*Parser).ParseArgs
+	/home/eval/go/pkg/mod/github.com/jessevdk/go-flags@v1.5.1-0.20210607101731-3927b71304df/parser.go:333
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:37
+main.main
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/main.go:11
+runtime.main
+	/home/eval/go/src/runtime/proc.go:267
+runtime.goexit
+	/home/eval/go/src/runtime/asm_amd64.s:1650
+github.com/symflower/eval-dev-quality/language/golang.(*Language).Execute
+	/home/eval/eval-dev-quality/language/golang/language.go:92
+github.com/symflower/eval-dev-quality/evaluate.Repository
+	/home/eval/eval-dev-quality/evaluate/repository.go:57
+github.com/symflower/eval-dev-quality/evaluate.Evaluate.func1
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:119
+github.com/symflower/eval-dev-quality/evaluate.withLoadedModel
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:253
+github.com/symflower/eval-dev-quality/evaluate.Evaluate
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:109
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.(*Evaluate).Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/evaluate.go:284
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute.func1
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:34
+github.com/jessevdk/go-flags.(*Parser).ParseArgs
+	/home/eval/go/pkg/mod/github.com/jessevdk/go-flags@v1.5.1-0.20210607101731-3927b71304df/parser.go:333
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:37
+main.main
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/main.go:11
+runtime.main
+	/home/eval/go/src/runtime/proc.go:267
+runtime.goexit
+	/home/eval/go/src/runtime/asm_amd64.s:1650
+go: finding module for package github.com/your/package/plain
+go: plain tested by
+	plain.test imports
+	github.com/your/package/plain: cannot find module providing package github.com/your/package/plain: module github.com/your/package/plain: git ls-remote -q origin in /home/eval/go/pkg/mod/cache/vcs/ede1b321abaa1b224e62b534653a65d90588f27984f330415401420b55fcd626: exit status 128:
+	fatal: could not read Username for 'https://github.com': terminal prompts disabled
+Confirm the import path was entered correctly.
+If this is a private repository, see https://golang.org/doc/faq#git_https for additional information.
+
+plain.go]
+2024/06/06 10:21:50 Evaluating model "openrouter/cohere/command-r-plus" using language "golang" and repository "golang/plain"
+2024/06/06 10:21:50 Querying model "openrouter/cohere/command-r-plus" with:
+	Given the following Go code file "plain.go" with package "plain", provide a test file for this code.
+	The tests should produce 100 percent code coverage and must compile.
+	The response must contain only the test code and nothing else.
+
+	```golang
+	package plain
+
+	func plain() {
+		return // This does not do anything but it gives us a line to cover.
+	}
+	```
+2024/06/06 10:21:51 Model "openrouter/cohere/command-r-plus" responded (1295 ms) with:
+	```golang
+	package plain_test
+
+	import (
+		"testing"
+
+		"github.com/your-org/your-project/plain"
+	)
+
+	func TestPlain(t *testing.T) {
+		plain.Plain()
+	}
+	```
+2024/06/06 10:21:51 $ go mod tidy
+go: finding module for package github.com/your-org/your-project/plain
+go: plain tested by
+	plain.test imports
+	github.com/your-org/your-project/plain: cannot find module providing package github.com/your-org/your-project/plain: module github.com/your-org/your-project/plain: git ls-remote -q origin in /home/eval/go/pkg/mod/cache/vcs/0238d5e5bf35c8f529107419b1a5b208f802db8711e914000fb354bc47491bc0: exit status 128:
+	fatal: could not read Username for 'https://github.com': terminal prompts disabled
+Confirm the import path was entered correctly.
+If this is a private repository, see https://golang.org/doc/faq#git_https for additional information.
+2024/06/06 10:21:53 Evaluated model "openrouter/cohere/command-r-plus" using language "golang" and repository "golang/plain": encountered 1 problems: [exit status 1
+go: finding module for package github.com/your-org/your-project/plain
+go: plain tested by
+	plain.test imports
+	github.com/your-org/your-project/plain: cannot find module providing package github.com/your-org/your-project/plain: module github.com/your-org/your-project/plain: git ls-remote -q origin in /home/eval/go/pkg/mod/cache/vcs/0238d5e5bf35c8f529107419b1a5b208f802db8711e914000fb354bc47491bc0: exit status 128:
+	fatal: could not read Username for 'https://github.com': terminal prompts disabled
+Confirm the import path was entered correctly.
+If this is a private repository, see https://golang.org/doc/faq#git_https for additional information.
+
+github.com/symflower/eval-dev-quality/util.CommandWithResult
+	/home/eval/eval-dev-quality/util/exec.go:52
+github.com/symflower/eval-dev-quality/language/golang.(*Language).Execute
+	/home/eval/eval-dev-quality/language/golang/language.go:82
+github.com/symflower/eval-dev-quality/evaluate.Repository
+	/home/eval/eval-dev-quality/evaluate/repository.go:57
+github.com/symflower/eval-dev-quality/evaluate.Evaluate.func1
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:119
+github.com/symflower/eval-dev-quality/evaluate.withLoadedModel
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:253
+github.com/symflower/eval-dev-quality/evaluate.Evaluate
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:109
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.(*Evaluate).Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/evaluate.go:284
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute.func1
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:34
+github.com/jessevdk/go-flags.(*Parser).ParseArgs
+	/home/eval/go/pkg/mod/github.com/jessevdk/go-flags@v1.5.1-0.20210607101731-3927b71304df/parser.go:333
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:37
+main.main
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/main.go:11
+runtime.main
+	/home/eval/go/src/runtime/proc.go:267
+runtime.goexit
+	/home/eval/go/src/runtime/asm_amd64.s:1650
+github.com/symflower/eval-dev-quality/language/golang.(*Language).Execute
+	/home/eval/eval-dev-quality/language/golang/language.go:92
+github.com/symflower/eval-dev-quality/evaluate.Repository
+	/home/eval/eval-dev-quality/evaluate/repository.go:57
+github.com/symflower/eval-dev-quality/evaluate.Evaluate.func1
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:119
+github.com/symflower/eval-dev-quality/evaluate.withLoadedModel
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:253
+github.com/symflower/eval-dev-quality/evaluate.Evaluate
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:109
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.(*Evaluate).Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/evaluate.go:284
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute.func1
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:34
+github.com/jessevdk/go-flags.(*Parser).ParseArgs
+	/home/eval/go/pkg/mod/github.com/jessevdk/go-flags@v1.5.1-0.20210607101731-3927b71304df/parser.go:333
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:37
+main.main
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/main.go:11
+runtime.main
+	/home/eval/go/src/runtime/proc.go:267
+runtime.goexit
+	/home/eval/go/src/runtime/asm_amd64.s:1650
+go: finding module for package github.com/your-org/your-project/plain
+go: plain tested by
+	plain.test imports
+	github.com/your-org/your-project/plain: cannot find module providing package github.com/your-org/your-project/plain: module github.com/your-org/your-project/plain: git ls-remote -q origin in /home/eval/go/pkg/mod/cache/vcs/0238d5e5bf35c8f529107419b1a5b208f802db8711e914000fb354bc47491bc0: exit status 128:
+	fatal: could not read Username for 'https://github.com': terminal prompts disabled
+Confirm the import path was entered correctly.
+If this is a private repository, see https://golang.org/doc/faq#git_https for additional information.
+
+plain.go]
+2024/06/06 10:31:06 Evaluating model "openrouter/cohere/command-r-plus" using language "golang" and repository "golang/plain"
+2024/06/06 10:31:06 Querying model "openrouter/cohere/command-r-plus" with:
+	Given the following Go code file "plain.go" with package "plain", provide a test file for this code.
+	The tests should produce 100 percent code coverage and must compile.
+	The response must contain only the test code and nothing else.
+
+	```golang
+	package plain
+
+	func plain() {
+		return // This does not do anything but it gives us a line to cover.
+	}
+	```
+2024/06/06 10:31:07 Model "openrouter/cohere/command-r-plus" responded (1061 ms) with:
+	```golang
+	package plain
+
+	import "testing"
+
+	func TestPlain(t *testing.T) {
+		// Just call the function once to get coverage
+		plain()
+	}
+	```
+2024/06/06 10:31:07 $ go mod tidy
+2024/06/06 10:31:07 $ symflower test --language golang --workspace /tmp/eval-dev-quality3908121424/plain --coverage-file /tmp/eval-dev-quality3908121424/plain/coverage.json
+=== RUN   TestPlain
+--- PASS: TestPlain (0.00s)
+PASS
+coverage: 100.0% of statements
+ok  	plain	0.003s	coverage: 100.0% of statements
+
+DONE 1 tests in 0.297s
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+2024/06/06 10:31:08 Executes tests with 1 coverage objects
+2024/06/06 10:31:08 Evaluated model "openrouter/cohere/command-r-plus" using language "golang" and repository "golang/plain": encountered 0 problems: []
+2024/06/06 10:39:35 Evaluating model "openrouter/cohere/command-r-plus" using language "golang" and repository "golang/plain"
+2024/06/06 10:39:35 Querying model "openrouter/cohere/command-r-plus" with:
+	Given the following Go code file "plain.go" with package "plain", provide a test file for this code.
+	The tests should produce 100 percent code coverage and must compile.
+	The response must contain only the test code and nothing else.
+
+	```golang
+	package plain
+
+	func plain() {
+		return // This does not do anything but it gives us a line to cover.
+	}
+	```
+2024/06/06 10:39:37 Model "openrouter/cohere/command-r-plus" responded (1265 ms) with:
+	```golang
+	package plain_test
+
+	import (
+		"testing"
+
+		"github.com/your/package/plain"
+	)
+
+	func TestPlain(t *testing.T) {
+		plain.Plain()
+	}
+	```
+2024/06/06 10:39:37 $ go mod tidy
+go: finding module for package github.com/your/package/plain
+go: plain tested by
+	plain.test imports
+	github.com/your/package/plain: cannot find module providing package github.com/your/package/plain: module github.com/your/package/plain: git ls-remote -q origin in /home/eval/go/pkg/mod/cache/vcs/ede1b321abaa1b224e62b534653a65d90588f27984f330415401420b55fcd626: exit status 128:
+	fatal: could not read Username for 'https://github.com': terminal prompts disabled
+Confirm the import path was entered correctly.
+If this is a private repository, see https://golang.org/doc/faq#git_https for additional information.
+2024/06/06 10:39:37 Evaluated model "openrouter/cohere/command-r-plus" using language "golang" and repository "golang/plain": encountered 1 problems: [exit status 1
+go: finding module for package github.com/your/package/plain
+go: plain tested by
+	plain.test imports
+	github.com/your/package/plain: cannot find module providing package github.com/your/package/plain: module github.com/your/package/plain: git ls-remote -q origin in /home/eval/go/pkg/mod/cache/vcs/ede1b321abaa1b224e62b534653a65d90588f27984f330415401420b55fcd626: exit status 128:
+	fatal: could not read Username for 'https://github.com': terminal prompts disabled
+Confirm the import path was entered correctly.
+If this is a private repository, see https://golang.org/doc/faq#git_https for additional information.
+
+github.com/symflower/eval-dev-quality/util.CommandWithResult
+	/home/eval/eval-dev-quality/util/exec.go:52
+github.com/symflower/eval-dev-quality/language/golang.(*Language).Execute
+	/home/eval/eval-dev-quality/language/golang/language.go:82
+github.com/symflower/eval-dev-quality/evaluate.Repository
+	/home/eval/eval-dev-quality/evaluate/repository.go:57
+github.com/symflower/eval-dev-quality/evaluate.Evaluate.func1
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:119
+github.com/symflower/eval-dev-quality/evaluate.withLoadedModel
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:253
+github.com/symflower/eval-dev-quality/evaluate.Evaluate
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:109
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.(*Evaluate).Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/evaluate.go:284
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute.func1
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:34
+github.com/jessevdk/go-flags.(*Parser).ParseArgs
+	/home/eval/go/pkg/mod/github.com/jessevdk/go-flags@v1.5.1-0.20210607101731-3927b71304df/parser.go:333
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:37
+main.main
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/main.go:11
+runtime.main
+	/home/eval/go/src/runtime/proc.go:267
+runtime.goexit
+	/home/eval/go/src/runtime/asm_amd64.s:1650
+github.com/symflower/eval-dev-quality/language/golang.(*Language).Execute
+	/home/eval/eval-dev-quality/language/golang/language.go:92
+github.com/symflower/eval-dev-quality/evaluate.Repository
+	/home/eval/eval-dev-quality/evaluate/repository.go:57
+github.com/symflower/eval-dev-quality/evaluate.Evaluate.func1
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:119
+github.com/symflower/eval-dev-quality/evaluate.withLoadedModel
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:253
+github.com/symflower/eval-dev-quality/evaluate.Evaluate
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:109
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.(*Evaluate).Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/evaluate.go:284
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute.func1
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:34
+github.com/jessevdk/go-flags.(*Parser).ParseArgs
+	/home/eval/go/pkg/mod/github.com/jessevdk/go-flags@v1.5.1-0.20210607101731-3927b71304df/parser.go:333
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:37
+main.main
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/main.go:11
+runtime.main
+	/home/eval/go/src/runtime/proc.go:267
+runtime.goexit
+	/home/eval/go/src/runtime/asm_amd64.s:1650
+go: finding module for package github.com/your/package/plain
+go: plain tested by
+	plain.test imports
+	github.com/your/package/plain: cannot find module providing package github.com/your/package/plain: module github.com/your/package/plain: git ls-remote -q origin in /home/eval/go/pkg/mod/cache/vcs/ede1b321abaa1b224e62b534653a65d90588f27984f330415401420b55fcd626: exit status 128:
+	fatal: could not read Username for 'https://github.com': terminal prompts disabled
+Confirm the import path was entered correctly.
+If this is a private repository, see https://golang.org/doc/faq#git_https for additional information.
+
+plain.go]

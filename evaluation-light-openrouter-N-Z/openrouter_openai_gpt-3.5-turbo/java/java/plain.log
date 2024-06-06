@@ -1,0 +1,362 @@
+2024/06/06 10:06:58 Evaluating model "openrouter/openai/gpt-3.5-turbo" using language "java" and repository "java/plain"
+2024/06/06 10:06:58 Querying model "openrouter/openai/gpt-3.5-turbo" with:
+	Given the following Java code file "src/main/java/com/eval/Plain.java" with package "com.eval", provide a test file for this code with JUnit 5 as a test framework.
+	The tests should produce 100 percent code coverage and must compile.
+	The response must contain only the test code and nothing else.
+
+	```java
+	package com.eval;
+
+	class Plain {
+	    static void plain() {
+	    }
+	}
+	```
+2024/06/06 10:07:01 Model "openrouter/openai/gpt-3.5-turbo" responded (2186 ms) with:
+	```java
+	package com.eval;
+
+	import org.junit.jupiter.api.Test;
+
+	import static org.junit.jupiter.api.Assertions.*;
+
+	public class PlainTest {
+
+	    @Test
+	    void testPlain() {
+	        Plain.plain();
+	        // Add assertions here if needed
+	    }
+	}
+	```
+2024/06/06 10:07:01 $ symflower test --language java --workspace /tmp/eval-dev-quality364885804/plain --coverage-file /tmp/eval-dev-quality364885804/plain/coverage.json
+[INFO] Scanning for projects...
+[WARNING] 
+[WARNING] Some problems were encountered while building the effective model for eval.dev.quality:test-java-plain:jar:SNAPSHOT
+[WARNING] 'version' uses an unsupported snapshot version format, should be '*-SNAPSHOT' instead. @ line 6, column 11
+[WARNING] 
+[WARNING] It is highly recommended to fix these problems because they threaten the stability of your build.
+[WARNING] 
+[WARNING] For this reason, future Maven versions might no longer support building such malformed projects.
+[WARNING] 
+[INFO] 
+[INFO] ------------------< eval.dev.quality:test-java-plain >------------------
+[INFO] Building test-java-plain SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clover:4.5.2:aggregate (default-cli) @ test-java-plain ---
+[INFO] 
+[INFO] ------------------< eval.dev.quality:test-java-plain >------------------
+[INFO] Building test-java-plain SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clover:4.5.2:clover (default-cli) @ test-java-plain ---
+[INFO] Using default-clover-report descriptor.
+[INFO] Using Clover report descriptor: /tmp/mvn15036596097042190937resource
+[INFO] OpenClover Version 4.5.2, built on 2024-01-31
+[INFO] Clover is enabled with initstring '/tmp/eval-dev-quality364885804/plain/target/clover/clover.db'
+[INFO] OpenClover Version 4.5.2, built on 2024-01-31
+[INFO] Loading coverage database from: '/tmp/eval-dev-quality364885804/plain/target/clover/clover.db'
+[INFO] Writing report to '/tmp/eval-dev-quality364885804/plain/target/site/clover/clover.xml'
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  1.940 s
+[INFO] Finished at: 2024-06-06T10:07:07+02:00
+[INFO] ------------------------------------------------------------------------
+
+Total coverage 100.000000%
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+2024/06/06 10:07:07 Executes tests with 1 coverage objects
+2024/06/06 10:07:07 Evaluated model "openrouter/openai/gpt-3.5-turbo" using language "java" and repository "java/plain": encountered 0 problems: []
+2024/06/06 10:14:40 Evaluating model "openrouter/openai/gpt-3.5-turbo" using language "java" and repository "java/plain"
+2024/06/06 10:14:40 Querying model "openrouter/openai/gpt-3.5-turbo" with:
+	Given the following Java code file "src/main/java/com/eval/Plain.java" with package "com.eval", provide a test file for this code with JUnit 5 as a test framework.
+	The tests should produce 100 percent code coverage and must compile.
+	The response must contain only the test code and nothing else.
+
+	```java
+	package com.eval;
+
+	class Plain {
+	    static void plain() {
+	    }
+	}
+	```
+2024/06/06 10:14:41 Model "openrouter/openai/gpt-3.5-turbo" responded (1458 ms) with:
+	```java
+	package com.eval;
+
+	import org.junit.jupiter.api.Test;
+
+	import static org.junit.jupiter.api.Assertions.*;
+
+	class PlainTest {
+
+	    @Test
+	    void testPlain() {
+	        Plain.plain();
+	    }
+	}
+	```
+2024/06/06 10:14:41 $ symflower test --language java --workspace /tmp/eval-dev-quality364885804/plain --coverage-file /tmp/eval-dev-quality364885804/plain/coverage.json
+[INFO] Scanning for projects...
+[WARNING] 
+[WARNING] Some problems were encountered while building the effective model for eval.dev.quality:test-java-plain:jar:SNAPSHOT
+[WARNING] 'version' uses an unsupported snapshot version format, should be '*-SNAPSHOT' instead. @ line 6, column 11
+[WARNING] 
+[WARNING] It is highly recommended to fix these problems because they threaten the stability of your build.
+[WARNING] 
+[WARNING] For this reason, future Maven versions might no longer support building such malformed projects.
+[WARNING] 
+[INFO] 
+[INFO] ------------------< eval.dev.quality:test-java-plain >------------------
+[INFO] Building test-java-plain SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clover:4.5.2:aggregate (default-cli) @ test-java-plain ---
+[INFO] 
+[INFO] ------------------< eval.dev.quality:test-java-plain >------------------
+[INFO] Building test-java-plain SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clover:4.5.2:clover (default-cli) @ test-java-plain ---
+[INFO] Using default-clover-report descriptor.
+[INFO] Using Clover report descriptor: /tmp/mvn9601973066101356029resource
+[INFO] OpenClover Version 4.5.2, built on 2024-01-31
+[INFO] Clover is enabled with initstring '/tmp/eval-dev-quality364885804/plain/target/clover/clover.db'
+[INFO] OpenClover Version 4.5.2, built on 2024-01-31
+[INFO] Loading coverage database from: '/tmp/eval-dev-quality364885804/plain/target/clover/clover.db'
+[INFO] Writing report to '/tmp/eval-dev-quality364885804/plain/target/site/clover/clover.xml'
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  1.959 s
+[INFO] Finished at: 2024-06-06T10:14:47+02:00
+[INFO] ------------------------------------------------------------------------
+
+Total coverage 100.000000%
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+2024/06/06 10:14:47 Executes tests with 1 coverage objects
+2024/06/06 10:14:47 Evaluated model "openrouter/openai/gpt-3.5-turbo" using language "java" and repository "java/plain": encountered 0 problems: []
+2024/06/06 10:20:56 Evaluating model "openrouter/openai/gpt-3.5-turbo" using language "java" and repository "java/plain"
+2024/06/06 10:20:56 Querying model "openrouter/openai/gpt-3.5-turbo" with:
+	Given the following Java code file "src/main/java/com/eval/Plain.java" with package "com.eval", provide a test file for this code with JUnit 5 as a test framework.
+	The tests should produce 100 percent code coverage and must compile.
+	The response must contain only the test code and nothing else.
+
+	```java
+	package com.eval;
+
+	class Plain {
+	    static void plain() {
+	    }
+	}
+	```
+2024/06/06 10:20:57 Model "openrouter/openai/gpt-3.5-turbo" responded (1574 ms) with:
+	```java
+	package com.eval;
+
+	import org.junit.jupiter.api.Test;
+
+	import static org.junit.jupiter.api.Assertions.*;
+
+	class PlainTest {
+
+	    @Test
+	    void testPlain() {
+	        Plain.plain();
+	        // Add assertions if needed
+	    }
+	}
+	```
+2024/06/06 10:20:57 $ symflower test --language java --workspace /tmp/eval-dev-quality364885804/plain --coverage-file /tmp/eval-dev-quality364885804/plain/coverage.json
+[INFO] Scanning for projects...
+[WARNING] 
+[WARNING] Some problems were encountered while building the effective model for eval.dev.quality:test-java-plain:jar:SNAPSHOT
+[WARNING] 'version' uses an unsupported snapshot version format, should be '*-SNAPSHOT' instead. @ line 6, column 11
+[WARNING] 
+[WARNING] It is highly recommended to fix these problems because they threaten the stability of your build.
+[WARNING] 
+[WARNING] For this reason, future Maven versions might no longer support building such malformed projects.
+[WARNING] 
+[INFO] 
+[INFO] ------------------< eval.dev.quality:test-java-plain >------------------
+[INFO] Building test-java-plain SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clover:4.5.2:aggregate (default-cli) @ test-java-plain ---
+[INFO] 
+[INFO] ------------------< eval.dev.quality:test-java-plain >------------------
+[INFO] Building test-java-plain SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clover:4.5.2:clover (default-cli) @ test-java-plain ---
+[INFO] Using default-clover-report descriptor.
+[INFO] Using Clover report descriptor: /tmp/mvn16969627060675517248resource
+[INFO] OpenClover Version 4.5.2, built on 2024-01-31
+[INFO] Clover is enabled with initstring '/tmp/eval-dev-quality364885804/plain/target/clover/clover.db'
+[INFO] OpenClover Version 4.5.2, built on 2024-01-31
+[INFO] Loading coverage database from: '/tmp/eval-dev-quality364885804/plain/target/clover/clover.db'
+[INFO] Writing report to '/tmp/eval-dev-quality364885804/plain/target/site/clover/clover.xml'
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  1.935 s
+[INFO] Finished at: 2024-06-06T10:21:04+02:00
+[INFO] ------------------------------------------------------------------------
+
+Total coverage 100.000000%
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+2024/06/06 10:21:04 Executes tests with 1 coverage objects
+2024/06/06 10:21:04 Evaluated model "openrouter/openai/gpt-3.5-turbo" using language "java" and repository "java/plain": encountered 0 problems: []
+2024/06/06 10:28:53 Evaluating model "openrouter/openai/gpt-3.5-turbo" using language "java" and repository "java/plain"
+2024/06/06 10:28:53 Querying model "openrouter/openai/gpt-3.5-turbo" with:
+	Given the following Java code file "src/main/java/com/eval/Plain.java" with package "com.eval", provide a test file for this code with JUnit 5 as a test framework.
+	The tests should produce 100 percent code coverage and must compile.
+	The response must contain only the test code and nothing else.
+
+	```java
+	package com.eval;
+
+	class Plain {
+	    static void plain() {
+	    }
+	}
+	```
+2024/06/06 10:28:55 Model "openrouter/openai/gpt-3.5-turbo" responded (1690 ms) with:
+	```java
+	package com.eval;
+
+	import org.junit.jupiter.api.Test;
+	import static org.junit.jupiter.api.Assertions.*;
+
+	class PlainTest {
+
+	    @Test
+	    void testPlain() {
+	        Plain.plain();
+	        // Add assertions or verification here
+	    }
+	}
+	```
+2024/06/06 10:28:55 $ symflower test --language java --workspace /tmp/eval-dev-quality364885804/plain --coverage-file /tmp/eval-dev-quality364885804/plain/coverage.json
+[INFO] Scanning for projects...
+[WARNING] 
+[WARNING] Some problems were encountered while building the effective model for eval.dev.quality:test-java-plain:jar:SNAPSHOT
+[WARNING] 'version' uses an unsupported snapshot version format, should be '*-SNAPSHOT' instead. @ line 6, column 11
+[WARNING] 
+[WARNING] It is highly recommended to fix these problems because they threaten the stability of your build.
+[WARNING] 
+[WARNING] For this reason, future Maven versions might no longer support building such malformed projects.
+[WARNING] 
+[INFO] 
+[INFO] ------------------< eval.dev.quality:test-java-plain >------------------
+[INFO] Building test-java-plain SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clover:4.5.2:aggregate (default-cli) @ test-java-plain ---
+[INFO] 
+[INFO] ------------------< eval.dev.quality:test-java-plain >------------------
+[INFO] Building test-java-plain SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clover:4.5.2:clover (default-cli) @ test-java-plain ---
+[INFO] Using default-clover-report descriptor.
+[INFO] Using Clover report descriptor: /tmp/mvn14996133146144626487resource
+[INFO] OpenClover Version 4.5.2, built on 2024-01-31
+[INFO] Clover is enabled with initstring '/tmp/eval-dev-quality364885804/plain/target/clover/clover.db'
+[INFO] OpenClover Version 4.5.2, built on 2024-01-31
+[INFO] Loading coverage database from: '/tmp/eval-dev-quality364885804/plain/target/clover/clover.db'
+[INFO] Writing report to '/tmp/eval-dev-quality364885804/plain/target/site/clover/clover.xml'
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  1.926 s
+[INFO] Finished at: 2024-06-06T10:29:01+02:00
+[INFO] ------------------------------------------------------------------------
+
+Total coverage 100.000000%
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+2024/06/06 10:29:01 Executes tests with 1 coverage objects
+2024/06/06 10:29:01 Evaluated model "openrouter/openai/gpt-3.5-turbo" using language "java" and repository "java/plain": encountered 0 problems: []
+2024/06/06 10:35:07 Evaluating model "openrouter/openai/gpt-3.5-turbo" using language "java" and repository "java/plain"
+2024/06/06 10:35:07 Querying model "openrouter/openai/gpt-3.5-turbo" with:
+	Given the following Java code file "src/main/java/com/eval/Plain.java" with package "com.eval", provide a test file for this code with JUnit 5 as a test framework.
+	The tests should produce 100 percent code coverage and must compile.
+	The response must contain only the test code and nothing else.
+
+	```java
+	package com.eval;
+
+	class Plain {
+	    static void plain() {
+	    }
+	}
+	```
+2024/06/06 10:35:09 Model "openrouter/openai/gpt-3.5-turbo" responded (1658 ms) with:
+	```java
+	package com.eval;
+
+	import org.junit.jupiter.api.Test;
+
+	import static org.junit.jupiter.api.Assertions.*;
+
+	class PlainTest {
+
+	    @Test
+	    void testPlain() {
+	        Plain.plain();
+	    }
+	}
+	```
+2024/06/06 10:35:09 $ symflower test --language java --workspace /tmp/eval-dev-quality364885804/plain --coverage-file /tmp/eval-dev-quality364885804/plain/coverage.json
+[INFO] Scanning for projects...
+[WARNING] 
+[WARNING] Some problems were encountered while building the effective model for eval.dev.quality:test-java-plain:jar:SNAPSHOT
+[WARNING] 'version' uses an unsupported snapshot version format, should be '*-SNAPSHOT' instead. @ line 6, column 11
+[WARNING] 
+[WARNING] It is highly recommended to fix these problems because they threaten the stability of your build.
+[WARNING] 
+[WARNING] For this reason, future Maven versions might no longer support building such malformed projects.
+[WARNING] 
+[INFO] 
+[INFO] ------------------< eval.dev.quality:test-java-plain >------------------
+[INFO] Building test-java-plain SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clover:4.5.2:aggregate (default-cli) @ test-java-plain ---
+[INFO] 
+[INFO] ------------------< eval.dev.quality:test-java-plain >------------------
+[INFO] Building test-java-plain SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clover:4.5.2:clover (default-cli) @ test-java-plain ---
+[INFO] Using default-clover-report descriptor.
+[INFO] Using Clover report descriptor: /tmp/mvn4750404616510422490resource
+[INFO] OpenClover Version 4.5.2, built on 2024-01-31
+[INFO] Clover is enabled with initstring '/tmp/eval-dev-quality364885804/plain/target/clover/clover.db'
+[INFO] OpenClover Version 4.5.2, built on 2024-01-31
+[INFO] Loading coverage database from: '/tmp/eval-dev-quality364885804/plain/target/clover/clover.db'
+[INFO] Writing report to '/tmp/eval-dev-quality364885804/plain/target/site/clover/clover.xml'
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  1.936 s
+[INFO] Finished at: 2024-06-06T10:35:15+02:00
+[INFO] ------------------------------------------------------------------------
+
+Total coverage 100.000000%
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+2024/06/06 10:35:15 Executes tests with 1 coverage objects
+2024/06/06 10:35:15 Evaluated model "openrouter/openai/gpt-3.5-turbo" using language "java" and repository "java/plain": encountered 0 problems: []

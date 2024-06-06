@@ -1,0 +1,3446 @@
+2024/06/06 11:15:45 Evaluating model "openrouter/anthropic/claude-1.2" using language "golang" and repository "golang/light"
+2024/06/06 11:15:45 Querying model "openrouter/anthropic/claude-1.2" with:
+	Given the following Go code file "balancedBrackets.go" with package "light", provide a test file for this code.
+	The tests should produce 100 percent code coverage and must compile.
+	The response must contain only the test code and nothing else.
+
+	```golang
+	package light
+
+	func hasBalancedBrackets(charArray string) bool {
+		brackets := 0
+		for _, ch := range charArray {
+			if ch == '[' {
+				brackets++
+			} else if ch == ']' {
+				brackets--
+			} else {
+				return false // Non-bracket characters.
+			}
+		}
+
+		if brackets < 0 { // Closing bracket before opening bracket.
+			return false
+		}
+
+		return brackets == 0
+	}
+	```
+2024/06/06 11:15:50 Model "openrouter/anthropic/claude-1.2" responded (5022 ms) with:
+	 ```golang
+	package light_test
+
+	import "testing"
+
+	func TestHasBalancedBrackets(t *testing.T) {
+		tests := []struct {
+			input    string
+			expected bool
+		}{
+			{"][", false}, 
+			{"[]", true}, 
+			{"[][]", true}, 
+			{"[]()", true}, 
+			{"[]a[]", false},
+			{"[]]", false}, 
+			{"[]][[]", true},
+			{"", true},
+		}
+
+		for _, test := range tests {
+			output := hasBalancedBrackets(test.input)
+			if output != test.expected {
+				t.Errorf("Input %s expected %t, got %t", test.input, test.expected, output)
+			}
+		}
+	}
+	```
+2024/06/06 11:15:50 $ go mod tidy
+2024/06/06 11:15:50 $ symflower test --language golang --workspace /tmp/eval-dev-quality4245721050/light --coverage-file /tmp/eval-dev-quality4245721050/light/coverage.json
+# light_test [light.test]
+./balancedBrackets_test.go:21:13: undefined: hasBalancedBrackets
+WARN invalid TestEvent: FAIL	light [build failed]
+bad output from test2json: FAIL	light [build failed]
+
+=== Errors
+./balancedBrackets_test.go:21:13: undefined: hasBalancedBrackets
+
+DONE 0 tests, 1 error in 0.115s
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+ERROR: execution failed: exit status 1
+2024/06/06 11:15:50 Querying model "openrouter/anthropic/claude-1.2" with:
+	Given the following Go code file "binarySearch.go" with package "light", provide a test file for this code.
+	The tests should produce 100 percent code coverage and must compile.
+	The response must contain only the test code and nothing else.
+
+	```golang
+	package light
+
+	func binarySearch(a []int, x int) int {
+		index := -1
+
+		min := 0
+		max := len(a) - 1
+
+		for index == -1 && min <= max {
+			m := (min + max) / 2
+
+			if x == a[m] {
+				index = m
+			} else if x < a[m] {
+				max = m - 1
+			} else {
+				min = m + 1
+			}
+		}
+
+		return index
+	}
+	```
+2024/06/06 11:15:57 Model "openrouter/anthropic/claude-1.2" responded (7226 ms) with:
+	 
+	package light_test
+
+	import "testing"
+
+	func TestBinarySearch(t *testing.T) {
+		var testCases = []struct {
+			input   []int
+			number  int
+			expected int
+		}{
+			{[]int{1, 2, 3}, 2, 1},
+			{[]int{1, 2, 3}, 4, -1},
+			{[]int{1, 3, 4, 6, 8}, 6, 3},
+			{[]int{1, 3, 4, 6, 8}, 7, -1},
+			{[]int{}, 2, -1},
+			{nil, 2, -1},
+		}
+
+		for _, test := range testCases {
+			index := binarySearch(test.input, test.number)
+			if index != test.expected {
+				t.Errorf("binarySearch(%v, %v) = %v, want %v", test.input, test.number, index, test.expected)
+			}
+		}
+	}
+
+	func BenchmarkBinarySearch(b *testing.B) {
+		input := []int{1, 3, 4, 6, 8}
+		for i := 0; i < b.N; i++ {
+			binarySearch(input, 6)
+		}
+	}
+	```
+2024/06/06 11:15:57 $ go mod tidy
+2024/06/06 11:15:57 $ symflower test --language golang --workspace /tmp/eval-dev-quality4245721050/light --coverage-file /tmp/eval-dev-quality4245721050/light/coverage.json
+# light_test [light.test]
+./binarySearch_test.go:20:12: undefined: binarySearch
+./binarySearch_test.go:30:3: undefined: binarySearch
+WARN invalid TestEvent: FAIL	light [build failed]
+bad output from test2json: FAIL	light [build failed]
+
+=== Errors
+./binarySearch_test.go:20:12: undefined: binarySearch
+./binarySearch_test.go:30:3: undefined: binarySearch
+
+DONE 0 tests, 2 errors in 0.103s
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+ERROR: execution failed: exit status 1
+2024/06/06 11:15:57 Querying model "openrouter/anthropic/claude-1.2" with:
+	Given the following Go code file "callLoopConditionsOftenEnough.go" with package "light", provide a test file for this code.
+	The tests should produce 100 percent code coverage and must compile.
+	The response must contain only the test code and nothing else.
+
+	```golang
+	package light
+
+	func callLoopConditionsOftenEnough(x, y int) int {
+		if x < 10 || x > 20 {
+			return 0
+		}
+
+		for i := 0; i < y; i++ {
+			if i > 20 {
+				x++ // This needs to be executed more than 10 times
+			}
+		}
+
+		if x > 20 { // This block needs to be reached for full coverage
+			x = x / 2
+		}
+
+		return x
+	}
+	```
+2024/06/06 11:16:02 Model "openrouter/anthropic/claude-1.2" responded (4821 ms) with:
+	 
+	package light_test
+
+	import "testing"
+
+	func TestCallLoopConditionsOftenEnough(t *testing.T) {
+		tests := []struct {
+			x, y, want int
+		}{
+			{5, 11, 10},  // x < 10 || x > 20 check
+			{15, 21, 25},  // x > 20 check reached
+			{15, 25, 12},  // full coverage
+		}
+		for _, tt := range tests {
+			got := callLoopConditionsOftenEnough(tt.x, tt.y)
+			if got != tt.want {
+				t.Errorf("callLoopConditionsOftenEnough(%d, %d) = %d; want %d", tt.x, tt.y, got, tt.want)
+			}
+		}
+	}
+2024/06/06 11:16:02 $ go mod tidy
+2024/06/06 11:16:02 $ symflower test --language golang --workspace /tmp/eval-dev-quality4245721050/light --coverage-file /tmp/eval-dev-quality4245721050/light/coverage.json
+# light_test [light.test]
+./callLoopConditionsOftenEnough_test.go:14:10: undefined: callLoopConditionsOftenEnough
+WARN invalid TestEvent: FAIL	light [build failed]
+bad output from test2json: FAIL	light [build failed]
+
+=== Errors
+./callLoopConditionsOftenEnough_test.go:14:10: undefined: callLoopConditionsOftenEnough
+
+DONE 0 tests, 1 error in 0.119s
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+ERROR: execution failed: exit status 1
+2024/06/06 11:16:02 Querying model "openrouter/anthropic/claude-1.2" with:
+	Given the following Go code file "cascadingIfElse.go" with package "light", provide a test file for this code.
+	The tests should produce 100 percent code coverage and must compile.
+	The response must contain only the test code and nothing else.
+
+	```golang
+	package light
+
+	func cascadingIfElse(i int) int {
+		if i == 1 {
+			return 2
+		} else if i == 3 {
+			return 4
+		} else {
+			return 5
+		}
+	}
+	```
+2024/06/06 11:16:07 Model "openrouter/anthropic/claude-1.2" responded (4461 ms) with:
+	 ```golang 
+	package light_test
+
+	import "testing"
+
+	func TestCascadingIfElse(t *testing.T) {
+		tests := []struct{
+			input  int
+			expect int
+		}{
+			{1, 2},
+			{3, 4},
+			{2, 5},
+			{4, 5},
+		}
+
+		for _, test := range tests {
+			result := cascadingIfElse(test.input)
+			if result != test.expect {
+				t.Errorf("Input %d expect %d got %d", test.input, test.expect, result)
+			}
+		}
+	}
+	```
+2024/06/06 11:16:07 $ go mod tidy
+2024/06/06 11:16:07 $ symflower test --language golang --workspace /tmp/eval-dev-quality4245721050/light --coverage-file /tmp/eval-dev-quality4245721050/light/coverage.json
+# light_test [light.test]
+./cascadingIfElse_test.go:17:13: undefined: cascadingIfElse
+WARN invalid TestEvent: FAIL	light [build failed]
+bad output from test2json: FAIL	light [build failed]
+
+=== Errors
+./cascadingIfElse_test.go:17:13: undefined: cascadingIfElse
+
+DONE 0 tests, 1 error in 0.101s
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+ERROR: execution failed: exit status 1
+2024/06/06 11:16:07 Querying model "openrouter/anthropic/claude-1.2" with:
+	Given the following Go code file "collatzCalculator.go" with package "light", provide a test file for this code.
+	The tests should produce 100 percent code coverage and must compile.
+	The response must contain only the test code and nothing else.
+
+	```golang
+	package light
+
+	import "errors"
+
+	func computeStepCount(start int) (int, error) {
+		if start <= 0 {
+			return 0, errors.New("Only positive integers are allowed")
+		}
+		if start == 1 {
+			return 0, nil
+		}
+		var next int
+
+		if start%2 == 0 {
+			next = start / 2
+		} else {
+			next = 3*start + 1
+		}
+
+		n, err := computeStepCount(next)
+		if err != nil {
+			return 0, err
+		}
+
+		return 1 + n, nil
+	}
+	```
+2024/06/06 11:16:13 Model "openrouter/anthropic/claude-1.2" responded (6189 ms) with:
+	 ```golang
+	package light_test
+
+	import "testing"
+
+	func TestComputeStepCount(t *testing.T) {
+		tt := []struct {
+			input      int
+			want       int
+			wantErr    bool
+		}{
+			{0, 0, true},
+			{1, 0, false},
+			{2, 1, false},
+			{3, 8, false},
+			{5, 6, false},
+			{12, 9, false},
+		}
+
+		for _, tc := range tt {
+			got, err := computeStepCount(tc.input)
+			if tc.wantErr {
+				if err == nil {
+					t.Errorf("Expected error for input %d but got none", tc.input)
+				}
+			} else {
+				if err != nil {
+					t.Errorf("Unexpected error for input %d: %v", tc.input, err)
+				}
+				if got != tc.want {
+					t.Errorf("For input %d, expected %d steps but got %d", tc.input, tc.want, got)
+				}
+			}
+		}
+	}
+	```
+2024/06/06 11:16:13 $ go mod tidy
+2024/06/06 11:16:13 $ symflower test --language golang --workspace /tmp/eval-dev-quality4245721050/light --coverage-file /tmp/eval-dev-quality4245721050/light/coverage.json
+# light_test [light.test]
+./collatzCalculator_test.go:20:15: undefined: computeStepCount
+WARN invalid TestEvent: FAIL	light [build failed]
+bad output from test2json: FAIL	light [build failed]
+
+=== Errors
+./collatzCalculator_test.go:20:15: undefined: computeStepCount
+
+DONE 0 tests, 1 error in 0.103s
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+ERROR: execution failed: exit status 1
+2024/06/06 11:16:13 Querying model "openrouter/anthropic/claude-1.2" with:
+	Given the following Go code file "conditionsAnd.go" with package "light", provide a test file for this code.
+	The tests should produce 100 percent code coverage and must compile.
+	The response must contain only the test code and nothing else.
+
+	```golang
+	package light
+
+	func conditionsAnd(x rune, y rune) bool {
+		if x == 'A' && y == 'B' {
+			return true
+		}
+
+		return false
+	}
+	```
+2024/06/06 11:16:18 Model "openrouter/anthropic/claude-1.2" responded (4579 ms) with:
+	 
+	package light_test
+
+	import "testing"
+
+	func TestConditionsAnd(t *testing.T) {
+		cases := []struct {
+			x rune
+			y rune
+			expected bool
+		}{
+			{'A', 'B', true},
+			{'A', 'C', false},
+			{'C', 'B', false},
+			{'a', 'b', false},
+		}
+
+		for _, tc := range cases {
+			actual := conditionsAnd(tc.x, tc.y)
+			if actual != tc.expected {
+				t.Errorf("Expected %v for %c and %c but got %v", tc.expected, tc.x, tc.y, actual)
+			}
+		}
+	}
+2024/06/06 11:16:18 $ go mod tidy
+2024/06/06 11:16:18 $ symflower test --language golang --workspace /tmp/eval-dev-quality4245721050/light --coverage-file /tmp/eval-dev-quality4245721050/light/coverage.json
+# light_test [light.test]
+./conditionsAnd_test.go:18:13: undefined: conditionsAnd
+WARN invalid TestEvent: FAIL	light [build failed]
+bad output from test2json: FAIL	light [build failed]
+
+=== Errors
+./conditionsAnd_test.go:18:13: undefined: conditionsAnd
+
+DONE 0 tests, 1 error in 0.122s
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+ERROR: execution failed: exit status 1
+2024/06/06 11:16:18 Querying model "openrouter/anthropic/claude-1.2" with:
+	Given the following Go code file "equilibriumIndices.go" with package "light", provide a test file for this code.
+	The tests should produce 100 percent code coverage and must compile.
+	The response must contain only the test code and nothing else.
+
+	```golang
+	package light
+
+	import "strconv"
+
+	func equilibriumIndices(sequence []int) (indexList string) {
+		// Determine total sum.
+		var totalSum int
+		for _, n := range sequence {
+			totalSum += n
+		}
+		// Compare running sum to remaining sum to find equilibrium indices.
+		var runningSum int
+		for i, n := range sequence {
+			if totalSum-runningSum-n == runningSum {
+				indexList += strconv.Itoa(i) + ";"
+			}
+			runningSum += n
+		}
+
+		return indexList
+	}
+	```
+2024/06/06 11:16:25 Model "openrouter/anthropic/claude-1.2" responded (6564 ms) with:
+	 ```golang 
+	package light
+
+	import "testing"
+
+	func TestEquilibriumIndices(t *testing.T) {
+	    testCases := []struct {
+	        input  []int
+	        output string
+	    }{
+	        {[]int{0, 3, 0}, "1;2;"},
+	        {[]int{0, 1, 3, 4, 2}, "3;"},
+	        {[]int{-1, 1, -2, 2, -2, 0}, "4;5;"},
+	        {[]int{}, ""},
+	        {[]int{-1, 1}, "1;"},
+	        {[]int{1, -1}, "0;"},
+	        {[]int{0}, "0;"},
+	        {[]int{0, 0}, "0;1;"},
+	    }
+
+	    for _, tc := range testCases {
+	        result := equilibriumIndices(tc.input)
+	        if result != tc.output {
+	            t.Errorf("equilibriumIndices(%v) = %v, want %v", tc.input, result, tc.output)
+	        }
+	    }
+	}
+	```
+2024/06/06 11:16:25 $ go mod tidy
+2024/06/06 11:16:25 $ symflower test --language golang --workspace /tmp/eval-dev-quality4245721050/light --coverage-file /tmp/eval-dev-quality4245721050/light/coverage.json
+=== RUN   TestEquilibriumIndices
+    equilibriumIndices_test.go:23: equilibriumIndices([0 3 0]) = 1;, want 1;2;
+    equilibriumIndices_test.go:23: equilibriumIndices([0 1 3 4 2]) = , want 3;
+    equilibriumIndices_test.go:23: equilibriumIndices([-1 1 -2 2 -2 0]) = 2;3;4;, want 4;5;
+    equilibriumIndices_test.go:23: equilibriumIndices([-1 1]) = , want 1;
+    equilibriumIndices_test.go:23: equilibriumIndices([1 -1]) = , want 0;
+--- FAIL: TestEquilibriumIndices (0.00s)
+FAIL
+coverage: 4.3% of statements
+FAIL	light	0.005s
+
+=== Failed
+=== FAIL: . TestEquilibriumIndices (0.00s)
+    equilibriumIndices_test.go:23: equilibriumIndices([0 3 0]) = 1;, want 1;2;
+    equilibriumIndices_test.go:23: equilibriumIndices([0 1 3 4 2]) = , want 3;
+    equilibriumIndices_test.go:23: equilibriumIndices([-1 1 -2 2 -2 0]) = 2;3;4;, want 4;5;
+    equilibriumIndices_test.go:23: equilibriumIndices([-1 1]) = , want 1;
+    equilibriumIndices_test.go:23: equilibriumIndices([1 -1]) = , want 0;
+
+DONE 1 tests, 1 failure in 0.321s
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+ERROR: execution failed: exit status 1
+2024/06/06 11:16:25 Executes tests with 4 coverage objects
+2024/06/06 11:16:25 Querying model "openrouter/anthropic/claude-1.2" with:
+	Given the following Go code file "forLoop.go" with package "light", provide a test file for this code.
+	The tests should produce 100 percent code coverage and must compile.
+	The response must contain only the test code and nothing else.
+
+	```golang
+	package light
+
+	func forLoop(s int) int {
+		sum := 0
+		for i := 0; i < s; i++ {
+			sum = sum + i
+		}
+		for i := 0; i < s; i++ {
+			sum = sum + i
+		}
+
+		return sum
+	}
+	```
+2024/06/06 11:16:30 Model "openrouter/anthropic/claude-1.2" responded (4696 ms) with:
+	 ```golang 
+	package light_test
+
+	import "testing"
+
+	func TestForLoop(t *testing.T) {
+		cases := []struct {
+			s   int
+			sum int
+		}{
+			{0, 0},
+			{1, 1},
+			{2, 3},
+			{5, 20},
+		}
+
+		for _, c := range cases {
+			if result := forLoop(c.s); result != c.sum {
+				t.Errorf("forLoop(%d) = %d; want %d", c.s, result, c.sum)
+			}
+		}
+	}
+	```
+2024/06/06 11:16:30 $ go mod tidy
+2024/06/06 11:16:30 $ symflower test --language golang --workspace /tmp/eval-dev-quality4245721050/light --coverage-file /tmp/eval-dev-quality4245721050/light/coverage.json
+# light_test [light.test]
+./forLoop_test.go:17:16: undefined: forLoop
+WARN invalid TestEvent: FAIL	light [build failed]
+bad output from test2json: FAIL	light [build failed]
+
+=== Errors
+./forLoop_test.go:17:16: undefined: forLoop
+
+DONE 0 tests, 1 error in 0.115s
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+ERROR: execution failed: exit status 1
+2024/06/06 11:16:30 Querying model "openrouter/anthropic/claude-1.2" with:
+	Given the following Go code file "jacobiSymbol.go" with package "light", provide a test file for this code.
+	The tests should produce 100 percent code coverage and must compile.
+	The response must contain only the test code and nothing else.
+
+	```golang
+	package light
+
+	import (
+		"fmt"
+	)
+
+	func jacobiSymbol(k, n uint64) (int, error) {
+		if k < 0 || n%2 == 0 {
+			return 0, fmt.Errorf("Invalid value. k = %d, n = %d", k, n)
+		}
+		k %= n
+		jacobi := 1
+		for k > 0 {
+			for k%2 == 0 {
+				k /= 2
+				r := n % 8
+				if r == 3 || r == 5 {
+					jacobi = -jacobi
+				}
+			}
+			temp := n
+			n = k
+			k = temp
+			if k%4 == 3 && n%4 == 3 {
+				jacobi = -jacobi
+			}
+			k %= n
+		}
+		if n == 1 {
+			return jacobi, nil
+		}
+		return 0, nil
+	}
+	```
+2024/06/06 11:16:38 Model "openrouter/anthropic/claude-1.2" responded (7509 ms) with:
+	 package light
+
+	import "testing"
+
+	func TestJacobiSymbol(t *testing.T) {
+		tests := []struct{
+			k, n uint64
+			want int
+			err  bool
+		}{
+			{5, 21, 1, false},
+			{7, 21, -1, false},
+			{0, 7,  0, false},
+			{-3, 7,  0, true},
+			{5,  8,  0, true},
+			{15, 15, 1, false},
+			{15, 17, -1, false},
+		}
+		for _, test := range tests {
+			got, err := jacobiSymbol(test.k, test.n)
+			if err != nil && !test.err {
+				t.Errorf("jacobiSymbol(%d, %d) unexpected error: %v", test.k, test.n, err)
+			}
+			if err == nil && test.err {
+				t.Errorf("jacobiSymbol(%d, %d) expected error", test.k, test.n)
+			}
+			if got != test.want {
+				t.Errorf("jacobiSymbol(%d, %d) = %d, want %d", test.k, test.n, got, test.want)
+			}
+		}
+	}
+	```
+2024/06/06 11:16:38 $ go mod tidy
+2024/06/06 11:16:38 $ symflower test --language golang --workspace /tmp/eval-dev-quality4245721050/light --coverage-file /tmp/eval-dev-quality4245721050/light/coverage.json
+# light [light.test]
+./jacobiSymbol_test.go:14:4: cannot use -3 (untyped int constant) as uint64 value in struct literal (overflows)
+WARN invalid TestEvent: FAIL	light [build failed]
+bad output from test2json: FAIL	light [build failed]
+
+=== Errors
+./jacobiSymbol_test.go:14:4: cannot use -3 (untyped int constant) as uint64 value in struct literal (overflows)
+
+DONE 0 tests, 1 error in 0.149s
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+ERROR: execution failed: exit status 1
+2024/06/06 11:16:38 Querying model "openrouter/anthropic/claude-1.2" with:
+	Given the following Go code file "klarnerRadoSequence.go" with package "light", provide a test file for this code.
+	The tests should produce 100 percent code coverage and must compile.
+	The response must contain only the test code and nothing else.
+
+	```golang
+	package light
+
+	import "math"
+
+	func initialiseKlarnerRadoSequence(limit int) []int {
+		result := make([]int, limit+1)
+		i2, i3 := 1, 1
+		m2, m3 := 1, 1
+
+		for i := 1; i <= limit; i++ {
+			minimum := int(math.Min(float64(m2), float64(m3)))
+			result[i] = minimum
+			if m2 == minimum {
+				m2 = result[i2]*2 + 1
+				i2 += 1
+			}
+			if m3 == minimum {
+				m3 = result[i3]*3 + 1
+				i3 += 1
+			}
+		}
+
+		return result
+	}
+	```
+2024/06/06 11:16:46 Model "openrouter/anthropic/claude-1.2" responded (8065 ms) with:
+	 package light 
+
+	import "testing" 
+
+	func TestInitialiseKlarnerRadoSequence(t *testing.T) { 
+		cases := []struct { 
+			limit int 
+			want  []int 
+		}{ 
+			{5,  []int{1, 1, 1, 1, 1, 1}}, 
+			{10, []int{1, 1, 1, 1, 1, 1, 1, 2, 1, 1}}, 
+			{15, []int{1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 2, 1, 1, 1}}, 
+		} 
+
+		for _, c := range cases { 
+			got := initialiseKlarnerRadoSequence(c.limit) 
+			if !equal(got, c.want) { 
+				t.Errorf("For limit %d: got %v, want %v", c.limit, got, c.want) 
+			} 
+		} 
+	} 
+
+	func equal(a, b []int) bool { 
+		if len(a) != len(b) { 
+			return false 
+		} 
+	Loop: 
+		for i := range a { 
+			if a[i] != b[i] { 
+				return false 
+			} 
+		} 
+		return true 
+	} 
+	}
+2024/06/06 11:16:46 $ go mod tidy
+2024/06/06 11:16:46 $ symflower test --language golang --workspace /tmp/eval-dev-quality4245721050/light --coverage-file /tmp/eval-dev-quality4245721050/light/coverage.json
+# light
+klarnerRadoSequence_test.go:35:1: expected declaration, found '}'
+WARN invalid TestEvent: FAIL	light [setup failed]
+bad output from test2json: FAIL	light [setup failed]
+
+=== Errors
+klarnerRadoSequence_test.go:35:1: expected declaration, found '}'
+
+DONE 0 tests, 1 error in 0.044s
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+ERROR: execution failed: exit status 1
+2024/06/06 11:16:46 Querying model "openrouter/anthropic/claude-1.2" with:
+	Given the following Go code file "knapsack.go" with package "light", provide a test file for this code.
+	The tests should produce 100 percent code coverage and must compile.
+	The response must contain only the test code and nothing else.
+
+	```golang
+	package light
+
+	import "math"
+
+	type Item struct {
+		weight int
+		value  int
+	}
+
+	func maximumValue(maximumWeight int, items []Item) int {
+		knapsack := make([][]int, len(items)+1)
+		for item := range knapsack {
+			knapsack[item] = make([]int, maximumWeight+1)
+			for weight := range knapsack[item] {
+				knapsack[item][weight] = 0 // Return 0 if not filled
+			}
+		}
+
+		for item := 0; item <= len(items); item++ {
+			for weight := 0; weight <= maximumWeight; weight++ {
+				if item == 0 || weight == 0 {
+					knapsack[item][weight] = 0
+				} else if items[item-1].weight > weight {
+					knapsack[item][weight] = knapsack[item-1][weight]
+				} else {
+					itemValue := items[item-1].value
+					itemWeight := items[item-1].weight
+					knapsack[item][weight] = int(math.Max(float64(itemValue+knapsack[item-1][weight-itemWeight]), float64(knapsack[item-1][weight])))
+				}
+			}
+		}
+
+		return knapsack[len(items)][maximumWeight]
+	}
+	```
+2024/06/06 11:16:53 Model "openrouter/anthropic/claude-1.2" responded (6759 ms) with:
+	 
+	package light
+
+	import "testing"
+
+	func TestMaximumValue(t *testing.T) {
+		item1 := Item{10, 60}
+		item2 := Item{20, 100}
+		item3 := Item{30, 120}
+		items := []Item{item1, item2, item3}
+
+		res := maximumValue(50, items)
+		if res != 220 {
+			t.Errorf("Expected value 220, got %v", res)
+		}
+
+		res = maximumValue(0, items)
+		if res != 0 {
+			t.Errorf("Expected value 0, got %v", res)
+		} 
+	}
+2024/06/06 11:16:53 $ go mod tidy
+2024/06/06 11:16:53 $ symflower test --language golang --workspace /tmp/eval-dev-quality4245721050/light --coverage-file /tmp/eval-dev-quality4245721050/light/coverage.json
+=== RUN   TestMaximumValue
+--- PASS: TestMaximumValue (0.00s)
+PASS
+coverage: 7.1% of statements
+ok  	light	0.004s	coverage: 7.1% of statements
+
+DONE 1 tests in 0.357s
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+2024/06/06 11:16:53 Executes tests with 5 coverage objects
+2024/06/06 11:16:53 Querying model "openrouter/anthropic/claude-1.2" with:
+	Given the following Go code file "largestProperDivisor.go" with package "light", provide a test file for this code.
+	The tests should produce 100 percent code coverage and must compile.
+	The response must contain only the test code and nothing else.
+
+	```golang
+	package light
+
+	import "fmt"
+
+	func largestProperDivisor(aNumber int) (int, error) {
+		if aNumber < 1 {
+			return 0, fmt.Errorf("Argument must be >= 1: %d", aNumber)
+		}
+
+		if (aNumber & 1) == 0 {
+			return aNumber >> 1, nil
+		}
+
+		for p := 3; p*p <= aNumber; p += 2 {
+			if aNumber%p == 0 {
+				return aNumber / p, nil
+			}
+		}
+
+		return 1, nil
+	}
+	```
+2024/06/06 11:17:00 Model "openrouter/anthropic/claude-1.2" responded (7324 ms) with:
+	 
+	package light
+
+	import "testing"
+
+	func Test_largestProperDivisor(t *testing.T) {
+		tests := []struct {
+			name      string
+			input     int
+			want      int
+			wantErr   bool
+		}{
+			{"PositiveEven", 12, 6, false}, 
+			{"PositiveOdd", 15, 5, false}, 
+			{"Zero", 0, 0, true}, 
+			{"Negative", -1, 0, true}, 
+		}
+		for _, tt := range tests {
+			t.Run(tt.name, func(t *testing.T) {
+				got, err := largestProperDivisor(tt.input)
+				if (err != nil) != tt.wantErr {
+					t.Errorf("largestProperDivisor() error = %v, wantErr %v", err, tt.wantErr)
+					return
+				}
+				if got != tt.want {
+					t.Errorf("largestProperDivisor() got = %v, want %v", got, tt.want)
+				}
+			})
+		}
+	}
+
+	func Test_largestProperDivisor_coverage(t *testing.T) {
+		_, err := largestProperDivisor(2) 
+		if err != nil {
+			t.Errorf("largestProperDivisor() error = %v", err) 
+		} 
+	} 
+	```
+2024/06/06 11:17:00 $ go mod tidy
+2024/06/06 11:17:01 $ symflower test --language golang --workspace /tmp/eval-dev-quality4245721050/light --coverage-file /tmp/eval-dev-quality4245721050/light/coverage.json
+=== RUN   Test_largestProperDivisor
+=== RUN   Test_largestProperDivisor/PositiveEven
+=== RUN   Test_largestProperDivisor/PositiveOdd
+=== RUN   Test_largestProperDivisor/Zero
+=== RUN   Test_largestProperDivisor/Negative
+--- PASS: Test_largestProperDivisor (0.00s)
+    --- PASS: Test_largestProperDivisor/PositiveEven (0.00s)
+    --- PASS: Test_largestProperDivisor/PositiveOdd (0.00s)
+    --- PASS: Test_largestProperDivisor/Zero (0.00s)
+    --- PASS: Test_largestProperDivisor/Negative (0.00s)
+=== RUN   Test_largestProperDivisor_coverage
+--- PASS: Test_largestProperDivisor_coverage (0.00s)
+PASS
+coverage: 3.3% of statements
+ok  	light	0.005s	coverage: 3.3% of statements
+
+DONE 6 tests in 0.355s
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+2024/06/06 11:17:01 Executes tests with 3 coverage objects
+2024/06/06 11:17:01 Querying model "openrouter/anthropic/claude-1.2" with:
+	Given the following Go code file "magicSquareOdd.go" with package "light", provide a test file for this code.
+	The tests should produce 100 percent code coverage and must compile.
+	The response must contain only the test code and nothing else.
+
+	```golang
+	package light
+
+	import "errors"
+
+	func magicSquareOdd(base int) ([][]int, error) {
+		if base%2 == 0 || base < 3 {
+			return nil, errors.New("base must be odd and > 2")
+		}
+
+		grid := make([][]int, base)
+		for i := range grid {
+			grid[i] = make([]int, base)
+		}
+		r, number := 0, 0
+		size := base * base
+
+		c := base / 2
+		for number < size {
+			number++
+			grid[r][c] = number
+			if r == 0 {
+				if c == base-1 {
+					r++
+				} else {
+					r = base - 1
+					c++
+				}
+			} else {
+				if c == base-1 {
+					r--
+					c = 0
+				} else {
+					if grid[r-1][c+1] == 0 {
+						r--
+						c++
+					} else {
+						r++
+					}
+				}
+			}
+		}
+
+		return grid, nil
+	}
+	```
+2024/06/06 11:17:08 Model "openrouter/anthropic/claude-1.2" responded (7515 ms) with:
+	 ```golang 
+	package light_test
+
+	import ( 
+		"testing" 
+		"light" 
+	)
+	// 100% coverage
+
+	func TestMagicSquareOdd(t *testing.T) { 
+		grid, err := light.MagicSquareOdd(3) 
+		if err != nil { 
+			t.Fatalf("Expected nil error, got %v", err) 
+		} 
+		if len(grid) != 3 { 
+			t.Fatalf("Expected grid length 3, got %v", len(grid)) 
+		} 
+		cols := len(grid[0]) 
+		if cols != 3 { 
+			t.Fatalf("Expected grid columns 3, got %v", cols) 
+		} 
+
+		grid, err = light.MagicSquareOdd(5) 
+		if err != nil { 
+			t.Fatalf("Expected nil error, got %v", err) 
+		} 
+		if len(grid) != 5 { 
+			t.Fatalf("Expected grid length 5, got %v", len(grid)) 
+		} 
+		cols = len(grid[0]) 
+		if cols != 5 { 
+			t.Fatalf("Expected grid columns 5, got %v", cols) 
+		} 
+
+		//even base returns error 
+		grid, err = light.MagicSquareOdd(2) 
+		if err == nil { 
+			t.Fatal("Expected error, got nil") 
+		} 
+	}
+	```
+2024/06/06 11:17:08 $ go mod tidy
+2024/06/06 11:17:08 $ symflower test --language golang --workspace /tmp/eval-dev-quality4245721050/light --coverage-file /tmp/eval-dev-quality4245721050/light/coverage.json
+# light_test [light.test]
+./magicSquareOdd_test.go:10:21: undefined: light.MagicSquareOdd
+./magicSquareOdd_test.go:22:20: undefined: light.MagicSquareOdd
+./magicSquareOdd_test.go:35:20: undefined: light.MagicSquareOdd
+WARN invalid TestEvent: FAIL	light [build failed]
+bad output from test2json: FAIL	light [build failed]
+
+=== Errors
+./magicSquareOdd_test.go:10:21: undefined: light.MagicSquareOdd
+./magicSquareOdd_test.go:22:20: undefined: light.MagicSquareOdd
+./magicSquareOdd_test.go:35:20: undefined: light.MagicSquareOdd
+
+DONE 0 tests, 3 errors in 0.109s
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+ERROR: execution failed: exit status 1
+2024/06/06 11:17:09 Querying model "openrouter/anthropic/claude-1.2" with:
+	Given the following Go code file "matchBytes.go" with package "light", provide a test file for this code.
+	The tests should produce 100 percent code coverage and must compile.
+	The response must contain only the test code and nothing else.
+
+	```golang
+	package light
+
+	func matchBytes(s1 []byte, s2 []byte) bool {
+		for i := 0; i < len(s1); i++ {
+			c1 := s1[i]
+			c2 := s2[i]
+
+			if c1 != c2 {
+				c1 |= 'a' - 'A'
+				c2 |= 'a' - 'A'
+
+				if c1 != c2 || c1 < 'a' || c1 > 'z' {
+					return false
+				}
+			}
+		}
+
+		return true
+	}
+	```
+2024/06/06 11:17:15 Model "openrouter/anthropic/claude-1.2" responded (6756 ms) with:
+	 
+	package light_test
+
+	import "testing"
+
+	func TestMatchBytes(t *testing.T) {
+		cases := []struct {
+			s1, s2 []byte
+			want   bool
+		}{
+			{[]byte("Hello"), []byte("Hello"), true},
+			{[]byte("HeLLo"), []byte("heLLo"), true},
+			{[]byte("Hello"), []byte("HelIo"), false},
+			{[]byte("abcd"), []byte("dcba"), false},
+			{nil, nil, true},
+			{[]byte("H"), []byte("h"), true},
+			{[]byte(""), []byte(""), true},
+		}
+		for _, c := range cases {
+			got := matchBytes(c.s1, c.s2)
+			if got != c.want {
+				t.Errorf("matchBytes(%q, %q) = %v, want %v", c.s1, c.s2, got, c.want)
+			}
+		}
+	}
+
+	func TestMatchBytesCoverage(t *testing.T) {
+		matchBytes([]byte{'a'}, []byte{'A'})
+		matchBytes([]byte{'9'}, []byte{'9'})
+	}
+	```
+2024/06/06 11:17:15 $ go mod tidy
+2024/06/06 11:17:15 $ symflower test --language golang --workspace /tmp/eval-dev-quality4245721050/light --coverage-file /tmp/eval-dev-quality4245721050/light/coverage.json
+# light_test [light.test]
+./matchBytes_test.go:19:10: undefined: matchBytes
+./matchBytes_test.go:27:2: undefined: matchBytes
+./matchBytes_test.go:28:2: undefined: matchBytes
+WARN invalid TestEvent: FAIL	light [build failed]
+bad output from test2json: FAIL	light [build failed]
+
+=== Errors
+./matchBytes_test.go:19:10: undefined: matchBytes
+./matchBytes_test.go:27:2: undefined: matchBytes
+./matchBytes_test.go:28:2: undefined: matchBytes
+
+DONE 0 tests, 3 errors in 0.158s
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+ERROR: execution failed: exit status 1
+2024/06/06 11:17:16 Querying model "openrouter/anthropic/claude-1.2" with:
+	Given the following Go code file "pascalsTriangle.go" with package "light", provide a test file for this code.
+	The tests should produce 100 percent code coverage and must compile.
+	The response must contain only the test code and nothing else.
+
+	```golang
+	package light
+
+	import "errors"
+
+	func pascalsTriangle(rows int) ([][]int, error) {
+		if rows < 0 {
+			return nil, errors.New("Rows can't be negative!")
+		}
+
+		triangle := make([][]int, rows)
+
+		for i := 0; i < rows; i++ {
+			triangle[i] = make([]int, i+1)
+			triangle[i][0] = 1
+			for j := 1; j < i; j++ {
+				triangle[i][j] = triangle[i-1][j-1] + triangle[i-1][j]
+			}
+			triangle[i][i] = 1
+		}
+		return triangle, nil
+	}
+	```
+2024/06/06 11:17:23 Model "openrouter/anthropic/claude-1.2" responded (7656 ms) with:
+	 package light_test
+
+	import "testing"
+
+	func TestPascalsTriangle(t *testing.T) {
+		rows := 4
+		got, err := pascalsTriangle(rows)
+		if err != nil {
+			t.Errorf("Unexpected error: %v", err)
+		}
+
+		want := [][]int{
+			{1},
+			{1, 1},
+			{1, 2, 1},
+			{1, 3, 3, 1},
+		}
+		if !equal(got, want) {
+			t.Errorf("pascalsTriangle(%d) = %v, want %v", rows, got, want)
+		}
+	}
+
+	func TestPascalsTriangle_Negative(t *testing.T) {
+		_, err := pascalsTriangle(-1)
+		want := "Rows can't be negative!"
+		if err == nil {
+			t.Error("Expected error!")
+		} else if err.Error() != want {
+			t.Errorf("Expected error: %s, got: %s", want, err)
+		}
+	}
+
+	func equal(a, b [][]int) bool {
+		if len(a) != len(b) {
+			return false
+		}
+		for i := range a {
+			if len(a[i]) != len(b[i]) {
+				return false
+			}
+			for j := range a[i] {
+				if a[i][j] != b[i][j] {
+					return false
+				}
+			}
+		}
+		return true 
+	}
+	```
+2024/06/06 11:17:23 $ go mod tidy
+2024/06/06 11:17:23 $ symflower test --language golang --workspace /tmp/eval-dev-quality4245721050/light --coverage-file /tmp/eval-dev-quality4245721050/light/coverage.json
+# light_test [light.test]
+./pascalsTriangle_test.go:7:14: undefined: pascalsTriangle
+./pascalsTriangle_test.go:24:12: undefined: pascalsTriangle
+WARN invalid TestEvent: FAIL	light [build failed]
+bad output from test2json: FAIL	light [build failed]
+
+=== Errors
+./pascalsTriangle_test.go:7:14: undefined: pascalsTriangle
+./pascalsTriangle_test.go:24:12: undefined: pascalsTriangle
+
+DONE 0 tests, 2 errors in 0.107s
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+ERROR: execution failed: exit status 1
+2024/06/06 11:17:24 Querying model "openrouter/anthropic/claude-1.2" with:
+	Given the following Go code file "phoneNumber.go" with package "light", provide a test file for this code.
+	The tests should produce 100 percent code coverage and must compile.
+	The response must contain only the test code and nothing else.
+
+	```golang
+	package light
+
+	import "errors"
+
+	func extractDigits(dirtyNumber string) (cleanNumber string, err error) {
+		for _, c := range dirtyNumber {
+			if c == ' ' || c == '.' || c == '(' || c == ')' || c == '-' || c == '+' {
+				// Remove spaces, dots, parentheses, hyphens and pluses.
+				continue
+			}
+			if c == '-' || c == '@' || c == ':' || c == '!' {
+				return "", errors.New("punctuations not permitted")
+			}
+			if c < '0' || c > '9' {
+				return "", errors.New("letters not permitted")
+			}
+			cleanNumber += string(c)
+		}
+
+		return cleanNumber, nil
+	}
+	```
+2024/06/06 11:17:31 Model "openrouter/anthropic/claude-1.2" responded (7128 ms) with:
+	 ```golang
+	package light
+
+	import "testing"
+
+	func TestExtractDigits(t *testing.T) {
+		tests := []struct {
+			name    string
+			input   string
+			want    string
+			wantErr bool
+		}{
+			{"empty string", "", "", false},
+			{"only spaces", "   ", "", false},
+			{"punctuations", "123.@!", "", true},
+			{"letters", "abc123", "", true},
+			{"normal input", "123-abc 456", "123456", false},
+			{"other symbols", "123+abc-def", "123abcdef", false},
+			{"many spaces", "  123   456  ", "123456", false},
+		}
+		for _, tt := range tests {
+			t.Run(tt.name, func(t *testing.T) {
+				got, err := extractDigits(tt.input)
+				if (err != nil) != tt.wantErr {
+					t.Errorf("extractDigits() error = %v, wantErr %v", err, tt.wantErr)
+					return
+				}
+				if got != tt.want {
+					t.Errorf("extractDigits() = %v, want %v", got, tt.want)
+				}
+			})
+		}
+	}
+	```
+2024/06/06 11:17:31 $ go mod tidy
+2024/06/06 11:17:31 $ symflower test --language golang --workspace /tmp/eval-dev-quality4245721050/light --coverage-file /tmp/eval-dev-quality4245721050/light/coverage.json
+=== RUN   TestExtractDigits
+=== RUN   TestExtractDigits/empty_string
+=== RUN   TestExtractDigits/only_spaces
+=== RUN   TestExtractDigits/punctuations
+=== RUN   TestExtractDigits/letters
+=== RUN   TestExtractDigits/normal_input
+    phoneNumber_test.go:24: extractDigits() error = letters not permitted, wantErr false
+=== RUN   TestExtractDigits/other_symbols
+    phoneNumber_test.go:24: extractDigits() error = letters not permitted, wantErr false
+=== RUN   TestExtractDigits/many_spaces
+--- FAIL: TestExtractDigits (0.00s)
+    --- PASS: TestExtractDigits/empty_string (0.00s)
+    --- PASS: TestExtractDigits/only_spaces (0.00s)
+    --- PASS: TestExtractDigits/punctuations (0.00s)
+    --- PASS: TestExtractDigits/letters (0.00s)
+    --- FAIL: TestExtractDigits/normal_input (0.00s)
+    --- FAIL: TestExtractDigits/other_symbols (0.00s)
+    --- PASS: TestExtractDigits/many_spaces (0.00s)
+FAIL
+coverage: 4.3% of statements
+FAIL	light	0.005s
+
+=== Failed
+=== FAIL: . TestExtractDigits/normal_input (0.00s)
+    phoneNumber_test.go:24: extractDigits() error = letters not permitted, wantErr false
+    --- FAIL: TestExtractDigits/normal_input (0.00s)
+
+=== FAIL: . TestExtractDigits/other_symbols (0.00s)
+    phoneNumber_test.go:24: extractDigits() error = letters not permitted, wantErr false
+    --- FAIL: TestExtractDigits/other_symbols (0.00s)
+
+=== FAIL: . TestExtractDigits (0.00s)
+
+DONE 8 tests, 3 failures in 0.333s
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+ERROR: execution failed: exit status 1
+2024/06/06 11:17:31 Executes tests with 5 coverage objects
+2024/06/06 11:17:31 Querying model "openrouter/anthropic/claude-1.2" with:
+	Given the following Go code file "simpleIfElse.go" with package "light", provide a test file for this code.
+	The tests should produce 100 percent code coverage and must compile.
+	The response must contain only the test code and nothing else.
+
+	```golang
+	package light
+
+	func simpleIfElse(i int) int {
+		if i == 1 {
+			return 0
+		} else {
+			return 1
+		}
+	}
+	```
+2024/06/06 11:17:35 Model "openrouter/anthropic/claude-1.2" responded (3271 ms) with:
+	 ```golang 
+	package light_test
+
+	import "testing"
+
+	func TestSimpleIfElse(t *testing.T) {
+		if got := simpleIfElse(1); got != 0 {
+			t.Errorf("expected 0, got %d", got)
+		} 
+		if got := simpleIfElse(2); got != 1 {
+			t.Errorf("expected 1, got %d", got)
+		} 
+	}
+	 ```
+2024/06/06 11:17:35 $ go mod tidy
+2024/06/06 11:17:35 $ symflower test --language golang --workspace /tmp/eval-dev-quality4245721050/light --coverage-file /tmp/eval-dev-quality4245721050/light/coverage.json
+# light_test [light.test]
+./simpleIfElse_test.go:6:12: undefined: simpleIfElse
+./simpleIfElse_test.go:9:12: undefined: simpleIfElse
+WARN invalid TestEvent: FAIL	light [build failed]
+bad output from test2json: FAIL	light [build failed]
+
+=== Errors
+./simpleIfElse_test.go:6:12: undefined: simpleIfElse
+./simpleIfElse_test.go:9:12: undefined: simpleIfElse
+
+DONE 0 tests, 2 errors in 0.108s
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+ERROR: execution failed: exit status 1
+2024/06/06 11:17:35 Querying model "openrouter/anthropic/claude-1.2" with:
+	Given the following Go code file "simpleSwitchWithReturn.go" with package "light", provide a test file for this code.
+	The tests should produce 100 percent code coverage and must compile.
+	The response must contain only the test code and nothing else.
+
+	```golang
+	package light
+
+	func simpleSwitchWithReturn(i int) int {
+		switch i {
+		case 1:
+			return 0
+		default:
+			return 1
+		}
+	}
+	```
+2024/06/06 11:17:38 Model "openrouter/anthropic/claude-1.2" responded (2907 ms) with:
+	 ```golang 
+	package light_test
+
+	import "testing"
+
+	func TestSimpleSwitchWithReturn(t *testing.T) {
+		if simpleSwitchWithReturn(1) != 0 {
+			t.Error("Expected 0 but got ", simpleSwitchWithReturn(1))
+		}
+		if simpleSwitchWithReturn(2) != 1 {
+			t.Error("Expected 1 but got ", simpleSwitchWithReturn(2)) 
+		}
+	}
+	```
+2024/06/06 11:17:38 $ go mod tidy
+2024/06/06 11:17:38 $ symflower test --language golang --workspace /tmp/eval-dev-quality4245721050/light --coverage-file /tmp/eval-dev-quality4245721050/light/coverage.json
+# light_test [light.test]
+./simpleSwitchWithReturn_test.go:6:5: undefined: simpleSwitchWithReturn
+./simpleSwitchWithReturn_test.go:7:34: undefined: simpleSwitchWithReturn
+./simpleSwitchWithReturn_test.go:9:5: undefined: simpleSwitchWithReturn
+./simpleSwitchWithReturn_test.go:10:34: undefined: simpleSwitchWithReturn
+WARN invalid TestEvent: FAIL	light [build failed]
+bad output from test2json: FAIL	light [build failed]
+
+=== Errors
+./simpleSwitchWithReturn_test.go:6:5: undefined: simpleSwitchWithReturn
+./simpleSwitchWithReturn_test.go:7:34: undefined: simpleSwitchWithReturn
+./simpleSwitchWithReturn_test.go:9:5: undefined: simpleSwitchWithReturn
+./simpleSwitchWithReturn_test.go:10:34: undefined: simpleSwitchWithReturn
+
+DONE 0 tests, 4 errors in 0.125s
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+ERROR: execution failed: exit status 1
+2024/06/06 11:17:38 Querying model "openrouter/anthropic/claude-1.2" with:
+	Given the following Go code file "sort.go" with package "light", provide a test file for this code.
+	The tests should produce 100 percent code coverage and must compile.
+	The response must contain only the test code and nothing else.
+
+	```golang
+	package light
+
+	func isSorted(a []int) bool {
+		i := 0
+		for i < len(a)-1 && a[i] <= a[i+1] {
+			i++
+		}
+
+		return i == len(a)-1
+	}
+	```
+2024/06/06 11:17:44 Model "openrouter/anthropic/claude-1.2" responded (6274 ms) with:
+	 ```golang 
+	package light
+
+	import "testing"
+
+	func TestIsSorted(t *testing.T) {
+	    cases := []struct{
+	        input  []int
+	        output bool
+	    }{
+	        {[]int{1, 2, 3}, true},
+	        {[]int{1, 3, 2}, false},
+	        {[]int{3, 3}, true},
+	        {[]int{3, 2}, false},
+	        {[]int{}, true},
+	        {nil, true},
+	    }
+
+	    for _, c := range cases {
+	        if res := isSorted(c.input); res != c.output {
+	            t.Fatalf("Expected %v for input %v but got %v", c.output, c.input, res)
+	        }
+	    }
+	} 
+	```
+2024/06/06 11:17:44 $ go mod tidy
+2024/06/06 11:17:44 $ symflower test --language golang --workspace /tmp/eval-dev-quality4245721050/light --coverage-file /tmp/eval-dev-quality4245721050/light/coverage.json
+=== RUN   TestIsSorted
+    sort_test.go:20: Expected true for input [] but got false
+--- FAIL: TestIsSorted (0.00s)
+FAIL
+coverage: 1.9% of statements
+FAIL	light	0.005s
+
+=== Failed
+=== FAIL: . TestIsSorted (0.00s)
+    sort_test.go:20: Expected true for input [] but got false
+
+DONE 1 tests, 1 failure in 0.343s
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+ERROR: execution failed: exit status 1
+2024/06/06 11:17:45 Executes tests with 2 coverage objects
+2024/06/06 11:17:45 Querying model "openrouter/anthropic/claude-1.2" with:
+	Given the following Go code file "typeArrayAccess.go" with package "light", provide a test file for this code.
+	The tests should produce 100 percent code coverage and must compile.
+	The response must contain only the test code and nothing else.
+
+	```golang
+	package light
+
+	func typeArrayAccess(x []int) int {
+		if x[0] == 123 {
+			return x[0]
+		}
+
+		return 3
+	}
+	```
+2024/06/06 11:17:52 Model "openrouter/anthropic/claude-1.2" responded (7468 ms) with:
+	 ```golang 
+	package light_test
+
+	import (
+	    "testing"
+
+	    "example.com/light"
+	)
+
+	func TestTypeArrayAccess(t *testing.T) {
+	    tests := []struct {
+	        input    []int
+	        expected int
+	    }{
+	        {[]int{123}, 123},
+	        {[]int{1, 2, 3}, 3},
+	        {nil, 3},
+	    }
+
+	    for _, test := range tests {
+	        output := light.TypeArrayAccess(test.input)
+	        if output != test.expected {
+	            t.Errorf("Expected %v, got %v", test.expected, output)
+	        }
+	    }
+	}
+	```
+2024/06/06 11:17:52 $ go mod tidy
+go: finding module for package example.com/light
+go: light tested by
+	light.test imports
+	example.com/light: cannot find module providing package example.com/light: unrecognized import path "example.com/light": reading https://example.com/light?go-get=1: 500 Internal Server Error
+2024/06/06 11:17:53 Querying model "openrouter/anthropic/claude-1.2" with:
+	Given the following Go code file "typeArrayConsecutiveAccess.go" with package "light", provide a test file for this code.
+	The tests should produce 100 percent code coverage and must compile.
+	The response must contain only the test code and nothing else.
+
+	```golang
+	package light
+
+	func typeArrayConsecutiveAccess(input []int) int {
+		cnt := 0
+		if input[0] == 0 {
+			cnt++
+		}
+		if input[1] == 8 {
+			cnt++
+		}
+		return cnt
+	}
+	```
+2024/06/06 11:17:58 Model "openrouter/anthropic/claude-1.2" responded (4938 ms) with:
+	 
+	```golang 
+	package light 
+
+	import "testing" 
+
+	func TestTypeArrayConsecutiveAccess(t *testing.T) { 
+		cases := []struct { 
+			input []int 
+			want  int 
+		}{ 
+			{[]int{0, 8}, 2}, 
+			{[]int{0, 7}, 1}, 
+			{[]int{1, 8}, 1}, 
+			{[]int{0, 0}, 1}, 
+			{[]int{}, 0}, 
+		} 
+		for _, c := range cases { 
+			got := typeArrayConsecutiveAccess(c.input) 
+			if got != c.want { 
+				t.Errorf("typeArrayConsecutiveAccess(%v) = %v, want %v", c.input, got, c.want) 
+			} 
+		} 
+	} 
+	```
+2024/06/06 11:17:58 $ go mod tidy
+2024/06/06 11:17:58 $ symflower test --language golang --workspace /tmp/eval-dev-quality4245721050/light --coverage-file /tmp/eval-dev-quality4245721050/light/coverage.json
+=== RUN   TestTypeArrayConsecutiveAccess
+--- FAIL: TestTypeArrayConsecutiveAccess (0.00s)
+panic: runtime error: index out of range [0] with length 0 [recovered]
+	panic: runtime error: index out of range [0] with length 0
+
+goroutine 18 [running]:
+testing.tRunner.func1.2({0x56b1c0, 0xc000156000})
+	/home/eval/go/src/testing/testing.go:1545 +0x238
+testing.tRunner.func1()
+	/home/eval/go/src/testing/testing.go:1548 +0x397
+panic({0x56b1c0?, 0xc000156000?})
+	/home/eval/go/src/runtime/panic.go:914 +0x21f
+light.typeArrayConsecutiveAccess(...)
+	/tmp/eval-dev-quality4245721050/light/typeArrayConsecutiveAccess.go:5
+light.TestTypeArrayConsecutiveAccess(0xc000102b60)
+	/tmp/eval-dev-quality4245721050/light/typeArrayConsecutiveAccess_test.go:17 +0x305
+testing.tRunner(0xc000102b60, 0x587038)
+	/home/eval/go/src/testing/testing.go:1595 +0xff
+created by testing.(*T).Run in goroutine 1
+	/home/eval/go/src/testing/testing.go:1648 +0x3ad
+FAIL	light	0.005s
+
+=== Failed
+=== FAIL: . TestTypeArrayConsecutiveAccess (0.00s)
+panic: runtime error: index out of range [0] with length 0 [recovered]
+	panic: runtime error: index out of range [0] with length 0
+
+goroutine 18 [running]:
+testing.tRunner.func1.2({0x56b1c0, 0xc000156000})
+	/home/eval/go/src/testing/testing.go:1545 +0x238
+testing.tRunner.func1()
+	/home/eval/go/src/testing/testing.go:1548 +0x397
+panic({0x56b1c0?, 0xc000156000?})
+	/home/eval/go/src/runtime/panic.go:914 +0x21f
+light.typeArrayConsecutiveAccess(...)
+	/tmp/eval-dev-quality4245721050/light/typeArrayConsecutiveAccess.go:5
+light.TestTypeArrayConsecutiveAccess(0xc000102b60)
+	/tmp/eval-dev-quality4245721050/light/typeArrayConsecutiveAccess_test.go:17 +0x305
+testing.tRunner(0xc000102b60, 0x587038)
+	/home/eval/go/src/testing/testing.go:1595 +0xff
+created by testing.(*T).Run in goroutine 1
+	/home/eval/go/src/testing/testing.go:1648 +0x3ad
+
+DONE 1 tests, 1 failure in 0.343s
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+ERROR: execution failed: exit status 1
+2024/06/06 11:17:58 Executes tests with 0 coverage objects
+2024/06/06 11:17:58 Querying model "openrouter/anthropic/claude-1.2" with:
+	Given the following Go code file "typeArrayMultidimensionalArrayLength.go" with package "light", provide a test file for this code.
+	The tests should produce 100 percent code coverage and must compile.
+	The response must contain only the test code and nothing else.
+
+	```golang
+	package light
+
+	func typeArrayMultidimensionalArrayLength(x [][]int) int {
+		if len(x) == 2 {
+			if len(x[0]) == 2 {
+				return 2
+			}
+
+			return 1
+		}
+
+		return 0
+	}
+	```
+2024/06/06 11:18:05 Model "openrouter/anthropic/claude-1.2" responded (6620 ms) with:
+	 
+	package light_test
+
+	import "testing"
+
+	func TestTypeArrayMultidimensionalArrayLength(t *testing.T) {
+		cases := []struct {
+			x         [][]int
+			expected  int
+		}{
+			{[][]int{[]int{0, 0}, []int{0, 0}}, 2},
+			{[][]int{[]int{0}, []int{0}}}, 1}, 
+			{[][]int{{0, 0, 0}, {0, 0}}}, 0}, 
+			{[][]int{[]int{0, 0}, []int{0, 0}, []int{0, 0}}}, 0}, 
+		}
+
+		for _, c := range cases {
+			got := typeArrayMultidimensionalArrayLength(c.x)
+			if got != c.expected {
+				t.Errorf("typeArrayMultidimensionalArrayLength(%v) = %v, want %v", c.x, got, c.expected)
+			}
+		}
+	}
+
+	func TestTypeArrayMultidimensionalArrayLengthEdge(t *testing.T) {
+		if typeArrayMultidimensionalArrayLength([][]int{}) != 0 {
+			t.Error("typeArrayMultidimensionalArrayLength([]) = _, want 0")
+		}
+	}
+2024/06/06 11:18:05 $ go mod tidy
+2024/06/06 11:18:05 $ symflower test --language golang --workspace /tmp/eval-dev-quality4245721050/light --coverage-file /tmp/eval-dev-quality4245721050/light/coverage.json
+# light
+WARN invalid TestEvent: FAIL	light [setup failed]
+bad output from test2json: FAIL	light [setup failed]
+typeArrayMultidimensionalArrayLength_test.go:12:3: expected operand, found '{'
+
+=== Errors
+typeArrayMultidimensionalArrayLength_test.go:12:3: expected operand, found '{'
+
+DONE 0 tests, 1 error in 0.042s
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+ERROR: execution failed: exit status 1
+2024/06/06 11:18:05 Querying model "openrouter/anthropic/claude-1.2" with:
+	Given the following Go code file "validateDate.go" with package "light", provide a test file for this code.
+	The tests should produce 100 percent code coverage and must compile.
+	The response must contain only the test code and nothing else.
+
+	```golang
+	package light
+
+	func validDate(day int, month int, year int) bool {
+		monthDays := []int{31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31}
+
+		if year < 1583 {
+			return false
+		}
+		if month < 1 || month > 12 {
+			return false
+		}
+		if day < 1 {
+			return false
+		}
+		if month == 2 {
+			if (year%400) != 0 && (year%4) == 0 {
+				if day > 29 {
+					return false
+				}
+			} else {
+				if day > 28 {
+					return false
+				}
+			}
+		} else {
+			if day > monthDays[month-1] {
+				return false
+			}
+		}
+
+		return true
+	}
+	```
+2024/06/06 11:18:14 Model "openrouter/anthropic/claude-1.2" responded (8754 ms) with:
+	 package light_test
+
+	import "testing"
+
+	func TestValidDate(t *testing.T) {
+		testCases := []struct {
+			day        int
+			month      int
+			year       int
+			expected   bool
+			testName   string
+		}{
+			{1, 1, 1584, true, "Year 1584"},
+			{1, 13, 1664, false, "Invalid month"},
+			{32, 10, 1664, false, "Day 32, Month 10"},
+			{31, 4, 1664, true, "Day 31, Month 4"},
+			{29, 2, 1600, true, "Leap year 1600"},
+			{30, 2, 1700, false, "Non-leap year 1700"},
+			{31, 12, 2014, true, "Day 31, Month 12, Year 2014"},
+			{0, 1, 2014, false, "Day 0"},
+			{-1, 1, 2014, false, "Negative day"},
+			{1, 0, 2014, false, "Month 0"},
+			{1, 13, 2014, false, "Month 13"},
+			{1, 1, 1582, false, "Year 1582"},
+		}
+		for _, tc := range testCases {
+			t.Run(tc.testName, func(t *testing.T) {
+				res := validDate(tc.day, tc.month, tc.year)
+				if res != tc.expected {
+					t.Errorf("Expected %t, got %t", tc.expected, res)
+				}
+			})
+		}
+	} 
+	```
+2024/06/06 11:18:14 $ go mod tidy
+2024/06/06 11:18:14 $ symflower test --language golang --workspace /tmp/eval-dev-quality4245721050/light --coverage-file /tmp/eval-dev-quality4245721050/light/coverage.json
+# light_test [light.test]
+./validateDate_test.go:28:11: undefined: validDate
+WARN invalid TestEvent: FAIL	light [build failed]
+bad output from test2json: FAIL	light [build failed]
+
+=== Errors
+./validateDate_test.go:28:11: undefined: validDate
+
+DONE 0 tests, 1 error in 0.113s
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+ERROR: execution failed: exit status 1
+2024/06/06 11:18:14 Evaluated model "openrouter/anthropic/claude-1.2" using language "golang" and repository "golang/light": encountered 21 problems: [exit status 1
+# light_test [light.test]
+./balancedBrackets_test.go:21:13: undefined: hasBalancedBrackets
+WARN invalid TestEvent: FAIL	light [build failed]
+bad output from test2json: FAIL	light [build failed]
+
+=== Errors
+./balancedBrackets_test.go:21:13: undefined: hasBalancedBrackets
+
+DONE 0 tests, 1 error in 0.115s
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+ERROR: execution failed: exit status 1
+
+github.com/symflower/eval-dev-quality/util.CommandWithResult
+	/home/eval/eval-dev-quality/util/exec.go:52
+github.com/symflower/eval-dev-quality/language/golang.(*Language).Execute
+	/home/eval/eval-dev-quality/language/golang/language.go:96
+github.com/symflower/eval-dev-quality/evaluate.Repository
+	/home/eval/eval-dev-quality/evaluate/repository.go:57
+github.com/symflower/eval-dev-quality/evaluate.Evaluate.func2
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:209
+github.com/symflower/eval-dev-quality/evaluate.withLoadedModel
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:253
+github.com/symflower/eval-dev-quality/evaluate.Evaluate
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:199
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.(*Evaluate).Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/evaluate.go:284
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute.func1
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:34
+github.com/jessevdk/go-flags.(*Parser).ParseArgs
+	/home/eval/go/pkg/mod/github.com/jessevdk/go-flags@v1.5.1-0.20210607101731-3927b71304df/parser.go:333
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:37
+main.main
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/main.go:11
+runtime.main
+	/home/eval/go/src/runtime/proc.go:267
+runtime.goexit
+	/home/eval/go/src/runtime/asm_amd64.s:1650
+github.com/symflower/eval-dev-quality/language/golang.(*Language).Execute
+	/home/eval/eval-dev-quality/language/golang/language.go:116
+github.com/symflower/eval-dev-quality/evaluate.Repository
+	/home/eval/eval-dev-quality/evaluate/repository.go:57
+github.com/symflower/eval-dev-quality/evaluate.Evaluate.func2
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:209
+github.com/symflower/eval-dev-quality/evaluate.withLoadedModel
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:253
+github.com/symflower/eval-dev-quality/evaluate.Evaluate
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:199
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.(*Evaluate).Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/evaluate.go:284
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute.func1
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:34
+github.com/jessevdk/go-flags.(*Parser).ParseArgs
+	/home/eval/go/pkg/mod/github.com/jessevdk/go-flags@v1.5.1-0.20210607101731-3927b71304df/parser.go:333
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:37
+main.main
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/main.go:11
+runtime.main
+	/home/eval/go/src/runtime/proc.go:267
+runtime.goexit
+	/home/eval/go/src/runtime/asm_amd64.s:1650
+# light_test [light.test]
+./balancedBrackets_test.go:21:13: undefined: hasBalancedBrackets
+WARN invalid TestEvent: FAIL	light [build failed]
+bad output from test2json: FAIL	light [build failed]
+
+=== Errors
+./balancedBrackets_test.go:21:13: undefined: hasBalancedBrackets
+
+DONE 0 tests, 1 error in 0.115s
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+ERROR: execution failed: exit status 1
+
+balancedBrackets.go exit status 1
+# light_test [light.test]
+./binarySearch_test.go:20:12: undefined: binarySearch
+./binarySearch_test.go:30:3: undefined: binarySearch
+WARN invalid TestEvent: FAIL	light [build failed]
+bad output from test2json: FAIL	light [build failed]
+
+=== Errors
+./binarySearch_test.go:20:12: undefined: binarySearch
+./binarySearch_test.go:30:3: undefined: binarySearch
+
+DONE 0 tests, 2 errors in 0.103s
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+ERROR: execution failed: exit status 1
+
+github.com/symflower/eval-dev-quality/util.CommandWithResult
+	/home/eval/eval-dev-quality/util/exec.go:52
+github.com/symflower/eval-dev-quality/language/golang.(*Language).Execute
+	/home/eval/eval-dev-quality/language/golang/language.go:96
+github.com/symflower/eval-dev-quality/evaluate.Repository
+	/home/eval/eval-dev-quality/evaluate/repository.go:57
+github.com/symflower/eval-dev-quality/evaluate.Evaluate.func2
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:209
+github.com/symflower/eval-dev-quality/evaluate.withLoadedModel
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:253
+github.com/symflower/eval-dev-quality/evaluate.Evaluate
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:199
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.(*Evaluate).Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/evaluate.go:284
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute.func1
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:34
+github.com/jessevdk/go-flags.(*Parser).ParseArgs
+	/home/eval/go/pkg/mod/github.com/jessevdk/go-flags@v1.5.1-0.20210607101731-3927b71304df/parser.go:333
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:37
+main.main
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/main.go:11
+runtime.main
+	/home/eval/go/src/runtime/proc.go:267
+runtime.goexit
+	/home/eval/go/src/runtime/asm_amd64.s:1650
+github.com/symflower/eval-dev-quality/language/golang.(*Language).Execute
+	/home/eval/eval-dev-quality/language/golang/language.go:116
+github.com/symflower/eval-dev-quality/evaluate.Repository
+	/home/eval/eval-dev-quality/evaluate/repository.go:57
+github.com/symflower/eval-dev-quality/evaluate.Evaluate.func2
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:209
+github.com/symflower/eval-dev-quality/evaluate.withLoadedModel
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:253
+github.com/symflower/eval-dev-quality/evaluate.Evaluate
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:199
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.(*Evaluate).Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/evaluate.go:284
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute.func1
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:34
+github.com/jessevdk/go-flags.(*Parser).ParseArgs
+	/home/eval/go/pkg/mod/github.com/jessevdk/go-flags@v1.5.1-0.20210607101731-3927b71304df/parser.go:333
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:37
+main.main
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/main.go:11
+runtime.main
+	/home/eval/go/src/runtime/proc.go:267
+runtime.goexit
+	/home/eval/go/src/runtime/asm_amd64.s:1650
+# light_test [light.test]
+./binarySearch_test.go:20:12: undefined: binarySearch
+./binarySearch_test.go:30:3: undefined: binarySearch
+WARN invalid TestEvent: FAIL	light [build failed]
+bad output from test2json: FAIL	light [build failed]
+
+=== Errors
+./binarySearch_test.go:20:12: undefined: binarySearch
+./binarySearch_test.go:30:3: undefined: binarySearch
+
+DONE 0 tests, 2 errors in 0.103s
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+ERROR: execution failed: exit status 1
+
+binarySearch.go exit status 1
+# light_test [light.test]
+./callLoopConditionsOftenEnough_test.go:14:10: undefined: callLoopConditionsOftenEnough
+WARN invalid TestEvent: FAIL	light [build failed]
+bad output from test2json: FAIL	light [build failed]
+
+=== Errors
+./callLoopConditionsOftenEnough_test.go:14:10: undefined: callLoopConditionsOftenEnough
+
+DONE 0 tests, 1 error in 0.119s
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+ERROR: execution failed: exit status 1
+
+github.com/symflower/eval-dev-quality/util.CommandWithResult
+	/home/eval/eval-dev-quality/util/exec.go:52
+github.com/symflower/eval-dev-quality/language/golang.(*Language).Execute
+	/home/eval/eval-dev-quality/language/golang/language.go:96
+github.com/symflower/eval-dev-quality/evaluate.Repository
+	/home/eval/eval-dev-quality/evaluate/repository.go:57
+github.com/symflower/eval-dev-quality/evaluate.Evaluate.func2
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:209
+github.com/symflower/eval-dev-quality/evaluate.withLoadedModel
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:253
+github.com/symflower/eval-dev-quality/evaluate.Evaluate
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:199
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.(*Evaluate).Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/evaluate.go:284
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute.func1
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:34
+github.com/jessevdk/go-flags.(*Parser).ParseArgs
+	/home/eval/go/pkg/mod/github.com/jessevdk/go-flags@v1.5.1-0.20210607101731-3927b71304df/parser.go:333
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:37
+main.main
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/main.go:11
+runtime.main
+	/home/eval/go/src/runtime/proc.go:267
+runtime.goexit
+	/home/eval/go/src/runtime/asm_amd64.s:1650
+github.com/symflower/eval-dev-quality/language/golang.(*Language).Execute
+	/home/eval/eval-dev-quality/language/golang/language.go:116
+github.com/symflower/eval-dev-quality/evaluate.Repository
+	/home/eval/eval-dev-quality/evaluate/repository.go:57
+github.com/symflower/eval-dev-quality/evaluate.Evaluate.func2
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:209
+github.com/symflower/eval-dev-quality/evaluate.withLoadedModel
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:253
+github.com/symflower/eval-dev-quality/evaluate.Evaluate
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:199
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.(*Evaluate).Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/evaluate.go:284
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute.func1
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:34
+github.com/jessevdk/go-flags.(*Parser).ParseArgs
+	/home/eval/go/pkg/mod/github.com/jessevdk/go-flags@v1.5.1-0.20210607101731-3927b71304df/parser.go:333
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:37
+main.main
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/main.go:11
+runtime.main
+	/home/eval/go/src/runtime/proc.go:267
+runtime.goexit
+	/home/eval/go/src/runtime/asm_amd64.s:1650
+# light_test [light.test]
+./callLoopConditionsOftenEnough_test.go:14:10: undefined: callLoopConditionsOftenEnough
+WARN invalid TestEvent: FAIL	light [build failed]
+bad output from test2json: FAIL	light [build failed]
+
+=== Errors
+./callLoopConditionsOftenEnough_test.go:14:10: undefined: callLoopConditionsOftenEnough
+
+DONE 0 tests, 1 error in 0.119s
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+ERROR: execution failed: exit status 1
+
+callLoopConditionsOftenEnough.go exit status 1
+# light_test [light.test]
+./cascadingIfElse_test.go:17:13: undefined: cascadingIfElse
+WARN invalid TestEvent: FAIL	light [build failed]
+bad output from test2json: FAIL	light [build failed]
+
+=== Errors
+./cascadingIfElse_test.go:17:13: undefined: cascadingIfElse
+
+DONE 0 tests, 1 error in 0.101s
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+ERROR: execution failed: exit status 1
+
+github.com/symflower/eval-dev-quality/util.CommandWithResult
+	/home/eval/eval-dev-quality/util/exec.go:52
+github.com/symflower/eval-dev-quality/language/golang.(*Language).Execute
+	/home/eval/eval-dev-quality/language/golang/language.go:96
+github.com/symflower/eval-dev-quality/evaluate.Repository
+	/home/eval/eval-dev-quality/evaluate/repository.go:57
+github.com/symflower/eval-dev-quality/evaluate.Evaluate.func2
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:209
+github.com/symflower/eval-dev-quality/evaluate.withLoadedModel
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:253
+github.com/symflower/eval-dev-quality/evaluate.Evaluate
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:199
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.(*Evaluate).Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/evaluate.go:284
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute.func1
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:34
+github.com/jessevdk/go-flags.(*Parser).ParseArgs
+	/home/eval/go/pkg/mod/github.com/jessevdk/go-flags@v1.5.1-0.20210607101731-3927b71304df/parser.go:333
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:37
+main.main
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/main.go:11
+runtime.main
+	/home/eval/go/src/runtime/proc.go:267
+runtime.goexit
+	/home/eval/go/src/runtime/asm_amd64.s:1650
+github.com/symflower/eval-dev-quality/language/golang.(*Language).Execute
+	/home/eval/eval-dev-quality/language/golang/language.go:116
+github.com/symflower/eval-dev-quality/evaluate.Repository
+	/home/eval/eval-dev-quality/evaluate/repository.go:57
+github.com/symflower/eval-dev-quality/evaluate.Evaluate.func2
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:209
+github.com/symflower/eval-dev-quality/evaluate.withLoadedModel
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:253
+github.com/symflower/eval-dev-quality/evaluate.Evaluate
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:199
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.(*Evaluate).Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/evaluate.go:284
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute.func1
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:34
+github.com/jessevdk/go-flags.(*Parser).ParseArgs
+	/home/eval/go/pkg/mod/github.com/jessevdk/go-flags@v1.5.1-0.20210607101731-3927b71304df/parser.go:333
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:37
+main.main
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/main.go:11
+runtime.main
+	/home/eval/go/src/runtime/proc.go:267
+runtime.goexit
+	/home/eval/go/src/runtime/asm_amd64.s:1650
+# light_test [light.test]
+./cascadingIfElse_test.go:17:13: undefined: cascadingIfElse
+WARN invalid TestEvent: FAIL	light [build failed]
+bad output from test2json: FAIL	light [build failed]
+
+=== Errors
+./cascadingIfElse_test.go:17:13: undefined: cascadingIfElse
+
+DONE 0 tests, 1 error in 0.101s
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+ERROR: execution failed: exit status 1
+
+cascadingIfElse.go exit status 1
+# light_test [light.test]
+./collatzCalculator_test.go:20:15: undefined: computeStepCount
+WARN invalid TestEvent: FAIL	light [build failed]
+bad output from test2json: FAIL	light [build failed]
+
+=== Errors
+./collatzCalculator_test.go:20:15: undefined: computeStepCount
+
+DONE 0 tests, 1 error in 0.103s
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+ERROR: execution failed: exit status 1
+
+github.com/symflower/eval-dev-quality/util.CommandWithResult
+	/home/eval/eval-dev-quality/util/exec.go:52
+github.com/symflower/eval-dev-quality/language/golang.(*Language).Execute
+	/home/eval/eval-dev-quality/language/golang/language.go:96
+github.com/symflower/eval-dev-quality/evaluate.Repository
+	/home/eval/eval-dev-quality/evaluate/repository.go:57
+github.com/symflower/eval-dev-quality/evaluate.Evaluate.func2
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:209
+github.com/symflower/eval-dev-quality/evaluate.withLoadedModel
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:253
+github.com/symflower/eval-dev-quality/evaluate.Evaluate
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:199
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.(*Evaluate).Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/evaluate.go:284
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute.func1
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:34
+github.com/jessevdk/go-flags.(*Parser).ParseArgs
+	/home/eval/go/pkg/mod/github.com/jessevdk/go-flags@v1.5.1-0.20210607101731-3927b71304df/parser.go:333
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:37
+main.main
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/main.go:11
+runtime.main
+	/home/eval/go/src/runtime/proc.go:267
+runtime.goexit
+	/home/eval/go/src/runtime/asm_amd64.s:1650
+github.com/symflower/eval-dev-quality/language/golang.(*Language).Execute
+	/home/eval/eval-dev-quality/language/golang/language.go:116
+github.com/symflower/eval-dev-quality/evaluate.Repository
+	/home/eval/eval-dev-quality/evaluate/repository.go:57
+github.com/symflower/eval-dev-quality/evaluate.Evaluate.func2
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:209
+github.com/symflower/eval-dev-quality/evaluate.withLoadedModel
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:253
+github.com/symflower/eval-dev-quality/evaluate.Evaluate
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:199
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.(*Evaluate).Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/evaluate.go:284
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute.func1
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:34
+github.com/jessevdk/go-flags.(*Parser).ParseArgs
+	/home/eval/go/pkg/mod/github.com/jessevdk/go-flags@v1.5.1-0.20210607101731-3927b71304df/parser.go:333
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:37
+main.main
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/main.go:11
+runtime.main
+	/home/eval/go/src/runtime/proc.go:267
+runtime.goexit
+	/home/eval/go/src/runtime/asm_amd64.s:1650
+# light_test [light.test]
+./collatzCalculator_test.go:20:15: undefined: computeStepCount
+WARN invalid TestEvent: FAIL	light [build failed]
+bad output from test2json: FAIL	light [build failed]
+
+=== Errors
+./collatzCalculator_test.go:20:15: undefined: computeStepCount
+
+DONE 0 tests, 1 error in 0.103s
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+ERROR: execution failed: exit status 1
+
+collatzCalculator.go exit status 1
+# light_test [light.test]
+./conditionsAnd_test.go:18:13: undefined: conditionsAnd
+WARN invalid TestEvent: FAIL	light [build failed]
+bad output from test2json: FAIL	light [build failed]
+
+=== Errors
+./conditionsAnd_test.go:18:13: undefined: conditionsAnd
+
+DONE 0 tests, 1 error in 0.122s
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+ERROR: execution failed: exit status 1
+
+github.com/symflower/eval-dev-quality/util.CommandWithResult
+	/home/eval/eval-dev-quality/util/exec.go:52
+github.com/symflower/eval-dev-quality/language/golang.(*Language).Execute
+	/home/eval/eval-dev-quality/language/golang/language.go:96
+github.com/symflower/eval-dev-quality/evaluate.Repository
+	/home/eval/eval-dev-quality/evaluate/repository.go:57
+github.com/symflower/eval-dev-quality/evaluate.Evaluate.func2
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:209
+github.com/symflower/eval-dev-quality/evaluate.withLoadedModel
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:253
+github.com/symflower/eval-dev-quality/evaluate.Evaluate
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:199
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.(*Evaluate).Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/evaluate.go:284
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute.func1
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:34
+github.com/jessevdk/go-flags.(*Parser).ParseArgs
+	/home/eval/go/pkg/mod/github.com/jessevdk/go-flags@v1.5.1-0.20210607101731-3927b71304df/parser.go:333
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:37
+main.main
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/main.go:11
+runtime.main
+	/home/eval/go/src/runtime/proc.go:267
+runtime.goexit
+	/home/eval/go/src/runtime/asm_amd64.s:1650
+github.com/symflower/eval-dev-quality/language/golang.(*Language).Execute
+	/home/eval/eval-dev-quality/language/golang/language.go:116
+github.com/symflower/eval-dev-quality/evaluate.Repository
+	/home/eval/eval-dev-quality/evaluate/repository.go:57
+github.com/symflower/eval-dev-quality/evaluate.Evaluate.func2
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:209
+github.com/symflower/eval-dev-quality/evaluate.withLoadedModel
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:253
+github.com/symflower/eval-dev-quality/evaluate.Evaluate
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:199
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.(*Evaluate).Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/evaluate.go:284
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute.func1
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:34
+github.com/jessevdk/go-flags.(*Parser).ParseArgs
+	/home/eval/go/pkg/mod/github.com/jessevdk/go-flags@v1.5.1-0.20210607101731-3927b71304df/parser.go:333
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:37
+main.main
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/main.go:11
+runtime.main
+	/home/eval/go/src/runtime/proc.go:267
+runtime.goexit
+	/home/eval/go/src/runtime/asm_amd64.s:1650
+# light_test [light.test]
+./conditionsAnd_test.go:18:13: undefined: conditionsAnd
+WARN invalid TestEvent: FAIL	light [build failed]
+bad output from test2json: FAIL	light [build failed]
+
+=== Errors
+./conditionsAnd_test.go:18:13: undefined: conditionsAnd
+
+DONE 0 tests, 1 error in 0.122s
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+ERROR: execution failed: exit status 1
+
+conditionsAnd.go exit status 1
+=== RUN   TestEquilibriumIndices
+    equilibriumIndices_test.go:23: equilibriumIndices([0 3 0]) = 1;, want 1;2;
+    equilibriumIndices_test.go:23: equilibriumIndices([0 1 3 4 2]) = , want 3;
+    equilibriumIndices_test.go:23: equilibriumIndices([-1 1 -2 2 -2 0]) = 2;3;4;, want 4;5;
+    equilibriumIndices_test.go:23: equilibriumIndices([-1 1]) = , want 1;
+    equilibriumIndices_test.go:23: equilibriumIndices([1 -1]) = , want 0;
+--- FAIL: TestEquilibriumIndices (0.00s)
+FAIL
+coverage: 4.3% of statements
+FAIL	light	0.005s
+
+=== Failed
+=== FAIL: . TestEquilibriumIndices (0.00s)
+    equilibriumIndices_test.go:23: equilibriumIndices([0 3 0]) = 1;, want 1;2;
+    equilibriumIndices_test.go:23: equilibriumIndices([0 1 3 4 2]) = , want 3;
+    equilibriumIndices_test.go:23: equilibriumIndices([-1 1 -2 2 -2 0]) = 2;3;4;, want 4;5;
+    equilibriumIndices_test.go:23: equilibriumIndices([-1 1]) = , want 1;
+    equilibriumIndices_test.go:23: equilibriumIndices([1 -1]) = , want 0;
+
+DONE 1 tests, 1 failure in 0.321s
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+ERROR: execution failed: exit status 1
+
+github.com/symflower/eval-dev-quality/util.CommandWithResult
+	/home/eval/eval-dev-quality/util/exec.go:52
+github.com/symflower/eval-dev-quality/language/golang.(*Language).Execute
+	/home/eval/eval-dev-quality/language/golang/language.go:96
+github.com/symflower/eval-dev-quality/evaluate.Repository
+	/home/eval/eval-dev-quality/evaluate/repository.go:57
+github.com/symflower/eval-dev-quality/evaluate.Evaluate.func2
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:209
+github.com/symflower/eval-dev-quality/evaluate.withLoadedModel
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:253
+github.com/symflower/eval-dev-quality/evaluate.Evaluate
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:199
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.(*Evaluate).Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/evaluate.go:284
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute.func1
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:34
+github.com/jessevdk/go-flags.(*Parser).ParseArgs
+	/home/eval/go/pkg/mod/github.com/jessevdk/go-flags@v1.5.1-0.20210607101731-3927b71304df/parser.go:333
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:37
+main.main
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/main.go:11
+runtime.main
+	/home/eval/go/src/runtime/proc.go:267
+runtime.goexit
+	/home/eval/go/src/runtime/asm_amd64.s:1650
+github.com/symflower/eval-dev-quality/language/golang.(*Language).Execute
+	/home/eval/eval-dev-quality/language/golang/language.go:113
+github.com/symflower/eval-dev-quality/evaluate.Repository
+	/home/eval/eval-dev-quality/evaluate/repository.go:57
+github.com/symflower/eval-dev-quality/evaluate.Evaluate.func2
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:209
+github.com/symflower/eval-dev-quality/evaluate.withLoadedModel
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:253
+github.com/symflower/eval-dev-quality/evaluate.Evaluate
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:199
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.(*Evaluate).Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/evaluate.go:284
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute.func1
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:34
+github.com/jessevdk/go-flags.(*Parser).ParseArgs
+	/home/eval/go/pkg/mod/github.com/jessevdk/go-flags@v1.5.1-0.20210607101731-3927b71304df/parser.go:333
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:37
+main.main
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/main.go:11
+runtime.main
+	/home/eval/go/src/runtime/proc.go:267
+runtime.goexit
+	/home/eval/go/src/runtime/asm_amd64.s:1650
+=== RUN   TestEquilibriumIndices
+    equilibriumIndices_test.go:23: equilibriumIndices([0 3 0]) = 1;, want 1;2;
+    equilibriumIndices_test.go:23: equilibriumIndices([0 1 3 4 2]) = , want 3;
+    equilibriumIndices_test.go:23: equilibriumIndices([-1 1 -2 2 -2 0]) = 2;3;4;, want 4;5;
+    equilibriumIndices_test.go:23: equilibriumIndices([-1 1]) = , want 1;
+    equilibriumIndices_test.go:23: equilibriumIndices([1 -1]) = , want 0;
+--- FAIL: TestEquilibriumIndices (0.00s)
+FAIL
+coverage: 4.3% of statements
+FAIL	light	0.005s
+
+=== Failed
+=== FAIL: . TestEquilibriumIndices (0.00s)
+    equilibriumIndices_test.go:23: equilibriumIndices([0 3 0]) = 1;, want 1;2;
+    equilibriumIndices_test.go:23: equilibriumIndices([0 1 3 4 2]) = , want 3;
+    equilibriumIndices_test.go:23: equilibriumIndices([-1 1 -2 2 -2 0]) = 2;3;4;, want 4;5;
+    equilibriumIndices_test.go:23: equilibriumIndices([-1 1]) = , want 1;
+    equilibriumIndices_test.go:23: equilibriumIndices([1 -1]) = , want 0;
+
+DONE 1 tests, 1 failure in 0.321s
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+ERROR: execution failed: exit status 1
+ exit status 1
+# light_test [light.test]
+./forLoop_test.go:17:16: undefined: forLoop
+WARN invalid TestEvent: FAIL	light [build failed]
+bad output from test2json: FAIL	light [build failed]
+
+=== Errors
+./forLoop_test.go:17:16: undefined: forLoop
+
+DONE 0 tests, 1 error in 0.115s
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+ERROR: execution failed: exit status 1
+
+github.com/symflower/eval-dev-quality/util.CommandWithResult
+	/home/eval/eval-dev-quality/util/exec.go:52
+github.com/symflower/eval-dev-quality/language/golang.(*Language).Execute
+	/home/eval/eval-dev-quality/language/golang/language.go:96
+github.com/symflower/eval-dev-quality/evaluate.Repository
+	/home/eval/eval-dev-quality/evaluate/repository.go:57
+github.com/symflower/eval-dev-quality/evaluate.Evaluate.func2
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:209
+github.com/symflower/eval-dev-quality/evaluate.withLoadedModel
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:253
+github.com/symflower/eval-dev-quality/evaluate.Evaluate
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:199
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.(*Evaluate).Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/evaluate.go:284
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute.func1
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:34
+github.com/jessevdk/go-flags.(*Parser).ParseArgs
+	/home/eval/go/pkg/mod/github.com/jessevdk/go-flags@v1.5.1-0.20210607101731-3927b71304df/parser.go:333
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:37
+main.main
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/main.go:11
+runtime.main
+	/home/eval/go/src/runtime/proc.go:267
+runtime.goexit
+	/home/eval/go/src/runtime/asm_amd64.s:1650
+github.com/symflower/eval-dev-quality/language/golang.(*Language).Execute
+	/home/eval/eval-dev-quality/language/golang/language.go:116
+github.com/symflower/eval-dev-quality/evaluate.Repository
+	/home/eval/eval-dev-quality/evaluate/repository.go:57
+github.com/symflower/eval-dev-quality/evaluate.Evaluate.func2
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:209
+github.com/symflower/eval-dev-quality/evaluate.withLoadedModel
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:253
+github.com/symflower/eval-dev-quality/evaluate.Evaluate
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:199
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.(*Evaluate).Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/evaluate.go:284
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute.func1
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:34
+github.com/jessevdk/go-flags.(*Parser).ParseArgs
+	/home/eval/go/pkg/mod/github.com/jessevdk/go-flags@v1.5.1-0.20210607101731-3927b71304df/parser.go:333
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:37
+main.main
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/main.go:11
+runtime.main
+	/home/eval/go/src/runtime/proc.go:267
+runtime.goexit
+	/home/eval/go/src/runtime/asm_amd64.s:1650
+# light_test [light.test]
+./forLoop_test.go:17:16: undefined: forLoop
+WARN invalid TestEvent: FAIL	light [build failed]
+bad output from test2json: FAIL	light [build failed]
+
+=== Errors
+./forLoop_test.go:17:16: undefined: forLoop
+
+DONE 0 tests, 1 error in 0.115s
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+ERROR: execution failed: exit status 1
+
+forLoop.go exit status 1
+# light [light.test]
+./jacobiSymbol_test.go:14:4: cannot use -3 (untyped int constant) as uint64 value in struct literal (overflows)
+WARN invalid TestEvent: FAIL	light [build failed]
+bad output from test2json: FAIL	light [build failed]
+
+=== Errors
+./jacobiSymbol_test.go:14:4: cannot use -3 (untyped int constant) as uint64 value in struct literal (overflows)
+
+DONE 0 tests, 1 error in 0.149s
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+ERROR: execution failed: exit status 1
+
+github.com/symflower/eval-dev-quality/util.CommandWithResult
+	/home/eval/eval-dev-quality/util/exec.go:52
+github.com/symflower/eval-dev-quality/language/golang.(*Language).Execute
+	/home/eval/eval-dev-quality/language/golang/language.go:96
+github.com/symflower/eval-dev-quality/evaluate.Repository
+	/home/eval/eval-dev-quality/evaluate/repository.go:57
+github.com/symflower/eval-dev-quality/evaluate.Evaluate.func2
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:209
+github.com/symflower/eval-dev-quality/evaluate.withLoadedModel
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:253
+github.com/symflower/eval-dev-quality/evaluate.Evaluate
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:199
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.(*Evaluate).Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/evaluate.go:284
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute.func1
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:34
+github.com/jessevdk/go-flags.(*Parser).ParseArgs
+	/home/eval/go/pkg/mod/github.com/jessevdk/go-flags@v1.5.1-0.20210607101731-3927b71304df/parser.go:333
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:37
+main.main
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/main.go:11
+runtime.main
+	/home/eval/go/src/runtime/proc.go:267
+runtime.goexit
+	/home/eval/go/src/runtime/asm_amd64.s:1650
+github.com/symflower/eval-dev-quality/language/golang.(*Language).Execute
+	/home/eval/eval-dev-quality/language/golang/language.go:116
+github.com/symflower/eval-dev-quality/evaluate.Repository
+	/home/eval/eval-dev-quality/evaluate/repository.go:57
+github.com/symflower/eval-dev-quality/evaluate.Evaluate.func2
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:209
+github.com/symflower/eval-dev-quality/evaluate.withLoadedModel
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:253
+github.com/symflower/eval-dev-quality/evaluate.Evaluate
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:199
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.(*Evaluate).Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/evaluate.go:284
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute.func1
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:34
+github.com/jessevdk/go-flags.(*Parser).ParseArgs
+	/home/eval/go/pkg/mod/github.com/jessevdk/go-flags@v1.5.1-0.20210607101731-3927b71304df/parser.go:333
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:37
+main.main
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/main.go:11
+runtime.main
+	/home/eval/go/src/runtime/proc.go:267
+runtime.goexit
+	/home/eval/go/src/runtime/asm_amd64.s:1650
+# light [light.test]
+./jacobiSymbol_test.go:14:4: cannot use -3 (untyped int constant) as uint64 value in struct literal (overflows)
+WARN invalid TestEvent: FAIL	light [build failed]
+bad output from test2json: FAIL	light [build failed]
+
+=== Errors
+./jacobiSymbol_test.go:14:4: cannot use -3 (untyped int constant) as uint64 value in struct literal (overflows)
+
+DONE 0 tests, 1 error in 0.149s
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+ERROR: execution failed: exit status 1
+
+jacobiSymbol.go exit status 1
+# light
+klarnerRadoSequence_test.go:35:1: expected declaration, found '}'
+WARN invalid TestEvent: FAIL	light [setup failed]
+bad output from test2json: FAIL	light [setup failed]
+
+=== Errors
+klarnerRadoSequence_test.go:35:1: expected declaration, found '}'
+
+DONE 0 tests, 1 error in 0.044s
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+ERROR: execution failed: exit status 1
+
+github.com/symflower/eval-dev-quality/util.CommandWithResult
+	/home/eval/eval-dev-quality/util/exec.go:52
+github.com/symflower/eval-dev-quality/language/golang.(*Language).Execute
+	/home/eval/eval-dev-quality/language/golang/language.go:96
+github.com/symflower/eval-dev-quality/evaluate.Repository
+	/home/eval/eval-dev-quality/evaluate/repository.go:57
+github.com/symflower/eval-dev-quality/evaluate.Evaluate.func2
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:209
+github.com/symflower/eval-dev-quality/evaluate.withLoadedModel
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:253
+github.com/symflower/eval-dev-quality/evaluate.Evaluate
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:199
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.(*Evaluate).Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/evaluate.go:284
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute.func1
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:34
+github.com/jessevdk/go-flags.(*Parser).ParseArgs
+	/home/eval/go/pkg/mod/github.com/jessevdk/go-flags@v1.5.1-0.20210607101731-3927b71304df/parser.go:333
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:37
+main.main
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/main.go:11
+runtime.main
+	/home/eval/go/src/runtime/proc.go:267
+runtime.goexit
+	/home/eval/go/src/runtime/asm_amd64.s:1650
+github.com/symflower/eval-dev-quality/language/golang.(*Language).Execute
+	/home/eval/eval-dev-quality/language/golang/language.go:116
+github.com/symflower/eval-dev-quality/evaluate.Repository
+	/home/eval/eval-dev-quality/evaluate/repository.go:57
+github.com/symflower/eval-dev-quality/evaluate.Evaluate.func2
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:209
+github.com/symflower/eval-dev-quality/evaluate.withLoadedModel
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:253
+github.com/symflower/eval-dev-quality/evaluate.Evaluate
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:199
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.(*Evaluate).Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/evaluate.go:284
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute.func1
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:34
+github.com/jessevdk/go-flags.(*Parser).ParseArgs
+	/home/eval/go/pkg/mod/github.com/jessevdk/go-flags@v1.5.1-0.20210607101731-3927b71304df/parser.go:333
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:37
+main.main
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/main.go:11
+runtime.main
+	/home/eval/go/src/runtime/proc.go:267
+runtime.goexit
+	/home/eval/go/src/runtime/asm_amd64.s:1650
+# light
+klarnerRadoSequence_test.go:35:1: expected declaration, found '}'
+WARN invalid TestEvent: FAIL	light [setup failed]
+bad output from test2json: FAIL	light [setup failed]
+
+=== Errors
+klarnerRadoSequence_test.go:35:1: expected declaration, found '}'
+
+DONE 0 tests, 1 error in 0.044s
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+ERROR: execution failed: exit status 1
+
+klarnerRadoSequence.go exit status 1
+# light_test [light.test]
+./magicSquareOdd_test.go:10:21: undefined: light.MagicSquareOdd
+./magicSquareOdd_test.go:22:20: undefined: light.MagicSquareOdd
+./magicSquareOdd_test.go:35:20: undefined: light.MagicSquareOdd
+WARN invalid TestEvent: FAIL	light [build failed]
+bad output from test2json: FAIL	light [build failed]
+
+=== Errors
+./magicSquareOdd_test.go:10:21: undefined: light.MagicSquareOdd
+./magicSquareOdd_test.go:22:20: undefined: light.MagicSquareOdd
+./magicSquareOdd_test.go:35:20: undefined: light.MagicSquareOdd
+
+DONE 0 tests, 3 errors in 0.109s
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+ERROR: execution failed: exit status 1
+
+github.com/symflower/eval-dev-quality/util.CommandWithResult
+	/home/eval/eval-dev-quality/util/exec.go:52
+github.com/symflower/eval-dev-quality/language/golang.(*Language).Execute
+	/home/eval/eval-dev-quality/language/golang/language.go:96
+github.com/symflower/eval-dev-quality/evaluate.Repository
+	/home/eval/eval-dev-quality/evaluate/repository.go:57
+github.com/symflower/eval-dev-quality/evaluate.Evaluate.func2
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:209
+github.com/symflower/eval-dev-quality/evaluate.withLoadedModel
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:253
+github.com/symflower/eval-dev-quality/evaluate.Evaluate
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:199
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.(*Evaluate).Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/evaluate.go:284
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute.func1
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:34
+github.com/jessevdk/go-flags.(*Parser).ParseArgs
+	/home/eval/go/pkg/mod/github.com/jessevdk/go-flags@v1.5.1-0.20210607101731-3927b71304df/parser.go:333
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:37
+main.main
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/main.go:11
+runtime.main
+	/home/eval/go/src/runtime/proc.go:267
+runtime.goexit
+	/home/eval/go/src/runtime/asm_amd64.s:1650
+github.com/symflower/eval-dev-quality/language/golang.(*Language).Execute
+	/home/eval/eval-dev-quality/language/golang/language.go:116
+github.com/symflower/eval-dev-quality/evaluate.Repository
+	/home/eval/eval-dev-quality/evaluate/repository.go:57
+github.com/symflower/eval-dev-quality/evaluate.Evaluate.func2
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:209
+github.com/symflower/eval-dev-quality/evaluate.withLoadedModel
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:253
+github.com/symflower/eval-dev-quality/evaluate.Evaluate
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:199
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.(*Evaluate).Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/evaluate.go:284
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute.func1
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:34
+github.com/jessevdk/go-flags.(*Parser).ParseArgs
+	/home/eval/go/pkg/mod/github.com/jessevdk/go-flags@v1.5.1-0.20210607101731-3927b71304df/parser.go:333
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:37
+main.main
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/main.go:11
+runtime.main
+	/home/eval/go/src/runtime/proc.go:267
+runtime.goexit
+	/home/eval/go/src/runtime/asm_amd64.s:1650
+# light_test [light.test]
+./magicSquareOdd_test.go:10:21: undefined: light.MagicSquareOdd
+./magicSquareOdd_test.go:22:20: undefined: light.MagicSquareOdd
+./magicSquareOdd_test.go:35:20: undefined: light.MagicSquareOdd
+WARN invalid TestEvent: FAIL	light [build failed]
+bad output from test2json: FAIL	light [build failed]
+
+=== Errors
+./magicSquareOdd_test.go:10:21: undefined: light.MagicSquareOdd
+./magicSquareOdd_test.go:22:20: undefined: light.MagicSquareOdd
+./magicSquareOdd_test.go:35:20: undefined: light.MagicSquareOdd
+
+DONE 0 tests, 3 errors in 0.109s
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+ERROR: execution failed: exit status 1
+
+magicSquareOdd.go exit status 1
+# light_test [light.test]
+./matchBytes_test.go:19:10: undefined: matchBytes
+./matchBytes_test.go:27:2: undefined: matchBytes
+./matchBytes_test.go:28:2: undefined: matchBytes
+WARN invalid TestEvent: FAIL	light [build failed]
+bad output from test2json: FAIL	light [build failed]
+
+=== Errors
+./matchBytes_test.go:19:10: undefined: matchBytes
+./matchBytes_test.go:27:2: undefined: matchBytes
+./matchBytes_test.go:28:2: undefined: matchBytes
+
+DONE 0 tests, 3 errors in 0.158s
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+ERROR: execution failed: exit status 1
+
+github.com/symflower/eval-dev-quality/util.CommandWithResult
+	/home/eval/eval-dev-quality/util/exec.go:52
+github.com/symflower/eval-dev-quality/language/golang.(*Language).Execute
+	/home/eval/eval-dev-quality/language/golang/language.go:96
+github.com/symflower/eval-dev-quality/evaluate.Repository
+	/home/eval/eval-dev-quality/evaluate/repository.go:57
+github.com/symflower/eval-dev-quality/evaluate.Evaluate.func2
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:209
+github.com/symflower/eval-dev-quality/evaluate.withLoadedModel
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:253
+github.com/symflower/eval-dev-quality/evaluate.Evaluate
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:199
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.(*Evaluate).Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/evaluate.go:284
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute.func1
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:34
+github.com/jessevdk/go-flags.(*Parser).ParseArgs
+	/home/eval/go/pkg/mod/github.com/jessevdk/go-flags@v1.5.1-0.20210607101731-3927b71304df/parser.go:333
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:37
+main.main
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/main.go:11
+runtime.main
+	/home/eval/go/src/runtime/proc.go:267
+runtime.goexit
+	/home/eval/go/src/runtime/asm_amd64.s:1650
+github.com/symflower/eval-dev-quality/language/golang.(*Language).Execute
+	/home/eval/eval-dev-quality/language/golang/language.go:116
+github.com/symflower/eval-dev-quality/evaluate.Repository
+	/home/eval/eval-dev-quality/evaluate/repository.go:57
+github.com/symflower/eval-dev-quality/evaluate.Evaluate.func2
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:209
+github.com/symflower/eval-dev-quality/evaluate.withLoadedModel
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:253
+github.com/symflower/eval-dev-quality/evaluate.Evaluate
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:199
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.(*Evaluate).Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/evaluate.go:284
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute.func1
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:34
+github.com/jessevdk/go-flags.(*Parser).ParseArgs
+	/home/eval/go/pkg/mod/github.com/jessevdk/go-flags@v1.5.1-0.20210607101731-3927b71304df/parser.go:333
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:37
+main.main
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/main.go:11
+runtime.main
+	/home/eval/go/src/runtime/proc.go:267
+runtime.goexit
+	/home/eval/go/src/runtime/asm_amd64.s:1650
+# light_test [light.test]
+./matchBytes_test.go:19:10: undefined: matchBytes
+./matchBytes_test.go:27:2: undefined: matchBytes
+./matchBytes_test.go:28:2: undefined: matchBytes
+WARN invalid TestEvent: FAIL	light [build failed]
+bad output from test2json: FAIL	light [build failed]
+
+=== Errors
+./matchBytes_test.go:19:10: undefined: matchBytes
+./matchBytes_test.go:27:2: undefined: matchBytes
+./matchBytes_test.go:28:2: undefined: matchBytes
+
+DONE 0 tests, 3 errors in 0.158s
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+ERROR: execution failed: exit status 1
+
+matchBytes.go exit status 1
+# light_test [light.test]
+./pascalsTriangle_test.go:7:14: undefined: pascalsTriangle
+./pascalsTriangle_test.go:24:12: undefined: pascalsTriangle
+WARN invalid TestEvent: FAIL	light [build failed]
+bad output from test2json: FAIL	light [build failed]
+
+=== Errors
+./pascalsTriangle_test.go:7:14: undefined: pascalsTriangle
+./pascalsTriangle_test.go:24:12: undefined: pascalsTriangle
+
+DONE 0 tests, 2 errors in 0.107s
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+ERROR: execution failed: exit status 1
+
+github.com/symflower/eval-dev-quality/util.CommandWithResult
+	/home/eval/eval-dev-quality/util/exec.go:52
+github.com/symflower/eval-dev-quality/language/golang.(*Language).Execute
+	/home/eval/eval-dev-quality/language/golang/language.go:96
+github.com/symflower/eval-dev-quality/evaluate.Repository
+	/home/eval/eval-dev-quality/evaluate/repository.go:57
+github.com/symflower/eval-dev-quality/evaluate.Evaluate.func2
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:209
+github.com/symflower/eval-dev-quality/evaluate.withLoadedModel
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:253
+github.com/symflower/eval-dev-quality/evaluate.Evaluate
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:199
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.(*Evaluate).Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/evaluate.go:284
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute.func1
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:34
+github.com/jessevdk/go-flags.(*Parser).ParseArgs
+	/home/eval/go/pkg/mod/github.com/jessevdk/go-flags@v1.5.1-0.20210607101731-3927b71304df/parser.go:333
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:37
+main.main
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/main.go:11
+runtime.main
+	/home/eval/go/src/runtime/proc.go:267
+runtime.goexit
+	/home/eval/go/src/runtime/asm_amd64.s:1650
+github.com/symflower/eval-dev-quality/language/golang.(*Language).Execute
+	/home/eval/eval-dev-quality/language/golang/language.go:116
+github.com/symflower/eval-dev-quality/evaluate.Repository
+	/home/eval/eval-dev-quality/evaluate/repository.go:57
+github.com/symflower/eval-dev-quality/evaluate.Evaluate.func2
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:209
+github.com/symflower/eval-dev-quality/evaluate.withLoadedModel
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:253
+github.com/symflower/eval-dev-quality/evaluate.Evaluate
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:199
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.(*Evaluate).Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/evaluate.go:284
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute.func1
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:34
+github.com/jessevdk/go-flags.(*Parser).ParseArgs
+	/home/eval/go/pkg/mod/github.com/jessevdk/go-flags@v1.5.1-0.20210607101731-3927b71304df/parser.go:333
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:37
+main.main
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/main.go:11
+runtime.main
+	/home/eval/go/src/runtime/proc.go:267
+runtime.goexit
+	/home/eval/go/src/runtime/asm_amd64.s:1650
+# light_test [light.test]
+./pascalsTriangle_test.go:7:14: undefined: pascalsTriangle
+./pascalsTriangle_test.go:24:12: undefined: pascalsTriangle
+WARN invalid TestEvent: FAIL	light [build failed]
+bad output from test2json: FAIL	light [build failed]
+
+=== Errors
+./pascalsTriangle_test.go:7:14: undefined: pascalsTriangle
+./pascalsTriangle_test.go:24:12: undefined: pascalsTriangle
+
+DONE 0 tests, 2 errors in 0.107s
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+ERROR: execution failed: exit status 1
+
+pascalsTriangle.go exit status 1
+=== RUN   TestExtractDigits
+=== RUN   TestExtractDigits/empty_string
+=== RUN   TestExtractDigits/only_spaces
+=== RUN   TestExtractDigits/punctuations
+=== RUN   TestExtractDigits/letters
+=== RUN   TestExtractDigits/normal_input
+    phoneNumber_test.go:24: extractDigits() error = letters not permitted, wantErr false
+=== RUN   TestExtractDigits/other_symbols
+    phoneNumber_test.go:24: extractDigits() error = letters not permitted, wantErr false
+=== RUN   TestExtractDigits/many_spaces
+--- FAIL: TestExtractDigits (0.00s)
+    --- PASS: TestExtractDigits/empty_string (0.00s)
+    --- PASS: TestExtractDigits/only_spaces (0.00s)
+    --- PASS: TestExtractDigits/punctuations (0.00s)
+    --- PASS: TestExtractDigits/letters (0.00s)
+    --- FAIL: TestExtractDigits/normal_input (0.00s)
+    --- FAIL: TestExtractDigits/other_symbols (0.00s)
+    --- PASS: TestExtractDigits/many_spaces (0.00s)
+FAIL
+coverage: 4.3% of statements
+FAIL	light	0.005s
+
+=== Failed
+=== FAIL: . TestExtractDigits/normal_input (0.00s)
+    phoneNumber_test.go:24: extractDigits() error = letters not permitted, wantErr false
+    --- FAIL: TestExtractDigits/normal_input (0.00s)
+
+=== FAIL: . TestExtractDigits/other_symbols (0.00s)
+    phoneNumber_test.go:24: extractDigits() error = letters not permitted, wantErr false
+    --- FAIL: TestExtractDigits/other_symbols (0.00s)
+
+=== FAIL: . TestExtractDigits (0.00s)
+
+DONE 8 tests, 3 failures in 0.333s
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+ERROR: execution failed: exit status 1
+
+github.com/symflower/eval-dev-quality/util.CommandWithResult
+	/home/eval/eval-dev-quality/util/exec.go:52
+github.com/symflower/eval-dev-quality/language/golang.(*Language).Execute
+	/home/eval/eval-dev-quality/language/golang/language.go:96
+github.com/symflower/eval-dev-quality/evaluate.Repository
+	/home/eval/eval-dev-quality/evaluate/repository.go:57
+github.com/symflower/eval-dev-quality/evaluate.Evaluate.func2
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:209
+github.com/symflower/eval-dev-quality/evaluate.withLoadedModel
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:253
+github.com/symflower/eval-dev-quality/evaluate.Evaluate
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:199
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.(*Evaluate).Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/evaluate.go:284
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute.func1
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:34
+github.com/jessevdk/go-flags.(*Parser).ParseArgs
+	/home/eval/go/pkg/mod/github.com/jessevdk/go-flags@v1.5.1-0.20210607101731-3927b71304df/parser.go:333
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:37
+main.main
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/main.go:11
+runtime.main
+	/home/eval/go/src/runtime/proc.go:267
+runtime.goexit
+	/home/eval/go/src/runtime/asm_amd64.s:1650
+github.com/symflower/eval-dev-quality/language/golang.(*Language).Execute
+	/home/eval/eval-dev-quality/language/golang/language.go:113
+github.com/symflower/eval-dev-quality/evaluate.Repository
+	/home/eval/eval-dev-quality/evaluate/repository.go:57
+github.com/symflower/eval-dev-quality/evaluate.Evaluate.func2
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:209
+github.com/symflower/eval-dev-quality/evaluate.withLoadedModel
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:253
+github.com/symflower/eval-dev-quality/evaluate.Evaluate
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:199
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.(*Evaluate).Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/evaluate.go:284
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute.func1
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:34
+github.com/jessevdk/go-flags.(*Parser).ParseArgs
+	/home/eval/go/pkg/mod/github.com/jessevdk/go-flags@v1.5.1-0.20210607101731-3927b71304df/parser.go:333
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:37
+main.main
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/main.go:11
+runtime.main
+	/home/eval/go/src/runtime/proc.go:267
+runtime.goexit
+	/home/eval/go/src/runtime/asm_amd64.s:1650
+=== RUN   TestExtractDigits
+=== RUN   TestExtractDigits/empty_string
+=== RUN   TestExtractDigits/only_spaces
+=== RUN   TestExtractDigits/punctuations
+=== RUN   TestExtractDigits/letters
+=== RUN   TestExtractDigits/normal_input
+    phoneNumber_test.go:24: extractDigits() error = letters not permitted, wantErr false
+=== RUN   TestExtractDigits/other_symbols
+    phoneNumber_test.go:24: extractDigits() error = letters not permitted, wantErr false
+=== RUN   TestExtractDigits/many_spaces
+--- FAIL: TestExtractDigits (0.00s)
+    --- PASS: TestExtractDigits/empty_string (0.00s)
+    --- PASS: TestExtractDigits/only_spaces (0.00s)
+    --- PASS: TestExtractDigits/punctuations (0.00s)
+    --- PASS: TestExtractDigits/letters (0.00s)
+    --- FAIL: TestExtractDigits/normal_input (0.00s)
+    --- FAIL: TestExtractDigits/other_symbols (0.00s)
+    --- PASS: TestExtractDigits/many_spaces (0.00s)
+FAIL
+coverage: 4.3% of statements
+FAIL	light	0.005s
+
+=== Failed
+=== FAIL: . TestExtractDigits/normal_input (0.00s)
+    phoneNumber_test.go:24: extractDigits() error = letters not permitted, wantErr false
+    --- FAIL: TestExtractDigits/normal_input (0.00s)
+
+=== FAIL: . TestExtractDigits/other_symbols (0.00s)
+    phoneNumber_test.go:24: extractDigits() error = letters not permitted, wantErr false
+    --- FAIL: TestExtractDigits/other_symbols (0.00s)
+
+=== FAIL: . TestExtractDigits (0.00s)
+
+DONE 8 tests, 3 failures in 0.333s
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+ERROR: execution failed: exit status 1
+ exit status 1
+# light_test [light.test]
+./simpleIfElse_test.go:6:12: undefined: simpleIfElse
+./simpleIfElse_test.go:9:12: undefined: simpleIfElse
+WARN invalid TestEvent: FAIL	light [build failed]
+bad output from test2json: FAIL	light [build failed]
+
+=== Errors
+./simpleIfElse_test.go:6:12: undefined: simpleIfElse
+./simpleIfElse_test.go:9:12: undefined: simpleIfElse
+
+DONE 0 tests, 2 errors in 0.108s
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+ERROR: execution failed: exit status 1
+
+github.com/symflower/eval-dev-quality/util.CommandWithResult
+	/home/eval/eval-dev-quality/util/exec.go:52
+github.com/symflower/eval-dev-quality/language/golang.(*Language).Execute
+	/home/eval/eval-dev-quality/language/golang/language.go:96
+github.com/symflower/eval-dev-quality/evaluate.Repository
+	/home/eval/eval-dev-quality/evaluate/repository.go:57
+github.com/symflower/eval-dev-quality/evaluate.Evaluate.func2
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:209
+github.com/symflower/eval-dev-quality/evaluate.withLoadedModel
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:253
+github.com/symflower/eval-dev-quality/evaluate.Evaluate
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:199
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.(*Evaluate).Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/evaluate.go:284
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute.func1
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:34
+github.com/jessevdk/go-flags.(*Parser).ParseArgs
+	/home/eval/go/pkg/mod/github.com/jessevdk/go-flags@v1.5.1-0.20210607101731-3927b71304df/parser.go:333
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:37
+main.main
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/main.go:11
+runtime.main
+	/home/eval/go/src/runtime/proc.go:267
+runtime.goexit
+	/home/eval/go/src/runtime/asm_amd64.s:1650
+github.com/symflower/eval-dev-quality/language/golang.(*Language).Execute
+	/home/eval/eval-dev-quality/language/golang/language.go:116
+github.com/symflower/eval-dev-quality/evaluate.Repository
+	/home/eval/eval-dev-quality/evaluate/repository.go:57
+github.com/symflower/eval-dev-quality/evaluate.Evaluate.func2
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:209
+github.com/symflower/eval-dev-quality/evaluate.withLoadedModel
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:253
+github.com/symflower/eval-dev-quality/evaluate.Evaluate
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:199
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.(*Evaluate).Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/evaluate.go:284
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute.func1
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:34
+github.com/jessevdk/go-flags.(*Parser).ParseArgs
+	/home/eval/go/pkg/mod/github.com/jessevdk/go-flags@v1.5.1-0.20210607101731-3927b71304df/parser.go:333
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:37
+main.main
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/main.go:11
+runtime.main
+	/home/eval/go/src/runtime/proc.go:267
+runtime.goexit
+	/home/eval/go/src/runtime/asm_amd64.s:1650
+# light_test [light.test]
+./simpleIfElse_test.go:6:12: undefined: simpleIfElse
+./simpleIfElse_test.go:9:12: undefined: simpleIfElse
+WARN invalid TestEvent: FAIL	light [build failed]
+bad output from test2json: FAIL	light [build failed]
+
+=== Errors
+./simpleIfElse_test.go:6:12: undefined: simpleIfElse
+./simpleIfElse_test.go:9:12: undefined: simpleIfElse
+
+DONE 0 tests, 2 errors in 0.108s
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+ERROR: execution failed: exit status 1
+
+simpleIfElse.go exit status 1
+# light_test [light.test]
+./simpleSwitchWithReturn_test.go:6:5: undefined: simpleSwitchWithReturn
+./simpleSwitchWithReturn_test.go:7:34: undefined: simpleSwitchWithReturn
+./simpleSwitchWithReturn_test.go:9:5: undefined: simpleSwitchWithReturn
+./simpleSwitchWithReturn_test.go:10:34: undefined: simpleSwitchWithReturn
+WARN invalid TestEvent: FAIL	light [build failed]
+bad output from test2json: FAIL	light [build failed]
+
+=== Errors
+./simpleSwitchWithReturn_test.go:6:5: undefined: simpleSwitchWithReturn
+./simpleSwitchWithReturn_test.go:7:34: undefined: simpleSwitchWithReturn
+./simpleSwitchWithReturn_test.go:9:5: undefined: simpleSwitchWithReturn
+./simpleSwitchWithReturn_test.go:10:34: undefined: simpleSwitchWithReturn
+
+DONE 0 tests, 4 errors in 0.125s
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+ERROR: execution failed: exit status 1
+
+github.com/symflower/eval-dev-quality/util.CommandWithResult
+	/home/eval/eval-dev-quality/util/exec.go:52
+github.com/symflower/eval-dev-quality/language/golang.(*Language).Execute
+	/home/eval/eval-dev-quality/language/golang/language.go:96
+github.com/symflower/eval-dev-quality/evaluate.Repository
+	/home/eval/eval-dev-quality/evaluate/repository.go:57
+github.com/symflower/eval-dev-quality/evaluate.Evaluate.func2
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:209
+github.com/symflower/eval-dev-quality/evaluate.withLoadedModel
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:253
+github.com/symflower/eval-dev-quality/evaluate.Evaluate
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:199
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.(*Evaluate).Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/evaluate.go:284
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute.func1
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:34
+github.com/jessevdk/go-flags.(*Parser).ParseArgs
+	/home/eval/go/pkg/mod/github.com/jessevdk/go-flags@v1.5.1-0.20210607101731-3927b71304df/parser.go:333
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:37
+main.main
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/main.go:11
+runtime.main
+	/home/eval/go/src/runtime/proc.go:267
+runtime.goexit
+	/home/eval/go/src/runtime/asm_amd64.s:1650
+github.com/symflower/eval-dev-quality/language/golang.(*Language).Execute
+	/home/eval/eval-dev-quality/language/golang/language.go:116
+github.com/symflower/eval-dev-quality/evaluate.Repository
+	/home/eval/eval-dev-quality/evaluate/repository.go:57
+github.com/symflower/eval-dev-quality/evaluate.Evaluate.func2
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:209
+github.com/symflower/eval-dev-quality/evaluate.withLoadedModel
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:253
+github.com/symflower/eval-dev-quality/evaluate.Evaluate
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:199
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.(*Evaluate).Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/evaluate.go:284
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute.func1
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:34
+github.com/jessevdk/go-flags.(*Parser).ParseArgs
+	/home/eval/go/pkg/mod/github.com/jessevdk/go-flags@v1.5.1-0.20210607101731-3927b71304df/parser.go:333
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:37
+main.main
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/main.go:11
+runtime.main
+	/home/eval/go/src/runtime/proc.go:267
+runtime.goexit
+	/home/eval/go/src/runtime/asm_amd64.s:1650
+# light_test [light.test]
+./simpleSwitchWithReturn_test.go:6:5: undefined: simpleSwitchWithReturn
+./simpleSwitchWithReturn_test.go:7:34: undefined: simpleSwitchWithReturn
+./simpleSwitchWithReturn_test.go:9:5: undefined: simpleSwitchWithReturn
+./simpleSwitchWithReturn_test.go:10:34: undefined: simpleSwitchWithReturn
+WARN invalid TestEvent: FAIL	light [build failed]
+bad output from test2json: FAIL	light [build failed]
+
+=== Errors
+./simpleSwitchWithReturn_test.go:6:5: undefined: simpleSwitchWithReturn
+./simpleSwitchWithReturn_test.go:7:34: undefined: simpleSwitchWithReturn
+./simpleSwitchWithReturn_test.go:9:5: undefined: simpleSwitchWithReturn
+./simpleSwitchWithReturn_test.go:10:34: undefined: simpleSwitchWithReturn
+
+DONE 0 tests, 4 errors in 0.125s
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+ERROR: execution failed: exit status 1
+
+simpleSwitchWithReturn.go exit status 1
+=== RUN   TestIsSorted
+    sort_test.go:20: Expected true for input [] but got false
+--- FAIL: TestIsSorted (0.00s)
+FAIL
+coverage: 1.9% of statements
+FAIL	light	0.005s
+
+=== Failed
+=== FAIL: . TestIsSorted (0.00s)
+    sort_test.go:20: Expected true for input [] but got false
+
+DONE 1 tests, 1 failure in 0.343s
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+ERROR: execution failed: exit status 1
+
+github.com/symflower/eval-dev-quality/util.CommandWithResult
+	/home/eval/eval-dev-quality/util/exec.go:52
+github.com/symflower/eval-dev-quality/language/golang.(*Language).Execute
+	/home/eval/eval-dev-quality/language/golang/language.go:96
+github.com/symflower/eval-dev-quality/evaluate.Repository
+	/home/eval/eval-dev-quality/evaluate/repository.go:57
+github.com/symflower/eval-dev-quality/evaluate.Evaluate.func2
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:209
+github.com/symflower/eval-dev-quality/evaluate.withLoadedModel
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:253
+github.com/symflower/eval-dev-quality/evaluate.Evaluate
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:199
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.(*Evaluate).Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/evaluate.go:284
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute.func1
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:34
+github.com/jessevdk/go-flags.(*Parser).ParseArgs
+	/home/eval/go/pkg/mod/github.com/jessevdk/go-flags@v1.5.1-0.20210607101731-3927b71304df/parser.go:333
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:37
+main.main
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/main.go:11
+runtime.main
+	/home/eval/go/src/runtime/proc.go:267
+runtime.goexit
+	/home/eval/go/src/runtime/asm_amd64.s:1650
+github.com/symflower/eval-dev-quality/language/golang.(*Language).Execute
+	/home/eval/eval-dev-quality/language/golang/language.go:113
+github.com/symflower/eval-dev-quality/evaluate.Repository
+	/home/eval/eval-dev-quality/evaluate/repository.go:57
+github.com/symflower/eval-dev-quality/evaluate.Evaluate.func2
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:209
+github.com/symflower/eval-dev-quality/evaluate.withLoadedModel
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:253
+github.com/symflower/eval-dev-quality/evaluate.Evaluate
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:199
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.(*Evaluate).Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/evaluate.go:284
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute.func1
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:34
+github.com/jessevdk/go-flags.(*Parser).ParseArgs
+	/home/eval/go/pkg/mod/github.com/jessevdk/go-flags@v1.5.1-0.20210607101731-3927b71304df/parser.go:333
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:37
+main.main
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/main.go:11
+runtime.main
+	/home/eval/go/src/runtime/proc.go:267
+runtime.goexit
+	/home/eval/go/src/runtime/asm_amd64.s:1650
+=== RUN   TestIsSorted
+    sort_test.go:20: Expected true for input [] but got false
+--- FAIL: TestIsSorted (0.00s)
+FAIL
+coverage: 1.9% of statements
+FAIL	light	0.005s
+
+=== Failed
+=== FAIL: . TestIsSorted (0.00s)
+    sort_test.go:20: Expected true for input [] but got false
+
+DONE 1 tests, 1 failure in 0.343s
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+ERROR: execution failed: exit status 1
+ exit status 1
+go: finding module for package example.com/light
+go: light tested by
+	light.test imports
+	example.com/light: cannot find module providing package example.com/light: unrecognized import path "example.com/light": reading https://example.com/light?go-get=1: 500 Internal Server Error
+
+github.com/symflower/eval-dev-quality/util.CommandWithResult
+	/home/eval/eval-dev-quality/util/exec.go:52
+github.com/symflower/eval-dev-quality/language/golang.(*Language).Execute
+	/home/eval/eval-dev-quality/language/golang/language.go:82
+github.com/symflower/eval-dev-quality/evaluate.Repository
+	/home/eval/eval-dev-quality/evaluate/repository.go:57
+github.com/symflower/eval-dev-quality/evaluate.Evaluate.func2
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:209
+github.com/symflower/eval-dev-quality/evaluate.withLoadedModel
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:253
+github.com/symflower/eval-dev-quality/evaluate.Evaluate
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:199
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.(*Evaluate).Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/evaluate.go:284
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute.func1
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:34
+github.com/jessevdk/go-flags.(*Parser).ParseArgs
+	/home/eval/go/pkg/mod/github.com/jessevdk/go-flags@v1.5.1-0.20210607101731-3927b71304df/parser.go:333
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:37
+main.main
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/main.go:11
+runtime.main
+	/home/eval/go/src/runtime/proc.go:267
+runtime.goexit
+	/home/eval/go/src/runtime/asm_amd64.s:1650
+github.com/symflower/eval-dev-quality/language/golang.(*Language).Execute
+	/home/eval/eval-dev-quality/language/golang/language.go:92
+github.com/symflower/eval-dev-quality/evaluate.Repository
+	/home/eval/eval-dev-quality/evaluate/repository.go:57
+github.com/symflower/eval-dev-quality/evaluate.Evaluate.func2
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:209
+github.com/symflower/eval-dev-quality/evaluate.withLoadedModel
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:253
+github.com/symflower/eval-dev-quality/evaluate.Evaluate
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:199
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.(*Evaluate).Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/evaluate.go:284
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute.func1
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:34
+github.com/jessevdk/go-flags.(*Parser).ParseArgs
+	/home/eval/go/pkg/mod/github.com/jessevdk/go-flags@v1.5.1-0.20210607101731-3927b71304df/parser.go:333
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:37
+main.main
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/main.go:11
+runtime.main
+	/home/eval/go/src/runtime/proc.go:267
+runtime.goexit
+	/home/eval/go/src/runtime/asm_amd64.s:1650
+go: finding module for package example.com/light
+go: light tested by
+	light.test imports
+	example.com/light: cannot find module providing package example.com/light: unrecognized import path "example.com/light": reading https://example.com/light?go-get=1: 500 Internal Server Error
+
+typeArrayAccess.go exit status 1
+=== RUN   TestTypeArrayConsecutiveAccess
+--- FAIL: TestTypeArrayConsecutiveAccess (0.00s)
+panic: runtime error: index out of range [0] with length 0 [recovered]
+	panic: runtime error: index out of range [0] with length 0
+
+goroutine 18 [running]:
+testing.tRunner.func1.2({0x56b1c0, 0xc000156000})
+	/home/eval/go/src/testing/testing.go:1545 +0x238
+testing.tRunner.func1()
+	/home/eval/go/src/testing/testing.go:1548 +0x397
+panic({0x56b1c0?, 0xc000156000?})
+	/home/eval/go/src/runtime/panic.go:914 +0x21f
+light.typeArrayConsecutiveAccess(...)
+	/tmp/eval-dev-quality4245721050/light/typeArrayConsecutiveAccess.go:5
+light.TestTypeArrayConsecutiveAccess(0xc000102b60)
+	/tmp/eval-dev-quality4245721050/light/typeArrayConsecutiveAccess_test.go:17 +0x305
+testing.tRunner(0xc000102b60, 0x587038)
+	/home/eval/go/src/testing/testing.go:1595 +0xff
+created by testing.(*T).Run in goroutine 1
+	/home/eval/go/src/testing/testing.go:1648 +0x3ad
+FAIL	light	0.005s
+
+=== Failed
+=== FAIL: . TestTypeArrayConsecutiveAccess (0.00s)
+panic: runtime error: index out of range [0] with length 0 [recovered]
+	panic: runtime error: index out of range [0] with length 0
+
+goroutine 18 [running]:
+testing.tRunner.func1.2({0x56b1c0, 0xc000156000})
+	/home/eval/go/src/testing/testing.go:1545 +0x238
+testing.tRunner.func1()
+	/home/eval/go/src/testing/testing.go:1548 +0x397
+panic({0x56b1c0?, 0xc000156000?})
+	/home/eval/go/src/runtime/panic.go:914 +0x21f
+light.typeArrayConsecutiveAccess(...)
+	/tmp/eval-dev-quality4245721050/light/typeArrayConsecutiveAccess.go:5
+light.TestTypeArrayConsecutiveAccess(0xc000102b60)
+	/tmp/eval-dev-quality4245721050/light/typeArrayConsecutiveAccess_test.go:17 +0x305
+testing.tRunner(0xc000102b60, 0x587038)
+	/home/eval/go/src/testing/testing.go:1595 +0xff
+created by testing.(*T).Run in goroutine 1
+	/home/eval/go/src/testing/testing.go:1648 +0x3ad
+
+DONE 1 tests, 1 failure in 0.343s
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+ERROR: execution failed: exit status 1
+
+github.com/symflower/eval-dev-quality/util.CommandWithResult
+	/home/eval/eval-dev-quality/util/exec.go:52
+github.com/symflower/eval-dev-quality/language/golang.(*Language).Execute
+	/home/eval/eval-dev-quality/language/golang/language.go:96
+github.com/symflower/eval-dev-quality/evaluate.Repository
+	/home/eval/eval-dev-quality/evaluate/repository.go:57
+github.com/symflower/eval-dev-quality/evaluate.Evaluate.func2
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:209
+github.com/symflower/eval-dev-quality/evaluate.withLoadedModel
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:253
+github.com/symflower/eval-dev-quality/evaluate.Evaluate
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:199
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.(*Evaluate).Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/evaluate.go:284
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute.func1
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:34
+github.com/jessevdk/go-flags.(*Parser).ParseArgs
+	/home/eval/go/pkg/mod/github.com/jessevdk/go-flags@v1.5.1-0.20210607101731-3927b71304df/parser.go:333
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:37
+main.main
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/main.go:11
+runtime.main
+	/home/eval/go/src/runtime/proc.go:267
+runtime.goexit
+	/home/eval/go/src/runtime/asm_amd64.s:1650
+github.com/symflower/eval-dev-quality/language/golang.(*Language).Execute
+	/home/eval/eval-dev-quality/language/golang/language.go:113
+github.com/symflower/eval-dev-quality/evaluate.Repository
+	/home/eval/eval-dev-quality/evaluate/repository.go:57
+github.com/symflower/eval-dev-quality/evaluate.Evaluate.func2
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:209
+github.com/symflower/eval-dev-quality/evaluate.withLoadedModel
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:253
+github.com/symflower/eval-dev-quality/evaluate.Evaluate
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:199
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.(*Evaluate).Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/evaluate.go:284
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute.func1
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:34
+github.com/jessevdk/go-flags.(*Parser).ParseArgs
+	/home/eval/go/pkg/mod/github.com/jessevdk/go-flags@v1.5.1-0.20210607101731-3927b71304df/parser.go:333
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:37
+main.main
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/main.go:11
+runtime.main
+	/home/eval/go/src/runtime/proc.go:267
+runtime.goexit
+	/home/eval/go/src/runtime/asm_amd64.s:1650
+=== RUN   TestTypeArrayConsecutiveAccess
+--- FAIL: TestTypeArrayConsecutiveAccess (0.00s)
+panic: runtime error: index out of range [0] with length 0 [recovered]
+	panic: runtime error: index out of range [0] with length 0
+
+goroutine 18 [running]:
+testing.tRunner.func1.2({0x56b1c0, 0xc000156000})
+	/home/eval/go/src/testing/testing.go:1545 +0x238
+testing.tRunner.func1()
+	/home/eval/go/src/testing/testing.go:1548 +0x397
+panic({0x56b1c0?, 0xc000156000?})
+	/home/eval/go/src/runtime/panic.go:914 +0x21f
+light.typeArrayConsecutiveAccess(...)
+	/tmp/eval-dev-quality4245721050/light/typeArrayConsecutiveAccess.go:5
+light.TestTypeArrayConsecutiveAccess(0xc000102b60)
+	/tmp/eval-dev-quality4245721050/light/typeArrayConsecutiveAccess_test.go:17 +0x305
+testing.tRunner(0xc000102b60, 0x587038)
+	/home/eval/go/src/testing/testing.go:1595 +0xff
+created by testing.(*T).Run in goroutine 1
+	/home/eval/go/src/testing/testing.go:1648 +0x3ad
+FAIL	light	0.005s
+
+=== Failed
+=== FAIL: . TestTypeArrayConsecutiveAccess (0.00s)
+panic: runtime error: index out of range [0] with length 0 [recovered]
+	panic: runtime error: index out of range [0] with length 0
+
+goroutine 18 [running]:
+testing.tRunner.func1.2({0x56b1c0, 0xc000156000})
+	/home/eval/go/src/testing/testing.go:1545 +0x238
+testing.tRunner.func1()
+	/home/eval/go/src/testing/testing.go:1548 +0x397
+panic({0x56b1c0?, 0xc000156000?})
+	/home/eval/go/src/runtime/panic.go:914 +0x21f
+light.typeArrayConsecutiveAccess(...)
+	/tmp/eval-dev-quality4245721050/light/typeArrayConsecutiveAccess.go:5
+light.TestTypeArrayConsecutiveAccess(0xc000102b60)
+	/tmp/eval-dev-quality4245721050/light/typeArrayConsecutiveAccess_test.go:17 +0x305
+testing.tRunner(0xc000102b60, 0x587038)
+	/home/eval/go/src/testing/testing.go:1595 +0xff
+created by testing.(*T).Run in goroutine 1
+	/home/eval/go/src/testing/testing.go:1648 +0x3ad
+
+DONE 1 tests, 1 failure in 0.343s
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+ERROR: execution failed: exit status 1
+ exit status 1
+# light
+WARN invalid TestEvent: FAIL	light [setup failed]
+bad output from test2json: FAIL	light [setup failed]
+typeArrayMultidimensionalArrayLength_test.go:12:3: expected operand, found '{'
+
+=== Errors
+typeArrayMultidimensionalArrayLength_test.go:12:3: expected operand, found '{'
+
+DONE 0 tests, 1 error in 0.042s
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+ERROR: execution failed: exit status 1
+
+github.com/symflower/eval-dev-quality/util.CommandWithResult
+	/home/eval/eval-dev-quality/util/exec.go:52
+github.com/symflower/eval-dev-quality/language/golang.(*Language).Execute
+	/home/eval/eval-dev-quality/language/golang/language.go:96
+github.com/symflower/eval-dev-quality/evaluate.Repository
+	/home/eval/eval-dev-quality/evaluate/repository.go:57
+github.com/symflower/eval-dev-quality/evaluate.Evaluate.func2
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:209
+github.com/symflower/eval-dev-quality/evaluate.withLoadedModel
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:253
+github.com/symflower/eval-dev-quality/evaluate.Evaluate
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:199
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.(*Evaluate).Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/evaluate.go:284
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute.func1
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:34
+github.com/jessevdk/go-flags.(*Parser).ParseArgs
+	/home/eval/go/pkg/mod/github.com/jessevdk/go-flags@v1.5.1-0.20210607101731-3927b71304df/parser.go:333
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:37
+main.main
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/main.go:11
+runtime.main
+	/home/eval/go/src/runtime/proc.go:267
+runtime.goexit
+	/home/eval/go/src/runtime/asm_amd64.s:1650
+github.com/symflower/eval-dev-quality/language/golang.(*Language).Execute
+	/home/eval/eval-dev-quality/language/golang/language.go:116
+github.com/symflower/eval-dev-quality/evaluate.Repository
+	/home/eval/eval-dev-quality/evaluate/repository.go:57
+github.com/symflower/eval-dev-quality/evaluate.Evaluate.func2
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:209
+github.com/symflower/eval-dev-quality/evaluate.withLoadedModel
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:253
+github.com/symflower/eval-dev-quality/evaluate.Evaluate
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:199
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.(*Evaluate).Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/evaluate.go:284
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute.func1
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:34
+github.com/jessevdk/go-flags.(*Parser).ParseArgs
+	/home/eval/go/pkg/mod/github.com/jessevdk/go-flags@v1.5.1-0.20210607101731-3927b71304df/parser.go:333
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:37
+main.main
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/main.go:11
+runtime.main
+	/home/eval/go/src/runtime/proc.go:267
+runtime.goexit
+	/home/eval/go/src/runtime/asm_amd64.s:1650
+# light
+WARN invalid TestEvent: FAIL	light [setup failed]
+bad output from test2json: FAIL	light [setup failed]
+typeArrayMultidimensionalArrayLength_test.go:12:3: expected operand, found '{'
+
+=== Errors
+typeArrayMultidimensionalArrayLength_test.go:12:3: expected operand, found '{'
+
+DONE 0 tests, 1 error in 0.042s
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+ERROR: execution failed: exit status 1
+
+typeArrayMultidimensionalArrayLength.go exit status 1
+# light_test [light.test]
+./validateDate_test.go:28:11: undefined: validDate
+WARN invalid TestEvent: FAIL	light [build failed]
+bad output from test2json: FAIL	light [build failed]
+
+=== Errors
+./validateDate_test.go:28:11: undefined: validDate
+
+DONE 0 tests, 1 error in 0.113s
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+ERROR: execution failed: exit status 1
+
+github.com/symflower/eval-dev-quality/util.CommandWithResult
+	/home/eval/eval-dev-quality/util/exec.go:52
+github.com/symflower/eval-dev-quality/language/golang.(*Language).Execute
+	/home/eval/eval-dev-quality/language/golang/language.go:96
+github.com/symflower/eval-dev-quality/evaluate.Repository
+	/home/eval/eval-dev-quality/evaluate/repository.go:57
+github.com/symflower/eval-dev-quality/evaluate.Evaluate.func2
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:209
+github.com/symflower/eval-dev-quality/evaluate.withLoadedModel
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:253
+github.com/symflower/eval-dev-quality/evaluate.Evaluate
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:199
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.(*Evaluate).Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/evaluate.go:284
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute.func1
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:34
+github.com/jessevdk/go-flags.(*Parser).ParseArgs
+	/home/eval/go/pkg/mod/github.com/jessevdk/go-flags@v1.5.1-0.20210607101731-3927b71304df/parser.go:333
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:37
+main.main
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/main.go:11
+runtime.main
+	/home/eval/go/src/runtime/proc.go:267
+runtime.goexit
+	/home/eval/go/src/runtime/asm_amd64.s:1650
+github.com/symflower/eval-dev-quality/language/golang.(*Language).Execute
+	/home/eval/eval-dev-quality/language/golang/language.go:116
+github.com/symflower/eval-dev-quality/evaluate.Repository
+	/home/eval/eval-dev-quality/evaluate/repository.go:57
+github.com/symflower/eval-dev-quality/evaluate.Evaluate.func2
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:209
+github.com/symflower/eval-dev-quality/evaluate.withLoadedModel
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:253
+github.com/symflower/eval-dev-quality/evaluate.Evaluate
+	/home/eval/eval-dev-quality/evaluate/evaluate.go:199
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.(*Evaluate).Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/evaluate.go:284
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute.func1
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:34
+github.com/jessevdk/go-flags.(*Parser).ParseArgs
+	/home/eval/go/pkg/mod/github.com/jessevdk/go-flags@v1.5.1-0.20210607101731-3927b71304df/parser.go:333
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:37
+main.main
+	/home/eval/eval-dev-quality/cmd/eval-dev-quality/main.go:11
+runtime.main
+	/home/eval/go/src/runtime/proc.go:267
+runtime.goexit
+	/home/eval/go/src/runtime/asm_amd64.s:1650
+# light_test [light.test]
+./validateDate_test.go:28:11: undefined: validDate
+WARN invalid TestEvent: FAIL	light [build failed]
+bad output from test2json: FAIL	light [build failed]
+
+=== Errors
+./validateDate_test.go:28:11: undefined: validDate
+
+DONE 0 tests, 1 error in 0.113s
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+ERROR: execution failed: exit status 1
+
+validateDate.go]
