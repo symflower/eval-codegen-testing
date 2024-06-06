@@ -1,0 +1,596 @@
+2024/06/06 09:48:11 Evaluating model "ollama/yi:9b-v1.5" using language "golang" and repository "golang\\plain"
+2024/06/06 09:48:11 Querying model "ollama/yi:9b-v1.5" with:
+	Given the following Go code file "plain.go" with package "plain", provide a test file for this code.
+	The tests should produce 100 percent code coverage and must compile.
+	The response must contain only the test code and nothing else.
+
+	```golang
+	package plain
+	
+	func plain() {
+		return // This does not do anything but it gives us a line to cover.
+	}
+	```
+2024/06/06 09:48:13 Model "ollama/yi:9b-v1.5" responded (1706 ms) with:
+	package main
+
+	import (
+	    "testing"
+	    "github.com/stretchr/testify/assert"
+	)
+
+	// TestPlain is a test function for the plain function.
+	func TestPlain(t *testing.T) {
+	    result := plain()
+	    assert.Nil(t, result, "plain function returned a value unexpectedly")
+	}
+2024/06/06 09:48:13 $ go mod tidy
+go: finding module for package github.com/stretchr/testify/assert
+go: found github.com/stretchr/testify/assert in github.com/stretchr/testify v1.9.0
+2024/06/06 09:48:13 $ symflower.exe test --language golang --workspace C:\Users\Martin\AppData\Local\Temp\eval-dev-quality87947349\plain --coverage-file C:\Users\Martin\AppData\Local\Temp\eval-dev-quality87947349\plain\coverage.json
+found packages plain (plain.go) and main (plain_test.go) in C:\Users\Martin\AppData\Local\Temp\eval-dev-quality87947349\plain
+
+=== Errors
+found packages plain (plain.go) and main (plain_test.go) in C:\Users\Martin\AppData\Local\Temp\eval-dev-quality87947349\plain
+
+DONE 0 tests, 1 error in 0.169s
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+ERROR: execution failed: exit status 1
+2024/06/06 09:48:14 Evaluated model "ollama/yi:9b-v1.5" using language "golang" and repository "golang\\plain": encountered 1 problems: [exit status 1
+found packages plain (plain.go) and main (plain_test.go) in C:\Users\Martin\AppData\Local\Temp\eval-dev-quality87947349\plain
+
+=== Errors
+found packages plain (plain.go) and main (plain_test.go) in C:\Users\Martin\AppData\Local\Temp\eval-dev-quality87947349\plain
+
+DONE 0 tests, 1 error in 0.169s
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+ERROR: execution failed: exit status 1
+
+github.com/symflower/eval-dev-quality/util.CommandWithResult
+	C:/Users/Martin/Documents/eval-dev-quality/util/exec.go:52
+github.com/symflower/eval-dev-quality/language/golang.(*Language).Execute
+	C:/Users/Martin/Documents/eval-dev-quality/language/golang/language.go:96
+github.com/symflower/eval-dev-quality/evaluate.Repository
+	C:/Users/Martin/Documents/eval-dev-quality/evaluate/repository.go:57
+github.com/symflower/eval-dev-quality/evaluate.Evaluate.func1
+	C:/Users/Martin/Documents/eval-dev-quality/evaluate/evaluate.go:119
+github.com/symflower/eval-dev-quality/evaluate.withLoadedModel
+	C:/Users/Martin/Documents/eval-dev-quality/evaluate/evaluate.go:253
+github.com/symflower/eval-dev-quality/evaluate.Evaluate
+	C:/Users/Martin/Documents/eval-dev-quality/evaluate/evaluate.go:109
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.(*Evaluate).Execute
+	C:/Users/Martin/Documents/eval-dev-quality/cmd/eval-dev-quality/cmd/evaluate.go:284
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute.func1
+	C:/Users/Martin/Documents/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:34
+github.com/jessevdk/go-flags.(*Parser).ParseArgs
+	C:/Users/Martin/go/pkg/mod/github.com/jessevdk/go-flags@v1.5.1-0.20210607101731-3927b71304df/parser.go:333
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute
+	C:/Users/Martin/Documents/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:37
+main.main
+	C:/Users/Martin/Documents/eval-dev-quality/cmd/eval-dev-quality/main.go:11
+runtime.main
+	C:/Program Files/Go/src/runtime/proc.go:271
+runtime.goexit
+	C:/Program Files/Go/src/runtime/asm_amd64.s:1695
+github.com/symflower/eval-dev-quality/language/golang.(*Language).Execute
+	C:/Users/Martin/Documents/eval-dev-quality/language/golang/language.go:116
+github.com/symflower/eval-dev-quality/evaluate.Repository
+	C:/Users/Martin/Documents/eval-dev-quality/evaluate/repository.go:57
+github.com/symflower/eval-dev-quality/evaluate.Evaluate.func1
+	C:/Users/Martin/Documents/eval-dev-quality/evaluate/evaluate.go:119
+github.com/symflower/eval-dev-quality/evaluate.withLoadedModel
+	C:/Users/Martin/Documents/eval-dev-quality/evaluate/evaluate.go:253
+github.com/symflower/eval-dev-quality/evaluate.Evaluate
+	C:/Users/Martin/Documents/eval-dev-quality/evaluate/evaluate.go:109
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.(*Evaluate).Execute
+	C:/Users/Martin/Documents/eval-dev-quality/cmd/eval-dev-quality/cmd/evaluate.go:284
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute.func1
+	C:/Users/Martin/Documents/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:34
+github.com/jessevdk/go-flags.(*Parser).ParseArgs
+	C:/Users/Martin/go/pkg/mod/github.com/jessevdk/go-flags@v1.5.1-0.20210607101731-3927b71304df/parser.go:333
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute
+	C:/Users/Martin/Documents/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:37
+main.main
+	C:/Users/Martin/Documents/eval-dev-quality/cmd/eval-dev-quality/main.go:11
+runtime.main
+	C:/Program Files/Go/src/runtime/proc.go:271
+runtime.goexit
+	C:/Program Files/Go/src/runtime/asm_amd64.s:1695
+found packages plain (plain.go) and main (plain_test.go) in C:\Users\Martin\AppData\Local\Temp\eval-dev-quality87947349\plain
+
+=== Errors
+found packages plain (plain.go) and main (plain_test.go) in C:\Users\Martin\AppData\Local\Temp\eval-dev-quality87947349\plain
+
+DONE 0 tests, 1 error in 0.169s
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+ERROR: execution failed: exit status 1
+
+plain.go]
+2024/06/06 09:48:14 Evaluating model "ollama/yi:9b-v1.5" using language "golang" and repository "golang\\plain"
+2024/06/06 09:48:14 Querying model "ollama/yi:9b-v1.5" with:
+	Given the following Go code file "plain.go" with package "plain", provide a test file for this code.
+	The tests should produce 100 percent code coverage and must compile.
+	The response must contain only the test code and nothing else.
+
+	```golang
+	package plain
+	
+	func plain() {
+		return // This does not do anything but it gives us a line to cover.
+	}
+	```
+2024/06/06 09:48:16 Model "ollama/yi:9b-v1.5" responded (1989 ms) with:
+	package main
+
+	import (
+	    "testing"
+	    "github.com/stretchr/testify/assert"
+	)
+
+	func TestPlain(t *testing.T) {
+	    defer func() {
+	        if err := recover(); err != nil {
+	            t.Fatal(err)
+	        }
+	    }(nil)
+
+	    // Testing plain function with no arguments
+	    plain()
+
+	    assert.Nil(t, nil, plain())
+	}
+2024/06/06 09:48:16 $ go mod tidy
+2024/06/06 09:48:16 $ symflower.exe test --language golang --workspace C:\Users\Martin\AppData\Local\Temp\eval-dev-quality87947349\plain --coverage-file C:\Users\Martin\AppData\Local\Temp\eval-dev-quality87947349\plain\coverage.json
+found packages plain (plain.go) and main (plain_test.go) in C:\Users\Martin\AppData\Local\Temp\eval-dev-quality87947349\plain
+
+=== Errors
+found packages plain (plain.go) and main (plain_test.go) in C:\Users\Martin\AppData\Local\Temp\eval-dev-quality87947349\plain
+
+DONE 0 tests, 1 error in 0.149s
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+ERROR: execution failed: exit status 1
+2024/06/06 09:48:16 Evaluated model "ollama/yi:9b-v1.5" using language "golang" and repository "golang\\plain": encountered 1 problems: [exit status 1
+found packages plain (plain.go) and main (plain_test.go) in C:\Users\Martin\AppData\Local\Temp\eval-dev-quality87947349\plain
+
+=== Errors
+found packages plain (plain.go) and main (plain_test.go) in C:\Users\Martin\AppData\Local\Temp\eval-dev-quality87947349\plain
+
+DONE 0 tests, 1 error in 0.149s
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+ERROR: execution failed: exit status 1
+
+github.com/symflower/eval-dev-quality/util.CommandWithResult
+	C:/Users/Martin/Documents/eval-dev-quality/util/exec.go:52
+github.com/symflower/eval-dev-quality/language/golang.(*Language).Execute
+	C:/Users/Martin/Documents/eval-dev-quality/language/golang/language.go:96
+github.com/symflower/eval-dev-quality/evaluate.Repository
+	C:/Users/Martin/Documents/eval-dev-quality/evaluate/repository.go:57
+github.com/symflower/eval-dev-quality/evaluate.Evaluate.func1
+	C:/Users/Martin/Documents/eval-dev-quality/evaluate/evaluate.go:119
+github.com/symflower/eval-dev-quality/evaluate.withLoadedModel
+	C:/Users/Martin/Documents/eval-dev-quality/evaluate/evaluate.go:253
+github.com/symflower/eval-dev-quality/evaluate.Evaluate
+	C:/Users/Martin/Documents/eval-dev-quality/evaluate/evaluate.go:109
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.(*Evaluate).Execute
+	C:/Users/Martin/Documents/eval-dev-quality/cmd/eval-dev-quality/cmd/evaluate.go:284
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute.func1
+	C:/Users/Martin/Documents/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:34
+github.com/jessevdk/go-flags.(*Parser).ParseArgs
+	C:/Users/Martin/go/pkg/mod/github.com/jessevdk/go-flags@v1.5.1-0.20210607101731-3927b71304df/parser.go:333
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute
+	C:/Users/Martin/Documents/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:37
+main.main
+	C:/Users/Martin/Documents/eval-dev-quality/cmd/eval-dev-quality/main.go:11
+runtime.main
+	C:/Program Files/Go/src/runtime/proc.go:271
+runtime.goexit
+	C:/Program Files/Go/src/runtime/asm_amd64.s:1695
+github.com/symflower/eval-dev-quality/language/golang.(*Language).Execute
+	C:/Users/Martin/Documents/eval-dev-quality/language/golang/language.go:116
+github.com/symflower/eval-dev-quality/evaluate.Repository
+	C:/Users/Martin/Documents/eval-dev-quality/evaluate/repository.go:57
+github.com/symflower/eval-dev-quality/evaluate.Evaluate.func1
+	C:/Users/Martin/Documents/eval-dev-quality/evaluate/evaluate.go:119
+github.com/symflower/eval-dev-quality/evaluate.withLoadedModel
+	C:/Users/Martin/Documents/eval-dev-quality/evaluate/evaluate.go:253
+github.com/symflower/eval-dev-quality/evaluate.Evaluate
+	C:/Users/Martin/Documents/eval-dev-quality/evaluate/evaluate.go:109
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.(*Evaluate).Execute
+	C:/Users/Martin/Documents/eval-dev-quality/cmd/eval-dev-quality/cmd/evaluate.go:284
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute.func1
+	C:/Users/Martin/Documents/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:34
+github.com/jessevdk/go-flags.(*Parser).ParseArgs
+	C:/Users/Martin/go/pkg/mod/github.com/jessevdk/go-flags@v1.5.1-0.20210607101731-3927b71304df/parser.go:333
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute
+	C:/Users/Martin/Documents/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:37
+main.main
+	C:/Users/Martin/Documents/eval-dev-quality/cmd/eval-dev-quality/main.go:11
+runtime.main
+	C:/Program Files/Go/src/runtime/proc.go:271
+runtime.goexit
+	C:/Program Files/Go/src/runtime/asm_amd64.s:1695
+found packages plain (plain.go) and main (plain_test.go) in C:\Users\Martin\AppData\Local\Temp\eval-dev-quality87947349\plain
+
+=== Errors
+found packages plain (plain.go) and main (plain_test.go) in C:\Users\Martin\AppData\Local\Temp\eval-dev-quality87947349\plain
+
+DONE 0 tests, 1 error in 0.149s
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+ERROR: execution failed: exit status 1
+
+plain.go]
+2024/06/06 09:48:16 Evaluating model "ollama/yi:9b-v1.5" using language "golang" and repository "golang\\plain"
+2024/06/06 09:48:16 Querying model "ollama/yi:9b-v1.5" with:
+	Given the following Go code file "plain.go" with package "plain", provide a test file for this code.
+	The tests should produce 100 percent code coverage and must compile.
+	The response must contain only the test code and nothing else.
+
+	```golang
+	package plain
+	
+	func plain() {
+		return // This does not do anything but it gives us a line to cover.
+	}
+	```
+2024/06/06 09:48:18 Model "ollama/yi:9b-v1.5" responded (1380 ms) with:
+	```go
+	// PlainTest.go
+	package plain
+
+	import (
+	    "testing"
+	)
+
+	func TestPlain(t *testing.T) {
+	    if plain() == nil {
+	        t.Error("Expected non-nil return value from plain function but got nil.")
+	    }
+	}
+	```
+2024/06/06 09:48:18 $ go mod tidy
+2024/06/06 09:48:18 $ symflower.exe test --language golang --workspace C:\Users\Martin\AppData\Local\Temp\eval-dev-quality87947349\plain --coverage-file C:\Users\Martin\AppData\Local\Temp\eval-dev-quality87947349\plain\coverage.json
+# plain [plain.test]
+.\plain_test.go:9:8: plain() (no value) used as value
+FAIL	plain [build failed]
+
+=== Failed
+=== FAIL: .  (0.00s)
+FAIL	plain [build failed]
+
+=== Errors
+.\plain_test.go:9:8: plain() (no value) used as value
+
+DONE 0 tests, 1 failure, 1 error in 0.323s
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+ERROR: execution failed: exit status 1
+2024/06/06 09:48:18 Executes tests with 0 coverage objects
+2024/06/06 09:48:18 Evaluated model "ollama/yi:9b-v1.5" using language "golang" and repository "golang\\plain": encountered 1 problems: [exit status 1
+# plain [plain.test]
+.\plain_test.go:9:8: plain() (no value) used as value
+FAIL	plain [build failed]
+
+=== Failed
+=== FAIL: .  (0.00s)
+FAIL	plain [build failed]
+
+=== Errors
+.\plain_test.go:9:8: plain() (no value) used as value
+
+DONE 0 tests, 1 failure, 1 error in 0.323s
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+ERROR: execution failed: exit status 1
+
+github.com/symflower/eval-dev-quality/util.CommandWithResult
+	C:/Users/Martin/Documents/eval-dev-quality/util/exec.go:52
+github.com/symflower/eval-dev-quality/language/golang.(*Language).Execute
+	C:/Users/Martin/Documents/eval-dev-quality/language/golang/language.go:96
+github.com/symflower/eval-dev-quality/evaluate.Repository
+	C:/Users/Martin/Documents/eval-dev-quality/evaluate/repository.go:57
+github.com/symflower/eval-dev-quality/evaluate.Evaluate.func1
+	C:/Users/Martin/Documents/eval-dev-quality/evaluate/evaluate.go:119
+github.com/symflower/eval-dev-quality/evaluate.withLoadedModel
+	C:/Users/Martin/Documents/eval-dev-quality/evaluate/evaluate.go:253
+github.com/symflower/eval-dev-quality/evaluate.Evaluate
+	C:/Users/Martin/Documents/eval-dev-quality/evaluate/evaluate.go:109
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.(*Evaluate).Execute
+	C:/Users/Martin/Documents/eval-dev-quality/cmd/eval-dev-quality/cmd/evaluate.go:284
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute.func1
+	C:/Users/Martin/Documents/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:34
+github.com/jessevdk/go-flags.(*Parser).ParseArgs
+	C:/Users/Martin/go/pkg/mod/github.com/jessevdk/go-flags@v1.5.1-0.20210607101731-3927b71304df/parser.go:333
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute
+	C:/Users/Martin/Documents/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:37
+main.main
+	C:/Users/Martin/Documents/eval-dev-quality/cmd/eval-dev-quality/main.go:11
+runtime.main
+	C:/Program Files/Go/src/runtime/proc.go:271
+runtime.goexit
+	C:/Program Files/Go/src/runtime/asm_amd64.s:1695
+github.com/symflower/eval-dev-quality/language/golang.(*Language).Execute
+	C:/Users/Martin/Documents/eval-dev-quality/language/golang/language.go:113
+github.com/symflower/eval-dev-quality/evaluate.Repository
+	C:/Users/Martin/Documents/eval-dev-quality/evaluate/repository.go:57
+github.com/symflower/eval-dev-quality/evaluate.Evaluate.func1
+	C:/Users/Martin/Documents/eval-dev-quality/evaluate/evaluate.go:119
+github.com/symflower/eval-dev-quality/evaluate.withLoadedModel
+	C:/Users/Martin/Documents/eval-dev-quality/evaluate/evaluate.go:253
+github.com/symflower/eval-dev-quality/evaluate.Evaluate
+	C:/Users/Martin/Documents/eval-dev-quality/evaluate/evaluate.go:109
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.(*Evaluate).Execute
+	C:/Users/Martin/Documents/eval-dev-quality/cmd/eval-dev-quality/cmd/evaluate.go:284
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute.func1
+	C:/Users/Martin/Documents/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:34
+github.com/jessevdk/go-flags.(*Parser).ParseArgs
+	C:/Users/Martin/go/pkg/mod/github.com/jessevdk/go-flags@v1.5.1-0.20210607101731-3927b71304df/parser.go:333
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute
+	C:/Users/Martin/Documents/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:37
+main.main
+	C:/Users/Martin/Documents/eval-dev-quality/cmd/eval-dev-quality/main.go:11
+runtime.main
+	C:/Program Files/Go/src/runtime/proc.go:271
+runtime.goexit
+	C:/Program Files/Go/src/runtime/asm_amd64.s:1695
+# plain [plain.test]
+.\plain_test.go:9:8: plain() (no value) used as value
+FAIL	plain [build failed]
+
+=== Failed
+=== FAIL: .  (0.00s)
+FAIL	plain [build failed]
+
+=== Errors
+.\plain_test.go:9:8: plain() (no value) used as value
+
+DONE 0 tests, 1 failure, 1 error in 0.323s
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+ERROR: execution failed: exit status 1
+]
+2024/06/06 09:48:18 Evaluating model "ollama/yi:9b-v1.5" using language "golang" and repository "golang\\plain"
+2024/06/06 09:48:19 Querying model "ollama/yi:9b-v1.5" with:
+	Given the following Go code file "plain.go" with package "plain", provide a test file for this code.
+	The tests should produce 100 percent code coverage and must compile.
+	The response must contain only the test code and nothing else.
+
+	```golang
+	package plain
+	
+	func plain() {
+		return // This does not do anything but it gives us a line to cover.
+	}
+	```
+2024/06/06 09:48:20 Model "ollama/yi:9b-v1.5" responded (1402 ms) with:
+	package plain
+
+	import (
+		"testing"
+	)
+
+	func TestPlain(t *testing.T) {
+	    plain()
+	    if err := t.Error("Test failed, but the function still doesn't do anything"); err != nil {
+	        t.Fatal(err)
+	    }
+	}
+2024/06/06 09:48:20 $ go mod tidy
+2024/06/06 09:48:20 $ symflower.exe test --language golang --workspace C:\Users\Martin\AppData\Local\Temp\eval-dev-quality87947349\plain --coverage-file C:\Users\Martin\AppData\Local\Temp\eval-dev-quality87947349\plain\coverage.json
+# plain [plain.test]
+.\plain_test.go:9:15: t.Error("Test failed, but the function still doesn't do anything") (no value) used as value
+FAIL	plain [build failed]
+
+=== Failed
+=== FAIL: .  (0.00s)
+FAIL	plain [build failed]
+
+=== Errors
+.\plain_test.go:9:15: t.Error("Test failed, but the function still doesn't do anything") (no value) used as value
+
+DONE 0 tests, 1 failure, 1 error in 0.286s
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+ERROR: execution failed: exit status 1
+2024/06/06 09:48:21 Executes tests with 0 coverage objects
+2024/06/06 09:48:21 Evaluated model "ollama/yi:9b-v1.5" using language "golang" and repository "golang\\plain": encountered 1 problems: [exit status 1
+# plain [plain.test]
+.\plain_test.go:9:15: t.Error("Test failed, but the function still doesn't do anything") (no value) used as value
+FAIL	plain [build failed]
+
+=== Failed
+=== FAIL: .  (0.00s)
+FAIL	plain [build failed]
+
+=== Errors
+.\plain_test.go:9:15: t.Error("Test failed, but the function still doesn't do anything") (no value) used as value
+
+DONE 0 tests, 1 failure, 1 error in 0.286s
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+ERROR: execution failed: exit status 1
+
+github.com/symflower/eval-dev-quality/util.CommandWithResult
+	C:/Users/Martin/Documents/eval-dev-quality/util/exec.go:52
+github.com/symflower/eval-dev-quality/language/golang.(*Language).Execute
+	C:/Users/Martin/Documents/eval-dev-quality/language/golang/language.go:96
+github.com/symflower/eval-dev-quality/evaluate.Repository
+	C:/Users/Martin/Documents/eval-dev-quality/evaluate/repository.go:57
+github.com/symflower/eval-dev-quality/evaluate.Evaluate.func1
+	C:/Users/Martin/Documents/eval-dev-quality/evaluate/evaluate.go:119
+github.com/symflower/eval-dev-quality/evaluate.withLoadedModel
+	C:/Users/Martin/Documents/eval-dev-quality/evaluate/evaluate.go:253
+github.com/symflower/eval-dev-quality/evaluate.Evaluate
+	C:/Users/Martin/Documents/eval-dev-quality/evaluate/evaluate.go:109
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.(*Evaluate).Execute
+	C:/Users/Martin/Documents/eval-dev-quality/cmd/eval-dev-quality/cmd/evaluate.go:284
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute.func1
+	C:/Users/Martin/Documents/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:34
+github.com/jessevdk/go-flags.(*Parser).ParseArgs
+	C:/Users/Martin/go/pkg/mod/github.com/jessevdk/go-flags@v1.5.1-0.20210607101731-3927b71304df/parser.go:333
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute
+	C:/Users/Martin/Documents/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:37
+main.main
+	C:/Users/Martin/Documents/eval-dev-quality/cmd/eval-dev-quality/main.go:11
+runtime.main
+	C:/Program Files/Go/src/runtime/proc.go:271
+runtime.goexit
+	C:/Program Files/Go/src/runtime/asm_amd64.s:1695
+github.com/symflower/eval-dev-quality/language/golang.(*Language).Execute
+	C:/Users/Martin/Documents/eval-dev-quality/language/golang/language.go:113
+github.com/symflower/eval-dev-quality/evaluate.Repository
+	C:/Users/Martin/Documents/eval-dev-quality/evaluate/repository.go:57
+github.com/symflower/eval-dev-quality/evaluate.Evaluate.func1
+	C:/Users/Martin/Documents/eval-dev-quality/evaluate/evaluate.go:119
+github.com/symflower/eval-dev-quality/evaluate.withLoadedModel
+	C:/Users/Martin/Documents/eval-dev-quality/evaluate/evaluate.go:253
+github.com/symflower/eval-dev-quality/evaluate.Evaluate
+	C:/Users/Martin/Documents/eval-dev-quality/evaluate/evaluate.go:109
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.(*Evaluate).Execute
+	C:/Users/Martin/Documents/eval-dev-quality/cmd/eval-dev-quality/cmd/evaluate.go:284
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute.func1
+	C:/Users/Martin/Documents/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:34
+github.com/jessevdk/go-flags.(*Parser).ParseArgs
+	C:/Users/Martin/go/pkg/mod/github.com/jessevdk/go-flags@v1.5.1-0.20210607101731-3927b71304df/parser.go:333
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute
+	C:/Users/Martin/Documents/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:37
+main.main
+	C:/Users/Martin/Documents/eval-dev-quality/cmd/eval-dev-quality/main.go:11
+runtime.main
+	C:/Program Files/Go/src/runtime/proc.go:271
+runtime.goexit
+	C:/Program Files/Go/src/runtime/asm_amd64.s:1695
+# plain [plain.test]
+.\plain_test.go:9:15: t.Error("Test failed, but the function still doesn't do anything") (no value) used as value
+FAIL	plain [build failed]
+
+=== Failed
+=== FAIL: .  (0.00s)
+FAIL	plain [build failed]
+
+=== Errors
+.\plain_test.go:9:15: t.Error("Test failed, but the function still doesn't do anything") (no value) used as value
+
+DONE 0 tests, 1 failure, 1 error in 0.286s
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+ERROR: execution failed: exit status 1
+]
+2024/06/06 09:48:21 Evaluating model "ollama/yi:9b-v1.5" using language "golang" and repository "golang\\plain"
+2024/06/06 09:48:21 Querying model "ollama/yi:9b-v1.5" with:
+	Given the following Go code file "plain.go" with package "plain", provide a test file for this code.
+	The tests should produce 100 percent code coverage and must compile.
+	The response must contain only the test code and nothing else.
+
+	```golang
+	package plain
+	
+	func plain() {
+		return // This does not do anything but it gives us a line to cover.
+	}
+	```
+2024/06/06 09:48:22 Model "ollama/yi:9b-v1.5" responded (1202 ms) with:
+	package plain
+
+	import (
+		"testing"
+	)
+
+	func TestPlain(t *testing.T) {
+	  plain()
+
+	  if plain() != nil {
+	    t.Fatal("expected return value to be nil")
+	  }
+	}
+2024/06/06 09:48:22 $ go mod tidy
+2024/06/06 09:48:22 $ symflower.exe test --language golang --workspace C:\Users\Martin\AppData\Local\Temp\eval-dev-quality87947349\plain --coverage-file C:\Users\Martin\AppData\Local\Temp\eval-dev-quality87947349\plain\coverage.json
+# plain [plain.test]
+.\plain_test.go:10:6: plain() (no value) used as value
+FAIL	plain [build failed]
+
+=== Failed
+=== FAIL: .  (0.00s)
+FAIL	plain [build failed]
+
+=== Errors
+.\plain_test.go:10:6: plain() (no value) used as value
+
+DONE 0 tests, 1 failure, 1 error in 0.331s
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+ERROR: execution failed: exit status 1
+2024/06/06 09:48:23 Executes tests with 0 coverage objects
+2024/06/06 09:48:23 Evaluated model "ollama/yi:9b-v1.5" using language "golang" and repository "golang\\plain": encountered 1 problems: [exit status 1
+# plain [plain.test]
+.\plain_test.go:10:6: plain() (no value) used as value
+FAIL	plain [build failed]
+
+=== Failed
+=== FAIL: .  (0.00s)
+FAIL	plain [build failed]
+
+=== Errors
+.\plain_test.go:10:6: plain() (no value) used as value
+
+DONE 0 tests, 1 failure, 1 error in 0.331s
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+ERROR: execution failed: exit status 1
+
+github.com/symflower/eval-dev-quality/util.CommandWithResult
+	C:/Users/Martin/Documents/eval-dev-quality/util/exec.go:52
+github.com/symflower/eval-dev-quality/language/golang.(*Language).Execute
+	C:/Users/Martin/Documents/eval-dev-quality/language/golang/language.go:96
+github.com/symflower/eval-dev-quality/evaluate.Repository
+	C:/Users/Martin/Documents/eval-dev-quality/evaluate/repository.go:57
+github.com/symflower/eval-dev-quality/evaluate.Evaluate.func1
+	C:/Users/Martin/Documents/eval-dev-quality/evaluate/evaluate.go:119
+github.com/symflower/eval-dev-quality/evaluate.withLoadedModel
+	C:/Users/Martin/Documents/eval-dev-quality/evaluate/evaluate.go:253
+github.com/symflower/eval-dev-quality/evaluate.Evaluate
+	C:/Users/Martin/Documents/eval-dev-quality/evaluate/evaluate.go:109
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.(*Evaluate).Execute
+	C:/Users/Martin/Documents/eval-dev-quality/cmd/eval-dev-quality/cmd/evaluate.go:284
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute.func1
+	C:/Users/Martin/Documents/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:34
+github.com/jessevdk/go-flags.(*Parser).ParseArgs
+	C:/Users/Martin/go/pkg/mod/github.com/jessevdk/go-flags@v1.5.1-0.20210607101731-3927b71304df/parser.go:333
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute
+	C:/Users/Martin/Documents/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:37
+main.main
+	C:/Users/Martin/Documents/eval-dev-quality/cmd/eval-dev-quality/main.go:11
+runtime.main
+	C:/Program Files/Go/src/runtime/proc.go:271
+runtime.goexit
+	C:/Program Files/Go/src/runtime/asm_amd64.s:1695
+github.com/symflower/eval-dev-quality/language/golang.(*Language).Execute
+	C:/Users/Martin/Documents/eval-dev-quality/language/golang/language.go:113
+github.com/symflower/eval-dev-quality/evaluate.Repository
+	C:/Users/Martin/Documents/eval-dev-quality/evaluate/repository.go:57
+github.com/symflower/eval-dev-quality/evaluate.Evaluate.func1
+	C:/Users/Martin/Documents/eval-dev-quality/evaluate/evaluate.go:119
+github.com/symflower/eval-dev-quality/evaluate.withLoadedModel
+	C:/Users/Martin/Documents/eval-dev-quality/evaluate/evaluate.go:253
+github.com/symflower/eval-dev-quality/evaluate.Evaluate
+	C:/Users/Martin/Documents/eval-dev-quality/evaluate/evaluate.go:109
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.(*Evaluate).Execute
+	C:/Users/Martin/Documents/eval-dev-quality/cmd/eval-dev-quality/cmd/evaluate.go:284
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute.func1
+	C:/Users/Martin/Documents/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:34
+github.com/jessevdk/go-flags.(*Parser).ParseArgs
+	C:/Users/Martin/go/pkg/mod/github.com/jessevdk/go-flags@v1.5.1-0.20210607101731-3927b71304df/parser.go:333
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute
+	C:/Users/Martin/Documents/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:37
+main.main
+	C:/Users/Martin/Documents/eval-dev-quality/cmd/eval-dev-quality/main.go:11
+runtime.main
+	C:/Program Files/Go/src/runtime/proc.go:271
+runtime.goexit
+	C:/Program Files/Go/src/runtime/asm_amd64.s:1695
+# plain [plain.test]
+.\plain_test.go:10:6: plain() (no value) used as value
+FAIL	plain [build failed]
+
+=== Failed
+=== FAIL: .  (0.00s)
+FAIL	plain [build failed]
+
+=== Errors
+.\plain_test.go:10:6: plain() (no value) used as value
+
+DONE 0 tests, 1 failure, 1 error in 0.331s
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+ERROR: execution failed: exit status 1
+]

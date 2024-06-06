@@ -1,0 +1,860 @@
+2024/06/06 09:53:43 Evaluating model "ollama/starcoder2:7b" using language "java" and repository "java\\plain"
+2024/06/06 09:53:43 Querying model "ollama/starcoder2:7b" with:
+	Given the following Java code file "src\main\java\com\eval\Plain.java" with package "com.eval", provide a test file for this code with JUnit 5 as a test framework.
+	The tests should produce 100 percent code coverage and must compile.
+	The response must contain only the test code and nothing else.
+
+	```java
+	package com.eval;
+	
+	class Plain {
+	    static void plain() {
+	    }
+	}
+	```
+2024/06/06 09:53:48 Model "ollama/starcoder2:7b" responded (5590 ms) with:
+	<file_sep>/src/main/java/com/eval/Main.java
+	package com.eval;
+	
+	import java.io.*;
+	import java.net.*;
+	
+	
+	public class Main {
+	
+	    public static void main(String[] args) throws IOException, InterruptedException {
+	
+	        Socket s = null;
+	        try {
+	            int port=54321;
+	            String hostname="localhost";
+	            s = new Socket(hostname,port);
+	
+	            DataInputStream in=new DataInputStream(s.getInputStream());
+	            DataOutputStream out=new DataOutputStream(s.getOutputStream());
+	
+	            Thread th=new ServerThread(in,out);
+	            th.start();
+	
+	            BufferedReader br = new BufferedReader(
+	                    new InputStreamReader(System.in));
+	            while(true) {
+	                String line =br.readLine();
+	                if(line!=null && !"".equals(line)){
+	                    out.writeUTF(line);
+	
+	                    byte[] buf=new byte[1024];
+	                    int length=-1;
+	                    try{
+	                        length=in.read(buf, 0 , 1024);
+	                        String data = new String(buf, 0, length,"UTF-8");
+	                        if("END".equals(data)){
+	                            System.exit(-1);
+	                        }
+	                        else{
+	                            System.out.println(data);
+	                        }
+	                    }catch(EOFException e){
+	
+	                    }
+	                }
+	            }
+	        } catch (UnknownHostException e) {
+	            System.err.println("Don't know about host " + hostname);
+	            System.exit(1);
+	        } catch (IOException e) {
+	            System.err.println("Couldn't get I/O for the connection to " +
+	                    "the host " + hostname);
+	            System.exit(1);
+	        } finally {
+	            if (s != null) s.close();
+	        }
+	    }
+	}
+2024/06/06 09:53:48 $ symflower.exe test --language java --workspace C:\Users\Martin\AppData\Local\Temp\eval-dev-quality3010409849\plain --coverage-file C:\Users\Martin\AppData\Local\Temp\eval-dev-quality3010409849\plain\coverage.json
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+ERROR: All attempts fail:
+#1: Internal error: exit status 1:
+[]interface {}{
+    "C:\\Users\\Martin\\AppData\\Local\\Temp\\eval-dev-quality3010409849\\plain\\",
+    "[INFO] Scanning for projects...\r\n[WARNING] \r\n[WARNING] Some problems were encountered while building the effective model for eval.dev.quality:test-java-plain:jar:SNAPSHOT\r\n[WARNING] 'version' uses an unsupported snapshot version format, should be '*-SNAPSHOT' instead. @ line 6, column 11\r\n[WARNING] \r\n[WARNING] It is highly recommended to fix these problems because they threaten the stability of your build.\r\n[WARNING] \r\n[WARNING] For this reason, future Maven versions might no longer support building such malformed projects.\r\n[WARNING] \r\n[INFO] \r\n[INFO] ------------------< eval.dev.quality:test-java-plain >------------------\r\n[INFO] Building test-java-plain SNAPSHOT\r\n[INFO]   from pom.xml\r\n[INFO] --------------------------------[ jar ]---------------------------------\r\n[INFO] \r\n[INFO] --- clean:3.2.0:clean (default-clean) @ test-java-plain ---\r\n[INFO] \r\n[INFO] --- resources:3.3.1:resources (default-resources) @ test-java-plain ---\r\n[WARNING] Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!\r\n[INFO] skip non existing resourceDirectory C:\\Users\\Martin\\AppData\\Local\\Temp\\eval-dev-quality3010409849\\plain\\src\\main\\resources\r\n[INFO] \r\n[INFO] --- compiler:3.13.0:compile (default-compile) @ test-java-plain ---\r\n[INFO] Recompiling the module because of changed source code.\r\n[WARNING] File encoding has not been set, using platform encoding UTF-8, i.e. build is platform dependent!\r\n[INFO] Compiling 1 source file with javac [debug target 11] to target\\classes\r\n[WARNING] system modules path not set in conjunction with -source 11\r\n[INFO] \r\n[INFO] --- resources:3.3.1:resources (default-resources) @ test-java-plain ---\r\n[WARNING] Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!\r\n[INFO] skip non existing resourceDirectory C:\\Users\\Martin\\AppData\\Local\\Temp\\eval-dev-quality3010409849\\plain\\src\\main\\resources\r\n[INFO] \r\n[INFO] --- compiler:3.13.0:compile (default-compile) @ test-java-plain ---\r\n[INFO] Nothing to compile - all classes are up to date.\r\n[INFO] \r\n[INFO] --- resources:3.3.1:testResources (default-testResources) @ test-java-plain ---\r\n[WARNING] Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!\r\n[INFO] skip non existing resourceDirectory C:\\Users\\Martin\\AppData\\Local\\Temp\\eval-dev-quality3010409849\\plain\\src\\test\\resources\r\n[INFO] \r\n[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ test-java-plain ---\r\n[INFO] Recompiling the module because of changed dependency.\r\n[WARNING] File encoding has not been set, using platform encoding UTF-8, i.e. build is platform dependent!\r\n[INFO] Compiling 1 source file with javac [debug target 11] to target\\test-classes\r\n[INFO] -------------------------------------------------------------\r\n[WARNING] COMPILATION WARNING : \r\n[INFO] -------------------------------------------------------------\r\n[WARNING] system modules path not set in conjunction with -source 11\r\n[INFO] 1 warning\r\n[INFO] -------------------------------------------------------------\r\n[INFO] -------------------------------------------------------------\r\n[ERROR] COMPILATION ERROR : \r\n[INFO] -------------------------------------------------------------\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[1,1] class, interface, or enum expected\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[4,1] class, interface, or enum expected\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[5,1] class, interface, or enum expected\r\n[INFO] 3 errors \r\n[INFO] -------------------------------------------------------------\r\n[INFO] ------------------------------------------------------------------------\r\n[INFO] BUILD FAILURE\r\n[INFO] ------------------------------------------------------------------------\r\n[INFO] Total time:  0.946 s\r\n[INFO] Finished at: 2024-06-06T09:53:51+02:00\r\n[INFO] ------------------------------------------------------------------------\r\n[ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.13.0:testCompile (default-testCompile) on project test-java-plain: Compilation failure: Compilation failure: \r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[1,1] class, interface, or enum expected\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[4,1] class, interface, or enum expected\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[5,1] class, interface, or enum expected\r\n[ERROR] -> [Help 1]\r\n[ERROR] \r\n[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.\r\n[ERROR] Re-run Maven using the -X switch to enable full debug logging.\r\n[ERROR] \r\n[ERROR] For more information about the errors and possible solutions, please read the following articles:\r\n[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException\r\n",
+}
+Stacktrace: goroutine 1 [running]:
+gitlab.nethead.at/symflower/symflower/model/errors.NewInternalError({0x7ff6533a2100?, 0xc0000a4220}, {0x7ff652370080?, 0xc000096168})
+	gitlab.nethead.at/symflower/symflower/model/errors/error.go:850 +0x59
+gitlab.nethead.at/symflower/symflower/language/java/execute.MavenDependencyCommand.func1()
+	gitlab.nethead.at/symflower/symflower/language/java/execute/maven.go:80 +0x1ef
+github.com/avast/retry-go.Do(0xc0005158b8, {0xc0005158a0, 0x3, 0x880?})
+	github.com/avast/retry-go/retry.go:135 +0x5a3
+gitlab.nethead.at/symflower/symflower/language/java/execute.MavenDependencyCommand({0xc00013e0f0, 0x44}, 0x0, {0xc00009a8a0, 0x6, 0x6})
+	gitlab.nethead.at/symflower/symflower/language/java/execute/maven.go:60 +0x1c5
+gitlab.nethead.at/symflower/symflower/language/java/execute.MavenCloverCoverage({0xc00013e0f0, 0x44})
+	gitlab.nethead.at/symflower/symflower/language/java/execute/clover.go:131 +0xc9
+gitlab.nethead.at/symflower/symflower/cmd/symflower-local/cmd.(*commandTest).Execute(0xc00015d978, {0xc00015d800?, 0x1a87cb84010?, 0xc00015d978?})
+	gitlab.nethead.at/symflower/symflower/cmd/symflower-local/cmd/test.go:143 +0x54f
+gitlab.nethead.at/symflower/symflower/cmd.ExecuteNoExit({0x7ff6533a19a0?, 0xc00015d800}, {0xc000138000?, 0x0?, 0xc00039fed8?})
+	gitlab.nethead.at/symflower/symflower/cmd/execute.go:56 +0x2d0
+gitlab.nethead.at/symflower/symflower/cmd.Execute({0x7ff6533a19a0?, 0xc00015d800?}, {0xc000138000?, 0x7ff653b24a80?, 0xc00015d800?})
+	gitlab.nethead.at/symflower/symflower/cmd/execute.go:16 +0x26
+gitlab.nethead.at/symflower/symflower/cmd.ExecuteWithOSArguments(...)
+	gitlab.nethead.at/symflower/symflower/cmd/execute.go:75
+main.main.func1()
+	gitlab.nethead.at/symflower/symflower/cmd/symflower-demo/main.go:40 +0x34
+gitlab.nethead.at/symflower/symflower/cmd/symflower-local/cmd.(*Command).WithPanicReporter(0xc00008e058?, 0x7ff653a21d78?)
+	gitlab.nethead.at/symflower/symflower/cmd/symflower-local/cmd/cmd.go:184 +0x48
+main.main()
+	gitlab.nethead.at/symflower/symflower/cmd/symflower-demo/main.go:39 +0xa5
+
+2024/06/06 09:53:51 Evaluated model "ollama/starcoder2:7b" using language "java" and repository "java\\plain": encountered 1 problems: [exit status 1
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+ERROR: All attempts fail:
+#1: Internal error: exit status 1:
+[]interface {}{
+    "C:\\Users\\Martin\\AppData\\Local\\Temp\\eval-dev-quality3010409849\\plain\\",
+    "[INFO] Scanning for projects...\r\n[WARNING] \r\n[WARNING] Some problems were encountered while building the effective model for eval.dev.quality:test-java-plain:jar:SNAPSHOT\r\n[WARNING] 'version' uses an unsupported snapshot version format, should be '*-SNAPSHOT' instead. @ line 6, column 11\r\n[WARNING] \r\n[WARNING] It is highly recommended to fix these problems because they threaten the stability of your build.\r\n[WARNING] \r\n[WARNING] For this reason, future Maven versions might no longer support building such malformed projects.\r\n[WARNING] \r\n[INFO] \r\n[INFO] ------------------< eval.dev.quality:test-java-plain >------------------\r\n[INFO] Building test-java-plain SNAPSHOT\r\n[INFO]   from pom.xml\r\n[INFO] --------------------------------[ jar ]---------------------------------\r\n[INFO] \r\n[INFO] --- clean:3.2.0:clean (default-clean) @ test-java-plain ---\r\n[INFO] \r\n[INFO] --- resources:3.3.1:resources (default-resources) @ test-java-plain ---\r\n[WARNING] Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!\r\n[INFO] skip non existing resourceDirectory C:\\Users\\Martin\\AppData\\Local\\Temp\\eval-dev-quality3010409849\\plain\\src\\main\\resources\r\n[INFO] \r\n[INFO] --- compiler:3.13.0:compile (default-compile) @ test-java-plain ---\r\n[INFO] Recompiling the module because of changed source code.\r\n[WARNING] File encoding has not been set, using platform encoding UTF-8, i.e. build is platform dependent!\r\n[INFO] Compiling 1 source file with javac [debug target 11] to target\\classes\r\n[WARNING] system modules path not set in conjunction with -source 11\r\n[INFO] \r\n[INFO] --- resources:3.3.1:resources (default-resources) @ test-java-plain ---\r\n[WARNING] Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!\r\n[INFO] skip non existing resourceDirectory C:\\Users\\Martin\\AppData\\Local\\Temp\\eval-dev-quality3010409849\\plain\\src\\main\\resources\r\n[INFO] \r\n[INFO] --- compiler:3.13.0:compile (default-compile) @ test-java-plain ---\r\n[INFO] Nothing to compile - all classes are up to date.\r\n[INFO] \r\n[INFO] --- resources:3.3.1:testResources (default-testResources) @ test-java-plain ---\r\n[WARNING] Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!\r\n[INFO] skip non existing resourceDirectory C:\\Users\\Martin\\AppData\\Local\\Temp\\eval-dev-quality3010409849\\plain\\src\\test\\resources\r\n[INFO] \r\n[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ test-java-plain ---\r\n[INFO] Recompiling the module because of changed dependency.\r\n[WARNING] File encoding has not been set, using platform encoding UTF-8, i.e. build is platform dependent!\r\n[INFO] Compiling 1 source file with javac [debug target 11] to target\\test-classes\r\n[INFO] -------------------------------------------------------------\r\n[WARNING] COMPILATION WARNING : \r\n[INFO] -------------------------------------------------------------\r\n[WARNING] system modules path not set in conjunction with -source 11\r\n[INFO] 1 warning\r\n[INFO] -------------------------------------------------------------\r\n[INFO] -------------------------------------------------------------\r\n[ERROR] COMPILATION ERROR : \r\n[INFO] -------------------------------------------------------------\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[1,1] class, interface, or enum expected\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[4,1] class, interface, or enum expected\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[5,1] class, interface, or enum expected\r\n[INFO] 3 errors \r\n[INFO] -------------------------------------------------------------\r\n[INFO] ------------------------------------------------------------------------\r\n[INFO] BUILD FAILURE\r\n[INFO] ------------------------------------------------------------------------\r\n[INFO] Total time:  0.946 s\r\n[INFO] Finished at: 2024-06-06T09:53:51+02:00\r\n[INFO] ------------------------------------------------------------------------\r\n[ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.13.0:testCompile (default-testCompile) on project test-java-plain: Compilation failure: Compilation failure: \r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[1,1] class, interface, or enum expected\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[4,1] class, interface, or enum expected\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[5,1] class, interface, or enum expected\r\n[ERROR] -> [Help 1]\r\n[ERROR] \r\n[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.\r\n[ERROR] Re-run Maven using the -X switch to enable full debug logging.\r\n[ERROR] \r\n[ERROR] For more information about the errors and possible solutions, please read the following articles:\r\n[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException\r\n",
+}
+Stacktrace: goroutine 1 [running]:
+gitlab.nethead.at/symflower/symflower/model/errors.NewInternalError({0x7ff6533a2100?, 0xc0000a4220}, {0x7ff652370080?, 0xc000096168})
+	gitlab.nethead.at/symflower/symflower/model/errors/error.go:850 +0x59
+gitlab.nethead.at/symflower/symflower/language/java/execute.MavenDependencyCommand.func1()
+	gitlab.nethead.at/symflower/symflower/language/java/execute/maven.go:80 +0x1ef
+github.com/avast/retry-go.Do(0xc0005158b8, {0xc0005158a0, 0x3, 0x880?})
+	github.com/avast/retry-go/retry.go:135 +0x5a3
+gitlab.nethead.at/symflower/symflower/language/java/execute.MavenDependencyCommand({0xc00013e0f0, 0x44}, 0x0, {0xc00009a8a0, 0x6, 0x6})
+	gitlab.nethead.at/symflower/symflower/language/java/execute/maven.go:60 +0x1c5
+gitlab.nethead.at/symflower/symflower/language/java/execute.MavenCloverCoverage({0xc00013e0f0, 0x44})
+	gitlab.nethead.at/symflower/symflower/language/java/execute/clover.go:131 +0xc9
+gitlab.nethead.at/symflower/symflower/cmd/symflower-local/cmd.(*commandTest).Execute(0xc00015d978, {0xc00015d800?, 0x1a87cb84010?, 0xc00015d978?})
+	gitlab.nethead.at/symflower/symflower/cmd/symflower-local/cmd/test.go:143 +0x54f
+gitlab.nethead.at/symflower/symflower/cmd.ExecuteNoExit({0x7ff6533a19a0?, 0xc00015d800}, {0xc000138000?, 0x0?, 0xc00039fed8?})
+	gitlab.nethead.at/symflower/symflower/cmd/execute.go:56 +0x2d0
+gitlab.nethead.at/symflower/symflower/cmd.Execute({0x7ff6533a19a0?, 0xc00015d800?}, {0xc000138000?, 0x7ff653b24a80?, 0xc00015d800?})
+	gitlab.nethead.at/symflower/symflower/cmd/execute.go:16 +0x26
+gitlab.nethead.at/symflower/symflower/cmd.ExecuteWithOSArguments(...)
+	gitlab.nethead.at/symflower/symflower/cmd/execute.go:75
+main.main.func1()
+	gitlab.nethead.at/symflower/symflower/cmd/symflower-demo/main.go:40 +0x34
+gitlab.nethead.at/symflower/symflower/cmd/symflower-local/cmd.(*Command).WithPanicReporter(0xc00008e058?, 0x7ff653a21d78?)
+	gitlab.nethead.at/symflower/symflower/cmd/symflower-local/cmd/cmd.go:184 +0x48
+main.main()
+	gitlab.nethead.at/symflower/symflower/cmd/symflower-demo/main.go:39 +0xa5
+
+
+github.com/symflower/eval-dev-quality/util.CommandWithResult
+	C:/Users/Martin/Documents/eval-dev-quality/util/exec.go:52
+github.com/symflower/eval-dev-quality/language/java.(*Language).Execute
+	C:/Users/Martin/Documents/eval-dev-quality/language/java/language.go:94
+github.com/symflower/eval-dev-quality/evaluate.Repository
+	C:/Users/Martin/Documents/eval-dev-quality/evaluate/repository.go:57
+github.com/symflower/eval-dev-quality/evaluate.Evaluate.func1
+	C:/Users/Martin/Documents/eval-dev-quality/evaluate/evaluate.go:119
+github.com/symflower/eval-dev-quality/evaluate.withLoadedModel
+	C:/Users/Martin/Documents/eval-dev-quality/evaluate/evaluate.go:253
+github.com/symflower/eval-dev-quality/evaluate.Evaluate
+	C:/Users/Martin/Documents/eval-dev-quality/evaluate/evaluate.go:109
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.(*Evaluate).Execute
+	C:/Users/Martin/Documents/eval-dev-quality/cmd/eval-dev-quality/cmd/evaluate.go:284
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute.func1
+	C:/Users/Martin/Documents/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:34
+github.com/jessevdk/go-flags.(*Parser).ParseArgs
+	C:/Users/Martin/go/pkg/mod/github.com/jessevdk/go-flags@v1.5.1-0.20210607101731-3927b71304df/parser.go:333
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute
+	C:/Users/Martin/Documents/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:37
+main.main
+	C:/Users/Martin/Documents/eval-dev-quality/cmd/eval-dev-quality/main.go:11
+runtime.main
+	C:/Program Files/Go/src/runtime/proc.go:271
+runtime.goexit
+	C:/Program Files/Go/src/runtime/asm_amd64.s:1695
+github.com/symflower/eval-dev-quality/language/java.(*Language).Execute
+	C:/Users/Martin/Documents/eval-dev-quality/language/java/language.go:105
+github.com/symflower/eval-dev-quality/evaluate.Repository
+	C:/Users/Martin/Documents/eval-dev-quality/evaluate/repository.go:57
+github.com/symflower/eval-dev-quality/evaluate.Evaluate.func1
+	C:/Users/Martin/Documents/eval-dev-quality/evaluate/evaluate.go:119
+github.com/symflower/eval-dev-quality/evaluate.withLoadedModel
+	C:/Users/Martin/Documents/eval-dev-quality/evaluate/evaluate.go:253
+github.com/symflower/eval-dev-quality/evaluate.Evaluate
+	C:/Users/Martin/Documents/eval-dev-quality/evaluate/evaluate.go:109
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.(*Evaluate).Execute
+	C:/Users/Martin/Documents/eval-dev-quality/cmd/eval-dev-quality/cmd/evaluate.go:284
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute.func1
+	C:/Users/Martin/Documents/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:34
+github.com/jessevdk/go-flags.(*Parser).ParseArgs
+	C:/Users/Martin/go/pkg/mod/github.com/jessevdk/go-flags@v1.5.1-0.20210607101731-3927b71304df/parser.go:333
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute
+	C:/Users/Martin/Documents/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:37
+main.main
+	C:/Users/Martin/Documents/eval-dev-quality/cmd/eval-dev-quality/main.go:11
+runtime.main
+	C:/Program Files/Go/src/runtime/proc.go:271
+runtime.goexit
+	C:/Program Files/Go/src/runtime/asm_amd64.s:1695
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+ERROR: All attempts fail:
+#1: Internal error: exit status 1:
+[]interface {}{
+    "C:\\Users\\Martin\\AppData\\Local\\Temp\\eval-dev-quality3010409849\\plain\\",
+    "[INFO] Scanning for projects...\r\n[WARNING] \r\n[WARNING] Some problems were encountered while building the effective model for eval.dev.quality:test-java-plain:jar:SNAPSHOT\r\n[WARNING] 'version' uses an unsupported snapshot version format, should be '*-SNAPSHOT' instead. @ line 6, column 11\r\n[WARNING] \r\n[WARNING] It is highly recommended to fix these problems because they threaten the stability of your build.\r\n[WARNING] \r\n[WARNING] For this reason, future Maven versions might no longer support building such malformed projects.\r\n[WARNING] \r\n[INFO] \r\n[INFO] ------------------< eval.dev.quality:test-java-plain >------------------\r\n[INFO] Building test-java-plain SNAPSHOT\r\n[INFO]   from pom.xml\r\n[INFO] --------------------------------[ jar ]---------------------------------\r\n[INFO] \r\n[INFO] --- clean:3.2.0:clean (default-clean) @ test-java-plain ---\r\n[INFO] \r\n[INFO] --- resources:3.3.1:resources (default-resources) @ test-java-plain ---\r\n[WARNING] Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!\r\n[INFO] skip non existing resourceDirectory C:\\Users\\Martin\\AppData\\Local\\Temp\\eval-dev-quality3010409849\\plain\\src\\main\\resources\r\n[INFO] \r\n[INFO] --- compiler:3.13.0:compile (default-compile) @ test-java-plain ---\r\n[INFO] Recompiling the module because of changed source code.\r\n[WARNING] File encoding has not been set, using platform encoding UTF-8, i.e. build is platform dependent!\r\n[INFO] Compiling 1 source file with javac [debug target 11] to target\\classes\r\n[WARNING] system modules path not set in conjunction with -source 11\r\n[INFO] \r\n[INFO] --- resources:3.3.1:resources (default-resources) @ test-java-plain ---\r\n[WARNING] Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!\r\n[INFO] skip non existing resourceDirectory C:\\Users\\Martin\\AppData\\Local\\Temp\\eval-dev-quality3010409849\\plain\\src\\main\\resources\r\n[INFO] \r\n[INFO] --- compiler:3.13.0:compile (default-compile) @ test-java-plain ---\r\n[INFO] Nothing to compile - all classes are up to date.\r\n[INFO] \r\n[INFO] --- resources:3.3.1:testResources (default-testResources) @ test-java-plain ---\r\n[WARNING] Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!\r\n[INFO] skip non existing resourceDirectory C:\\Users\\Martin\\AppData\\Local\\Temp\\eval-dev-quality3010409849\\plain\\src\\test\\resources\r\n[INFO] \r\n[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ test-java-plain ---\r\n[INFO] Recompiling the module because of changed dependency.\r\n[WARNING] File encoding has not been set, using platform encoding UTF-8, i.e. build is platform dependent!\r\n[INFO] Compiling 1 source file with javac [debug target 11] to target\\test-classes\r\n[INFO] -------------------------------------------------------------\r\n[WARNING] COMPILATION WARNING : \r\n[INFO] -------------------------------------------------------------\r\n[WARNING] system modules path not set in conjunction with -source 11\r\n[INFO] 1 warning\r\n[INFO] -------------------------------------------------------------\r\n[INFO] -------------------------------------------------------------\r\n[ERROR] COMPILATION ERROR : \r\n[INFO] -------------------------------------------------------------\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[1,1] class, interface, or enum expected\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[4,1] class, interface, or enum expected\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[5,1] class, interface, or enum expected\r\n[INFO] 3 errors \r\n[INFO] -------------------------------------------------------------\r\n[INFO] ------------------------------------------------------------------------\r\n[INFO] BUILD FAILURE\r\n[INFO] ------------------------------------------------------------------------\r\n[INFO] Total time:  0.946 s\r\n[INFO] Finished at: 2024-06-06T09:53:51+02:00\r\n[INFO] ------------------------------------------------------------------------\r\n[ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.13.0:testCompile (default-testCompile) on project test-java-plain: Compilation failure: Compilation failure: \r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[1,1] class, interface, or enum expected\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[4,1] class, interface, or enum expected\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[5,1] class, interface, or enum expected\r\n[ERROR] -> [Help 1]\r\n[ERROR] \r\n[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.\r\n[ERROR] Re-run Maven using the -X switch to enable full debug logging.\r\n[ERROR] \r\n[ERROR] For more information about the errors and possible solutions, please read the following articles:\r\n[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException\r\n",
+}
+Stacktrace: goroutine 1 [running]:
+gitlab.nethead.at/symflower/symflower/model/errors.NewInternalError({0x7ff6533a2100?, 0xc0000a4220}, {0x7ff652370080?, 0xc000096168})
+	gitlab.nethead.at/symflower/symflower/model/errors/error.go:850 +0x59
+gitlab.nethead.at/symflower/symflower/language/java/execute.MavenDependencyCommand.func1()
+	gitlab.nethead.at/symflower/symflower/language/java/execute/maven.go:80 +0x1ef
+github.com/avast/retry-go.Do(0xc0005158b8, {0xc0005158a0, 0x3, 0x880?})
+	github.com/avast/retry-go/retry.go:135 +0x5a3
+gitlab.nethead.at/symflower/symflower/language/java/execute.MavenDependencyCommand({0xc00013e0f0, 0x44}, 0x0, {0xc00009a8a0, 0x6, 0x6})
+	gitlab.nethead.at/symflower/symflower/language/java/execute/maven.go:60 +0x1c5
+gitlab.nethead.at/symflower/symflower/language/java/execute.MavenCloverCoverage({0xc00013e0f0, 0x44})
+	gitlab.nethead.at/symflower/symflower/language/java/execute/clover.go:131 +0xc9
+gitlab.nethead.at/symflower/symflower/cmd/symflower-local/cmd.(*commandTest).Execute(0xc00015d978, {0xc00015d800?, 0x1a87cb84010?, 0xc00015d978?})
+	gitlab.nethead.at/symflower/symflower/cmd/symflower-local/cmd/test.go:143 +0x54f
+gitlab.nethead.at/symflower/symflower/cmd.ExecuteNoExit({0x7ff6533a19a0?, 0xc00015d800}, {0xc000138000?, 0x0?, 0xc00039fed8?})
+	gitlab.nethead.at/symflower/symflower/cmd/execute.go:56 +0x2d0
+gitlab.nethead.at/symflower/symflower/cmd.Execute({0x7ff6533a19a0?, 0xc00015d800?}, {0xc000138000?, 0x7ff653b24a80?, 0xc00015d800?})
+	gitlab.nethead.at/symflower/symflower/cmd/execute.go:16 +0x26
+gitlab.nethead.at/symflower/symflower/cmd.ExecuteWithOSArguments(...)
+	gitlab.nethead.at/symflower/symflower/cmd/execute.go:75
+main.main.func1()
+	gitlab.nethead.at/symflower/symflower/cmd/symflower-demo/main.go:40 +0x34
+gitlab.nethead.at/symflower/symflower/cmd/symflower-local/cmd.(*Command).WithPanicReporter(0xc00008e058?, 0x7ff653a21d78?)
+	gitlab.nethead.at/symflower/symflower/cmd/symflower-local/cmd/cmd.go:184 +0x48
+main.main()
+	gitlab.nethead.at/symflower/symflower/cmd/symflower-demo/main.go:39 +0xa5
+
+
+src\main\java\com\eval\Plain.java]
+2024/06/06 09:53:51 Evaluating model "ollama/starcoder2:7b" using language "java" and repository "java\\plain"
+2024/06/06 09:53:51 Querying model "ollama/starcoder2:7b" with:
+	Given the following Java code file "src\main\java\com\eval\Plain.java" with package "com.eval", provide a test file for this code with JUnit 5 as a test framework.
+	The tests should produce 100 percent code coverage and must compile.
+	The response must contain only the test code and nothing else.
+
+	```java
+	package com.eval;
+	
+	class Plain {
+	    static void plain() {
+	    }
+	}
+	```
+2024/06/06 09:53:52 Model "ollama/starcoder2:7b" responded (1588 ms) with:
+	The response is evaluated using `maven:3` as base image, i.e., it should be possible to build a Docker container containing the complete setup for compilation and testing.
+
+	<file_sep>/solutions/klaus-fuchs-2019-07-18/src/main/java/com/eval/Plain.java
+	package com.eval;
+	
+	class Plain {
+	    static void plain() {}
+	}
+2024/06/06 09:53:52 $ symflower.exe test --language java --workspace C:\Users\Martin\AppData\Local\Temp\eval-dev-quality3010409849\plain --coverage-file C:\Users\Martin\AppData\Local\Temp\eval-dev-quality3010409849\plain\coverage.json
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+ERROR: All attempts fail:
+#1: Internal error: exit status 1:
+[]interface {}{
+    "C:\\Users\\Martin\\AppData\\Local\\Temp\\eval-dev-quality3010409849\\plain\\",
+    "[INFO] Scanning for projects...\r\n[WARNING] \r\n[WARNING] Some problems were encountered while building the effective model for eval.dev.quality:test-java-plain:jar:SNAPSHOT\r\n[WARNING] 'version' uses an unsupported snapshot version format, should be '*-SNAPSHOT' instead. @ line 6, column 11\r\n[WARNING] \r\n[WARNING] It is highly recommended to fix these problems because they threaten the stability of your build.\r\n[WARNING] \r\n[WARNING] For this reason, future Maven versions might no longer support building such malformed projects.\r\n[WARNING] \r\n[INFO] \r\n[INFO] ------------------< eval.dev.quality:test-java-plain >------------------\r\n[INFO] Building test-java-plain SNAPSHOT\r\n[INFO]   from pom.xml\r\n[INFO] --------------------------------[ jar ]---------------------------------\r\n[INFO] \r\n[INFO] --- clean:3.2.0:clean (default-clean) @ test-java-plain ---\r\n[INFO] \r\n[INFO] --- resources:3.3.1:resources (default-resources) @ test-java-plain ---\r\n[WARNING] Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!\r\n[INFO] skip non existing resourceDirectory C:\\Users\\Martin\\AppData\\Local\\Temp\\eval-dev-quality3010409849\\plain\\src\\main\\resources\r\n[INFO] \r\n[INFO] --- compiler:3.13.0:compile (default-compile) @ test-java-plain ---\r\n[INFO] Recompiling the module because of changed source code.\r\n[WARNING] File encoding has not been set, using platform encoding UTF-8, i.e. build is platform dependent!\r\n[INFO] Compiling 1 source file with javac [debug target 11] to target\\classes\r\n[WARNING] system modules path not set in conjunction with -source 11\r\n[INFO] \r\n[INFO] --- resources:3.3.1:resources (default-resources) @ test-java-plain ---\r\n[WARNING] Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!\r\n[INFO] skip non existing resourceDirectory C:\\Users\\Martin\\AppData\\Local\\Temp\\eval-dev-quality3010409849\\plain\\src\\main\\resources\r\n[INFO] \r\n[INFO] --- compiler:3.13.0:compile (default-compile) @ test-java-plain ---\r\n[INFO] Nothing to compile - all classes are up to date.\r\n[INFO] \r\n[INFO] --- resources:3.3.1:testResources (default-testResources) @ test-java-plain ---\r\n[WARNING] Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!\r\n[INFO] skip non existing resourceDirectory C:\\Users\\Martin\\AppData\\Local\\Temp\\eval-dev-quality3010409849\\plain\\src\\test\\resources\r\n[INFO] \r\n[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ test-java-plain ---\r\n[INFO] Recompiling the module because of changed dependency.\r\n[WARNING] File encoding has not been set, using platform encoding UTF-8, i.e. build is platform dependent!\r\n[INFO] Compiling 1 source file with javac [debug target 11] to target\\test-classes\r\n[INFO] -------------------------------------------------------------\r\n[WARNING] COMPILATION WARNING : \r\n[INFO] -------------------------------------------------------------\r\n[WARNING] system modules path not set in conjunction with -source 11\r\n[INFO] 1 warning\r\n[INFO] -------------------------------------------------------------\r\n[INFO] -------------------------------------------------------------\r\n[ERROR] COMPILATION ERROR : \r\n[INFO] -------------------------------------------------------------\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[1,1] class, interface, or enum expected\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[1,33] illegal character: '`'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[1,41] illegal character: '`'\r\n[INFO] 3 errors \r\n[INFO] -------------------------------------------------------------\r\n[INFO] ------------------------------------------------------------------------\r\n[INFO] BUILD FAILURE\r\n[INFO] ------------------------------------------------------------------------\r\n[INFO] Total time:  0.912 s\r\n[INFO] Finished at: 2024-06-06T09:53:55+02:00\r\n[INFO] ------------------------------------------------------------------------\r\n[ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.13.0:testCompile (default-testCompile) on project test-java-plain: Compilation failure: Compilation failure: \r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[1,1] class, interface, or enum expected\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[1,33] illegal character: '`'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[1,41] illegal character: '`'\r\n[ERROR] -> [Help 1]\r\n[ERROR] \r\n[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.\r\n[ERROR] Re-run Maven using the -X switch to enable full debug logging.\r\n[ERROR] \r\n[ERROR] For more information about the errors and possible solutions, please read the following articles:\r\n[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException\r\n",
+}
+Stacktrace: goroutine 1 [running]:
+gitlab.nethead.at/symflower/symflower/model/errors.NewInternalError({0x7ff6533a2100?, 0xc00010e4a0}, {0x7ff652370080?, 0xc0001027b0})
+	gitlab.nethead.at/symflower/symflower/model/errors/error.go:850 +0x59
+gitlab.nethead.at/symflower/symflower/language/java/execute.MavenDependencyCommand.func1()
+	gitlab.nethead.at/symflower/symflower/language/java/execute/maven.go:80 +0x1ef
+github.com/avast/retry-go.Do(0xc0000e38b8, {0xc0000e38a0, 0x3, 0x880?})
+	github.com/avast/retry-go/retry.go:135 +0x5a3
+gitlab.nethead.at/symflower/symflower/language/java/execute.MavenDependencyCommand({0xc0000be370, 0x44}, 0x0, {0xc00009b620, 0x6, 0x6})
+	gitlab.nethead.at/symflower/symflower/language/java/execute/maven.go:60 +0x1c5
+gitlab.nethead.at/symflower/symflower/language/java/execute.MavenCloverCoverage({0xc0000be370, 0x44})
+	gitlab.nethead.at/symflower/symflower/language/java/execute/clover.go:131 +0xc9
+gitlab.nethead.at/symflower/symflower/cmd/symflower-local/cmd.(*commandTest).Execute(0xc00015c578, {0xc00015c400?, 0x19aeb3a63d8?, 0xc00015c578?})
+	gitlab.nethead.at/symflower/symflower/cmd/symflower-local/cmd/test.go:143 +0x54f
+gitlab.nethead.at/symflower/symflower/cmd.ExecuteNoExit({0x7ff6533a19a0?, 0xc00015c400}, {0xc000138000?, 0x7ff653b7a2c0?, 0xc0000e3ed8?})
+	gitlab.nethead.at/symflower/symflower/cmd/execute.go:56 +0x2d0
+gitlab.nethead.at/symflower/symflower/cmd.Execute({0x7ff6533a19a0?, 0xc00015c400?}, {0xc000138000?, 0x7ff653b24a80?, 0xc00015c400?})
+	gitlab.nethead.at/symflower/symflower/cmd/execute.go:16 +0x26
+gitlab.nethead.at/symflower/symflower/cmd.ExecuteWithOSArguments(...)
+	gitlab.nethead.at/symflower/symflower/cmd/execute.go:75
+main.main.func1()
+	gitlab.nethead.at/symflower/symflower/cmd/symflower-demo/main.go:40 +0x34
+gitlab.nethead.at/symflower/symflower/cmd/symflower-local/cmd.(*Command).WithPanicReporter(0xc00008e058?, 0x7ff653a21d78?)
+	gitlab.nethead.at/symflower/symflower/cmd/symflower-local/cmd/cmd.go:184 +0x48
+main.main()
+	gitlab.nethead.at/symflower/symflower/cmd/symflower-demo/main.go:39 +0xa5
+
+2024/06/06 09:53:55 Evaluated model "ollama/starcoder2:7b" using language "java" and repository "java\\plain": encountered 1 problems: [exit status 1
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+ERROR: All attempts fail:
+#1: Internal error: exit status 1:
+[]interface {}{
+    "C:\\Users\\Martin\\AppData\\Local\\Temp\\eval-dev-quality3010409849\\plain\\",
+    "[INFO] Scanning for projects...\r\n[WARNING] \r\n[WARNING] Some problems were encountered while building the effective model for eval.dev.quality:test-java-plain:jar:SNAPSHOT\r\n[WARNING] 'version' uses an unsupported snapshot version format, should be '*-SNAPSHOT' instead. @ line 6, column 11\r\n[WARNING] \r\n[WARNING] It is highly recommended to fix these problems because they threaten the stability of your build.\r\n[WARNING] \r\n[WARNING] For this reason, future Maven versions might no longer support building such malformed projects.\r\n[WARNING] \r\n[INFO] \r\n[INFO] ------------------< eval.dev.quality:test-java-plain >------------------\r\n[INFO] Building test-java-plain SNAPSHOT\r\n[INFO]   from pom.xml\r\n[INFO] --------------------------------[ jar ]---------------------------------\r\n[INFO] \r\n[INFO] --- clean:3.2.0:clean (default-clean) @ test-java-plain ---\r\n[INFO] \r\n[INFO] --- resources:3.3.1:resources (default-resources) @ test-java-plain ---\r\n[WARNING] Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!\r\n[INFO] skip non existing resourceDirectory C:\\Users\\Martin\\AppData\\Local\\Temp\\eval-dev-quality3010409849\\plain\\src\\main\\resources\r\n[INFO] \r\n[INFO] --- compiler:3.13.0:compile (default-compile) @ test-java-plain ---\r\n[INFO] Recompiling the module because of changed source code.\r\n[WARNING] File encoding has not been set, using platform encoding UTF-8, i.e. build is platform dependent!\r\n[INFO] Compiling 1 source file with javac [debug target 11] to target\\classes\r\n[WARNING] system modules path not set in conjunction with -source 11\r\n[INFO] \r\n[INFO] --- resources:3.3.1:resources (default-resources) @ test-java-plain ---\r\n[WARNING] Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!\r\n[INFO] skip non existing resourceDirectory C:\\Users\\Martin\\AppData\\Local\\Temp\\eval-dev-quality3010409849\\plain\\src\\main\\resources\r\n[INFO] \r\n[INFO] --- compiler:3.13.0:compile (default-compile) @ test-java-plain ---\r\n[INFO] Nothing to compile - all classes are up to date.\r\n[INFO] \r\n[INFO] --- resources:3.3.1:testResources (default-testResources) @ test-java-plain ---\r\n[WARNING] Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!\r\n[INFO] skip non existing resourceDirectory C:\\Users\\Martin\\AppData\\Local\\Temp\\eval-dev-quality3010409849\\plain\\src\\test\\resources\r\n[INFO] \r\n[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ test-java-plain ---\r\n[INFO] Recompiling the module because of changed dependency.\r\n[WARNING] File encoding has not been set, using platform encoding UTF-8, i.e. build is platform dependent!\r\n[INFO] Compiling 1 source file with javac [debug target 11] to target\\test-classes\r\n[INFO] -------------------------------------------------------------\r\n[WARNING] COMPILATION WARNING : \r\n[INFO] -------------------------------------------------------------\r\n[WARNING] system modules path not set in conjunction with -source 11\r\n[INFO] 1 warning\r\n[INFO] -------------------------------------------------------------\r\n[INFO] -------------------------------------------------------------\r\n[ERROR] COMPILATION ERROR : \r\n[INFO] -------------------------------------------------------------\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[1,1] class, interface, or enum expected\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[1,33] illegal character: '`'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[1,41] illegal character: '`'\r\n[INFO] 3 errors \r\n[INFO] -------------------------------------------------------------\r\n[INFO] ------------------------------------------------------------------------\r\n[INFO] BUILD FAILURE\r\n[INFO] ------------------------------------------------------------------------\r\n[INFO] Total time:  0.912 s\r\n[INFO] Finished at: 2024-06-06T09:53:55+02:00\r\n[INFO] ------------------------------------------------------------------------\r\n[ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.13.0:testCompile (default-testCompile) on project test-java-plain: Compilation failure: Compilation failure: \r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[1,1] class, interface, or enum expected\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[1,33] illegal character: '`'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[1,41] illegal character: '`'\r\n[ERROR] -> [Help 1]\r\n[ERROR] \r\n[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.\r\n[ERROR] Re-run Maven using the -X switch to enable full debug logging.\r\n[ERROR] \r\n[ERROR] For more information about the errors and possible solutions, please read the following articles:\r\n[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException\r\n",
+}
+Stacktrace: goroutine 1 [running]:
+gitlab.nethead.at/symflower/symflower/model/errors.NewInternalError({0x7ff6533a2100?, 0xc00010e4a0}, {0x7ff652370080?, 0xc0001027b0})
+	gitlab.nethead.at/symflower/symflower/model/errors/error.go:850 +0x59
+gitlab.nethead.at/symflower/symflower/language/java/execute.MavenDependencyCommand.func1()
+	gitlab.nethead.at/symflower/symflower/language/java/execute/maven.go:80 +0x1ef
+github.com/avast/retry-go.Do(0xc0000e38b8, {0xc0000e38a0, 0x3, 0x880?})
+	github.com/avast/retry-go/retry.go:135 +0x5a3
+gitlab.nethead.at/symflower/symflower/language/java/execute.MavenDependencyCommand({0xc0000be370, 0x44}, 0x0, {0xc00009b620, 0x6, 0x6})
+	gitlab.nethead.at/symflower/symflower/language/java/execute/maven.go:60 +0x1c5
+gitlab.nethead.at/symflower/symflower/language/java/execute.MavenCloverCoverage({0xc0000be370, 0x44})
+	gitlab.nethead.at/symflower/symflower/language/java/execute/clover.go:131 +0xc9
+gitlab.nethead.at/symflower/symflower/cmd/symflower-local/cmd.(*commandTest).Execute(0xc00015c578, {0xc00015c400?, 0x19aeb3a63d8?, 0xc00015c578?})
+	gitlab.nethead.at/symflower/symflower/cmd/symflower-local/cmd/test.go:143 +0x54f
+gitlab.nethead.at/symflower/symflower/cmd.ExecuteNoExit({0x7ff6533a19a0?, 0xc00015c400}, {0xc000138000?, 0x7ff653b7a2c0?, 0xc0000e3ed8?})
+	gitlab.nethead.at/symflower/symflower/cmd/execute.go:56 +0x2d0
+gitlab.nethead.at/symflower/symflower/cmd.Execute({0x7ff6533a19a0?, 0xc00015c400?}, {0xc000138000?, 0x7ff653b24a80?, 0xc00015c400?})
+	gitlab.nethead.at/symflower/symflower/cmd/execute.go:16 +0x26
+gitlab.nethead.at/symflower/symflower/cmd.ExecuteWithOSArguments(...)
+	gitlab.nethead.at/symflower/symflower/cmd/execute.go:75
+main.main.func1()
+	gitlab.nethead.at/symflower/symflower/cmd/symflower-demo/main.go:40 +0x34
+gitlab.nethead.at/symflower/symflower/cmd/symflower-local/cmd.(*Command).WithPanicReporter(0xc00008e058?, 0x7ff653a21d78?)
+	gitlab.nethead.at/symflower/symflower/cmd/symflower-local/cmd/cmd.go:184 +0x48
+main.main()
+	gitlab.nethead.at/symflower/symflower/cmd/symflower-demo/main.go:39 +0xa5
+
+
+github.com/symflower/eval-dev-quality/util.CommandWithResult
+	C:/Users/Martin/Documents/eval-dev-quality/util/exec.go:52
+github.com/symflower/eval-dev-quality/language/java.(*Language).Execute
+	C:/Users/Martin/Documents/eval-dev-quality/language/java/language.go:94
+github.com/symflower/eval-dev-quality/evaluate.Repository
+	C:/Users/Martin/Documents/eval-dev-quality/evaluate/repository.go:57
+github.com/symflower/eval-dev-quality/evaluate.Evaluate.func1
+	C:/Users/Martin/Documents/eval-dev-quality/evaluate/evaluate.go:119
+github.com/symflower/eval-dev-quality/evaluate.withLoadedModel
+	C:/Users/Martin/Documents/eval-dev-quality/evaluate/evaluate.go:253
+github.com/symflower/eval-dev-quality/evaluate.Evaluate
+	C:/Users/Martin/Documents/eval-dev-quality/evaluate/evaluate.go:109
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.(*Evaluate).Execute
+	C:/Users/Martin/Documents/eval-dev-quality/cmd/eval-dev-quality/cmd/evaluate.go:284
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute.func1
+	C:/Users/Martin/Documents/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:34
+github.com/jessevdk/go-flags.(*Parser).ParseArgs
+	C:/Users/Martin/go/pkg/mod/github.com/jessevdk/go-flags@v1.5.1-0.20210607101731-3927b71304df/parser.go:333
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute
+	C:/Users/Martin/Documents/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:37
+main.main
+	C:/Users/Martin/Documents/eval-dev-quality/cmd/eval-dev-quality/main.go:11
+runtime.main
+	C:/Program Files/Go/src/runtime/proc.go:271
+runtime.goexit
+	C:/Program Files/Go/src/runtime/asm_amd64.s:1695
+github.com/symflower/eval-dev-quality/language/java.(*Language).Execute
+	C:/Users/Martin/Documents/eval-dev-quality/language/java/language.go:105
+github.com/symflower/eval-dev-quality/evaluate.Repository
+	C:/Users/Martin/Documents/eval-dev-quality/evaluate/repository.go:57
+github.com/symflower/eval-dev-quality/evaluate.Evaluate.func1
+	C:/Users/Martin/Documents/eval-dev-quality/evaluate/evaluate.go:119
+github.com/symflower/eval-dev-quality/evaluate.withLoadedModel
+	C:/Users/Martin/Documents/eval-dev-quality/evaluate/evaluate.go:253
+github.com/symflower/eval-dev-quality/evaluate.Evaluate
+	C:/Users/Martin/Documents/eval-dev-quality/evaluate/evaluate.go:109
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.(*Evaluate).Execute
+	C:/Users/Martin/Documents/eval-dev-quality/cmd/eval-dev-quality/cmd/evaluate.go:284
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute.func1
+	C:/Users/Martin/Documents/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:34
+github.com/jessevdk/go-flags.(*Parser).ParseArgs
+	C:/Users/Martin/go/pkg/mod/github.com/jessevdk/go-flags@v1.5.1-0.20210607101731-3927b71304df/parser.go:333
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute
+	C:/Users/Martin/Documents/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:37
+main.main
+	C:/Users/Martin/Documents/eval-dev-quality/cmd/eval-dev-quality/main.go:11
+runtime.main
+	C:/Program Files/Go/src/runtime/proc.go:271
+runtime.goexit
+	C:/Program Files/Go/src/runtime/asm_amd64.s:1695
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+ERROR: All attempts fail:
+#1: Internal error: exit status 1:
+[]interface {}{
+    "C:\\Users\\Martin\\AppData\\Local\\Temp\\eval-dev-quality3010409849\\plain\\",
+    "[INFO] Scanning for projects...\r\n[WARNING] \r\n[WARNING] Some problems were encountered while building the effective model for eval.dev.quality:test-java-plain:jar:SNAPSHOT\r\n[WARNING] 'version' uses an unsupported snapshot version format, should be '*-SNAPSHOT' instead. @ line 6, column 11\r\n[WARNING] \r\n[WARNING] It is highly recommended to fix these problems because they threaten the stability of your build.\r\n[WARNING] \r\n[WARNING] For this reason, future Maven versions might no longer support building such malformed projects.\r\n[WARNING] \r\n[INFO] \r\n[INFO] ------------------< eval.dev.quality:test-java-plain >------------------\r\n[INFO] Building test-java-plain SNAPSHOT\r\n[INFO]   from pom.xml\r\n[INFO] --------------------------------[ jar ]---------------------------------\r\n[INFO] \r\n[INFO] --- clean:3.2.0:clean (default-clean) @ test-java-plain ---\r\n[INFO] \r\n[INFO] --- resources:3.3.1:resources (default-resources) @ test-java-plain ---\r\n[WARNING] Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!\r\n[INFO] skip non existing resourceDirectory C:\\Users\\Martin\\AppData\\Local\\Temp\\eval-dev-quality3010409849\\plain\\src\\main\\resources\r\n[INFO] \r\n[INFO] --- compiler:3.13.0:compile (default-compile) @ test-java-plain ---\r\n[INFO] Recompiling the module because of changed source code.\r\n[WARNING] File encoding has not been set, using platform encoding UTF-8, i.e. build is platform dependent!\r\n[INFO] Compiling 1 source file with javac [debug target 11] to target\\classes\r\n[WARNING] system modules path not set in conjunction with -source 11\r\n[INFO] \r\n[INFO] --- resources:3.3.1:resources (default-resources) @ test-java-plain ---\r\n[WARNING] Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!\r\n[INFO] skip non existing resourceDirectory C:\\Users\\Martin\\AppData\\Local\\Temp\\eval-dev-quality3010409849\\plain\\src\\main\\resources\r\n[INFO] \r\n[INFO] --- compiler:3.13.0:compile (default-compile) @ test-java-plain ---\r\n[INFO] Nothing to compile - all classes are up to date.\r\n[INFO] \r\n[INFO] --- resources:3.3.1:testResources (default-testResources) @ test-java-plain ---\r\n[WARNING] Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!\r\n[INFO] skip non existing resourceDirectory C:\\Users\\Martin\\AppData\\Local\\Temp\\eval-dev-quality3010409849\\plain\\src\\test\\resources\r\n[INFO] \r\n[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ test-java-plain ---\r\n[INFO] Recompiling the module because of changed dependency.\r\n[WARNING] File encoding has not been set, using platform encoding UTF-8, i.e. build is platform dependent!\r\n[INFO] Compiling 1 source file with javac [debug target 11] to target\\test-classes\r\n[INFO] -------------------------------------------------------------\r\n[WARNING] COMPILATION WARNING : \r\n[INFO] -------------------------------------------------------------\r\n[WARNING] system modules path not set in conjunction with -source 11\r\n[INFO] 1 warning\r\n[INFO] -------------------------------------------------------------\r\n[INFO] -------------------------------------------------------------\r\n[ERROR] COMPILATION ERROR : \r\n[INFO] -------------------------------------------------------------\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[1,1] class, interface, or enum expected\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[1,33] illegal character: '`'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[1,41] illegal character: '`'\r\n[INFO] 3 errors \r\n[INFO] -------------------------------------------------------------\r\n[INFO] ------------------------------------------------------------------------\r\n[INFO] BUILD FAILURE\r\n[INFO] ------------------------------------------------------------------------\r\n[INFO] Total time:  0.912 s\r\n[INFO] Finished at: 2024-06-06T09:53:55+02:00\r\n[INFO] ------------------------------------------------------------------------\r\n[ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.13.0:testCompile (default-testCompile) on project test-java-plain: Compilation failure: Compilation failure: \r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[1,1] class, interface, or enum expected\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[1,33] illegal character: '`'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[1,41] illegal character: '`'\r\n[ERROR] -> [Help 1]\r\n[ERROR] \r\n[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.\r\n[ERROR] Re-run Maven using the -X switch to enable full debug logging.\r\n[ERROR] \r\n[ERROR] For more information about the errors and possible solutions, please read the following articles:\r\n[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException\r\n",
+}
+Stacktrace: goroutine 1 [running]:
+gitlab.nethead.at/symflower/symflower/model/errors.NewInternalError({0x7ff6533a2100?, 0xc00010e4a0}, {0x7ff652370080?, 0xc0001027b0})
+	gitlab.nethead.at/symflower/symflower/model/errors/error.go:850 +0x59
+gitlab.nethead.at/symflower/symflower/language/java/execute.MavenDependencyCommand.func1()
+	gitlab.nethead.at/symflower/symflower/language/java/execute/maven.go:80 +0x1ef
+github.com/avast/retry-go.Do(0xc0000e38b8, {0xc0000e38a0, 0x3, 0x880?})
+	github.com/avast/retry-go/retry.go:135 +0x5a3
+gitlab.nethead.at/symflower/symflower/language/java/execute.MavenDependencyCommand({0xc0000be370, 0x44}, 0x0, {0xc00009b620, 0x6, 0x6})
+	gitlab.nethead.at/symflower/symflower/language/java/execute/maven.go:60 +0x1c5
+gitlab.nethead.at/symflower/symflower/language/java/execute.MavenCloverCoverage({0xc0000be370, 0x44})
+	gitlab.nethead.at/symflower/symflower/language/java/execute/clover.go:131 +0xc9
+gitlab.nethead.at/symflower/symflower/cmd/symflower-local/cmd.(*commandTest).Execute(0xc00015c578, {0xc00015c400?, 0x19aeb3a63d8?, 0xc00015c578?})
+	gitlab.nethead.at/symflower/symflower/cmd/symflower-local/cmd/test.go:143 +0x54f
+gitlab.nethead.at/symflower/symflower/cmd.ExecuteNoExit({0x7ff6533a19a0?, 0xc00015c400}, {0xc000138000?, 0x7ff653b7a2c0?, 0xc0000e3ed8?})
+	gitlab.nethead.at/symflower/symflower/cmd/execute.go:56 +0x2d0
+gitlab.nethead.at/symflower/symflower/cmd.Execute({0x7ff6533a19a0?, 0xc00015c400?}, {0xc000138000?, 0x7ff653b24a80?, 0xc00015c400?})
+	gitlab.nethead.at/symflower/symflower/cmd/execute.go:16 +0x26
+gitlab.nethead.at/symflower/symflower/cmd.ExecuteWithOSArguments(...)
+	gitlab.nethead.at/symflower/symflower/cmd/execute.go:75
+main.main.func1()
+	gitlab.nethead.at/symflower/symflower/cmd/symflower-demo/main.go:40 +0x34
+gitlab.nethead.at/symflower/symflower/cmd/symflower-local/cmd.(*Command).WithPanicReporter(0xc00008e058?, 0x7ff653a21d78?)
+	gitlab.nethead.at/symflower/symflower/cmd/symflower-local/cmd/cmd.go:184 +0x48
+main.main()
+	gitlab.nethead.at/symflower/symflower/cmd/symflower-demo/main.go:39 +0xa5
+
+
+src\main\java\com\eval\Plain.java]
+2024/06/06 09:53:55 Evaluating model "ollama/starcoder2:7b" using language "java" and repository "java\\plain"
+2024/06/06 09:53:55 Querying model "ollama/starcoder2:7b" with:
+	Given the following Java code file "src\main\java\com\eval\Plain.java" with package "com.eval", provide a test file for this code with JUnit 5 as a test framework.
+	The tests should produce 100 percent code coverage and must compile.
+	The response must contain only the test code and nothing else.
+
+	```java
+	package com.eval;
+	
+	class Plain {
+	    static void plain() {
+	    }
+	}
+	```
+2024/06/06 09:53:56 Model "ollama/starcoder2:7b" responded (1732 ms) with:
+	<br/><br/>
+
+	<file_sep>/03-junit5/test-output/old/testSuite/JUnit5_Tests.properties
+	[SuiteResult testSuite]<file_sep><fim_prefix><fim_suffix>     System.out.println("I am a main method in Main.java");
+	    }
+	}
+	<fim_middle>/01-compile/src/main/java/com/eval/Main.java
+	package com.eval;
+	
+	class Main {
+	    public static void main(String[] args) {
+	   
+2024/06/06 09:53:56 $ symflower.exe test --language java --workspace C:\Users\Martin\AppData\Local\Temp\eval-dev-quality3010409849\plain --coverage-file C:\Users\Martin\AppData\Local\Temp\eval-dev-quality3010409849\plain\coverage.json
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+ERROR: All attempts fail:
+#1: Internal error: exit status 1:
+[]interface {}{
+    "C:\\Users\\Martin\\AppData\\Local\\Temp\\eval-dev-quality3010409849\\plain\\",
+    "[INFO] Scanning for projects...\r\n[WARNING] \r\n[WARNING] Some problems were encountered while building the effective model for eval.dev.quality:test-java-plain:jar:SNAPSHOT\r\n[WARNING] 'version' uses an unsupported snapshot version format, should be '*-SNAPSHOT' instead. @ line 6, column 11\r\n[WARNING] \r\n[WARNING] It is highly recommended to fix these problems because they threaten the stability of your build.\r\n[WARNING] \r\n[WARNING] For this reason, future Maven versions might no longer support building such malformed projects.\r\n[WARNING] \r\n[INFO] \r\n[INFO] ------------------< eval.dev.quality:test-java-plain >------------------\r\n[INFO] Building test-java-plain SNAPSHOT\r\n[INFO]   from pom.xml\r\n[INFO] --------------------------------[ jar ]---------------------------------\r\n[INFO] \r\n[INFO] --- clean:3.2.0:clean (default-clean) @ test-java-plain ---\r\n[INFO] \r\n[INFO] --- resources:3.3.1:resources (default-resources) @ test-java-plain ---\r\n[WARNING] Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!\r\n[INFO] skip non existing resourceDirectory C:\\Users\\Martin\\AppData\\Local\\Temp\\eval-dev-quality3010409849\\plain\\src\\main\\resources\r\n[INFO] \r\n[INFO] --- compiler:3.13.0:compile (default-compile) @ test-java-plain ---\r\n[INFO] Recompiling the module because of changed source code.\r\n[WARNING] File encoding has not been set, using platform encoding UTF-8, i.e. build is platform dependent!\r\n[INFO] Compiling 1 source file with javac [debug target 11] to target\\classes\r\n[WARNING] system modules path not set in conjunction with -source 11\r\n[INFO] \r\n[INFO] --- resources:3.3.1:resources (default-resources) @ test-java-plain ---\r\n[WARNING] Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!\r\n[INFO] skip non existing resourceDirectory C:\\Users\\Martin\\AppData\\Local\\Temp\\eval-dev-quality3010409849\\plain\\src\\main\\resources\r\n[INFO] \r\n[INFO] --- compiler:3.13.0:compile (default-compile) @ test-java-plain ---\r\n[INFO] Nothing to compile - all classes are up to date.\r\n[INFO] \r\n[INFO] --- resources:3.3.1:testResources (default-testResources) @ test-java-plain ---\r\n[WARNING] Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!\r\n[INFO] skip non existing resourceDirectory C:\\Users\\Martin\\AppData\\Local\\Temp\\eval-dev-quality3010409849\\plain\\src\\test\\resources\r\n[INFO] \r\n[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ test-java-plain ---\r\n[INFO] Recompiling the module because of changed dependency.\r\n[WARNING] File encoding has not been set, using platform encoding UTF-8, i.e. build is platform dependent!\r\n[INFO] Compiling 1 source file with javac [debug target 11] to target\\test-classes\r\n[INFO] -------------------------------------------------------------\r\n[WARNING] COMPILATION WARNING : \r\n[INFO] -------------------------------------------------------------\r\n[WARNING] system modules path not set in conjunction with -source 11\r\n[INFO] 1 warning\r\n[INFO] -------------------------------------------------------------\r\n[INFO] -------------------------------------------------------------\r\n[ERROR] COMPILATION ERROR : \r\n[INFO] -------------------------------------------------------------\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[1,1] class, interface, or enum expected\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[5,5] class, interface, or enum expected\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[11,45] reached end of file while parsing\r\n[INFO] 3 errors \r\n[INFO] -------------------------------------------------------------\r\n[INFO] ------------------------------------------------------------------------\r\n[INFO] BUILD FAILURE\r\n[INFO] ------------------------------------------------------------------------\r\n[INFO] Total time:  0.947 s\r\n[INFO] Finished at: 2024-06-06T09:53:59+02:00\r\n[INFO] ------------------------------------------------------------------------\r\n[ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.13.0:testCompile (default-testCompile) on project test-java-plain: Compilation failure: Compilation failure: \r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[1,1] class, interface, or enum expected\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[5,5] class, interface, or enum expected\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[11,45] reached end of file while parsing\r\n[ERROR] -> [Help 1]\r\n[ERROR] \r\n[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.\r\n[ERROR] Re-run Maven using the -X switch to enable full debug logging.\r\n[ERROR] \r\n[ERROR] For more information about the errors and possible solutions, please read the following articles:\r\n[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException\r\n",
+}
+Stacktrace: goroutine 1 [running]:
+gitlab.nethead.at/symflower/symflower/model/errors.NewInternalError({0x7ff6533a2100?, 0xc00018e520}, {0x7ff652370080?, 0xc0000980c0})
+	gitlab.nethead.at/symflower/symflower/model/errors/error.go:850 +0x59
+gitlab.nethead.at/symflower/symflower/language/java/execute.MavenDependencyCommand.func1()
+	gitlab.nethead.at/symflower/symflower/language/java/execute/maven.go:80 +0x1ef
+github.com/avast/retry-go.Do(0xc0005158b8, {0xc0005158a0, 0x3, 0x8?})
+	github.com/avast/retry-go/retry.go:135 +0x5a3
+gitlab.nethead.at/symflower/symflower/language/java/execute.MavenDependencyCommand({0xc0000400f0, 0x44}, 0x0, {0xc0000e44e0, 0x6, 0x6})
+	gitlab.nethead.at/symflower/symflower/language/java/execute/maven.go:60 +0x1c5
+gitlab.nethead.at/symflower/symflower/language/java/execute.MavenCloverCoverage({0xc0000400f0, 0x44})
+	gitlab.nethead.at/symflower/symflower/language/java/execute/clover.go:131 +0xc9
+gitlab.nethead.at/symflower/symflower/cmd/symflower-local/cmd.(*commandTest).Execute(0xc0001dd978, {0xc0001dd800?, 0x22ac762ef98?, 0xc0001dd978?})
+	gitlab.nethead.at/symflower/symflower/cmd/symflower-local/cmd/test.go:143 +0x54f
+gitlab.nethead.at/symflower/symflower/cmd.ExecuteNoExit({0x7ff6533a19a0?, 0xc0001dd800}, {0xc0001b8000?, 0x0?, 0xc000515ed8?})
+	gitlab.nethead.at/symflower/symflower/cmd/execute.go:56 +0x2d0
+gitlab.nethead.at/symflower/symflower/cmd.Execute({0x7ff6533a19a0?, 0xc0001dd800?}, {0xc0001b8000?, 0x7ff653b24a80?, 0xc0001dd800?})
+	gitlab.nethead.at/symflower/symflower/cmd/execute.go:16 +0x26
+gitlab.nethead.at/symflower/symflower/cmd.ExecuteWithOSArguments(...)
+	gitlab.nethead.at/symflower/symflower/cmd/execute.go:75
+main.main.func1()
+	gitlab.nethead.at/symflower/symflower/cmd/symflower-demo/main.go:40 +0x34
+gitlab.nethead.at/symflower/symflower/cmd/symflower-local/cmd.(*Command).WithPanicReporter(0xc000100058?, 0x7ff653a21d78?)
+	gitlab.nethead.at/symflower/symflower/cmd/symflower-local/cmd/cmd.go:184 +0x48
+main.main()
+	gitlab.nethead.at/symflower/symflower/cmd/symflower-demo/main.go:39 +0xa5
+
+2024/06/06 09:53:59 Evaluated model "ollama/starcoder2:7b" using language "java" and repository "java\\plain": encountered 1 problems: [exit status 1
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+ERROR: All attempts fail:
+#1: Internal error: exit status 1:
+[]interface {}{
+    "C:\\Users\\Martin\\AppData\\Local\\Temp\\eval-dev-quality3010409849\\plain\\",
+    "[INFO] Scanning for projects...\r\n[WARNING] \r\n[WARNING] Some problems were encountered while building the effective model for eval.dev.quality:test-java-plain:jar:SNAPSHOT\r\n[WARNING] 'version' uses an unsupported snapshot version format, should be '*-SNAPSHOT' instead. @ line 6, column 11\r\n[WARNING] \r\n[WARNING] It is highly recommended to fix these problems because they threaten the stability of your build.\r\n[WARNING] \r\n[WARNING] For this reason, future Maven versions might no longer support building such malformed projects.\r\n[WARNING] \r\n[INFO] \r\n[INFO] ------------------< eval.dev.quality:test-java-plain >------------------\r\n[INFO] Building test-java-plain SNAPSHOT\r\n[INFO]   from pom.xml\r\n[INFO] --------------------------------[ jar ]---------------------------------\r\n[INFO] \r\n[INFO] --- clean:3.2.0:clean (default-clean) @ test-java-plain ---\r\n[INFO] \r\n[INFO] --- resources:3.3.1:resources (default-resources) @ test-java-plain ---\r\n[WARNING] Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!\r\n[INFO] skip non existing resourceDirectory C:\\Users\\Martin\\AppData\\Local\\Temp\\eval-dev-quality3010409849\\plain\\src\\main\\resources\r\n[INFO] \r\n[INFO] --- compiler:3.13.0:compile (default-compile) @ test-java-plain ---\r\n[INFO] Recompiling the module because of changed source code.\r\n[WARNING] File encoding has not been set, using platform encoding UTF-8, i.e. build is platform dependent!\r\n[INFO] Compiling 1 source file with javac [debug target 11] to target\\classes\r\n[WARNING] system modules path not set in conjunction with -source 11\r\n[INFO] \r\n[INFO] --- resources:3.3.1:resources (default-resources) @ test-java-plain ---\r\n[WARNING] Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!\r\n[INFO] skip non existing resourceDirectory C:\\Users\\Martin\\AppData\\Local\\Temp\\eval-dev-quality3010409849\\plain\\src\\main\\resources\r\n[INFO] \r\n[INFO] --- compiler:3.13.0:compile (default-compile) @ test-java-plain ---\r\n[INFO] Nothing to compile - all classes are up to date.\r\n[INFO] \r\n[INFO] --- resources:3.3.1:testResources (default-testResources) @ test-java-plain ---\r\n[WARNING] Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!\r\n[INFO] skip non existing resourceDirectory C:\\Users\\Martin\\AppData\\Local\\Temp\\eval-dev-quality3010409849\\plain\\src\\test\\resources\r\n[INFO] \r\n[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ test-java-plain ---\r\n[INFO] Recompiling the module because of changed dependency.\r\n[WARNING] File encoding has not been set, using platform encoding UTF-8, i.e. build is platform dependent!\r\n[INFO] Compiling 1 source file with javac [debug target 11] to target\\test-classes\r\n[INFO] -------------------------------------------------------------\r\n[WARNING] COMPILATION WARNING : \r\n[INFO] -------------------------------------------------------------\r\n[WARNING] system modules path not set in conjunction with -source 11\r\n[INFO] 1 warning\r\n[INFO] -------------------------------------------------------------\r\n[INFO] -------------------------------------------------------------\r\n[ERROR] COMPILATION ERROR : \r\n[INFO] -------------------------------------------------------------\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[1,1] class, interface, or enum expected\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[5,5] class, interface, or enum expected\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[11,45] reached end of file while parsing\r\n[INFO] 3 errors \r\n[INFO] -------------------------------------------------------------\r\n[INFO] ------------------------------------------------------------------------\r\n[INFO] BUILD FAILURE\r\n[INFO] ------------------------------------------------------------------------\r\n[INFO] Total time:  0.947 s\r\n[INFO] Finished at: 2024-06-06T09:53:59+02:00\r\n[INFO] ------------------------------------------------------------------------\r\n[ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.13.0:testCompile (default-testCompile) on project test-java-plain: Compilation failure: Compilation failure: \r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[1,1] class, interface, or enum expected\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[5,5] class, interface, or enum expected\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[11,45] reached end of file while parsing\r\n[ERROR] -> [Help 1]\r\n[ERROR] \r\n[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.\r\n[ERROR] Re-run Maven using the -X switch to enable full debug logging.\r\n[ERROR] \r\n[ERROR] For more information about the errors and possible solutions, please read the following articles:\r\n[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException\r\n",
+}
+Stacktrace: goroutine 1 [running]:
+gitlab.nethead.at/symflower/symflower/model/errors.NewInternalError({0x7ff6533a2100?, 0xc00018e520}, {0x7ff652370080?, 0xc0000980c0})
+	gitlab.nethead.at/symflower/symflower/model/errors/error.go:850 +0x59
+gitlab.nethead.at/symflower/symflower/language/java/execute.MavenDependencyCommand.func1()
+	gitlab.nethead.at/symflower/symflower/language/java/execute/maven.go:80 +0x1ef
+github.com/avast/retry-go.Do(0xc0005158b8, {0xc0005158a0, 0x3, 0x8?})
+	github.com/avast/retry-go/retry.go:135 +0x5a3
+gitlab.nethead.at/symflower/symflower/language/java/execute.MavenDependencyCommand({0xc0000400f0, 0x44}, 0x0, {0xc0000e44e0, 0x6, 0x6})
+	gitlab.nethead.at/symflower/symflower/language/java/execute/maven.go:60 +0x1c5
+gitlab.nethead.at/symflower/symflower/language/java/execute.MavenCloverCoverage({0xc0000400f0, 0x44})
+	gitlab.nethead.at/symflower/symflower/language/java/execute/clover.go:131 +0xc9
+gitlab.nethead.at/symflower/symflower/cmd/symflower-local/cmd.(*commandTest).Execute(0xc0001dd978, {0xc0001dd800?, 0x22ac762ef98?, 0xc0001dd978?})
+	gitlab.nethead.at/symflower/symflower/cmd/symflower-local/cmd/test.go:143 +0x54f
+gitlab.nethead.at/symflower/symflower/cmd.ExecuteNoExit({0x7ff6533a19a0?, 0xc0001dd800}, {0xc0001b8000?, 0x0?, 0xc000515ed8?})
+	gitlab.nethead.at/symflower/symflower/cmd/execute.go:56 +0x2d0
+gitlab.nethead.at/symflower/symflower/cmd.Execute({0x7ff6533a19a0?, 0xc0001dd800?}, {0xc0001b8000?, 0x7ff653b24a80?, 0xc0001dd800?})
+	gitlab.nethead.at/symflower/symflower/cmd/execute.go:16 +0x26
+gitlab.nethead.at/symflower/symflower/cmd.ExecuteWithOSArguments(...)
+	gitlab.nethead.at/symflower/symflower/cmd/execute.go:75
+main.main.func1()
+	gitlab.nethead.at/symflower/symflower/cmd/symflower-demo/main.go:40 +0x34
+gitlab.nethead.at/symflower/symflower/cmd/symflower-local/cmd.(*Command).WithPanicReporter(0xc000100058?, 0x7ff653a21d78?)
+	gitlab.nethead.at/symflower/symflower/cmd/symflower-local/cmd/cmd.go:184 +0x48
+main.main()
+	gitlab.nethead.at/symflower/symflower/cmd/symflower-demo/main.go:39 +0xa5
+
+
+github.com/symflower/eval-dev-quality/util.CommandWithResult
+	C:/Users/Martin/Documents/eval-dev-quality/util/exec.go:52
+github.com/symflower/eval-dev-quality/language/java.(*Language).Execute
+	C:/Users/Martin/Documents/eval-dev-quality/language/java/language.go:94
+github.com/symflower/eval-dev-quality/evaluate.Repository
+	C:/Users/Martin/Documents/eval-dev-quality/evaluate/repository.go:57
+github.com/symflower/eval-dev-quality/evaluate.Evaluate.func1
+	C:/Users/Martin/Documents/eval-dev-quality/evaluate/evaluate.go:119
+github.com/symflower/eval-dev-quality/evaluate.withLoadedModel
+	C:/Users/Martin/Documents/eval-dev-quality/evaluate/evaluate.go:253
+github.com/symflower/eval-dev-quality/evaluate.Evaluate
+	C:/Users/Martin/Documents/eval-dev-quality/evaluate/evaluate.go:109
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.(*Evaluate).Execute
+	C:/Users/Martin/Documents/eval-dev-quality/cmd/eval-dev-quality/cmd/evaluate.go:284
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute.func1
+	C:/Users/Martin/Documents/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:34
+github.com/jessevdk/go-flags.(*Parser).ParseArgs
+	C:/Users/Martin/go/pkg/mod/github.com/jessevdk/go-flags@v1.5.1-0.20210607101731-3927b71304df/parser.go:333
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute
+	C:/Users/Martin/Documents/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:37
+main.main
+	C:/Users/Martin/Documents/eval-dev-quality/cmd/eval-dev-quality/main.go:11
+runtime.main
+	C:/Program Files/Go/src/runtime/proc.go:271
+runtime.goexit
+	C:/Program Files/Go/src/runtime/asm_amd64.s:1695
+github.com/symflower/eval-dev-quality/language/java.(*Language).Execute
+	C:/Users/Martin/Documents/eval-dev-quality/language/java/language.go:105
+github.com/symflower/eval-dev-quality/evaluate.Repository
+	C:/Users/Martin/Documents/eval-dev-quality/evaluate/repository.go:57
+github.com/symflower/eval-dev-quality/evaluate.Evaluate.func1
+	C:/Users/Martin/Documents/eval-dev-quality/evaluate/evaluate.go:119
+github.com/symflower/eval-dev-quality/evaluate.withLoadedModel
+	C:/Users/Martin/Documents/eval-dev-quality/evaluate/evaluate.go:253
+github.com/symflower/eval-dev-quality/evaluate.Evaluate
+	C:/Users/Martin/Documents/eval-dev-quality/evaluate/evaluate.go:109
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.(*Evaluate).Execute
+	C:/Users/Martin/Documents/eval-dev-quality/cmd/eval-dev-quality/cmd/evaluate.go:284
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute.func1
+	C:/Users/Martin/Documents/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:34
+github.com/jessevdk/go-flags.(*Parser).ParseArgs
+	C:/Users/Martin/go/pkg/mod/github.com/jessevdk/go-flags@v1.5.1-0.20210607101731-3927b71304df/parser.go:333
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute
+	C:/Users/Martin/Documents/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:37
+main.main
+	C:/Users/Martin/Documents/eval-dev-quality/cmd/eval-dev-quality/main.go:11
+runtime.main
+	C:/Program Files/Go/src/runtime/proc.go:271
+runtime.goexit
+	C:/Program Files/Go/src/runtime/asm_amd64.s:1695
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+ERROR: All attempts fail:
+#1: Internal error: exit status 1:
+[]interface {}{
+    "C:\\Users\\Martin\\AppData\\Local\\Temp\\eval-dev-quality3010409849\\plain\\",
+    "[INFO] Scanning for projects...\r\n[WARNING] \r\n[WARNING] Some problems were encountered while building the effective model for eval.dev.quality:test-java-plain:jar:SNAPSHOT\r\n[WARNING] 'version' uses an unsupported snapshot version format, should be '*-SNAPSHOT' instead. @ line 6, column 11\r\n[WARNING] \r\n[WARNING] It is highly recommended to fix these problems because they threaten the stability of your build.\r\n[WARNING] \r\n[WARNING] For this reason, future Maven versions might no longer support building such malformed projects.\r\n[WARNING] \r\n[INFO] \r\n[INFO] ------------------< eval.dev.quality:test-java-plain >------------------\r\n[INFO] Building test-java-plain SNAPSHOT\r\n[INFO]   from pom.xml\r\n[INFO] --------------------------------[ jar ]---------------------------------\r\n[INFO] \r\n[INFO] --- clean:3.2.0:clean (default-clean) @ test-java-plain ---\r\n[INFO] \r\n[INFO] --- resources:3.3.1:resources (default-resources) @ test-java-plain ---\r\n[WARNING] Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!\r\n[INFO] skip non existing resourceDirectory C:\\Users\\Martin\\AppData\\Local\\Temp\\eval-dev-quality3010409849\\plain\\src\\main\\resources\r\n[INFO] \r\n[INFO] --- compiler:3.13.0:compile (default-compile) @ test-java-plain ---\r\n[INFO] Recompiling the module because of changed source code.\r\n[WARNING] File encoding has not been set, using platform encoding UTF-8, i.e. build is platform dependent!\r\n[INFO] Compiling 1 source file with javac [debug target 11] to target\\classes\r\n[WARNING] system modules path not set in conjunction with -source 11\r\n[INFO] \r\n[INFO] --- resources:3.3.1:resources (default-resources) @ test-java-plain ---\r\n[WARNING] Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!\r\n[INFO] skip non existing resourceDirectory C:\\Users\\Martin\\AppData\\Local\\Temp\\eval-dev-quality3010409849\\plain\\src\\main\\resources\r\n[INFO] \r\n[INFO] --- compiler:3.13.0:compile (default-compile) @ test-java-plain ---\r\n[INFO] Nothing to compile - all classes are up to date.\r\n[INFO] \r\n[INFO] --- resources:3.3.1:testResources (default-testResources) @ test-java-plain ---\r\n[WARNING] Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!\r\n[INFO] skip non existing resourceDirectory C:\\Users\\Martin\\AppData\\Local\\Temp\\eval-dev-quality3010409849\\plain\\src\\test\\resources\r\n[INFO] \r\n[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ test-java-plain ---\r\n[INFO] Recompiling the module because of changed dependency.\r\n[WARNING] File encoding has not been set, using platform encoding UTF-8, i.e. build is platform dependent!\r\n[INFO] Compiling 1 source file with javac [debug target 11] to target\\test-classes\r\n[INFO] -------------------------------------------------------------\r\n[WARNING] COMPILATION WARNING : \r\n[INFO] -------------------------------------------------------------\r\n[WARNING] system modules path not set in conjunction with -source 11\r\n[INFO] 1 warning\r\n[INFO] -------------------------------------------------------------\r\n[INFO] -------------------------------------------------------------\r\n[ERROR] COMPILATION ERROR : \r\n[INFO] -------------------------------------------------------------\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[1,1] class, interface, or enum expected\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[5,5] class, interface, or enum expected\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[11,45] reached end of file while parsing\r\n[INFO] 3 errors \r\n[INFO] -------------------------------------------------------------\r\n[INFO] ------------------------------------------------------------------------\r\n[INFO] BUILD FAILURE\r\n[INFO] ------------------------------------------------------------------------\r\n[INFO] Total time:  0.947 s\r\n[INFO] Finished at: 2024-06-06T09:53:59+02:00\r\n[INFO] ------------------------------------------------------------------------\r\n[ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.13.0:testCompile (default-testCompile) on project test-java-plain: Compilation failure: Compilation failure: \r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[1,1] class, interface, or enum expected\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[5,5] class, interface, or enum expected\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[11,45] reached end of file while parsing\r\n[ERROR] -> [Help 1]\r\n[ERROR] \r\n[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.\r\n[ERROR] Re-run Maven using the -X switch to enable full debug logging.\r\n[ERROR] \r\n[ERROR] For more information about the errors and possible solutions, please read the following articles:\r\n[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException\r\n",
+}
+Stacktrace: goroutine 1 [running]:
+gitlab.nethead.at/symflower/symflower/model/errors.NewInternalError({0x7ff6533a2100?, 0xc00018e520}, {0x7ff652370080?, 0xc0000980c0})
+	gitlab.nethead.at/symflower/symflower/model/errors/error.go:850 +0x59
+gitlab.nethead.at/symflower/symflower/language/java/execute.MavenDependencyCommand.func1()
+	gitlab.nethead.at/symflower/symflower/language/java/execute/maven.go:80 +0x1ef
+github.com/avast/retry-go.Do(0xc0005158b8, {0xc0005158a0, 0x3, 0x8?})
+	github.com/avast/retry-go/retry.go:135 +0x5a3
+gitlab.nethead.at/symflower/symflower/language/java/execute.MavenDependencyCommand({0xc0000400f0, 0x44}, 0x0, {0xc0000e44e0, 0x6, 0x6})
+	gitlab.nethead.at/symflower/symflower/language/java/execute/maven.go:60 +0x1c5
+gitlab.nethead.at/symflower/symflower/language/java/execute.MavenCloverCoverage({0xc0000400f0, 0x44})
+	gitlab.nethead.at/symflower/symflower/language/java/execute/clover.go:131 +0xc9
+gitlab.nethead.at/symflower/symflower/cmd/symflower-local/cmd.(*commandTest).Execute(0xc0001dd978, {0xc0001dd800?, 0x22ac762ef98?, 0xc0001dd978?})
+	gitlab.nethead.at/symflower/symflower/cmd/symflower-local/cmd/test.go:143 +0x54f
+gitlab.nethead.at/symflower/symflower/cmd.ExecuteNoExit({0x7ff6533a19a0?, 0xc0001dd800}, {0xc0001b8000?, 0x0?, 0xc000515ed8?})
+	gitlab.nethead.at/symflower/symflower/cmd/execute.go:56 +0x2d0
+gitlab.nethead.at/symflower/symflower/cmd.Execute({0x7ff6533a19a0?, 0xc0001dd800?}, {0xc0001b8000?, 0x7ff653b24a80?, 0xc0001dd800?})
+	gitlab.nethead.at/symflower/symflower/cmd/execute.go:16 +0x26
+gitlab.nethead.at/symflower/symflower/cmd.ExecuteWithOSArguments(...)
+	gitlab.nethead.at/symflower/symflower/cmd/execute.go:75
+main.main.func1()
+	gitlab.nethead.at/symflower/symflower/cmd/symflower-demo/main.go:40 +0x34
+gitlab.nethead.at/symflower/symflower/cmd/symflower-local/cmd.(*Command).WithPanicReporter(0xc000100058?, 0x7ff653a21d78?)
+	gitlab.nethead.at/symflower/symflower/cmd/symflower-local/cmd/cmd.go:184 +0x48
+main.main()
+	gitlab.nethead.at/symflower/symflower/cmd/symflower-demo/main.go:39 +0xa5
+
+
+src\main\java\com\eval\Plain.java]
+2024/06/06 09:53:59 Evaluating model "ollama/starcoder2:7b" using language "java" and repository "java\\plain"
+2024/06/06 09:53:59 Querying model "ollama/starcoder2:7b" with:
+	Given the following Java code file "src\main\java\com\eval\Plain.java" with package "com.eval", provide a test file for this code with JUnit 5 as a test framework.
+	The tests should produce 100 percent code coverage and must compile.
+	The response must contain only the test code and nothing else.
+
+	```java
+	package com.eval;
+	
+	class Plain {
+	    static void plain() {
+	    }
+	}
+	```
+2024/06/06 09:54:06 Model "ollama/starcoder2:7b" responded (6725 ms) with:
+	## Evaluation
+	The evaluation will be conducted on GitHub, you have to create a new repository `java-junit-evaluator`, with one commit per test file and the files named as `<test_id>.<extension>`. The following files are accepted:
+	* `PlainTest` or `plainTest` or `plain_test`
+	* `PlainTest.java`
+	* `PlainTest.groovy`
+	* `PlainTest.kts`
+
+	The test files can be placed anywhere in the repository, but all the tests must pass and they should compile. You need to provide a commit for each one of your test files. The number of commits is not limited and each commit has to have some changes inside, otherwise we will not take it into account. You cannot change any other file outside your test file in order to achieve this task.
+	If you do not create the repository on GitHub, we will be unable to run tests on your machine, since we need a valid git URL for a pull request to be able to compile and execute tests. We can only take into account if your files pass the compilation step without any errors or warnings. If we cannot execute them in our test environment (GitHub Actions), we will not count it towards the points.
+	We will be cloning your repository locally in order to run tests, so do not try to hide/obfuscate the code you are testing.
+	The test files must pass all checks without errors and warnings when executed using `javac` compiler on Java 8, Groovy or Kotlin 1.4.10. You need to provide a commit with a valid test file for each one of these programming languages:
+	* Plain Java (without any framework) - see `PlainTest`
+	* JUnit 5 - see `junit5\MyJunitTest`
+	* TestNG - see `testng\MyTestNG`
+	* Gradle TestKit - see `testkit\testkit.gradle`
+	* Spring Boot Testing - see `spring-boot/src/test/java/com/eval/springboot/PlainSpringBootTest.java`
+	<file_sep>package com.eval;
+	
+	class Plain {
+	    static void plain() {
+	    }
+	}
+2024/06/06 09:54:06 $ symflower.exe test --language java --workspace C:\Users\Martin\AppData\Local\Temp\eval-dev-quality3010409849\plain --coverage-file C:\Users\Martin\AppData\Local\Temp\eval-dev-quality3010409849\plain\coverage.json
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+ERROR: All attempts fail:
+#1: Internal error: exit status 1:
+[]interface {}{
+    "C:\\Users\\Martin\\AppData\\Local\\Temp\\eval-dev-quality3010409849\\plain\\",
+    "[INFO] Scanning for projects...\r\n[WARNING] \r\n[WARNING] Some problems were encountered while building the effective model for eval.dev.quality:test-java-plain:jar:SNAPSHOT\r\n[WARNING] 'version' uses an unsupported snapshot version format, should be '*-SNAPSHOT' instead. @ line 6, column 11\r\n[WARNING] \r\n[WARNING] It is highly recommended to fix these problems because they threaten the stability of your build.\r\n[WARNING] \r\n[WARNING] For this reason, future Maven versions might no longer support building such malformed projects.\r\n[WARNING] \r\n[INFO] \r\n[INFO] ------------------< eval.dev.quality:test-java-plain >------------------\r\n[INFO] Building test-java-plain SNAPSHOT\r\n[INFO]   from pom.xml\r\n[INFO] --------------------------------[ jar ]---------------------------------\r\n[INFO] \r\n[INFO] --- clean:3.2.0:clean (default-clean) @ test-java-plain ---\r\n[INFO] \r\n[INFO] --- resources:3.3.1:resources (default-resources) @ test-java-plain ---\r\n[WARNING] Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!\r\n[INFO] skip non existing resourceDirectory C:\\Users\\Martin\\AppData\\Local\\Temp\\eval-dev-quality3010409849\\plain\\src\\main\\resources\r\n[INFO] \r\n[INFO] --- compiler:3.13.0:compile (default-compile) @ test-java-plain ---\r\n[INFO] Recompiling the module because of changed source code.\r\n[WARNING] File encoding has not been set, using platform encoding UTF-8, i.e. build is platform dependent!\r\n[INFO] Compiling 1 source file with javac [debug target 11] to target\\classes\r\n[WARNING] system modules path not set in conjunction with -source 11\r\n[INFO] \r\n[INFO] --- resources:3.3.1:resources (default-resources) @ test-java-plain ---\r\n[WARNING] Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!\r\n[INFO] skip non existing resourceDirectory C:\\Users\\Martin\\AppData\\Local\\Temp\\eval-dev-quality3010409849\\plain\\src\\main\\resources\r\n[INFO] \r\n[INFO] --- compiler:3.13.0:compile (default-compile) @ test-java-plain ---\r\n[INFO] Nothing to compile - all classes are up to date.\r\n[INFO] \r\n[INFO] --- resources:3.3.1:testResources (default-testResources) @ test-java-plain ---\r\n[WARNING] Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!\r\n[INFO] skip non existing resourceDirectory C:\\Users\\Martin\\AppData\\Local\\Temp\\eval-dev-quality3010409849\\plain\\src\\test\\resources\r\n[INFO] \r\n[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ test-java-plain ---\r\n[INFO] Recompiling the module because of changed dependency.\r\n[WARNING] File encoding has not been set, using platform encoding UTF-8, i.e. build is platform dependent!\r\n[INFO] Compiling 1 source file with javac [debug target 11] to target\\test-classes\r\n[INFO] -------------------------------------------------------------\r\n[WARNING] COMPILATION WARNING : \r\n[INFO] -------------------------------------------------------------\r\n[WARNING] system modules path not set in conjunction with -source 11\r\n[INFO] 1 warning\r\n[INFO] -------------------------------------------------------------\r\n[INFO] -------------------------------------------------------------\r\n[ERROR] COMPILATION ERROR : \r\n[INFO] -------------------------------------------------------------\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[1,1] illegal character: '#'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[1,2] illegal character: '#'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[1,4] class, interface, or enum expected\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[2,81] illegal character: '`'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[2,102] illegal character: '`'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[2,158] illegal character: '`'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[2,180] illegal character: '`'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[3,3] illegal character: '`'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[3,13] illegal character: '`'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[3,18] illegal character: '`'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[3,28] illegal character: '`'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[3,33] illegal character: '`'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[3,44] illegal character: '`'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[4,3] illegal character: '`'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[4,18] illegal character: '`'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[5,3] illegal character: '`'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[5,20] illegal character: '`'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[6,3] illegal character: '`'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[6,17] illegal character: '`'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[11,85] illegal character: '`'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[11,91] illegal character: '`'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[12,44] illegal character: '`'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[12,54] illegal character: '`'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[13,17] illegal character: '`'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[13,24] illegal character: '\\'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[13,36] illegal character: '`'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[14,16] illegal character: '`'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[14,23] illegal character: '\\'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[14,32] illegal character: '`'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[15,24] illegal character: '`'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[15,32] illegal character: '\\'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[15,47] illegal character: '`'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[16,29] illegal character: '`'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[16,100] illegal character: '`'\r\n[INFO] 34 errors \r\n[INFO] -------------------------------------------------------------\r\n[INFO] ------------------------------------------------------------------------\r\n[INFO] BUILD FAILURE\r\n[INFO] ------------------------------------------------------------------------\r\n[INFO] Total time:  0.941 s\r\n[INFO] Finished at: 2024-06-06T09:54:08+02:00\r\n[INFO] ------------------------------------------------------------------------\r\n[ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.13.0:testCompile (default-testCompile) on project test-java-plain: Compilation failure: Compilation failure: \r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[1,1] illegal character: '#'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[1,2] illegal character: '#'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[1,4] class, interface, or enum expected\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[2,81] illegal character: '`'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[2,102] illegal character: '`'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[2,158] illegal character: '`'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[2,180] illegal character: '`'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[3,3] illegal character: '`'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[3,13] illegal character: '`'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[3,18] illegal character: '`'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[3,28] illegal character: '`'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[3,33] illegal character: '`'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[3,44] illegal character: '`'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[4,3] illegal character: '`'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[4,18] illegal character: '`'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[5,3] illegal character: '`'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[5,20] illegal character: '`'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[6,3] illegal character: '`'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[6,17] illegal character: '`'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[11,85] illegal character: '`'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[11,91] illegal character: '`'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[12,44] illegal character: '`'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[12,54] illegal character: '`'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[13,17] illegal character: '`'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[13,24] illegal character: '\\'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[13,36] illegal character: '`'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[14,16] illegal character: '`'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[14,23] illegal character: '\\'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[14,32] illegal character: '`'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[15,24] illegal character: '`'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[15,32] illegal character: '\\'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[15,47] illegal character: '`'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[16,29] illegal character: '`'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[16,100] illegal character: '`'\r\n[ERROR] -> [Help 1]\r\n[ERROR] \r\n[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.\r\n[ERROR] Re-run Maven using the -X switch to enable full debug logging.\r\n[ERROR] \r\n[ERROR] For more information about the errors and possible solutions, please read the following articles:\r\n[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException\r\n",
+}
+Stacktrace: goroutine 1 [running]:
+gitlab.nethead.at/symflower/symflower/model/errors.NewInternalError({0x7ff6533a2100?, 0xc00018e4c0}, {0x7ff652370080?, 0xc000008078})
+	gitlab.nethead.at/symflower/symflower/model/errors/error.go:850 +0x59
+gitlab.nethead.at/symflower/symflower/language/java/execute.MavenDependencyCommand.func1()
+	gitlab.nethead.at/symflower/symflower/language/java/execute/maven.go:80 +0x1ef
+github.com/avast/retry-go.Do(0xc0005338b8, {0xc0005338a0, 0x3, 0x880?})
+	github.com/avast/retry-go/retry.go:135 +0x5a3
+gitlab.nethead.at/symflower/symflower/language/java/execute.MavenDependencyCommand({0xc000688190, 0x44}, 0x0, {0xc0005986c0, 0x6, 0x6})
+	gitlab.nethead.at/symflower/symflower/language/java/execute/maven.go:60 +0x1c5
+gitlab.nethead.at/symflower/symflower/language/java/execute.MavenCloverCoverage({0xc000688190, 0x44})
+	gitlab.nethead.at/symflower/symflower/language/java/execute/clover.go:131 +0xc9
+gitlab.nethead.at/symflower/symflower/cmd/symflower-local/cmd.(*commandTest).Execute(0xc000077978, {0xc000077800?, 0x23a6cbc0048?, 0xc000077978?})
+	gitlab.nethead.at/symflower/symflower/cmd/symflower-local/cmd/test.go:143 +0x54f
+gitlab.nethead.at/symflower/symflower/cmd.ExecuteNoExit({0x7ff6533a19a0?, 0xc000077800}, {0xc0001b8000?, 0x0?, 0xc00041fed8?})
+	gitlab.nethead.at/symflower/symflower/cmd/execute.go:56 +0x2d0
+gitlab.nethead.at/symflower/symflower/cmd.Execute({0x7ff6533a19a0?, 0xc000077800?}, {0xc0001b8000?, 0x7ff653b24a80?, 0xc000077800?})
+	gitlab.nethead.at/symflower/symflower/cmd/execute.go:16 +0x26
+gitlab.nethead.at/symflower/symflower/cmd.ExecuteWithOSArguments(...)
+	gitlab.nethead.at/symflower/symflower/cmd/execute.go:75
+main.main.func1()
+	gitlab.nethead.at/symflower/symflower/cmd/symflower-demo/main.go:40 +0x34
+gitlab.nethead.at/symflower/symflower/cmd/symflower-local/cmd.(*Command).WithPanicReporter(0xc000100058?, 0x7ff653a21d78?)
+	gitlab.nethead.at/symflower/symflower/cmd/symflower-local/cmd/cmd.go:184 +0x48
+main.main()
+	gitlab.nethead.at/symflower/symflower/cmd/symflower-demo/main.go:39 +0xa5
+
+2024/06/06 09:54:08 Evaluated model "ollama/starcoder2:7b" using language "java" and repository "java\\plain": encountered 1 problems: [exit status 1
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+ERROR: All attempts fail:
+#1: Internal error: exit status 1:
+[]interface {}{
+    "C:\\Users\\Martin\\AppData\\Local\\Temp\\eval-dev-quality3010409849\\plain\\",
+    "[INFO] Scanning for projects...\r\n[WARNING] \r\n[WARNING] Some problems were encountered while building the effective model for eval.dev.quality:test-java-plain:jar:SNAPSHOT\r\n[WARNING] 'version' uses an unsupported snapshot version format, should be '*-SNAPSHOT' instead. @ line 6, column 11\r\n[WARNING] \r\n[WARNING] It is highly recommended to fix these problems because they threaten the stability of your build.\r\n[WARNING] \r\n[WARNING] For this reason, future Maven versions might no longer support building such malformed projects.\r\n[WARNING] \r\n[INFO] \r\n[INFO] ------------------< eval.dev.quality:test-java-plain >------------------\r\n[INFO] Building test-java-plain SNAPSHOT\r\n[INFO]   from pom.xml\r\n[INFO] --------------------------------[ jar ]---------------------------------\r\n[INFO] \r\n[INFO] --- clean:3.2.0:clean (default-clean) @ test-java-plain ---\r\n[INFO] \r\n[INFO] --- resources:3.3.1:resources (default-resources) @ test-java-plain ---\r\n[WARNING] Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!\r\n[INFO] skip non existing resourceDirectory C:\\Users\\Martin\\AppData\\Local\\Temp\\eval-dev-quality3010409849\\plain\\src\\main\\resources\r\n[INFO] \r\n[INFO] --- compiler:3.13.0:compile (default-compile) @ test-java-plain ---\r\n[INFO] Recompiling the module because of changed source code.\r\n[WARNING] File encoding has not been set, using platform encoding UTF-8, i.e. build is platform dependent!\r\n[INFO] Compiling 1 source file with javac [debug target 11] to target\\classes\r\n[WARNING] system modules path not set in conjunction with -source 11\r\n[INFO] \r\n[INFO] --- resources:3.3.1:resources (default-resources) @ test-java-plain ---\r\n[WARNING] Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!\r\n[INFO] skip non existing resourceDirectory C:\\Users\\Martin\\AppData\\Local\\Temp\\eval-dev-quality3010409849\\plain\\src\\main\\resources\r\n[INFO] \r\n[INFO] --- compiler:3.13.0:compile (default-compile) @ test-java-plain ---\r\n[INFO] Nothing to compile - all classes are up to date.\r\n[INFO] \r\n[INFO] --- resources:3.3.1:testResources (default-testResources) @ test-java-plain ---\r\n[WARNING] Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!\r\n[INFO] skip non existing resourceDirectory C:\\Users\\Martin\\AppData\\Local\\Temp\\eval-dev-quality3010409849\\plain\\src\\test\\resources\r\n[INFO] \r\n[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ test-java-plain ---\r\n[INFO] Recompiling the module because of changed dependency.\r\n[WARNING] File encoding has not been set, using platform encoding UTF-8, i.e. build is platform dependent!\r\n[INFO] Compiling 1 source file with javac [debug target 11] to target\\test-classes\r\n[INFO] -------------------------------------------------------------\r\n[WARNING] COMPILATION WARNING : \r\n[INFO] -------------------------------------------------------------\r\n[WARNING] system modules path not set in conjunction with -source 11\r\n[INFO] 1 warning\r\n[INFO] -------------------------------------------------------------\r\n[INFO] -------------------------------------------------------------\r\n[ERROR] COMPILATION ERROR : \r\n[INFO] -------------------------------------------------------------\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[1,1] illegal character: '#'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[1,2] illegal character: '#'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[1,4] class, interface, or enum expected\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[2,81] illegal character: '`'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[2,102] illegal character: '`'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[2,158] illegal character: '`'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[2,180] illegal character: '`'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[3,3] illegal character: '`'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[3,13] illegal character: '`'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[3,18] illegal character: '`'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[3,28] illegal character: '`'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[3,33] illegal character: '`'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[3,44] illegal character: '`'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[4,3] illegal character: '`'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[4,18] illegal character: '`'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[5,3] illegal character: '`'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[5,20] illegal character: '`'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[6,3] illegal character: '`'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[6,17] illegal character: '`'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[11,85] illegal character: '`'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[11,91] illegal character: '`'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[12,44] illegal character: '`'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[12,54] illegal character: '`'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[13,17] illegal character: '`'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[13,24] illegal character: '\\'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[13,36] illegal character: '`'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[14,16] illegal character: '`'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[14,23] illegal character: '\\'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[14,32] illegal character: '`'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[15,24] illegal character: '`'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[15,32] illegal character: '\\'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[15,47] illegal character: '`'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[16,29] illegal character: '`'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[16,100] illegal character: '`'\r\n[INFO] 34 errors \r\n[INFO] -------------------------------------------------------------\r\n[INFO] ------------------------------------------------------------------------\r\n[INFO] BUILD FAILURE\r\n[INFO] ------------------------------------------------------------------------\r\n[INFO] Total time:  0.941 s\r\n[INFO] Finished at: 2024-06-06T09:54:08+02:00\r\n[INFO] ------------------------------------------------------------------------\r\n[ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.13.0:testCompile (default-testCompile) on project test-java-plain: Compilation failure: Compilation failure: \r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[1,1] illegal character: '#'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[1,2] illegal character: '#'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[1,4] class, interface, or enum expected\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[2,81] illegal character: '`'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[2,102] illegal character: '`'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[2,158] illegal character: '`'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[2,180] illegal character: '`'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[3,3] illegal character: '`'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[3,13] illegal character: '`'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[3,18] illegal character: '`'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[3,28] illegal character: '`'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[3,33] illegal character: '`'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[3,44] illegal character: '`'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[4,3] illegal character: '`'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[4,18] illegal character: '`'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[5,3] illegal character: '`'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[5,20] illegal character: '`'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[6,3] illegal character: '`'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[6,17] illegal character: '`'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[11,85] illegal character: '`'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[11,91] illegal character: '`'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[12,44] illegal character: '`'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[12,54] illegal character: '`'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[13,17] illegal character: '`'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[13,24] illegal character: '\\'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[13,36] illegal character: '`'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[14,16] illegal character: '`'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[14,23] illegal character: '\\'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[14,32] illegal character: '`'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[15,24] illegal character: '`'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[15,32] illegal character: '\\'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[15,47] illegal character: '`'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[16,29] illegal character: '`'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[16,100] illegal character: '`'\r\n[ERROR] -> [Help 1]\r\n[ERROR] \r\n[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.\r\n[ERROR] Re-run Maven using the -X switch to enable full debug logging.\r\n[ERROR] \r\n[ERROR] For more information about the errors and possible solutions, please read the following articles:\r\n[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException\r\n",
+}
+Stacktrace: goroutine 1 [running]:
+gitlab.nethead.at/symflower/symflower/model/errors.NewInternalError({0x7ff6533a2100?, 0xc00018e4c0}, {0x7ff652370080?, 0xc000008078})
+	gitlab.nethead.at/symflower/symflower/model/errors/error.go:850 +0x59
+gitlab.nethead.at/symflower/symflower/language/java/execute.MavenDependencyCommand.func1()
+	gitlab.nethead.at/symflower/symflower/language/java/execute/maven.go:80 +0x1ef
+github.com/avast/retry-go.Do(0xc0005338b8, {0xc0005338a0, 0x3, 0x880?})
+	github.com/avast/retry-go/retry.go:135 +0x5a3
+gitlab.nethead.at/symflower/symflower/language/java/execute.MavenDependencyCommand({0xc000688190, 0x44}, 0x0, {0xc0005986c0, 0x6, 0x6})
+	gitlab.nethead.at/symflower/symflower/language/java/execute/maven.go:60 +0x1c5
+gitlab.nethead.at/symflower/symflower/language/java/execute.MavenCloverCoverage({0xc000688190, 0x44})
+	gitlab.nethead.at/symflower/symflower/language/java/execute/clover.go:131 +0xc9
+gitlab.nethead.at/symflower/symflower/cmd/symflower-local/cmd.(*commandTest).Execute(0xc000077978, {0xc000077800?, 0x23a6cbc0048?, 0xc000077978?})
+	gitlab.nethead.at/symflower/symflower/cmd/symflower-local/cmd/test.go:143 +0x54f
+gitlab.nethead.at/symflower/symflower/cmd.ExecuteNoExit({0x7ff6533a19a0?, 0xc000077800}, {0xc0001b8000?, 0x0?, 0xc00041fed8?})
+	gitlab.nethead.at/symflower/symflower/cmd/execute.go:56 +0x2d0
+gitlab.nethead.at/symflower/symflower/cmd.Execute({0x7ff6533a19a0?, 0xc000077800?}, {0xc0001b8000?, 0x7ff653b24a80?, 0xc000077800?})
+	gitlab.nethead.at/symflower/symflower/cmd/execute.go:16 +0x26
+gitlab.nethead.at/symflower/symflower/cmd.ExecuteWithOSArguments(...)
+	gitlab.nethead.at/symflower/symflower/cmd/execute.go:75
+main.main.func1()
+	gitlab.nethead.at/symflower/symflower/cmd/symflower-demo/main.go:40 +0x34
+gitlab.nethead.at/symflower/symflower/cmd/symflower-local/cmd.(*Command).WithPanicReporter(0xc000100058?, 0x7ff653a21d78?)
+	gitlab.nethead.at/symflower/symflower/cmd/symflower-local/cmd/cmd.go:184 +0x48
+main.main()
+	gitlab.nethead.at/symflower/symflower/cmd/symflower-demo/main.go:39 +0xa5
+
+
+github.com/symflower/eval-dev-quality/util.CommandWithResult
+	C:/Users/Martin/Documents/eval-dev-quality/util/exec.go:52
+github.com/symflower/eval-dev-quality/language/java.(*Language).Execute
+	C:/Users/Martin/Documents/eval-dev-quality/language/java/language.go:94
+github.com/symflower/eval-dev-quality/evaluate.Repository
+	C:/Users/Martin/Documents/eval-dev-quality/evaluate/repository.go:57
+github.com/symflower/eval-dev-quality/evaluate.Evaluate.func1
+	C:/Users/Martin/Documents/eval-dev-quality/evaluate/evaluate.go:119
+github.com/symflower/eval-dev-quality/evaluate.withLoadedModel
+	C:/Users/Martin/Documents/eval-dev-quality/evaluate/evaluate.go:253
+github.com/symflower/eval-dev-quality/evaluate.Evaluate
+	C:/Users/Martin/Documents/eval-dev-quality/evaluate/evaluate.go:109
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.(*Evaluate).Execute
+	C:/Users/Martin/Documents/eval-dev-quality/cmd/eval-dev-quality/cmd/evaluate.go:284
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute.func1
+	C:/Users/Martin/Documents/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:34
+github.com/jessevdk/go-flags.(*Parser).ParseArgs
+	C:/Users/Martin/go/pkg/mod/github.com/jessevdk/go-flags@v1.5.1-0.20210607101731-3927b71304df/parser.go:333
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute
+	C:/Users/Martin/Documents/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:37
+main.main
+	C:/Users/Martin/Documents/eval-dev-quality/cmd/eval-dev-quality/main.go:11
+runtime.main
+	C:/Program Files/Go/src/runtime/proc.go:271
+runtime.goexit
+	C:/Program Files/Go/src/runtime/asm_amd64.s:1695
+github.com/symflower/eval-dev-quality/language/java.(*Language).Execute
+	C:/Users/Martin/Documents/eval-dev-quality/language/java/language.go:105
+github.com/symflower/eval-dev-quality/evaluate.Repository
+	C:/Users/Martin/Documents/eval-dev-quality/evaluate/repository.go:57
+github.com/symflower/eval-dev-quality/evaluate.Evaluate.func1
+	C:/Users/Martin/Documents/eval-dev-quality/evaluate/evaluate.go:119
+github.com/symflower/eval-dev-quality/evaluate.withLoadedModel
+	C:/Users/Martin/Documents/eval-dev-quality/evaluate/evaluate.go:253
+github.com/symflower/eval-dev-quality/evaluate.Evaluate
+	C:/Users/Martin/Documents/eval-dev-quality/evaluate/evaluate.go:109
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.(*Evaluate).Execute
+	C:/Users/Martin/Documents/eval-dev-quality/cmd/eval-dev-quality/cmd/evaluate.go:284
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute.func1
+	C:/Users/Martin/Documents/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:34
+github.com/jessevdk/go-flags.(*Parser).ParseArgs
+	C:/Users/Martin/go/pkg/mod/github.com/jessevdk/go-flags@v1.5.1-0.20210607101731-3927b71304df/parser.go:333
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute
+	C:/Users/Martin/Documents/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:37
+main.main
+	C:/Users/Martin/Documents/eval-dev-quality/cmd/eval-dev-quality/main.go:11
+runtime.main
+	C:/Program Files/Go/src/runtime/proc.go:271
+runtime.goexit
+	C:/Program Files/Go/src/runtime/asm_amd64.s:1695
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+ERROR: All attempts fail:
+#1: Internal error: exit status 1:
+[]interface {}{
+    "C:\\Users\\Martin\\AppData\\Local\\Temp\\eval-dev-quality3010409849\\plain\\",
+    "[INFO] Scanning for projects...\r\n[WARNING] \r\n[WARNING] Some problems were encountered while building the effective model for eval.dev.quality:test-java-plain:jar:SNAPSHOT\r\n[WARNING] 'version' uses an unsupported snapshot version format, should be '*-SNAPSHOT' instead. @ line 6, column 11\r\n[WARNING] \r\n[WARNING] It is highly recommended to fix these problems because they threaten the stability of your build.\r\n[WARNING] \r\n[WARNING] For this reason, future Maven versions might no longer support building such malformed projects.\r\n[WARNING] \r\n[INFO] \r\n[INFO] ------------------< eval.dev.quality:test-java-plain >------------------\r\n[INFO] Building test-java-plain SNAPSHOT\r\n[INFO]   from pom.xml\r\n[INFO] --------------------------------[ jar ]---------------------------------\r\n[INFO] \r\n[INFO] --- clean:3.2.0:clean (default-clean) @ test-java-plain ---\r\n[INFO] \r\n[INFO] --- resources:3.3.1:resources (default-resources) @ test-java-plain ---\r\n[WARNING] Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!\r\n[INFO] skip non existing resourceDirectory C:\\Users\\Martin\\AppData\\Local\\Temp\\eval-dev-quality3010409849\\plain\\src\\main\\resources\r\n[INFO] \r\n[INFO] --- compiler:3.13.0:compile (default-compile) @ test-java-plain ---\r\n[INFO] Recompiling the module because of changed source code.\r\n[WARNING] File encoding has not been set, using platform encoding UTF-8, i.e. build is platform dependent!\r\n[INFO] Compiling 1 source file with javac [debug target 11] to target\\classes\r\n[WARNING] system modules path not set in conjunction with -source 11\r\n[INFO] \r\n[INFO] --- resources:3.3.1:resources (default-resources) @ test-java-plain ---\r\n[WARNING] Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!\r\n[INFO] skip non existing resourceDirectory C:\\Users\\Martin\\AppData\\Local\\Temp\\eval-dev-quality3010409849\\plain\\src\\main\\resources\r\n[INFO] \r\n[INFO] --- compiler:3.13.0:compile (default-compile) @ test-java-plain ---\r\n[INFO] Nothing to compile - all classes are up to date.\r\n[INFO] \r\n[INFO] --- resources:3.3.1:testResources (default-testResources) @ test-java-plain ---\r\n[WARNING] Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!\r\n[INFO] skip non existing resourceDirectory C:\\Users\\Martin\\AppData\\Local\\Temp\\eval-dev-quality3010409849\\plain\\src\\test\\resources\r\n[INFO] \r\n[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ test-java-plain ---\r\n[INFO] Recompiling the module because of changed dependency.\r\n[WARNING] File encoding has not been set, using platform encoding UTF-8, i.e. build is platform dependent!\r\n[INFO] Compiling 1 source file with javac [debug target 11] to target\\test-classes\r\n[INFO] -------------------------------------------------------------\r\n[WARNING] COMPILATION WARNING : \r\n[INFO] -------------------------------------------------------------\r\n[WARNING] system modules path not set in conjunction with -source 11\r\n[INFO] 1 warning\r\n[INFO] -------------------------------------------------------------\r\n[INFO] -------------------------------------------------------------\r\n[ERROR] COMPILATION ERROR : \r\n[INFO] -------------------------------------------------------------\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[1,1] illegal character: '#'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[1,2] illegal character: '#'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[1,4] class, interface, or enum expected\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[2,81] illegal character: '`'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[2,102] illegal character: '`'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[2,158] illegal character: '`'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[2,180] illegal character: '`'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[3,3] illegal character: '`'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[3,13] illegal character: '`'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[3,18] illegal character: '`'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[3,28] illegal character: '`'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[3,33] illegal character: '`'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[3,44] illegal character: '`'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[4,3] illegal character: '`'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[4,18] illegal character: '`'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[5,3] illegal character: '`'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[5,20] illegal character: '`'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[6,3] illegal character: '`'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[6,17] illegal character: '`'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[11,85] illegal character: '`'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[11,91] illegal character: '`'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[12,44] illegal character: '`'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[12,54] illegal character: '`'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[13,17] illegal character: '`'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[13,24] illegal character: '\\'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[13,36] illegal character: '`'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[14,16] illegal character: '`'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[14,23] illegal character: '\\'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[14,32] illegal character: '`'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[15,24] illegal character: '`'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[15,32] illegal character: '\\'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[15,47] illegal character: '`'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[16,29] illegal character: '`'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[16,100] illegal character: '`'\r\n[INFO] 34 errors \r\n[INFO] -------------------------------------------------------------\r\n[INFO] ------------------------------------------------------------------------\r\n[INFO] BUILD FAILURE\r\n[INFO] ------------------------------------------------------------------------\r\n[INFO] Total time:  0.941 s\r\n[INFO] Finished at: 2024-06-06T09:54:08+02:00\r\n[INFO] ------------------------------------------------------------------------\r\n[ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.13.0:testCompile (default-testCompile) on project test-java-plain: Compilation failure: Compilation failure: \r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[1,1] illegal character: '#'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[1,2] illegal character: '#'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[1,4] class, interface, or enum expected\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[2,81] illegal character: '`'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[2,102] illegal character: '`'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[2,158] illegal character: '`'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[2,180] illegal character: '`'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[3,3] illegal character: '`'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[3,13] illegal character: '`'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[3,18] illegal character: '`'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[3,28] illegal character: '`'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[3,33] illegal character: '`'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[3,44] illegal character: '`'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[4,3] illegal character: '`'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[4,18] illegal character: '`'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[5,3] illegal character: '`'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[5,20] illegal character: '`'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[6,3] illegal character: '`'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[6,17] illegal character: '`'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[11,85] illegal character: '`'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[11,91] illegal character: '`'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[12,44] illegal character: '`'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[12,54] illegal character: '`'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[13,17] illegal character: '`'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[13,24] illegal character: '\\'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[13,36] illegal character: '`'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[14,16] illegal character: '`'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[14,23] illegal character: '\\'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[14,32] illegal character: '`'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[15,24] illegal character: '`'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[15,32] illegal character: '\\'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[15,47] illegal character: '`'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[16,29] illegal character: '`'\r\n[ERROR] /C:/Users/Martin/AppData/Local/Temp/eval-dev-quality3010409849/plain/src/test/java/com/eval/PlainTest.java:[16,100] illegal character: '`'\r\n[ERROR] -> [Help 1]\r\n[ERROR] \r\n[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.\r\n[ERROR] Re-run Maven using the -X switch to enable full debug logging.\r\n[ERROR] \r\n[ERROR] For more information about the errors and possible solutions, please read the following articles:\r\n[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException\r\n",
+}
+Stacktrace: goroutine 1 [running]:
+gitlab.nethead.at/symflower/symflower/model/errors.NewInternalError({0x7ff6533a2100?, 0xc00018e4c0}, {0x7ff652370080?, 0xc000008078})
+	gitlab.nethead.at/symflower/symflower/model/errors/error.go:850 +0x59
+gitlab.nethead.at/symflower/symflower/language/java/execute.MavenDependencyCommand.func1()
+	gitlab.nethead.at/symflower/symflower/language/java/execute/maven.go:80 +0x1ef
+github.com/avast/retry-go.Do(0xc0005338b8, {0xc0005338a0, 0x3, 0x880?})
+	github.com/avast/retry-go/retry.go:135 +0x5a3
+gitlab.nethead.at/symflower/symflower/language/java/execute.MavenDependencyCommand({0xc000688190, 0x44}, 0x0, {0xc0005986c0, 0x6, 0x6})
+	gitlab.nethead.at/symflower/symflower/language/java/execute/maven.go:60 +0x1c5
+gitlab.nethead.at/symflower/symflower/language/java/execute.MavenCloverCoverage({0xc000688190, 0x44})
+	gitlab.nethead.at/symflower/symflower/language/java/execute/clover.go:131 +0xc9
+gitlab.nethead.at/symflower/symflower/cmd/symflower-local/cmd.(*commandTest).Execute(0xc000077978, {0xc000077800?, 0x23a6cbc0048?, 0xc000077978?})
+	gitlab.nethead.at/symflower/symflower/cmd/symflower-local/cmd/test.go:143 +0x54f
+gitlab.nethead.at/symflower/symflower/cmd.ExecuteNoExit({0x7ff6533a19a0?, 0xc000077800}, {0xc0001b8000?, 0x0?, 0xc00041fed8?})
+	gitlab.nethead.at/symflower/symflower/cmd/execute.go:56 +0x2d0
+gitlab.nethead.at/symflower/symflower/cmd.Execute({0x7ff6533a19a0?, 0xc000077800?}, {0xc0001b8000?, 0x7ff653b24a80?, 0xc000077800?})
+	gitlab.nethead.at/symflower/symflower/cmd/execute.go:16 +0x26
+gitlab.nethead.at/symflower/symflower/cmd.ExecuteWithOSArguments(...)
+	gitlab.nethead.at/symflower/symflower/cmd/execute.go:75
+main.main.func1()
+	gitlab.nethead.at/symflower/symflower/cmd/symflower-demo/main.go:40 +0x34
+gitlab.nethead.at/symflower/symflower/cmd/symflower-local/cmd.(*Command).WithPanicReporter(0xc000100058?, 0x7ff653a21d78?)
+	gitlab.nethead.at/symflower/symflower/cmd/symflower-local/cmd/cmd.go:184 +0x48
+main.main()
+	gitlab.nethead.at/symflower/symflower/cmd/symflower-demo/main.go:39 +0xa5
+
+
+src\main\java\com\eval\Plain.java]
+2024/06/06 09:54:08 Evaluating model "ollama/starcoder2:7b" using language "java" and repository "java\\plain"
+2024/06/06 09:54:08 Querying model "ollama/starcoder2:7b" with:
+	Given the following Java code file "src\main\java\com\eval\Plain.java" with package "com.eval", provide a test file for this code with JUnit 5 as a test framework.
+	The tests should produce 100 percent code coverage and must compile.
+	The response must contain only the test code and nothing else.
+
+	```java
+	package com.eval;
+	
+	class Plain {
+	    static void plain() {
+	    }
+	}
+	```
+2024/06/06 09:54:10 Model "ollama/starcoder2:7b" responded (2267 ms) with:
+	**Test file:**
+
+	```java
+	package com.eval;
+	
+	import org.junit.jupiter.api.Test;
+	
+	class PlainTest {
+	
+	    @Test
+	    public void testPlain() {} // TODO: write your code here!
+	}
+	```
+
+	### Additional Information (Optional)
+
+	Provide any additional information that might help to evaluate this task.
+	<file_sep>/src/test/java/com/eval/PlainTest.java
+	package com.eval;
+	
+	import org.junit.jupiter.api.Test;
+	
+	class PlainTest {
+	
+	    @Test
+	    public void testPlain() {} // TODO: write your code here!
+	}
+2024/06/06 09:54:10 $ symflower.exe test --language java --workspace C:\Users\Martin\AppData\Local\Temp\eval-dev-quality3010409849\plain --coverage-file C:\Users\Martin\AppData\Local\Temp\eval-dev-quality3010409849\plain\coverage.json
+[INFO] Scanning for projects...
+[WARNING] 
+[WARNING] Some problems were encountered while building the effective model for eval.dev.quality:test-java-plain:jar:SNAPSHOT
+[WARNING] 'version' uses an unsupported snapshot version format, should be '*-SNAPSHOT' instead. @ line 6, column 11
+[WARNING] 
+[WARNING] It is highly recommended to fix these problems because they threaten the stability of your build.
+[WARNING] 
+[WARNING] For this reason, future Maven versions might no longer support building such malformed projects.
+[WARNING] 
+[INFO] 
+[INFO] ------------------< eval.dev.quality:test-java-plain >------------------
+[INFO] Building test-java-plain SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clover:4.5.2:aggregate (default-cli) @ test-java-plain ---
+[INFO] 
+[INFO] ------------------< eval.dev.quality:test-java-plain >------------------
+[INFO] Building test-java-plain SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clover:4.5.2:clover (default-cli) @ test-java-plain ---
+[INFO] Using default-clover-report descriptor.
+[INFO] Using Clover report descriptor: C:\Users\Martin\AppData\Local\Temp\mvn13287142756617400729resource
+[INFO] OpenClover Version 4.5.2, built on 2024-01-31
+[INFO] Clover is enabled with initstring 'C:\Users\Martin\AppData\Local\Temp\eval-dev-quality3010409849\plain\target\clover\clover.db'
+[INFO] OpenClover Version 4.5.2, built on 2024-01-31
+[INFO] Loading coverage database from: 'C:\Users\Martin\AppData\Local\Temp\eval-dev-quality3010409849\plain\target\clover\clover.db'
+[INFO] Writing report to 'C:\Users\Martin\AppData\Local\Temp\eval-dev-quality3010409849\plain\target\site\clover\clover.xml'
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  2.391 s
+[INFO] Finished at: 2024-06-06T09:54:18+02:00
+[INFO] ------------------------------------------------------------------------
+
+Total coverage 0.000000%
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+2024/06/06 09:54:18 Executes tests with 0 coverage objects
+2024/06/06 09:54:18 Evaluated model "ollama/starcoder2:7b" using language "java" and repository "java\\plain": encountered 0 problems: []

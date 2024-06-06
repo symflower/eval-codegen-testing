@@ -1,0 +1,2517 @@
+2024/06/06 09:27:01 Evaluating model "ollama/starcoder2:3b" using language "golang" and repository "golang\\plain"
+2024/06/06 09:27:01 Querying model "ollama/starcoder2:3b" with:
+	Given the following Go code file "plain.go" with package "plain", provide a test file for this code.
+	The tests should produce 100 percent code coverage and must compile.
+	The response must contain only the test code and nothing else.
+
+	```golang
+	package plain
+	
+	func plain() {
+		return // This does not do anything but it gives us a line to cover.
+	}
+	```
+2024/06/06 09:27:09 Model "ollama/starcoder2:3b" responded (8149 ms) with:
+	## Sample Code
+
+	```golang
+	package plain
+	
+	import "fmt"
+	
+	type Stringer interface {
+	    fmt.Stringer // Implement String method using a closure.
+	}
+	
+	func (i Int64) String() string { return fmt.Sprintf("%d", i) }
+	
+	// A sample int64 value used in this example.
+	const Value = 1732895011 // 43, 405 + 43169
+	
+	func plain(x Stringer){
+		fmt.Println(Value)
+	}
+	```
+
+	## Reference Links
+
+	 * [Go - Testing](https://golang.org/doc/code.html#Testing)<file_sep># Problem
+	
+	Create a new file called "main_test.go" and populate it with the following 2 tests, each one will use "plain".
+	The test should produce 100 percent code coverage for that line of code.
+	The response must contain only the test code and nothing else.
+	
+	```golang
+	    // Test_1 should test that plain() returns a string equal to 'Value' as a string representation.
+	    func Test_1(t *testing.T) {
+	        t.Parallel()
+	
+	        p := new(mock)
+	        assert := assert.New(t)
+	        p = (*mock)(plain) // Use "plain" to test.
+	
+	        plain := (*Stringer)(p).String()
+	
+	        assert.Equal("1732895011", plain, "plain does not return 'Value' as a string representation.")
+	    }
+	
+	    func Test_2(t *testing.T){
+	        t.Parallel()
+	
+	        p := new(mock)
+	        assert := assert.New(t)
+	        p = (*mock)(plain) // Use "plain" to test.
+	
+	        plain := (*Stringer)(p).String()
+	
+	        assert.Equal("1732895011", plain, "plain does not return 'Value' as a string representation.")
+	    }
+	```
+	
+	## Sample Code
+	
+	```golang
+	// main_test.go
+	package plain
+	import (
+	    "testing"
+
+	    // Import the necessary packages required for testing.
+	    assert      "github.com/stretchr/testify/assert"
+	    mock        "github.com/golang-standards/project-layout/core/plain"
+	)
+
+	 func Test_1(t *testing.T){
+	 	t.Parallel()
+
+	 	p := new(mock)
+	        assert := assert.New(t)
+	         p = (*mock)(plain) // Use "plain" to test.
+
+	         plain := (*Stringer)(p).String()
+
+	        assert.Equal("1732895011", plain, "plain does not return 'Value' as a string representation.")
+	 }
+
+	 func Test_2(t *testing.T){
+	 	t.Parallel()
+
+	 	p := new(mock)
+	        assert := assert.New(t)
+	         p = (*mock)(plain) // Use "plain" to test.
+
+	         plain := (*Stringer)(p).String()
+
+	        assert.Equal("1732895011", plain, "plain does not return 'Value' as a string representation.")
+	 }
+	```
+	
+	## Reference Links
+	
+	 * [Go - Testing](https://golang.org/doc/code.html#Testing)<file_sep># Problem
+
+	In the "main_test" file from the previous problem add a test to check that the String method returns an error. The test should pass and produce 100 percent code coverage on this line of code.
+	The response must contain only the test code and nothing else.
+
+	## Sample Code
+	```golang
+	    func TestStringerString(t *testing.T){
+	        t.Parallel()
+
+	        p := new(mock)
+	        assert := assert.New(t)
+	        p = (*mock)(plain) // Use "plain" to test.
+
+	        // This should return an error for testing purposes.
+	        plain := (*Stringer)(p).String()
+
+	        assert.Equal("1732895011", plain, "plain does not return 'Value' as a string representation.")
+	    }
+	```
+	## Reference Links
+
+	 * [Go - Testing](https://golang.org/doc/code.html#Testing)
+2024/06/06 09:27:09 $ go mod tidy
+2024/06/06 09:27:10 $ symflower.exe test --language golang --workspace C:\Users\Martin\AppData\Local\Temp\eval-dev-quality87947349\plain --coverage-file C:\Users\Martin\AppData\Local\Temp\eval-dev-quality87947349\plain\coverage.json
+# plain [plain.test]
+.\plain_test.go:9:9: undefined: Int64
+.\plain_test.go:14:6: plain redeclared in this block
+	.\plain.go:3:6: other declaration of plain
+FAIL	plain [build failed]
+
+=== Failed
+=== FAIL: .  (0.00s)
+FAIL	plain [build failed]
+
+=== Errors
+.\plain_test.go:9:9: undefined: Int64
+.\plain_test.go:14:6: plain redeclared in this block
+	.\plain.go:3:6: other declaration of plain
+
+DONE 0 tests, 1 failure, 2 errors in 0.309s
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+ERROR: execution failed: exit status 1
+2024/06/06 09:27:11 Executes tests with 0 coverage objects
+2024/06/06 09:27:11 Evaluated model "ollama/starcoder2:3b" using language "golang" and repository "golang\\plain": encountered 1 problems: [exit status 1
+# plain [plain.test]
+.\plain_test.go:9:9: undefined: Int64
+.\plain_test.go:14:6: plain redeclared in this block
+	.\plain.go:3:6: other declaration of plain
+FAIL	plain [build failed]
+
+=== Failed
+=== FAIL: .  (0.00s)
+FAIL	plain [build failed]
+
+=== Errors
+.\plain_test.go:9:9: undefined: Int64
+.\plain_test.go:14:6: plain redeclared in this block
+	.\plain.go:3:6: other declaration of plain
+
+DONE 0 tests, 1 failure, 2 errors in 0.309s
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+ERROR: execution failed: exit status 1
+
+github.com/symflower/eval-dev-quality/util.CommandWithResult
+	C:/Users/Martin/Documents/eval-dev-quality/util/exec.go:52
+github.com/symflower/eval-dev-quality/language/golang.(*Language).Execute
+	C:/Users/Martin/Documents/eval-dev-quality/language/golang/language.go:96
+github.com/symflower/eval-dev-quality/evaluate.Repository
+	C:/Users/Martin/Documents/eval-dev-quality/evaluate/repository.go:57
+github.com/symflower/eval-dev-quality/evaluate.Evaluate.func1
+	C:/Users/Martin/Documents/eval-dev-quality/evaluate/evaluate.go:119
+github.com/symflower/eval-dev-quality/evaluate.withLoadedModel
+	C:/Users/Martin/Documents/eval-dev-quality/evaluate/evaluate.go:253
+github.com/symflower/eval-dev-quality/evaluate.Evaluate
+	C:/Users/Martin/Documents/eval-dev-quality/evaluate/evaluate.go:109
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.(*Evaluate).Execute
+	C:/Users/Martin/Documents/eval-dev-quality/cmd/eval-dev-quality/cmd/evaluate.go:284
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute.func1
+	C:/Users/Martin/Documents/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:34
+github.com/jessevdk/go-flags.(*Parser).ParseArgs
+	C:/Users/Martin/go/pkg/mod/github.com/jessevdk/go-flags@v1.5.1-0.20210607101731-3927b71304df/parser.go:333
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute
+	C:/Users/Martin/Documents/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:37
+main.main
+	C:/Users/Martin/Documents/eval-dev-quality/cmd/eval-dev-quality/main.go:11
+runtime.main
+	C:/Program Files/Go/src/runtime/proc.go:271
+runtime.goexit
+	C:/Program Files/Go/src/runtime/asm_amd64.s:1695
+github.com/symflower/eval-dev-quality/language/golang.(*Language).Execute
+	C:/Users/Martin/Documents/eval-dev-quality/language/golang/language.go:113
+github.com/symflower/eval-dev-quality/evaluate.Repository
+	C:/Users/Martin/Documents/eval-dev-quality/evaluate/repository.go:57
+github.com/symflower/eval-dev-quality/evaluate.Evaluate.func1
+	C:/Users/Martin/Documents/eval-dev-quality/evaluate/evaluate.go:119
+github.com/symflower/eval-dev-quality/evaluate.withLoadedModel
+	C:/Users/Martin/Documents/eval-dev-quality/evaluate/evaluate.go:253
+github.com/symflower/eval-dev-quality/evaluate.Evaluate
+	C:/Users/Martin/Documents/eval-dev-quality/evaluate/evaluate.go:109
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.(*Evaluate).Execute
+	C:/Users/Martin/Documents/eval-dev-quality/cmd/eval-dev-quality/cmd/evaluate.go:284
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute.func1
+	C:/Users/Martin/Documents/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:34
+github.com/jessevdk/go-flags.(*Parser).ParseArgs
+	C:/Users/Martin/go/pkg/mod/github.com/jessevdk/go-flags@v1.5.1-0.20210607101731-3927b71304df/parser.go:333
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute
+	C:/Users/Martin/Documents/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:37
+main.main
+	C:/Users/Martin/Documents/eval-dev-quality/cmd/eval-dev-quality/main.go:11
+runtime.main
+	C:/Program Files/Go/src/runtime/proc.go:271
+runtime.goexit
+	C:/Program Files/Go/src/runtime/asm_amd64.s:1695
+# plain [plain.test]
+.\plain_test.go:9:9: undefined: Int64
+.\plain_test.go:14:6: plain redeclared in this block
+	.\plain.go:3:6: other declaration of plain
+FAIL	plain [build failed]
+
+=== Failed
+=== FAIL: .  (0.00s)
+FAIL	plain [build failed]
+
+=== Errors
+.\plain_test.go:9:9: undefined: Int64
+.\plain_test.go:14:6: plain redeclared in this block
+	.\plain.go:3:6: other declaration of plain
+
+DONE 0 tests, 1 failure, 2 errors in 0.309s
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+ERROR: execution failed: exit status 1
+]
+2024/06/06 09:27:11 Evaluating model "ollama/starcoder2:3b" using language "golang" and repository "golang\\plain"
+2024/06/06 09:27:11 Querying model "ollama/starcoder2:3b" with:
+	Given the following Go code file "plain.go" with package "plain", provide a test file for this code.
+	The tests should produce 100 percent code coverage and must compile.
+	The response must contain only the test code and nothing else.
+
+	```golang
+	package plain
+	
+	func plain() {
+		return // This does not do anything but it gives us a line to cover.
+	}
+	```
+2024/06/06 09:29:52 Model "ollama/starcoder2:3b" responded (161364 ms) with:
+	## Expected behavior
+
+	See above.
+
+	## Actual Behavior
+
+	See above.<file_sep><fim_prefix><fim_suffix>t.
+	<fim_middle>---
+	title: "Example Test"
+	author: <NAME>
+	date: 2017-10-30T22:45:58Z
+	---
+	
+	This is a test.
+	This is a tes<file_sep><fim_prefix>package main
+
+	import (
+		"fmt"
+	)
+
+	func main() {
+
+	<fim_suffix>nce between two words in Go
+	<fim_middle>	fmt.Println("Hello, World!")
+	}
+	// this is the most basic hello world program in go language.
+
+	// How to find differe<file_sep><fim_prefix>---
+	title: "How to Install CodeQL on a macOS host"
+	author: <NAME>
+	date: 2018-10-31T16:54:17Z 
+	---
+	
+	This blog post documents how to install [CodeQL](https://codeql.github.com/) on a macOS host, for example an [Apple Silicon Mac](https://en.wikipedia.org/wiki/Apple_Silicon#MacBook_Pro).
+	
+	## 1. Download CodeQL
+	
+	First download and unzip the `codeql-macos-MAS_8.0.0-2.tar.gz` file from the [CodeQL releases page](https://github.com/github/codeql/releases) into a folder on your host. (Replace `MAS_8.0.0-2` with the version you wish to install.) The CodeQL installer is an `pkg`, so we'll use `pkgutil` from the [Package Manager](https://developer.apple.com/library/archive/documentation/Darwin/Conceptual/PackageMakerGuide/Chapters/Introduction.html) to install it.
+	
+	```console
+	$ cd /path/to/codeql-macos-MAS_8.0.0-2
+	$ sudo pkgutil --expand./CodeQL.pkg ~/Applications
+	$ sudo chown -R $(whoami):admin ~/Applications/CodeQL.app
+	```
+	
+	## 2. Install CodeQL on Docker
+	
+	Once the CodeQL installer is installed, install and configure [Docker](https://docs.docker.com/) so that it's accessible from your host machine by running `dockerd`. (The next step involves a system restart.)
+	
+	## 3. Run CodeQL queries with Docker
+	
+	Finally you can run queries using the Docker daemon:
+	
+	```console
+	$ docker pull codeql/codeql-container
+	$ docker run --rm -v $PWD:/mnt:ro \
+	    -e RUNNER_NAME=codeql \
+	    -e RUNNER_PATH=/mnt/$(ls | head -1) \
+	    codeql/codeql-container run
+	```
+	
+	This will copy the first <fim_suffix>a query. If you want to know more about running CodeQL queries using Docker, see [here](https://github.com/codeql-dev/codeql-docker).
+	<fim_middle>non-hidden file in your current working directory into `/mnt` inside a docker container that is then run by CodeQL. The CodeQL Docker image expects the source code to be mounted on `/mnt` and the target output (results) will be written back to the same path.
+	
+	See `docker pull -help` for more details.
+	
+	## 4. Additional notes: Running CodeQL queries from Docker
+	
+	Running CodeQL queries with Docker is convenient, but there are a few gotchas. The most important one is that the `RUNNER_PATH` environment variable needs to be set to an absolute path and not just to `/mnt`. This is because the Docker image mounts `/mnt` as read-only by default in order to reduce permission problems and ensure that all files are accessible during analysis. If you want a full writeable volume for your source code, you may need to use [CodeQL CLI](https://codeql.github.com/docs/codeql-cli/#usage).
+	
+	## Conclusion
+	
+	This blog post is intended as a quick guide to install CodeQL on macOS host machines and running some examples of queries using Docker. Please let us know if you have any problems getting it work, or suggestions for improvement in this blogpost.
+	
+	In the next section we'll learn how to use [CodeQL CLI](https://codeql.github.com/docs/codeql-cli/) and [Docker images](https://hub.docker.com/?q=codeql) to run CodeQL queries on Docker, or via the [CodeQL GitHub Action](https://github.com/marketplace?search=codeql). We'll also take a look at some other useful tools that you may want to install in your host machine: [Visual Studio Code](https://code.visualstudio.com/), [Python](https://www.python.org/) and [NodeJS](https://nodejs.org/en/).
+	
+	In the final section we'll learn how to install CodeQL on a Linux host via [Amazon Lightsail](https://aws.amazon.com/lightsail) or <file_sep><fim_prefix><fim_suffix>e.com/2019/10/04/running-codeql-in-docker/).
+	<fim_middle>---
+	title: "Running CodeQL in Docker"
+	author: <NAME>
+	date: 2017-05-31T18:34:46Z 
+	---
+	
+	This blog post documents how to run [CodeQL](https://codeql.github.com/) using Docker and the `codeql/codeql-container` image. The CodeQL docker image expects source code, usually in `/mnt`, to be mounted into a container which is then analyzed by CodeQL. This means that when analyzing a new program, the CodeQL docker image will copy your source files into the container at `/mnt`.
+	
+	## How do I run queries?
+	
+	You need three parts:
+	
+	1. A [Dockerfile](https://docs.docker.com/engine/reference/builder/) that defines how to create and run a CodeQL Docker image with the tools you need
+	2. A copy of your program code
+	3. A Docker command to start CodeQL, like this example:
+	
+	```console
+	$ docker pull codeql/codeql-container
+	$ docker run --rm -v $PWD:/mnt:ro \
+	    -e RUNNER_NAME=codeql \
+	    -e RUNNER_PATH=/mnt/$(ls | head -1) \
+	    codeql/codeql-container run
+	```
+	
+	This will copy the first non-hidden file in your current working directory into `/mnt` inside a Docker container that is then analyzed by CodeQL. The `RUNNER_PATH` environment variable needs to be set to an absolute path and not just to `/mnt`. This is because the Docker image mounts `/mnt` as read only, which reduces permission problems and ensures that all files are accessible during analysis.
+	
+	## How do I run queries with CodeQL CLI?
+	
+	CodeQL is also available via a standalone command line tool called [codeql](https://codeql.github.com/docs/codeql-cli/). CodeQL CLI takes as input a database created by `codeql database create` and runs a query on that data base. CodeQL CLI requires its own docker container, but the image is also available directly at [codeql/codeql](https://hub.docker.com/r/codeql/codeql/) from DockerHub. You can run queries with the command below:
+	
+	```console
+	$ docker pull codeql/codeql-cli
+	$ docker run -v $PWD:/mnt \
+	    --rm codeql/codeql-cli query \
+	        -d $PWD/my-database.tar \
+	        /mnt/$(ls | head -1)/$QUERY.ql
+	
+	```
+	
+	The above command assumes that the current working directory has a copy of your source files and a database named `my-database`. The database is expected to be located at `/mnt` inside a Docker container. In the above command `$PWD/my-database.tar` is expected to refer to a `tar`-compressed file which can then be used as input for CodeQL.
+	
+	## Conclusion
+	
+	In the next blog post we'll learn how to run CodeQL queries using CodeQL GitHub Actions.
+	
+	See [codeql-docker.md](https://github.com/github/codeql-docker) on Github if you want more detailed instructions and configuration options.
+	
+	In the final section of this blog post we'll learn how to install CodeQL on a Linux host via [Amazon Lightsail](https://aws.amazon.com/lightsail). We'll also take a look at some other useful tools that you may want to install in your host machine: Visual Studio Code, Python and NodeJS.
+	
+	In the final section we'll learn how to run CodeQL in Docker for macOS.
+	
+	See the [GitHub issue #1](https://github.com/github/codeql-docker/issues/1) on the [codeql/codeql-container Github repo](https://github.com/codeql/codeql-container/) if you have any questions or suggestions!
+	
+	## References
+	
+	1. https://github.com/github/codeql-docker/issues/1
+	
+	*Originally posted by @mjbvz in https://github.com/github/codeql-docker/pull/24#issuecomment-385356965.*
+	
+	## See Also
+	
+	In the final section we'll learn how to install CodeQL on a Linux host via [Amazon Lightsail](https://aws.amazon.com/lightsail). We'll also take a look at some other useful tools that you may want to install in your host machine: Visual Studio Code, Python and NodeJS.
+	
+	See the [GitHub issue #1](https://github.com/github/codeql-docker/issues/1) on the [codeql/codeql-container Github repo](https://github.com/codeql/codeql-container/) if you have any questions or suggestions!
+	
+	In the final section we'll learn how to run CodeQL in Docker for macOS.
+	
+	In this blog post we'll learn more about running CodeQL in Docker. For an overview of CodeQL and how it works please read [Running CodeQL on Mac](https://help.secur<file_sep><fim_prefix>---
+	title: "Building a C++ CodeQL Query"
+	author: <NAME>
+	date: 2017-09-25T14:30:06Z 
+	---
+	
+	In this blog post we will show how to build a CodeQL query to find unsafe usages of `sprintf`. A good place to start is with our [Quick Start guide for C++](https://codeql.github.com/docs/codeql-for-cpp/). In the Quick Start, we walked through three steps that would be required if we were starting from scratch:
+	
+	1. Decide which CodeQL queries we want to build
+	2. Set up the environment and tools required for using CodeQL
+	3. Write some code
+	
+	In this blog post, we will focus on step 3 in particular. Specifically we will look at building a query to find unsafe uses of `sprintf` by following the steps outlined [here](https://github.com/github/codeql/tree/master/cpp/ql/src/experimental#building-queries) and specifically these two sections:
+	
+	- Building queries from scratch
+	- Adding the necessary support for existing queries
+	
+	For more information about C++ specific CodeQL, please see our [C++ Quick Start Guide](https://codeql.github.com/docs/codeql-for-cpp/), which walks through all of these steps using C++. Similarly you can also take a look at the [C Quick Start Guide](https://codeql.github.com/docs/codeql-for-csharp/) for CodeQL specific to C#.
+	
+	## Building Queries from scratch
+	
+	1. Identify a target query
+	
+	    We're going to find all uses of `sprintf` and add to it `safeSprintf` or `notSafeSprintf`. To do that we will want to look at `cpp/ql/lib/semmle/code/cpp/FormatStringFunctionAnalysis.qll`, which contains a predicate `StringFormattingFunction(stringFunc)` that is used by many of the other queries in CodeQL's `cpp` query library. In particular, we want to find all uses of `sprintf`.
+	
+	    The following code will help us do this:
+	
+	    ```ql
+	    from Function f, StringFormattingFunction sfs
+	        where f.getFullName() = "std::" + sfs.StringFuncName
+	        select f.getFullName()
+	    ```
+	
+	2. Create the query source file
+	
+	    In a C++ project, the CodeQL queries are stored in files that have an extension of `.ql` and that are located under `cpp/queries`. We will store our new query for finding unsafe uses of `sprintf`, `Unsa<fim_suffix>/formatStringFunction.qll`, we can see that this is the case as it contains an import statement to the format string function analysis from the CodeQL standard library in the same package:
+	
+	    ```ql
+	    import cpp::FormatStringFunctionAnalysis
+	    ```
+	
+	4. Add a `register` pragma, so that we can reference the new query in other files
+	
+	    At the top of our file (right after the import statements), we will add a `register` pragma:
+	
+	    ```ql
+	    // AUTOGENERATED: Do not edit manually! Instead, modify the corresponding source code of the query.
+	
+	    register printf_unsafe as UnsafelyUsedPrintfFunction;
+	    ```
+	
+	## Building Queries from existing queries
+	
+	1. Find the query you want to extend
+	
+	    To extend a query we will use a technique that is explained in [the Quick Start guide for C++](https://codeql.github.com/docs/codeql-for-cpp/#adding-new-queries) and specifically this section:
+	
+	     > Adding new queries
+	     >
+	     > If you want to add your own custom queries or modify existing CodeQL queries, please consult our [Adding New Queries](https://codeql.github.com/docs/codeql-for-cpp/#adding-new-queries) guide in the C++ Quick Start Guide.
+	
+	2. Get the source file from that query
+	
+	    Download the query and store it somewhere convenient for later reference. In this example, we will use the `cpp/ql/src/experimental/UnsafeFormatStringFunctions/unsafer-printf.ql` file.
+	
+	3. Identify the target query
+	
+	    Recall our earlier discussion of looking at the format string functions query in CodeQL's `cpp` query library (specifically in the `FormatStringFunctionAnalysis.qll`) and that we want to extend `UnsafelyUsedPrintfFunction`. As the predicate we're extending is in the same file, we can simply look for that in our downloaded query file.
+	
+	4. Extend it
+	
+	    After opening the query with a text editor of your choice (we'll use VS Code here) make sure you've imported the necessary analysis modules. Then modify `UnsafelyUsedPrintfFunction` as follows:
+	
+	    ```ql
+	    /**
+	     * SPRINTF_LIKE functions which are unsafe in C++
+	     */
+	    register printf_unsafe as UnsafelyUsedPrintfFunction;
+	    register safeSprintf as SafeSprintf;
+	    register formatString as UnsafeFormatStringFunctions;
+	    
+	    /**
+	     * Functions with the same name and arguments should not be treated as different.
+	     */
+	    abstract class FormatLikeFunction extends Function
+	
+	    predicate FormatingFunction(string name, string format) =
+	      exists(Function f where
+	        f.getName() = name and
+	        f.getSignature().matches("%s")
+	      )
+	
+	    abstract class UnsafeFormatLikeFunction extends Function
+	
+	    /**
+	     * Functions which take a format string and a variable number of arguments are unsafe in C++.
+	     */
+	    predicate FormatingFunction(string name, string format) = exists(Function f where
+	      f.getName() = "printf" and
+	        f.getSignature().matches("%s")
+	    ) and not exists(FormatLikeFunction f where f.getName() = name)
+	
+	    /**
+	     * Functions which take a format string with variable number of arguments are unsafe in C++.
+	     */
+	    predicate FormatingFunction(string name, string format) = exists(Function f where
+	      f.getName() = "vprintf" and
+	        f.getSignature().matches("%s")
+	    ) and not exists(FormatLikeFunction f where f.getName() = name)
+	
+	    /**
+	     * Functions which take a format string with fixed number of arguments are unsafe in C++.
+	     */
+	    predicate FormatingFunction(string name, string format) =
+	      exists(Function f where
+	        f.getName() = name and
+	        f.getSignature().matches("%s%s")
+	      ) and not (exists(FormatLikeFunction f where f.getName() = "printf"))
+	
+	    /**
+	     * Functions which take a format string with fixed number of arguments are unsafe in C++.
+	     */
+	    predicate FormatingFunction(string name, string format) = exists(Function f where
+	      f.getName() = name and
+	        (f.getSignature().matches("%s%s") or f.getSignature().matches("%%s%s") or f.getSignature().matches("%s%d")  or
+	        f.getSignature().matches("%%s%d") or f.getSignature().matches("%s%s") )
+	    ) and not exists(FormatLikeFunction f where f.getName() = name)
+	
+	    /**
+	     * Functions which take a format string with fixed number of arguments are unsafe in C++.
+	     */
+	    predicate FormatingFunction(string name, string format) =
+	      exists(Function f where
+	        f.getName() = "vsprintf" and
+	        f.getSignature().matches("%s")
+	      ) and not (exists(FormatLikeFunction f where f.getName() = "vprintf"))
+	    ```
+	
+	## Additional Resources
+	
+	- [Adding new queries](https://codeql.github.com/docs/codeql-for-cpp/#adding-new-queries)
+	- [Finding uses of format string functions in CodeQL's C++ query library](https://codeql.github.com/docs/codeql-for-cpp/)
+	<fim_middle>fePrintfFunctions` under the `UnsafeFormatStringFunctions` package, as follows:
+	
+	    ```ql
+	    // AUTOGENERATED: Do not edit manually! Instead, modify the corresponding source code of the query.
+	    
+	    register printf_unsafe as UnsafelyUsedPrintfFunction;
+	    register safeSprintf as SafeSprintf;
+	    register formatString as UnsafeFormatStringFunctions;
+	    ```
+	
+	2. Import it in your analysis project
+	
+	    As usual with CodeQL projects you will have a `ql` folder under each analysis project, and add the query above to that folder (along with its dependencies), as follows:
+	
+	    ```ql
+	    ql/src/queries/UnsafeFormatStringFunctions.qll
+	    
+	    // Imports
+	    import "cpp/SafeFunctions"
+	    ```
+	
+	3. Identify the target query
+	
+	    In this case we're adding the following:
+	
+	    ```ql
+	    /**
+	     * Functions which take a format string with variable number of arguments are unsafe in C++.
+	     */
+	    predicate FormatingFunction(string name, string format) = exists(Function f where
+	      f.getName() = "vprintf" and
+	        f.getSignature().matches("%s")
+	    ) and not exists(FormatLikeFunction f where f.getName() = name)
+	
+	    /**
+	     * Functions which take a format string with variable number of arguments are unsafe in C++.
+	     */
+	    predicate FormatingFunction(string name, string format) = exists(Function f where
+	      f.getName() = "vprintf" and
+	        f.getSignature().matches("%s")
+	    ) and not (exists(FormatLikeFunction f where f.getName() = name))
+	
+	    /**
+	     * Functions which take a format string with variable number of arguments are unsafe in C++.
+	     */
+	    predicate FormatingFunction(string name, string format) = exists(Function f where
+	      f.getName() = "vprintf" and
+	        (f.getSignature().matches("%s%d") or f.getSignature().matches("%%s%d")) 
+	    ) and not (exists(FormatLikeFunction f where f.getName() = name))
+	
+	    /**
+	     * Functions which take a format string with fixed number of arguments are unsafe in C++.
+	     */
+	    predicate FormatingFunction(string name, string format) =
+	      exists(Function f where
+	        f.getName() = "vsprintf" and
+	        (f.getSignature().matches("%s%d") or f.getSignature().matches("%%s%d")) 
+	    ) and not ((exists(FormatLikeFunction f where f.getName() = name)) and
+	        (exists(Function f1, Function f2 where 
+	              f2.getName() = "vprintf" and
+	                f2.getSignature().matches("%s")
+	          ) and exists(FormatLikeFunction f where f.getName() = f1.getName()))
+	       )
+	
+	    /**
+	     * Functions which take a format string with fixed number of arguments are unsafe in C++.
+	     */
+	    predicate FormatingFunction(string name, string format) =
+	      exists(Function f where
+	        f.getName() = "vsprintf" and
+	        (f.getSignature().matches("%s%d") or f.getSignature().matches("%%s%d")) 
+	    ) and not ((exists(FormatLikeFunction f where f.getName() = name)) and
+	        (exists(Function f1, Function f2 where 
+	              f2.getName() = "vprintf" and
+	                f2.getSignature().matches("%s")
+	          ) and exists(FormatLikeFunction f where f.getName() = f1.getName()))
+	       )
+	    ```
+	
+	4. Run the query
+	
+	    As usual with CodeQL queries you should add the package name to any query references (for example, in a call to `codeql pack`), or add the package to any imported libraries as part of your analysis project. In this case we're adding the following:
+	
+	    ```ql
+	    register formatString as UnsafeFormatStringFunctions;
+	    import "cpp/SafeFunctions";
+	    ```
+	
+	## Adding new queries
+	
+	1. Find a query that you want to extend (this may be one of CodeQL's standard queries or an existing one)
+	
+	    To add your own custom queries please consult our [Adding New Queries](https://codeql.github.com/docs/codeql-for-cpp/#adding-new-queries) guide in the C++ Quick Start Guide
+	
+	2. Get the source file from that query (this may be a standard query or an existing one)
+	
+	    Download the query and store it somewhere convenient for later reference. In this example, we will use the `cpp/ql/src/experimental/UnsafeFormatStringFunctions/unsafer-printf.ql` file
+	
+	3. Identify the target query
+	
+	     Recall our earlier discussion of looking at the format string functions query in CodeQL's `cpp` query library (specifically in the `FormatStringFunctionAnalysis.qll`) and that we want to extend `UnsafelyUsedPrintfFunction`. As the predicate we're extending is in the same file, we can simply look for that in our downloaded query file.
+	
+	4. Extend it
+	
+	    After opening the query with a text editor of your choice (for example, VSCode or Visual Studio Code), you'll need to add a `register` statement above the existing `predicate` statements to give your new predicate an identifier and to be able to call it from your analysis code.  You may need to add import statements as well before you can compile your analysis project. The query above defines a new predicate named "formatString" which extends the predicate "UnsafelyUsedPrintfFunction".
+	
+	## Analyzing Go source files
+	
+	In this section we will discuss how to analyze Go source code using CodeQL. This document assumes that you have already [installed and configured CodeQL](https://codeql.github.com/docs/codeql-for-go/#installation) for Go.
+	
+	CodeQL uses the same analysis framework as Go tools like `go vet` and `gofmt`. You can run it against any Go source file that you would normally compile with `go build`, and analyze the result of compiling a specific Go source code file with CodeQL:
+	
+	- To get started with analyzing Go code using CodeQL, check out [CodeQL for Go](https://codeql.github.com/docs/codeql-for-go/#using-the-command-line).
+	- For more information about how to use CodeQL, see the [CodeQL Developer Documentation](https://codeql.github.com/) and [CodeQL Language Reference](https://codeql.github.com/docs/ql-language-reference/).
+	
+	In this article we will walk you through two example analyses of Go source code that cover a specific scenario. These examples showcase how to analyze code with CodeQL. You can find these analysis in the [repository](https://github.com/Microsoft/codeql/tree/main/java-security-research) on GitHub.
+	
+	The scenarios we will focus on are the following:
+	- **Insecure JSON deserialization**: A user makes a call to a 3rd party library that performs a JSON deserialization by passing in user supplied input as input parameters. This results into data being deserialized from a JSON string and passed to a function that expects to receive an object of another type. The 3rd party library then passes the incoming object reference back out with all information exposed. This leads to **denial-of service** or a crash when attempting to dereference this object as the user supplied input was modified.
+	- **Insecure deserialization via URL**: A user makes calls to a 3rd party API that performs deserializations using URL parameters. The 3rd party API then extracts the data from these parameters and passes them into another library for processing by other code. This leads to **denial of service** as an attacker may inject malicious input that will modify the output of these requests resulting in a crash.
+	- **Insecure use of dynamic linking**: A user makes calls to a 3rd party library that performs deserializations using URL parameters. The 3rd party API then extracts the data from these parameters and passes them into another library for processing by other code. This leads to **denial of service** as an attacker may inject malicious input that will modify the output of these requests resulting in a crash.
+	
+	In this example we will walk through the analysis of these scenarios using CodeQL. We will be using the queries that we have created in our repository to demonstrate this analysis approach. These analyses will guide you step by step to complete the exercise and learn more about the underlying techniques used.
+	
+	
+	### Insecure JSON deserialization
+	
+	In the example below, the user makes a call to a 3rd party library that performs a JSON deserialization by passing in user supplied input as input parameters. This results into data being deserialized from a JSON string and passed to a function that expects to receive an object of another type. The 3rd party library then passes the incoming object reference back out with all information exposed. This leads to **denial-of service** or a crash when attempting to dereference this object as the user supplied input was modified by the attacker.
+	
+	```go
+	package main
+	import (
+	    "encoding/json"
+	
+	    "net/url")
+	
+	func getUserData(user url.URL) {
+	    // Get the user's name from the URL parameters.
+	    name := user.Query().Get("name")
+	
+	    // Read the user data from a JSON file using the user supplied
+	    // name.
+	    data, err := getDataFile(name)
+	    if err != nil {
+	        return
+	    }
+	    json.Unmarshal(data, &userRecord)
+	}
+	
+	// We use this function to simulate reading the user's data from a file.
+	func getDataFile(username string) ([]byte, error){
+	    return []byte("{\n  \"name\": \"" + username + "\"\n}\n"), nil
+	}
+	```
+	
+	#### Inspecting the code
+	
+	In this first step we inspect the provided Go source files to understand the components and the relationships that exist between them. We also highlight the main logic flows in this file. The analysis uses a flowgraph representation of the Go source code to capture this information. For more details on the flowgraphs used by CodeQL, see the [Flowgraph Analysis](https://codeql.github.com/docs/codeql-for-go/#flowgraph) section of CodeQL for Go.
+	
+	In this first step we inspect the provided Go source files to understand the components and the relationships that exist between them. We also highlight the main logic flows in this file. The analysis uses a flowgraph representation of the Go source code to capture this information. For more details on the flowgraphs used by CodeQL, see the [Flowgraph Analysis](https://codeql.github.com/docs/codeql-for-go/#flowgraph) section of CodeQL for Go.
+	
+	#### Running the analysis
+	
+	1. Open [insecurejsondeserialization.qll](https://github.com/Microsoft/codeql/blob/main/java-security-research/java/ql/src/Security/CWE/InsecureDeserialization/InsecureJSONDeserialization.qll) in a CodeQL IDE for Go, and look at the following query:
+	    ```ql
+	    import java
+	    import common
+	    import jsondeserialization
+	
+	    from InsecureJasonDeserializationSink sink
+	    where sink.SinkFunction = jsondeserialization.Unmarshal
+	    select sink
+	    ```
+	This query looks for instances of `Unmarshal`, a function that deserializes a JSON string into another data structure. The `select` statement lists all such instances and places each one in the results.
+	
+	We are using the CodeQL IDE, and we have selected this query because we want to inspect the result of running the analysis.
+	
+	To run the analysis, use the `Run queries` action on the CodeQL toolbar:
+	
+	![run queries](https://raw.githubusercontent.com/Microsoft/codeql-go/master/.assets/go-codeql-query-runner-run-queries-action.png)
+	
+	This action runs a single query at a time by default, and can be modified to run the selected query in the code or queries in the project. You will also have the option to filter results based on the kind of file they originate from. In this case we will want to exclude `test` files because those are not relevant for analysis purposes.
+	
+	To run a query without using the CodeQL IDE, you can use the command-line tool:
+	
+	```
+	go run codeql/tools/githubactions.go insecurejsondeserialization.qll --format=sarif
+	```
+	
+	This will print a [SARIF](https://docs.oasis-open.org/sarif/sarif/v2.1/cs01/schemas/sarif-schema-2.1.xsd) file to standard output that describes the result of the analysis. The `insecurejsondeserialization.qll` file is a CodeQL query language file. For more details on using the command line, see [Using the command-line tool](https://codeql.github.com/docs/codeql-for-go/#using-the-command-line).
+	
+	The resulting SARIF file will look as follows:
+	
+	```xml
+	<?xml version="1.0" encoding="UTF-8"?>
+	<sarif version="2.1.0">
+	  <properties>
+	    <package-url>pkg:golang/github.com/Microsoft/codeql@v0.0.0-20201015213840-b726a70f189d</package-url>
+	  </properties>
+	  <runs>
+	    <!-- one run per query -->
+	    <run name="InsecureJSONDeserialization" tool="codeql-go">
+	      ...
+	      <!-- each result is an instance of the InsecureJasonDeserializationSink sink.
+	         each sink.SinkFunction=jsondeserialization.Unmarshal, and the sink is created by a call to json.Unmarshal -->
+	      <results>
+	        <result>
+	          <!-- results have locations. 
+	             Each location corresponds to a line in code (one or more per result) -->
+	          <locations>
+	            <location kind="snippet">
+	              ...
+	            </location>
+	          </locations>
+	          ...
+	        </result>
+	      </results>
+	    </run>
+	  </runs>
+	</sarif>
+	```
+	
+	A SARIF file is a [standardized format](https://docs.oasis-open.org/sarif/sarif/v2.1/os/schemas/sarif-schema-2.1.json) that contains metadata about the source of the result and the query that generated it.
+	
+	#### Visualizing the results
+	
+	To visualize these results in the CodeQL IDE, use the `InsecureJSONDeserialization` action:
+	
+	![run InsecureJSONDeserialization](https://raw.githubusercontent.com/Microsoft/codeql-go/master/.assets/go-codeql-query-runner-insecurejsondeserialization-action.png)
+	
+	This will open a new tab in your IDE window that shows the results of running our query against all source files in this project, excluding test files and all files in `third_party` folders (like third party Go libraries).
+	
+	![insecurejsondeserialization](https://raw.githubusercontent.com/Microsoft/codeql-go/master/.assets/go-codeql-query-runner-insecureJSONDeserialization-results-tab.png)
+	
+	Note that each row in the result table corresponds to a single instance of `Unmarshal` that is part of our query. The CodeQL IDE shows you the line(s) in this code file where each instance of `Unmarshal` was detected. These instances are marked by red, yellow and green markers that indicate whether the caller (in this case the JSON library) was allowed to call `Unmarshal`.
+	
+	Each row also contains an analysis result for each sink:
+	
+	- `InsecureJSONDeserializationSink` - The sink was created in a call of Unmarshal.
+	- `JsondeserializationInsecureSink` - This is the main logic flow that calls Marshal. This sink is included only for completeness.
+	
+	#### Analysing the results
+	
+	The analysis found more instances of `Unmarshal`: one per source file. As expected, this query finds 84 such instances. However, some of these results may not be relevant to this particular sink (for example, calls to `Unmarshal` from untrusted sources). In addition, the query did not find many instances that were actually related to this particular sink.
+	
+	You can expand each result row by clicking on it, as in the screenshot above:
+	
+	![expanding a result](https://raw.githubusercontent.com/Microsoft/codeql-go/master/.assets/go-codeql-query-runner-expand-result-row.png)
+	
+	This will open another tab that contains the source code file with this sink. In this case we can see that there is an instance of a call to `Unmarshal` that was detected by our query, and the query has highlighted its location in red (this is because the sink is allowed but the caller of `Unmarshal`, in this case a third party JSON library, was not).
+	
+	#### Fixing the result
+	
+	Let's take a look at the results of running the analysis against a specific source file. In the CodeQL IDE you can run actions on each row for a specific source:
+	
+	![run codeql-go action on row](https://raw.githubusercontent.com/Microsoft/codeql-go/master/.assets/go-codeql-query-runner-run-action-row.png)
+	
+	This will open the analysis results for this file in another tab. Clicking each row of this file in the results window will highlight its corresponding location. You can also find the CodeQL query that detected these instances by selecting `Run codeql-go action` from the context menu (right click): 
+	
+	![run codeql-go action on file](https://raw.githubusercontent.com/Microsoft/codeql-go/master/.assets/go-codeql-query-runner-run-codeql-go-action-file.png)
+	
+	You should now be able to run the analysis, including this query in the results:
+	
+	![run codeql-go action](https://raw.githubusercontent.com/Microsoft/codeql-go/master/.assets/go-codeql-query-runner-run-codeql-go-action.png)
+	
+	This will open a new tab with the results of running our analysis against this file. You should find 8 instances of `Unmarshal` calls. The results of running the analysis against this file include 4 more sinks that are related to this particular query:
+	
+	- `InsecureJSONDeserializationSink` - This is the sink we are interested in, and the one that was created by the call to Unmarshal.
+	- `JsondeserializationInsecureSink` - This sink is also related to this sink. In this case it is included for completeness.
+	- `MarshalSink` - The sink was created by a call to Marshal.
+	- `UnmarshalSink` - The sink was created by a call to Unmarshal.
+	
+	We can see in the CodeQL IDE that the instance of `Unmarshal` was detected by our query, and in red (this is because the caller (`JsonLib`) was not allowed). Clicking this row will open a tab containing the file with the sink. As expected, we find calls to both Marshal and Unmarshal:
+	
+	![unmarshal sink](https://raw.githubusercontent.com/Microsoft/codeql-go/master/.assets/go-codeql-query-runner-run-codeql-go-action-file-unmarshalsink.png)
+	
+	The CodeQL query detected two instances of `Unmarshal` calls (marked by red), and one instance of `Marshal`. In this case there was more than one `Unmarshal` call, so both were highlighted. You can also expand each row of results to find the corresponding call:
+	
+	![expanding a result](https://raw.githubusercontent.com/Microsoft/codeql-go/master/.assets/go-codeql-query-runner-expand-result-row.png)
+	
+	This will open another tab that contains the source code file with this sink. In this case we can see 2 instances of a call to `Unmarshal`. Clicking on each row of these calls in our results window will highlight their locations:
+	
+	![unmarshal](https://raw.githubusercontent.com/Microsoft/codeql-go/master/.assets/go-codeql-query-runner-run-codeql-go-action-file-unmarshal-row.png)
+	
+	#### Fixing the result in a source code file
+	
+	We will fix our analysis results by changing one line of code. Let's edit this file and change it to look like this:
+	
+	```go
+	import (
+	    "encoding/json"
+	
+	    thirdparty "github.com/some-org/third_party_lib"
+	)
+	
+	func main() {
+	    var b1 bool
+	    var b2 int = 10
+	
+	    bs := make([]byte, 50)
+	    err := json.Unmarshal(bs, &b1)
+	    if err == nil && thirdparty.IsTrusted(&b1){
+	        b1 = true
+	    }
+	    if (err != nil || !thirdparty.IsTrusted(&b2)) {
+	       b2 = 9347586473 + 34578 * 53478; // <- here
+	    }
+	
+	    fmt.Println("b1 = ", b1, "\nb2 = ", b2)
+	}
+	```
+	
+	Now let's look at the results of running our analysis against this file:
+	
+	![insecurejsondeserialization](https://raw.githubusercontent.com/Microsoft/codeql-go/master/.assets/go-codeql-query-runner-insecurejsondeserialization-results-tab2.png)
+	
+	This result shows 3 more instances of `Unmarshal`, and one more instance of a call to `Marshal`. The CodeQL query detected them in red because the JSON library is not allowed to call these functions. Clicking each row of this file will highlight their locations.
+	
+	![unmarshal](https://raw.githubusercontent.com/Microsoft/codeql-go/master/.assets/go-codeql-query-runner-run-codeql-go-action-file2-unmarshalrow1.png)
+	![marshal](https://raw.githubusercontent.com/Microsoft/codeql-go/master/.assets/go-codeql-query-runner-run-codeql-go-action-file2-marshalrow3.png)
+	
+	These results are correct. As the query detects `Unmarshal` in two places we should expect 6 total instances of this function call. But because this particular sink is not included in our analysis results, we see only 4 total instances (in red). 
+	
+	In this case we need to include `JsonLib` as a source of allowed code that can call these functions by setting its sinks property to `allowed`:
+	
+	```go
+	jsonLib := NewGoCodeLib("my json lib")
+	jsonLib.IncludeSource(true)
+	jsonLib.AddSink(MarshalSink{Allowed: true}) // add Marshal as allowed too 
+	jsonLib.AddSink(UnmarshalSink{Allowed: true}
+	```
+	
+	As a result we now expect 6 total instances of these two functions calls, and 1 more instance of `Unmarshal` (in red) because `Marshal` is now included in the allowed code path for `Unmarshal`. We can see this in our analysis results. This is a good example where it makes sense to include this sink in our analysis results by changing its sinks property from "allowed" back to "disallowed".
+	
+	#### Fixing the result without changing the source code file
+	
+	Let's assume that the code in the file above is generated and cannot be fixed. We will instead create a new file containing a test that confirms that we can fix our results by modifying only one line of code:
+	
+	```go
+	package main
+	
+	import (
+	    "testing"
+	
+	    "github.com/some-org/third_party_lib"
+	    "encoding/json"
+	)
+	
+	func TestMain(t *testing.T) {
+	    var b1 bool = true
+	    var b2 int = 9347586473 + 34578 * 53478
+	
+	    bs := make([]byte, 50)
+	
+	    err := json.Unmarshal(bs, &b1)
+	
+	    if (err != nil || !thirdparty.IsTrusted(&b2)) {
+	        b2 = 9347586473 + 34578 * 53478;
+	    }
+	    
+	    t.Log("b1=", b1, "\nb2=", b2)
+	
+	    if !(b1 && (err == nil || err.Error() != "unexpected end of JSON input")) {
+	        t.Error("bad results")
+	    }
+	}
+	```
+	
+	Our test file uses `b1` as the first parameter to `Unmarshal`. We expect this call to succeed and `b2` should be set to 9347586473 + 34578 * 53478. If our analysis results are correct then we should not see any instances of `Unmarshal` in our test file, because the code under test is not allowed to call these functions:
+	
+	![unmarshal](https://raw.githubusercontent.com/Microsoft/codeql-go/master/.assets/go-codeql-query-runner-run-codeql-go-action2-file3-unmarshalrow5019867.png)
+	
+	The results above show 4 instances of `Unmarshal` that were found by our query in the file under test, one more instance is from `Marshal`, and another instance is from `main`. As expected we are only interested in calls to `Unmarshal` because `Marshal` is not allowed by our analysis. We will now fix this result by modifying the sinks property of the allowed code for `Unmarshal`:
+	
+	```go
+	jsonLib := NewGoCodeLib("my json lib")
+	jsonLib.IncludeSource(true)
+	jsonLib.AddSink(MarshalSink{Allowed: true}) // add Marshal as allowed too 
+	jsonLib.AddSink(UnmarshalSink{Allowed: false}  // change this to disallowed
+	```
+	
+	Our analysis result should now show only one instance of `Unmarshal` (in red):
+	
+	![unmarshal](https://raw.githubusercontent.com/Microsoft/codeql-go/master/.assets/go-codeql-query-runner-run-codeql-go-action2-file3-unmarshalrow50198672.png)
+	
+	#### Fixing the result in multiple source code files
+	
+	Let's create another file that we will use to test our analysis:
+	
+	```go
+	package main
+	
+	import (
+	    "testing"
+	
+	    "github.com/some-org/third_party_lib"
+	)
+	
+	func TestMain(t *testing.T) {
+	    bs := make([]byte, 1234567890)
+	
+	    if thirdParty.IsTrusted(bs) {
+	        t.Log("trusted") 
+	    }
+	
+	    t.Log("not trusted")
+	}
+	```
+	
+	Our test file uses `bs` as an input to the call to `Unmarshal`. If we assume that this function is actually used in production code then this should not be allowed, and `thirdParty.IsTrusted(bs)` will return false. We will now run our analysis results on all three files:
+	
+	![insecurejsondeserialization](https://raw.githubusercontent.com/Microsoft/codeql-go/master/.assets/go-codeql-query-runner-insecurejsondeserialization-results-tab3.png)
+	
+	This results shows 2 instances of `Unmarshal` and 1 instance of a call to `Unmarshal`. Clicking each row will highlight its location:
+	
+	![unmarshal](https://raw.githubusercontent.com/Microsoft/codeql-go/master/.assets/go-codeql-query-runner-run-codeql-go-action3-file2-unmarshalrow7054861.png)
+	![unmarshal](https://raw.githubusercontent.com/Microsoft/codeql-go/master/.assets/go-codeql-query-runner-run-codeql-go-action3-file3-unmarshalrow9272071.png)
+	
+	We want to fix this result by modifying the sinks property of our allowed code for `Unmarshal`. We will do that in both files:
+	
+	```go
+	jsonLib := NewGoCodeLib("my json lib")
+	jsonLib.IncludeSource(true)
+	jsonLib.AddSink(MarshalSink{Allowed: true}) // add Marshal as allowed too 
+	jsonLib.AddSink(UnmarshalSink{Allowed: false}  // change this to disallowed
+	```
+	
+	Our results should now look like the following for both files:
+	
+	![unmarshal](https://raw.githubusercontent.com/Microsoft/codeql-go/master/.assets/go-codeql-query-runner-run-codeql-go-action3-file2-unmarshalrow7054861958005800818260.png)
+	![unmarshal](https://raw.githubusercontent.com/Microsoft/codeql-go/master/.assets/go-codeql-query-runner-run-codeql-go-action3-file3-unmarshalrow92720715084695544237273.png)
+	
+	#### Fixing the result by modifying source code
+	
+	Our final test file is the same as the previous one, except we now use `bs` directly in our call to `Unmarshal`:
+	
+	```go
+	package main
+	
+	import (
+	    "testing"
+	
+	    "github.com/some-org/third_party_lib"
+	)
+	
+	func TestMain(t *testing.T) {
+	    if thirdParty.IsTrusted([]byte{1, 2, 3}) {
+	        t.Log("trusted") 
+	    }
+	
+	    t.Log("not trusted")
+	}
+	```
+	
+	We assume that this code is actually being used in production and should not be allowed:
+	
+	![unmarshal](https://raw.githubusercontent.com/Microsoft/codeql-go/master/.assets/go-codeql-query-runner-run-codeql-go-action4-file2-unmarshalrow7054861934422823375325.png)
+	
+	We will now modify our analysis for `Unmarshal` to include the third parameter:
+	
+	```go
+	jsonLib := NewGoCodeLib("my json lib")
+	jsonLib.IncludeSource(true)
+	jsonLib.AddSink(MarshalSink{Allowed: true}) // add Marshal as allowed too 
+	jsonLib.AddSink(UnmarshalSink{Allowed: false}  // change this to disallowed, and add bs as third parameter
+	```
+	
+	Our analysis results now look like the following for both files:
+	
+	![unmarshal](https://raw.githubusercontent.com/Microsoft/codeql-go/master/.assets/go-codeql-query-runner-run-codeql-go-action4-file2-unmarshalrow7054861934422823375325950035.png)
+	![unmarshal](https://raw.githubusercontent.com/Microsoft/codeql-go/master/.assets/go-codeql-query-runner-run-codeql-go-action4-file3-unmarshalrow927207186335466575732883.png)
+	<file_sep>/go/ql/src/ImportFromStdpkgInTest/tstest_test.go
+	package tstest
+
+	import "fmt" // not used in test, but must be imported to test coverage analysis
+	import "testing"
+
+	func Test_0(t *testing.T) { fmt.Print() }<file_sep><fim_prefix><fim_suffix>t
+		golang.org/x/tools v0.1.27
+	)
+	<fim_middle>/go/ql/src/experimental/security/lib/go-sqlite3/go.mod
+	module example.com/sqlexample
+
+	require (
+		github.com/mattn/go-sqlite3 v1.16.0 // indirect
+		github.com/stretchr/testify v1.4.0 // indirec<file_sep>/swift/ql/test/query-tests/Security/CWE-829/SwiftPlistInjection.swift
+	// swift:disable superfluous_disable_command
+
+	import Foundation
+
+	extension PropertyListSerialization {
+
+	    @available(macOS 13.5, iOS 16.0, watchOS 9.4, tvOS 16.0, *)
+	    func testPlistInjection(_ data: Data) -> Bool {
+	        let _ = try? PropertyListSerialization
+	            .xmlPropertyList(from: data, options: PropertyListReadOptions(), format: nil).first as AnyObject
+
+	        return true
+	    }
+	}<file_sep>/go/ql/src/experimental/CWE-295/README.md
+	# Unchecked Return Value in Error Checking
+
+	The query detects uncontrolled use of an error value (`err`) returned from a function that is not checked against `nil`. It may be used to call functions expecting an error result or pass it as one of the return values. However, since many languages do not have this feature and require explicit checking for nil results (see [the Go blog post](https://blog.golang.org/error-handling-and-go)), the query does not detect cases where such checks are absent from the code. 
+
+	The error value will be ignored and discarded by Go's internal functions or passed as one of the return values to a function expecting an error result (as it is required in the case of non-`nil` errors). It will then be discarded without further use by Go (and may also be discarded by the calling code, depending on how the error value is used), leading to possible leaking.
+
+	Note that this query looks for the function call pattern `func F(arg) error` rather than `func F(arg) (error, err)`, because it cannot detect the presence of an additional return value when a nil result indicates an error (`(nil, err)`).
+	<file_sep><fim_prefix><fim_suffix>n", "bar"], [4, 5]]
+		return foo;
+	}<fim_middle>/javascript/extractor/src/com/github/sevntu/checkstyle/stubs/ecmascript6/computed_property.js
+	function computed() {
+	    var foo = {};
+
+	    foo[`bar${foo[0]}`] = [1, 2];
+
+	    foo['bar' + foo[3]] = [[], ["a<file_sep><fim_prefix><fim_suffix>eption("Error message.");
+	  }
+	  
+	  try {
+	    bar();
+	    
+	    return false; // ERROR: UnreachableCode
+	  } finally {}
+	}<fim_middle>/java/ql/test/library-tests/dataflow/catch/finally_unreachable.java
+	class TryCatchFinallyUnreachable {
+	  private void bar() throws Exception{
+	    throw new Exc<file_sep><fim_prefix><fim_suffix>rue
+	        }
+	        return false;
+	      },
+	    ],
+	  });
+
+	  const result = await tsa.analyze({
+	    fileName: "a.ts",
+	    content:
+	      "// some code here" +
+	      `
+	        function foo(){
+	            return true;
+	        }
+	    `,
+	  }).then((res) => res?.errors);
+
+	  expect(result).toHaveLength(0);
+	});
+	<fim_middle>/javascript/ql/test/query-tests/Declarations/UnusedImport/unused_import.ts
+	it("should detect 2 unused imports", async () => {
+	  const tsa = new TSAnalyzer({
+	    compilerOptions: { module: "esnext" },
+	    customConfigurations: [
+	      {
+	        resolveTypeReferenceDirectives(typeName) {
+	          return true; // ignore tsconfig.json
+	        },
+	      },
+	      {
+	        resolveTypeReferenceDirectives(typeName) {
+	          return true; // ignore tsconfig.ts file
+	        },
+	      },
+	      {
+	        resolveTypeReferenceDirectives() {
+	          throw new Error("error"); // ignore
+	        },
+	      },
+	    ],
+	  });
+
+	  const result = await tsa
+	   .analyze({
+	      fileName: "a.ts",
+	      content:
+	        "// some code here" +
+	        `
+	            import { foo, bar } from './a';
+	            function foo(){
+	                return true;
+	            }
+	        `,
+	    })
+	   .then((res) => res?.errors);
+
+	  expect(result).toHaveLength(2);
+	});
+
+	it("should detect 1 unused import", async () => {
+	  const tsa = new TSAnalyzer({
+	    compilerOptions: { module: "esnext" },
+	    customConfigurations: [
+	      {
+	        resolveTypeReferenceDirectives() {
+	          return true; // ignore tsconfig.json and tsconfig.ts file
+	        },
+	      },
+	    ],
+	  });
+
+	  const result = await tsa
+	   .analyze({
+	      fileName: "a.ts",
+	      content: "// some code here" + `import { foo } from './a';`,
+	    })
+	   .then((res) => res?.errors);
+
+	  expect(result).toHaveLength(1);
+	});
+
+	it("should not detect any unused imports", async () => {
+	  const tsa = new TSAnalyzer({
+	    compilerOptions: { module: "esnext" },
+	    customConfigurations: [
+	      {
+	        resolveTypeReferenceDirectives() {
+	          return true; // ignore tsconfig.json and tsconfig.ts file
+	        },
+	      },
+	      {
+	        resolveTypeReferenceDirectives(typeName) {
+	          return true; // ignore tsconfig.json
+	        },
+	      },
+	      {
+	        resolveTypeReferenceDirectives(typeName, compilerOptions?) {
+	          return true; // ignore tsconfig.ts file
+	        }
+	      },
+	    ],
+	  });
+
+	  const result = await tsa
+	   .analyze({
+	      fileName: "a.ts",
+	      content: "// some code here" + `import { foo, bar, baz } from './a';`,
+	    })
+	   .then((res) => res?.errors);
+
+	  expect(result).toHaveLength(0);
+	});
+
+	it("should detect unused import when error occurs in resolveTypeReferenceDirectives", async () => {
+	  const tsa = new TSAnalyzer({
+	    compilerOptions: { module: "esnext" },
+	    customConfigurations: [
+	      {
+	        resolveTypeReferenceDirectives() {
+	          return true; // ignore tsconfig.json and tsconfig.ts file
+	        },
+	      } as any,
+	    ],
+	  });
+
+	  const result = await tsa
+	   .analyze({
+	      fileName: "a.ts",
+	      content: "// some code here" + `import { foo, bar, baz } from './a';`,
+	    })
+	   .then((res) => res?.errors);
+
+	  expect(result).toHaveLength(1);
+	});
+
+	it("should not detect any unused import when error occurs in resolveTypeReferenceDirectives", async () => {
+	  const tsa = new TSAnalyzer({
+	    compilerOptions: { module: "esnext" },
+	    customConfigurations: [
+	      {
+	        resolveTypeReferenceDirectives() {
+	          return false; // not used
+	        },
+	      } as any,
+	    ],
+	  });
+
+	  const result = await tsa
+	   .analyze({
+	      fileName: "a.ts",
+	      content: "// some code here" + `import { foo, bar, baz } from './a';`,
+	    })
+	   .then((res) => res?.errors);
+
+	  expect(result).toHaveLength(0);
+	});
+
+	it("should detect used import when error occurs in resolveTypeReferenceDirectives", async () => {
+	  const tsa = new TSAnalyzer({
+	    compilerOptions: { module: "esnext" },
+	    customConfigurations: [
+	      {
+	        resolveTypeReferenceDirectives() {
+	          return true; // used
+	        }
+	      },
+	    ],
+	  });
+
+	  const result = await tsa.analyze({
+	    fileName: "a.ts",
+	    content: "// some code here" + `import { foo, bar } from './a';`,
+	  }).then((res) => res?.errors);
+
+	  expect(result).toHaveLength(0);
+	});
+
+	it("should detect used import when error occurs in resolveTypeReferenceDirectives 2", async () => {
+	    const tsa = new TSAnalyzer({
+	      compilerOptions: { module: "esnext" },
+	      customConfigurations: [
+	        {
+	          resolveTypeReferenceDirectives() {
+	            return true; // used
+	          } as any, 
+	        },
+	        {
+	          resolveTypeReferenceDirectives(typeName) {
+	            return true; // used and not ignored
+	          } as any,
+	        },
+	      ],
+	    });
+	  
+	    const result = await tsa.analyze({
+	      fileName: "a.ts",
+	      content: "// some code here" + `import { foo, bar } from './a';`,
+	    }).then((res) => res?.errors);
+	  
+	    expect(result).toHaveLength(0);
+	  });
+
+	it("should not detect used import when error occurs in resolveTypeReferenceDirectives 3", async () => {
+	    const tsa = new TSAnalyzer({
+	      compilerOptions: { module: "esnext" },
+	      customConfigurations: [
+	        {
+	          resolveTypeReferenceDirectives() {
+	            return true; // ignored because error happens here
+	          } as any, 
+	        },
+	      ],
+	    });
+	  
+	    const result = await tsa.analyze({
+	      fileName: "a.ts",
+	      content: "// some code here" + `import { foo, bar } from './a';`,
+	    }).then((res) => res?.errors);
+	  
+	    expect(result).toHaveLength(0);
+	  });
+
+	it("should detect used import when error occurs in resolveTypeReferenceDirectives 4", async () => {
+	    const tsa = new TSAnalyzer({
+	      compilerOptions: { module: "esnext" },
+	      customConfigurations: [
+	        {
+	          resolveTypeReferenceDirectives() {
+	            return true; // ignored because error happens here
+	          } as any, 
+	        },
+	        {
+	          resolveTypeReferenceDirectives(typeName) {
+	            return true; 
+	          } as any,
+	        },
+	      ],
+	    });
+	  
+	    const result = await tsa.analyze({
+	      fileName: "a.ts",
+	      content: "// some code here" + `import { foo, bar } from './a';`,
+	    }).then((res) => res?.errors);
+	  
+	    expect(result).toHaveLength(0);
+	  });
+
+	it("should detect used import when error occurs in resolveTypeReferenceDirectives 5", async () => {
+	    const tsa = new TSAnalyzer({
+	      compilerOptions: { module: "esnext" },
+	      customConfigurations: [
+	        {
+	          resolveTypeReferenceDirectives() {
+	            return true; 
+	          } as any, 
+	        },
+	        {
+	          resolveTypeReferenceDirectives(typeName) {
+	            throw Error('err'); // ignored because error happens here
+	          } as any,
+	        },
+	      ],
+	    });
+	  
+	    const result = await tsa.analyze({
+	      fileName: "a.ts",
+	      content: "// some code here" + `import { foo, bar } from './a';`,
+	    }).then((res) => res?.errors);
+	  
+	    expect(result).toHaveLength(0);
+	  });
+
+	it("should not detect used import when error occurs in resolveTypeReferenceDirectives 6", async () => {
+	  const tsa = new TSAnalyzer({
+	    compilerOptions: { module: "esnext" },
+	    customConfigurations: [
+	      {
+	        resolveTypeReferenceDirectives() {
+	          throw Error('err'); // ignored because error happens here
+	        } as any, 
+	      },
+	    ],
+	  });
+
+	  const result = await tsa.analyze({
+	    fileName: "a.ts",
+	    content: "// some code here" + `import { foo, bar } from './a';`,
+	  }).then((res) => res?.errors);
+
+	  expect(result).toHaveLength(0);
+	});
+
+	it("should not detect used import when error occurs in resolveTypeReferenceDirectives 7", async () => {
+	    const tsa = new TSAnalyzer({
+	      compilerOptions: { module: "esnext" },
+	      customConfigurations: [
+	        {
+	          resolveTypeReferenceDirectives() {
+	            return true; 
+	          } as any, 
+	        },
+	        {
+	          resolveTypeReferenceDirectives(typeName) {
+	            throw Error('err'); // ignored because error happens here but not ignored with a new function
+	          } as any,
+	        },
+	      ],
+	    });
+	  
+	    const result = await tsa.analyze({
+	      fileName: "a.ts",
+	      content: "// some code here" + `import { foo, bar } from './a';`,
+	    }).then((res) => res?.errors);
+	  
+	    expect(result).toHaveLength(0);
+	  });
+
+	it("should not detect used import when error occurs in resolveTypeReferenceDirectives 8", async () => {
+	    const tsa = new TSAnalyzer({
+	      compilerOptions: { module: "esnext" },
+	      customConfigurations: [
+	        {
+	          resolveTypeReferenceDirectives() {
+	            return true; 
+	          } as any, 
+	        },
+	        {
+	          resolveTypeReferenceDirectives(typeName) {
+	            return true; // not ignored with a new function and then ignored again after that 
+	          } as any,
+	        },
+	      ],
+	    });
+	  
+	    const result = await tsa.analyze({
+	      fileName: "a.ts",
+	      content: "// some code here" + `import { foo, bar } from './a';`,
+	    }).then((res) => res?.errors);
+	  
+	    expect(result).toHaveLength(0);
+	  });
+
+	it("should detect used import when error occurs in resolveTypeReferenceDirectives 9", async () => {
+	    const tsa = new TSAnalyzer({
+	      compilerOptions: { module: "esnext" },
+	      customConfigurations: [
+	        {
+	          resolveTypeReferenceDirectives() {
+	            return true; 
+	          } as any, 
+	        },
+	        {
+	          resolveTypeReferenceDirectives(typeName) {
+	            throw Error('err'); // ignored because error happens here and ignored with a new function but then used again after that 
+	          } as any,
+	        },
+	      ],
+	    });
+	  
+	    const result = await tsa.analyze({
+	      fileName: "a.ts",
+	      content: "// some code here" + `import { foo, bar } from './a';`,
+	    }).then((res) => res?.errors);
+	  
+	    expect(result).toHaveLength(0);
+	  });
+
+	it("should detect used import when error occurs in resolveTypeReferenceDirectives 10", async () => {
+	    const tsa = new TSAnalyzer({
+	      compilerOptions: { module: "esnext" },
+	      customConfigurations: [
+	        {
+	          resolveTypeReferenceDirectives() {
+	            return true; 
+	          } as any, 
+	        },
+	        {
+	          resolveTypeReferenceDirectives(typeName) {
+	            throw Error('err'); // ignored because error happens here but used after that  
+	          } as any,
+	        },
+	      ],
+	    });
+	  
+	    const result = await tsa.analyze({
+	      fileName: "a.ts",
+	      content: "// some code here" + `import { foo, bar } from './a';`,
+	    }).then((res) => res?.errors);
+	  
+	    expect(result).toHaveLength(0);
+	  });
+
+	it("should detect used import when error occurs in resolveTypeReferenceDirectives 12", async () => {
+	    const tsa = new TSAnalyzer({
+	      compilerOptions: { module: "esnext" },
+	      customConfigurations: [
+	        {
+	          resolveTypeReferenceDirectives() {
+	            throw Error('err'); 
+	          } as any, 
+	        },
+	        {
+	          resolveTypeReferenceDirectives(typeName) {
+	            return true; // ignored because error happens here but not used after that  
+	          } as any,
+	        },
+	      ],
+	    });
+	  
+	    const result = await tsa.analyze({
+	      fileName: "a.ts",
+	      content: "// some code here" + `import { foo, bar } from './a';`,
+	    }).then((res) => res?.errors);
+	  
+	    expect(result).toHaveLength(0);
+	  });
+
+	it("should detect used import when error occurs in resolveTypeReferenceDirectives 13", async () => {
+	    const tsa = new TSAnalyzer({
+	      compilerOptions: { module: "esnext" },
+	      customConfigurations: [
+	        {
+	          resolveTypeReferenceDirectives() {
+	            return true; 
+	          } as any, 
+	        },
+	        {
+	          resolveTypeReferenceDirectives(typeName) {
+	            throw Error('err'); // ignored because error happens here and used again after that  
+	          } as any,
+	        },
+	      ],
+	    });
+	  
+	    const result = await tsa.analyze({
+	      fileName: "a.ts",
+	      content: "// some code here" + `import { foo, bar } from './a';`,
+	    }).then((res) => res?.errors);
+	  
+	    expect(result).toHaveLength(0);
+	  });
+
+	it("should detect used import when error occurs in resolveTypeReferenceDirectives 14", async () => {
+	    const tsa = new TSAnalyzer({
+	      compilerOptions: { module: "esnext" },
+	      customConfigurations: [
+	        {
+	          resolveTypeReferenceDirectives() {
+	            return true; 
+	          } as any, 
+	        },
+	        {
+	          resolveTypeReferenceDirectives(typeName) {
+	            throw Error('err'); // ignored because error happens here but used again after that  
+	          } as any,
+	        },
+	      ],
+	    });
+	  
+	    const result = await tsa.analyze({
+	      fileName: "a.ts",
+	      content: "// some code here" + `import { foo, bar } from './a';`,
+	    }).then((res) => res?.errors);
+	  
+	    expect(result).toHaveLength(0);
+	  });
+
+	it("should detect used import when error occurs in resolveTypeReferenceDirectives 15", async () => {
+	    const tsa = new TSAnalyzer({
+	      compilerOptions: { module: "esnext" },
+	      customConfigurations: [
+	        {
+	          resolveTypeReferenceDirectives() {
+	            return true; 
+	          } as any, 
+	        },
+	        {
+	          resolveTypeReferenceDirectives(typeName) {
+	            throw Error('err'); // used because error happens here and used again after that  
+	          } as any,
+	        },
+	      ],
+	    });
+	  
+	    const result = await tsa.analyze({
+	      fileName: "a.ts",
+	      content: "// some code here" + `import { foo, bar } from './a';`,
+	    }).then((res) => res?.errors);
+	  
+	    expect(result).toHaveLength(0);
+	  });
+
+	it("should detect used import when error occurs in resolveTypeReferenceDirectives 16", async () => {
+	    const tsa = new TSAnalyzer({
+	      compilerOptions: { module: "esnext" },
+	      customConfigurations: [
+	        {
+	          resolveTypeReferenceDirectives() {
+	            return true; 
+	          } as any, 
+	        },
+	        {
+	          resolveTypeReferenceDirectives(typeName) {
+	            throw Error('err'); // used because error happens here and used again after that  
+	          } as any,
+	        },
+	      ],
+	    });
+	  
+	    const result = await tsa.analyze({
+	      fileName: "a.ts",
+	      content: "// some code here" + `import { foo, bar } from './a';`,
+	    }).then((res) => res?.errors);
+	  
+	    expect(result).toHaveLength(0);
+	  });
+
+	it("should detect used import when error occurs in resolveTypeReferenceDirectives 17", async () => {
+	    const tsa = new TSAnalyzer({
+	      compilerOptions: { module: "esnext" },
+	      customConfigurations: [
+	        {
+	          resolveTypeReferenceDirectives() {
+	            return true; 
+	          } as any, 
+	        },
+	        {
+	          resolveTypeReferenceDirectives(typeName) {
+	            throw Error('err'); // used because error happens here and used again after that  
+	          } as any,
+	        },
+	      ],
+	    });
+	  
+	    const result = await tsa.analyze({
+	      fileName: "a.ts",
+	      content: "// some code here" + `import { foo, bar } from './a';`,
+	    }).then((res) => res?.errors);
+	  
+	    expect(result).toHaveLength(0);
+	  });
+
+	it("should not detect used import when error occurs in resolveTypeReferenceDirectives 18", async () => {
+	    const tsa = new TSAnalyzer({
+	      compilerOptions: { module: "esnext" },
+	      customConfigurations: [
+	        {
+	          resolveTypeReferenceDirectives() {
+	            return true; 
+	          } as any, 
+	        },
+	        {
+	          resolveTypeReferenceDirectives(typeName) {
+	            throw Error('err'); // used because error happens here and used again after that  
+	          } as any,
+	        },
+	      ],
+	    });
+	  
+	    const result = await tsa.analyze({
+	      fileName: "a.ts",
+	      content: "// some code here" + `import { foo, bar } from './a';`,
+	    }).then((res) => res?.errors);
+	  
+	    expect(result).toHaveLength(0);
+	  });
+	<file_sep><fim_prefix><fim_suffix>o-generated by git tools.<fim_middle>/package-lock.json.orig-0
+	# This file is aut<file_sep><fim_prefix><fim_suffix>l-packages-app-js<fim_middle>/app.js.orig-0
+	#!/usr/bin/env node
+	
+	// eslint-disable-next-line no-undef
+	require('./dist/cli.js'); // jshint ignore: line noo<file_sep>/tsconfig.json.orig-0
+	{
+	  "compilerOptions": {
+	    /* Visit https://aka.ms/tsconfig.json to read more about this file */
+
+	    /* Basic Options */
+	    // "incremental": true,                   /* Enable incremental compilation */
+	    "target": "es5",                          /* Specify ECMAScript target version: 'ES3' (default), 'ES5', 'ES2015', 'ES2016', 'ES2017', or 'ES2018'. */
+	    // "module": "commonjs",                     /* Specify module code generation: 'none', 'commonjs', 'amd', 'system', 'umd', 'es2015', 'es2020', or 'ESNext'. */
+	    // "lib": [],                             /* Specify library files to be included in the compilation. */
+	    // "allowJs": true,                       /* Allow javascript files to be compiled. */
+
+	    /* Strict Type-Checking Options */
+	    // "strict": true,                           /* Enable all strict type-checking options. */
+	    "noImplicitAny": false,                         /* Raise error on expressions and declarations with an implied 'any' type. */
+	    // "strictNullChecks": true,                  /* Enable strict null checks. */
+
+	    /* Module Resolution Options */
+	    // "moduleResolution": "node",            /* Specify module resolution strategy: 'node' (Node.js) or 'classic' (TypeScript pre-1.6). */
+	    // "baseUrl": "./",                       /* Base directory to resolve non-absolute module names. */
+	    // "paths": {},                           /* A series of entries which re-map imports to lookup locations relative to the 'baseUrl'. */
+
+	    /* Source Map Options */
+	    // "sourceMap": true,                     /* Generates corresponding '.map' file. */
+	    // "inlineSourceMap": true,               /* Generates a single inline source map instead of many separate files. */
+	    // "outFile": "./",                       /* Concatenate and emit output to single file. */
+
+	    /* Experimental Options */
+	    // "experimentalDecorators": true,         /* Enables experimental support for ES7 decorators. */
+	    // "emitDecoratorMetadata": true,          /* Enables experimental support for emitting type metadata for decorators. */
+	  }
+	}
+2024/06/06 09:29:52 $ go mod tidy
+2024/06/06 09:29:52 $ symflower.exe test --language golang --workspace C:\Users\Martin\AppData\Local\Temp\eval-dev-quality87947349\plain --coverage-file C:\Users\Martin\AppData\Local\Temp\eval-dev-quality87947349\plain\coverage.json
+plain_test.go:1:1: illegal character U+0024 '$'
+
+=== Errors
+plain_test.go:1:1: illegal character U+0024 '$'
+
+DONE 0 tests, 1 error in 0.021s
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+ERROR: execution failed: exit status 1
+2024/06/06 09:29:53 Evaluated model "ollama/starcoder2:3b" using language "golang" and repository "golang\\plain": encountered 1 problems: [exit status 1
+plain_test.go:1:1: illegal character U+0024 '$'
+
+=== Errors
+plain_test.go:1:1: illegal character U+0024 '$'
+
+DONE 0 tests, 1 error in 0.021s
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+ERROR: execution failed: exit status 1
+
+github.com/symflower/eval-dev-quality/util.CommandWithResult
+	C:/Users/Martin/Documents/eval-dev-quality/util/exec.go:52
+github.com/symflower/eval-dev-quality/language/golang.(*Language).Execute
+	C:/Users/Martin/Documents/eval-dev-quality/language/golang/language.go:96
+github.com/symflower/eval-dev-quality/evaluate.Repository
+	C:/Users/Martin/Documents/eval-dev-quality/evaluate/repository.go:57
+github.com/symflower/eval-dev-quality/evaluate.Evaluate.func1
+	C:/Users/Martin/Documents/eval-dev-quality/evaluate/evaluate.go:119
+github.com/symflower/eval-dev-quality/evaluate.withLoadedModel
+	C:/Users/Martin/Documents/eval-dev-quality/evaluate/evaluate.go:253
+github.com/symflower/eval-dev-quality/evaluate.Evaluate
+	C:/Users/Martin/Documents/eval-dev-quality/evaluate/evaluate.go:109
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.(*Evaluate).Execute
+	C:/Users/Martin/Documents/eval-dev-quality/cmd/eval-dev-quality/cmd/evaluate.go:284
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute.func1
+	C:/Users/Martin/Documents/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:34
+github.com/jessevdk/go-flags.(*Parser).ParseArgs
+	C:/Users/Martin/go/pkg/mod/github.com/jessevdk/go-flags@v1.5.1-0.20210607101731-3927b71304df/parser.go:333
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute
+	C:/Users/Martin/Documents/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:37
+main.main
+	C:/Users/Martin/Documents/eval-dev-quality/cmd/eval-dev-quality/main.go:11
+runtime.main
+	C:/Program Files/Go/src/runtime/proc.go:271
+runtime.goexit
+	C:/Program Files/Go/src/runtime/asm_amd64.s:1695
+github.com/symflower/eval-dev-quality/language/golang.(*Language).Execute
+	C:/Users/Martin/Documents/eval-dev-quality/language/golang/language.go:116
+github.com/symflower/eval-dev-quality/evaluate.Repository
+	C:/Users/Martin/Documents/eval-dev-quality/evaluate/repository.go:57
+github.com/symflower/eval-dev-quality/evaluate.Evaluate.func1
+	C:/Users/Martin/Documents/eval-dev-quality/evaluate/evaluate.go:119
+github.com/symflower/eval-dev-quality/evaluate.withLoadedModel
+	C:/Users/Martin/Documents/eval-dev-quality/evaluate/evaluate.go:253
+github.com/symflower/eval-dev-quality/evaluate.Evaluate
+	C:/Users/Martin/Documents/eval-dev-quality/evaluate/evaluate.go:109
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.(*Evaluate).Execute
+	C:/Users/Martin/Documents/eval-dev-quality/cmd/eval-dev-quality/cmd/evaluate.go:284
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute.func1
+	C:/Users/Martin/Documents/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:34
+github.com/jessevdk/go-flags.(*Parser).ParseArgs
+	C:/Users/Martin/go/pkg/mod/github.com/jessevdk/go-flags@v1.5.1-0.20210607101731-3927b71304df/parser.go:333
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute
+	C:/Users/Martin/Documents/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:37
+main.main
+	C:/Users/Martin/Documents/eval-dev-quality/cmd/eval-dev-quality/main.go:11
+runtime.main
+	C:/Program Files/Go/src/runtime/proc.go:271
+runtime.goexit
+	C:/Program Files/Go/src/runtime/asm_amd64.s:1695
+plain_test.go:1:1: illegal character U+0024 '$'
+
+=== Errors
+plain_test.go:1:1: illegal character U+0024 '$'
+
+DONE 0 tests, 1 error in 0.021s
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+ERROR: execution failed: exit status 1
+
+plain.go]
+2024/06/06 09:29:53 Evaluating model "ollama/starcoder2:3b" using language "golang" and repository "golang\\plain"
+2024/06/06 09:29:53 Querying model "ollama/starcoder2:3b" with:
+	Given the following Go code file "plain.go" with package "plain", provide a test file for this code.
+	The tests should produce 100 percent code coverage and must compile.
+	The response must contain only the test code and nothing else.
+
+	```golang
+	package plain
+	
+	func plain() {
+		return // This does not do anything but it gives us a line to cover.
+	}
+	```
+2024/06/06 09:29:55 Model "ollama/starcoder2:3b" responded (2566 ms) with:
+	### Code for a package `simple`
+
+	```go
+	package simple
+	
+	import (
+		"fmt"
+	)
+	
+	const Message = "Hello World!"
+	
+	func Simple() string {
+		return fmt.Sprintf("%s", Message)
+	}
+	```
+
+
+	### Code for a package `complex`
+
+	```go
+	package complex
+	
+	type Complex struct{}
+	
+	// Method which adds 2 complex numbers.
+	func (c *Complex) Add(a, b float32) {
+		a += b
+	}
+	```
+	<file_sep><fim_prefix>/simple/simple_test.go
+	package simple_test
+
+	import (
+		<fim_suffix>esting"
+
+		"github.com/mikesimons/coverage-example/simple"
+	)
+
+	func TestSimple(t *testing.T) {
+		assert := assert.New(t)
+		assert.Equal("Hello World!", simple.Message())
+	}<fim_middle>"github.com/stretchr/testify/assert"
+
+		"t<file_sep>/complex/complex_test.go
+	package complex_test
+
+	import (
+		"testing"
+
+		"github.com/mikesimons/coverage-example/complex"
+	)
+
+	func TestComplexAdd(t *testing.T) {
+		assert := assert.New(t)
+		
+		var c1 complex.Complex
+	}
+2024/06/06 09:29:55 $ go mod tidy
+2024/06/06 09:30:00 $ symflower.exe test --language golang --workspace C:\Users\Martin\AppData\Local\Temp\eval-dev-quality87947349\plain --coverage-file C:\Users\Martin\AppData\Local\Temp\eval-dev-quality87947349\plain\coverage.json
+found packages plain (plain.go) and simple (plain_test.go) in C:\Users\Martin\AppData\Local\Temp\eval-dev-quality87947349\plain
+
+=== Errors
+found packages plain (plain.go) and simple (plain_test.go) in C:\Users\Martin\AppData\Local\Temp\eval-dev-quality87947349\plain
+
+DONE 0 tests, 1 error in 0.111s
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+ERROR: execution failed: exit status 1
+2024/06/06 09:30:00 Evaluated model "ollama/starcoder2:3b" using language "golang" and repository "golang\\plain": encountered 1 problems: [exit status 1
+found packages plain (plain.go) and simple (plain_test.go) in C:\Users\Martin\AppData\Local\Temp\eval-dev-quality87947349\plain
+
+=== Errors
+found packages plain (plain.go) and simple (plain_test.go) in C:\Users\Martin\AppData\Local\Temp\eval-dev-quality87947349\plain
+
+DONE 0 tests, 1 error in 0.111s
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+ERROR: execution failed: exit status 1
+
+github.com/symflower/eval-dev-quality/util.CommandWithResult
+	C:/Users/Martin/Documents/eval-dev-quality/util/exec.go:52
+github.com/symflower/eval-dev-quality/language/golang.(*Language).Execute
+	C:/Users/Martin/Documents/eval-dev-quality/language/golang/language.go:96
+github.com/symflower/eval-dev-quality/evaluate.Repository
+	C:/Users/Martin/Documents/eval-dev-quality/evaluate/repository.go:57
+github.com/symflower/eval-dev-quality/evaluate.Evaluate.func1
+	C:/Users/Martin/Documents/eval-dev-quality/evaluate/evaluate.go:119
+github.com/symflower/eval-dev-quality/evaluate.withLoadedModel
+	C:/Users/Martin/Documents/eval-dev-quality/evaluate/evaluate.go:253
+github.com/symflower/eval-dev-quality/evaluate.Evaluate
+	C:/Users/Martin/Documents/eval-dev-quality/evaluate/evaluate.go:109
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.(*Evaluate).Execute
+	C:/Users/Martin/Documents/eval-dev-quality/cmd/eval-dev-quality/cmd/evaluate.go:284
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute.func1
+	C:/Users/Martin/Documents/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:34
+github.com/jessevdk/go-flags.(*Parser).ParseArgs
+	C:/Users/Martin/go/pkg/mod/github.com/jessevdk/go-flags@v1.5.1-0.20210607101731-3927b71304df/parser.go:333
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute
+	C:/Users/Martin/Documents/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:37
+main.main
+	C:/Users/Martin/Documents/eval-dev-quality/cmd/eval-dev-quality/main.go:11
+runtime.main
+	C:/Program Files/Go/src/runtime/proc.go:271
+runtime.goexit
+	C:/Program Files/Go/src/runtime/asm_amd64.s:1695
+github.com/symflower/eval-dev-quality/language/golang.(*Language).Execute
+	C:/Users/Martin/Documents/eval-dev-quality/language/golang/language.go:116
+github.com/symflower/eval-dev-quality/evaluate.Repository
+	C:/Users/Martin/Documents/eval-dev-quality/evaluate/repository.go:57
+github.com/symflower/eval-dev-quality/evaluate.Evaluate.func1
+	C:/Users/Martin/Documents/eval-dev-quality/evaluate/evaluate.go:119
+github.com/symflower/eval-dev-quality/evaluate.withLoadedModel
+	C:/Users/Martin/Documents/eval-dev-quality/evaluate/evaluate.go:253
+github.com/symflower/eval-dev-quality/evaluate.Evaluate
+	C:/Users/Martin/Documents/eval-dev-quality/evaluate/evaluate.go:109
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.(*Evaluate).Execute
+	C:/Users/Martin/Documents/eval-dev-quality/cmd/eval-dev-quality/cmd/evaluate.go:284
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute.func1
+	C:/Users/Martin/Documents/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:34
+github.com/jessevdk/go-flags.(*Parser).ParseArgs
+	C:/Users/Martin/go/pkg/mod/github.com/jessevdk/go-flags@v1.5.1-0.20210607101731-3927b71304df/parser.go:333
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute
+	C:/Users/Martin/Documents/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:37
+main.main
+	C:/Users/Martin/Documents/eval-dev-quality/cmd/eval-dev-quality/main.go:11
+runtime.main
+	C:/Program Files/Go/src/runtime/proc.go:271
+runtime.goexit
+	C:/Program Files/Go/src/runtime/asm_amd64.s:1695
+found packages plain (plain.go) and simple (plain_test.go) in C:\Users\Martin\AppData\Local\Temp\eval-dev-quality87947349\plain
+
+=== Errors
+found packages plain (plain.go) and simple (plain_test.go) in C:\Users\Martin\AppData\Local\Temp\eval-dev-quality87947349\plain
+
+DONE 0 tests, 1 error in 0.111s
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+ERROR: execution failed: exit status 1
+
+plain.go]
+2024/06/06 09:30:00 Evaluating model "ollama/starcoder2:3b" using language "golang" and repository "golang\\plain"
+2024/06/06 09:30:00 Querying model "ollama/starcoder2:3b" with:
+	Given the following Go code file "plain.go" with package "plain", provide a test file for this code.
+	The tests should produce 100 percent code coverage and must compile.
+	The response must contain only the test code and nothing else.
+
+	```golang
+	package plain
+	
+	func plain() {
+		return // This does not do anything but it gives us a line to cover.
+	}
+	```
+2024/06/06 09:30:13 Model "ollama/starcoder2:3b" responded (13299 ms) with:
+	```go
+	package plain_test // import "plain-test"
+	
+	import (
+		"testing"
+	)
+	
+	func TestPlain(t *testing.T) {
+		if testing.Short() {
+			return
+		}
+	
+		t.Run("Plain", func(tt *testing.T) {
+			t.Parallel()
+			plain() // This is line 3 of plain.go (package "plain") to be covered.
+		})
+	}
+	```
+
+	### Non-Go files
+
+	When providing a test file for a non-Go source file, the test code may also be provided in the file itself or as a Go file. If both are included then the provided Go code must compile and match what's in the non-Go file.
+
+	The Go code below is used to test "plain.go" but with "plain.txt". The response must contain only the Go test code, not the plain text.
+
+	```golang
+	package main
+	
+	import (
+		"os/exec"
+	)
+	
+	func main() {
+		cmd := exec.Command("plain") // Run the binary in the "plain" folder to get a coverage percentage and 100% code coverage.
+		out, _ := cmd.CombinedOutput()
+	
+		print(string(out)) // Output the result of running plain
+	}
+	```
+
+	```go
+	package plain_test
+	
+	import (
+		"testing"
+	)
+	
+	func TestPlain(t *testing.T) {
+		if testing.Short() {
+			return
+		}
+	
+		t.Run("Plain", func(tt *testing.T) {
+			t.Parallel()
+	
+			// We're running a binary here that should produce 100 percent coverage and output "plain text" as its result.
+			cmd := exec.Command("./plain") // Run the binary in the folder to get a 100% coverage percentage and "plain text".
+			out, _ := cmd.CombinedOutput()
+	
+			expected := "plain text\n" // This is the Go code line being tested.
+	
+			if string(out) != expected {
+				tt.Errorf("Expected %v but got '%v' from binary", expected, out)
+			}
+		})
+	}
+	```
+	<file_sep>package main
+	
+	import (
+		"fmt"
+	
+		"github.com/spf13/cobra"
+	)
+	
+	const version = "1.0.0-SNAPSHOT" // The current version of the tool
+	
+	func main() {
+		rootCmd := rootCommand(version)
+		if err := rootCmd.Execute(); err != nil {
+			fmt.Println("Error: ", err)
+			return
+		}
+	}
+	
+	// rootCommand creates a root level command that contains all the sub commands.
+	func rootCommand(version string) *cobra.Command {
+	
+		rootCmd := &cobra.Command{
+			Use:   "gotestcover", // This is the command used to run this tool, e.g. 'gotestcover'
+			Short: "A Go Code Coverage Tool",
+			Long: `gotestcover provides the following commands for running coverage tools against a Go program.
+		- cover: Generate an HTML file with a full coverage report.`,
+	
+			Example: `gotestcover cover [sourceFile.go]`, // This is an example of how to use this tool, it's optional but helps explain how it should be used.
+			Version: version,                                // Print the version at the end when the tool is run.
+		}
+	
+		rootCmd.AddCommand(
+			coverCmd(), // Run the cover command to generate a coverage report for your project.
+			helpCmd())  // This is an optional command that prints out helpful information.
+	
+		return rootCmd
+	}
+	
+	// coverCmd creates and returns a Go Test Cover command.
+	func coverCmd() *cobra.Command {
+		var cmd = &cobra.Command{
+			Use:     "cover [sourceFile.go]", // This is the command used to run this tool, e.g. 'gotestcover'
+			Short:   "Run a coverage report against your Go source file.",
+			Example: `gotestcover cover [sourceFile.go]`, // This is an example of how to use this tool, it's optional but helps explain how it should be used.
+	
+			RunE: func(cmd *cobra.Command, args []string) error {
+				if len(args) != 1 {
+					return fmt.Errorf("Invalid number of arguments. Please provide a source file.") // If there are not any arguments then an error is returned and the tool stops.
+				}
+	
+				// Run the cover tool here using the sourceFile variable, it must be of type string in this case to use with cmd.Flags()
+	
+				// Get the cover flag that is set by the tool so that it can be used for coverage.
+				coverFlag := cmd.Flag("cover") // The 'cover' flag can be set here and parsed when using cmd.Flags().
+	
+				if !coverFlag.Changed {
+					return fmt.Errorf("No source file provided.") // Return an error if there are no arguments or the cover flag is not set.
+				}
+	
+				// Run the cover tool, it is important to parse the 'cover' flag here so that it is available for the tool to run.
+				cmd.ParseFlags(coverFlag)
+	
+				return nil
+			}}
+	
+		return cmd
+	}
+	
+	// helpCmd creates and returns a command used for providing more helpful information.
+	func helpCmd() *cobra.Command {
+		var cmd = &cobra.Command{
+	
+			Use:   "help", // This is the command that prints out help text.
+			Short: "Displays helpful information.",
+	
+			Example: `gotestcover help`, // This is an example of how to use this tool, it's optional but helps explain how it should be used.
+		}
+	
+		return cmd
+	}
+	
+	// versionCmd creates and returns a command that prints out the version number.
+	func versionCmd() *cobra.Command {
+		var cmd = &cobra.Command{
+			Use:   "version", // This is the command that will print out the version of this tool.
+			Short: "Prints out the version.",
+	
+			RunE: func(cmd *cobra.Command, args []string) error {
+				fmt.Println("Version:", version) // Print out the version at the end.
+				return nil
+			}}
+	
+		return cmd
+	}
+2024/06/06 09:30:13 $ go mod tidy
+2024/06/06 09:30:13 $ symflower.exe test --language golang --workspace C:\Users\Martin\AppData\Local\Temp\eval-dev-quality87947349\plain --coverage-file C:\Users\Martin\AppData\Local\Temp\eval-dev-quality87947349\plain\coverage.json
+# plain_test [plain.test]
+.\plain_test.go:14:3: undefined: plain
+FAIL	plain [build failed]
+
+=== Failed
+=== FAIL: .  (0.00s)
+FAIL	plain [build failed]
+
+=== Errors
+.\plain_test.go:14:3: undefined: plain
+
+DONE 0 tests, 1 failure, 1 error in 0.821s
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+ERROR: execution failed: exit status 1
+2024/06/06 09:30:15 Executes tests with 0 coverage objects
+2024/06/06 09:30:15 Evaluated model "ollama/starcoder2:3b" using language "golang" and repository "golang\\plain": encountered 1 problems: [exit status 1
+# plain_test [plain.test]
+.\plain_test.go:14:3: undefined: plain
+FAIL	plain [build failed]
+
+=== Failed
+=== FAIL: .  (0.00s)
+FAIL	plain [build failed]
+
+=== Errors
+.\plain_test.go:14:3: undefined: plain
+
+DONE 0 tests, 1 failure, 1 error in 0.821s
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+ERROR: execution failed: exit status 1
+
+github.com/symflower/eval-dev-quality/util.CommandWithResult
+	C:/Users/Martin/Documents/eval-dev-quality/util/exec.go:52
+github.com/symflower/eval-dev-quality/language/golang.(*Language).Execute
+	C:/Users/Martin/Documents/eval-dev-quality/language/golang/language.go:96
+github.com/symflower/eval-dev-quality/evaluate.Repository
+	C:/Users/Martin/Documents/eval-dev-quality/evaluate/repository.go:57
+github.com/symflower/eval-dev-quality/evaluate.Evaluate.func1
+	C:/Users/Martin/Documents/eval-dev-quality/evaluate/evaluate.go:119
+github.com/symflower/eval-dev-quality/evaluate.withLoadedModel
+	C:/Users/Martin/Documents/eval-dev-quality/evaluate/evaluate.go:253
+github.com/symflower/eval-dev-quality/evaluate.Evaluate
+	C:/Users/Martin/Documents/eval-dev-quality/evaluate/evaluate.go:109
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.(*Evaluate).Execute
+	C:/Users/Martin/Documents/eval-dev-quality/cmd/eval-dev-quality/cmd/evaluate.go:284
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute.func1
+	C:/Users/Martin/Documents/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:34
+github.com/jessevdk/go-flags.(*Parser).ParseArgs
+	C:/Users/Martin/go/pkg/mod/github.com/jessevdk/go-flags@v1.5.1-0.20210607101731-3927b71304df/parser.go:333
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute
+	C:/Users/Martin/Documents/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:37
+main.main
+	C:/Users/Martin/Documents/eval-dev-quality/cmd/eval-dev-quality/main.go:11
+runtime.main
+	C:/Program Files/Go/src/runtime/proc.go:271
+runtime.goexit
+	C:/Program Files/Go/src/runtime/asm_amd64.s:1695
+github.com/symflower/eval-dev-quality/language/golang.(*Language).Execute
+	C:/Users/Martin/Documents/eval-dev-quality/language/golang/language.go:113
+github.com/symflower/eval-dev-quality/evaluate.Repository
+	C:/Users/Martin/Documents/eval-dev-quality/evaluate/repository.go:57
+github.com/symflower/eval-dev-quality/evaluate.Evaluate.func1
+	C:/Users/Martin/Documents/eval-dev-quality/evaluate/evaluate.go:119
+github.com/symflower/eval-dev-quality/evaluate.withLoadedModel
+	C:/Users/Martin/Documents/eval-dev-quality/evaluate/evaluate.go:253
+github.com/symflower/eval-dev-quality/evaluate.Evaluate
+	C:/Users/Martin/Documents/eval-dev-quality/evaluate/evaluate.go:109
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.(*Evaluate).Execute
+	C:/Users/Martin/Documents/eval-dev-quality/cmd/eval-dev-quality/cmd/evaluate.go:284
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute.func1
+	C:/Users/Martin/Documents/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:34
+github.com/jessevdk/go-flags.(*Parser).ParseArgs
+	C:/Users/Martin/go/pkg/mod/github.com/jessevdk/go-flags@v1.5.1-0.20210607101731-3927b71304df/parser.go:333
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute
+	C:/Users/Martin/Documents/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:37
+main.main
+	C:/Users/Martin/Documents/eval-dev-quality/cmd/eval-dev-quality/main.go:11
+runtime.main
+	C:/Program Files/Go/src/runtime/proc.go:271
+runtime.goexit
+	C:/Program Files/Go/src/runtime/asm_amd64.s:1695
+# plain_test [plain.test]
+.\plain_test.go:14:3: undefined: plain
+FAIL	plain [build failed]
+
+=== Failed
+=== FAIL: .  (0.00s)
+FAIL	plain [build failed]
+
+=== Errors
+.\plain_test.go:14:3: undefined: plain
+
+DONE 0 tests, 1 failure, 1 error in 0.821s
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+ERROR: execution failed: exit status 1
+]
+2024/06/06 09:30:15 Evaluating model "ollama/starcoder2:3b" using language "golang" and repository "golang\\plain"
+2024/06/06 09:30:15 Querying model "ollama/starcoder2:3b" with:
+	Given the following Go code file "plain.go" with package "plain", provide a test file for this code.
+	The tests should produce 100 percent code coverage and must compile.
+	The response must contain only the test code and nothing else.
+
+	```golang
+	package plain
+	
+	func plain() {
+		return // This does not do anything but it gives us a line to cover.
+	}
+	```
+2024/06/06 09:30:34 Model "ollama/starcoder2:3b" responded (19738 ms) with:
+	<file_sep>/pkg/generator/generator_test.go
+	// Copyright 2018 Google LLC All Rights Reserved.
+	//
+	// Licensed under the Apache License, Version 2.0 (the "License");
+	// you may not use this file except in compliance with the License.
+	// You may obtain a copy of the License at
+	//
+	//     http://www.apache.org/licenses/LICENSE-2.0
+	//
+	// Unless required by applicable law or agreed to in writing, software
+	// distributed under the License is distributed on an "AS IS" BASIS,
+	// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+	// See the License for the specific language governing permissions and
+	// limitations under the License.
+	
+	package generator_test
+	
+	import (
+		"io/ioutil"
+	
+		"github.com/GoogleCloudPlatform/golang-samples/internal/gcloud"
+		"github.com/GoogleCloudPlatform/golang-samples/pkg/generator"
+	)
+	
+	func getTestFileContent(name string) []byte {
+		const (
+			testFileName = "testdata/%s.go"
+		)
+	
+		fileBytes, err := ioutil.ReadFile(gcloud.SourceRoot() + testFileName)
+	
+		if err != nil || len(fileBytes) == 0 {
+			return nil
+		}
+		return fileBytes
+	}
+	
+	func getGeneratedFileContent(name string) []byte {
+		return generator.Generate(getTestFileContent(name))
+	}
+	<file_sep>/internal/gcloud/testdata/project-list.go
+	// Copyright 2019 Google LLC All Rights Reserved.
+	//
+	// Licensed under the Apache License, Version 2.0 (the "License");
+	// you may not use this file except in compliance with the License.
+	// You may obtain a copy of the License at
+	//
+	//     http://www.apache.org/licenses/LICENSE-2.0
+	//
+	// Unless required by applicable law or agreed to in writing, software
+	// distributed under the License is distributed on an "AS IS" BASIS,
+	// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+	// See the License for the specific language governing permissions and
+	// limitations under the License.
+	
+	package gcloud
+	
+	import (
+		"context"
+	
+		"google.golang.org/api/compute/v1"
+		"google.golang.org/api/option"
+	)
+	
+	func GetProjectID(ctx context.Context, opts ...option.ClientOption) (string, error) {
+		service, err := compute.NewService(ctx, opts...)
+	
+		if err != nil || service == nil {
+			return "", err
+		}
+	
+		req := &compute.ProjectsGetRequest{
+			Project: "test-project", // Change this to the ID of your project
+		}
+	
+		resp, err2 := service.Projects.Get(req).Do()
+	
+		if err2 != nil || resp == nil {
+			return "", err2
+		}
+	
+		// fmt.Printf("%+v\n", resp)
+	
+		return resp.ProjectID, nil
+	}
+	<file_sep>/internal/gcloud/testdata/project-list-full.go
+	// Copyright 2019 Google LLC All Rights Reserved.
+	//
+	// Licensed under the Apache License, Version 2.0 (the "License");
+	// you may not use this file except in compliance with the License.
+	// You may obtain a copy of the License at
+	//
+	//     http://www.apache.org/licenses/LICENSE-2.0
+	//
+	// Unless required by applicable law or agreed to in writing, software
+	// distributed under the License is distributed on an "AS IS" BASIS,
+	// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+	// See the License for the specific language governing permissions and
+	// limitations under the License.
+	
+	package gcloud
+	
+	import (
+		"context"
+	
+		"google.golang.org/api/compute/v1"
+		"google.golang.org/api/option"
+		"google.golang.org/api/storage/v1"
+	)
+	
+	func GetProjectID(ctx context.Context, opts ...option.ClientOption) (string, error) {
+		service2, err := compute.NewService(ctx, opts...)
+	
+		if err != nil || service2 == nil {
+			return "", err
+		}
+	
+		req1 := &compute.ProjectsGetRequest{
+			Project: "test-project", // Change this to the ID of your project
+		}
+	
+		resp1, err2 := service2.Projects.Get(req1).Do()
+	
+		if err2 != nil || resp1 == nil {
+			return "", err2
+		}
+	
+		return resp1.ProjectID, nil
+	}
+	
+	func GetStorageService(ctx context.Context) (*storage.Service, error) {
+		service3, err := storage.NewService(ctx)
+	
+		if err != nil || service3 == nil {
+			return nil, err
+		}
+	
+		return service3, nil
+	}
+	
+	func GetStorageBucket(ctx context.Context, bucketName string) (*storage.Bucket, error) {
+		req2 := &storage.BucketsGetRequest{
+			Bucket:  "test-bucket", // Change this to the ID of your bucket name
+			Project: "",             // Leave empty
+		}
+	
+		return nil, nil
+	}
+	
+	func GetStorageObject(ctx context.Context) (*storage.Object, error) {
+		req3 := &storage.ObjectsCreateRequest{
+			Bucket:          "test-bucket",  // Change this to the ID of your bucket name
+			Project:         "",             // Leave empty
+			SourceObjectGza: "/tmp/object", // This will be overwritten by an actual file to upload
+		}
+	
+		return nil, nil
+	}
+	
+	func GetStorageObject2(ctx context.Context, bucketName string) (*storage.Object, error) {
+		req4 := &storage.ObjectsGetRequest{
+			Bucket:  "test-bucket", // Change this to the ID of your bucket name
+			Project: "",            // Leave empty
+			ObjectName: `object`,// Change this to an object that you want to download from a storage bucket
+			Generation: nil,
+		}
+	
+		return nil, nil
+	}
+	
+	func GetComputeService(ctx context.Context) (*compute.Service, error) {
+		service4 := compute.NewService(ctx)
+	
+		if service4 == nil || len(service4.Projects) <= 0 {
+			return nil, errNoProject
+		}
+	
+		return service4, nil
+	}
+	
+	func GetComputeDiskList(ctx context.Context) ([]string, error){
+		return nil,nil
+	}
+	
+	func GetComputeDisk(ctx context.Context) (*compute.Disk,error){
+		return nil, nil
+	}
+	
+	func GetComputeInstanceList(ctx context.Context)([]string,error){
+		return nil,nil
+	}<file_sep>/internal/gcloud/testdata/project-list-empty.go
+	// Copyright 2019 Google LLC All Rights Reserved.
+	//
+	// Licensed under the Apache License, Version 2.0 (the "License");
+	// you may not use this file except in compliance with the License.
+	// You may obtain a copy of the License at
+	//
+	//     http://www.apache.org/licenses/LICENSE-2.0
+	//
+	// Unless required by applicable law or agreed to in writing, software
+	// distributed under the License is distributed on an "AS IS" BASIS,
+	// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+	// See the License for the specific language governing permissions and
+	// limitations under the License.
+	
+	package gcloud
+	
+	import (
+		"context"
+	
+		"google.golang.org/api/option"
+	)
+	
+	func GetProjectID(ctx context.Context, opts ...option.ClientOption) (string, error) {
+		return "", nil
+	}
+	<file_sep>/internal/gcloud/testdata/project-list-error.go
+	// Copyright 2019 Google LLC All Rights Reserved.
+	//
+	// Licensed under the Apache License, Version 2.0 (the "License");
+	// you may not use this file except in compliance with the License.
+	// You may obtain a copy of the License at
+	//
+	//     http://www.apache.org/licenses/LICENSE-2.0
+	//
+	// Unless required by applicable law or agreed to in writing, software
+	// distributed under the License is distributed on an "AS IS" BASIS,
+	// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+	// See the License for the specific language governing permissions and
+	// limitations under the License.
+	
+	package gcloud
+	
+	import (
+		"context"
+	
+		"google.golang.org/api/option"
+	)
+	
+	func GetProjectID(ctx context.Context, opts ...option.ClientOption) (string, error){
+		return "",errNoProject
+	}<file_sep><fim_prefix>/go.mod
+	module github.com/CloudyKit/<fim_suffix>/cobra v0.0.3
+	<fim_middle>project-scaffold
+
+	require github.com/spf13
+2024/06/06 09:30:34 $ go mod tidy
+2024/06/06 09:30:34 $ symflower.exe test --language golang --workspace C:\Users\Martin\AppData\Local\Temp\eval-dev-quality87947349\plain --coverage-file C:\Users\Martin\AppData\Local\Temp\eval-dev-quality87947349\plain\coverage.json
+plain_test.go:1:1: expected 'package', found '<'
+
+=== Errors
+plain_test.go:1:1: expected 'package', found '<'
+
+DONE 0 tests, 1 error in 0.020s
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+ERROR: execution failed: exit status 1
+2024/06/06 09:30:35 Evaluated model "ollama/starcoder2:3b" using language "golang" and repository "golang\\plain": encountered 1 problems: [exit status 1
+plain_test.go:1:1: expected 'package', found '<'
+
+=== Errors
+plain_test.go:1:1: expected 'package', found '<'
+
+DONE 0 tests, 1 error in 0.020s
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+ERROR: execution failed: exit status 1
+
+github.com/symflower/eval-dev-quality/util.CommandWithResult
+	C:/Users/Martin/Documents/eval-dev-quality/util/exec.go:52
+github.com/symflower/eval-dev-quality/language/golang.(*Language).Execute
+	C:/Users/Martin/Documents/eval-dev-quality/language/golang/language.go:96
+github.com/symflower/eval-dev-quality/evaluate.Repository
+	C:/Users/Martin/Documents/eval-dev-quality/evaluate/repository.go:57
+github.com/symflower/eval-dev-quality/evaluate.Evaluate.func1
+	C:/Users/Martin/Documents/eval-dev-quality/evaluate/evaluate.go:119
+github.com/symflower/eval-dev-quality/evaluate.withLoadedModel
+	C:/Users/Martin/Documents/eval-dev-quality/evaluate/evaluate.go:253
+github.com/symflower/eval-dev-quality/evaluate.Evaluate
+	C:/Users/Martin/Documents/eval-dev-quality/evaluate/evaluate.go:109
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.(*Evaluate).Execute
+	C:/Users/Martin/Documents/eval-dev-quality/cmd/eval-dev-quality/cmd/evaluate.go:284
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute.func1
+	C:/Users/Martin/Documents/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:34
+github.com/jessevdk/go-flags.(*Parser).ParseArgs
+	C:/Users/Martin/go/pkg/mod/github.com/jessevdk/go-flags@v1.5.1-0.20210607101731-3927b71304df/parser.go:333
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute
+	C:/Users/Martin/Documents/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:37
+main.main
+	C:/Users/Martin/Documents/eval-dev-quality/cmd/eval-dev-quality/main.go:11
+runtime.main
+	C:/Program Files/Go/src/runtime/proc.go:271
+runtime.goexit
+	C:/Program Files/Go/src/runtime/asm_amd64.s:1695
+github.com/symflower/eval-dev-quality/language/golang.(*Language).Execute
+	C:/Users/Martin/Documents/eval-dev-quality/language/golang/language.go:116
+github.com/symflower/eval-dev-quality/evaluate.Repository
+	C:/Users/Martin/Documents/eval-dev-quality/evaluate/repository.go:57
+github.com/symflower/eval-dev-quality/evaluate.Evaluate.func1
+	C:/Users/Martin/Documents/eval-dev-quality/evaluate/evaluate.go:119
+github.com/symflower/eval-dev-quality/evaluate.withLoadedModel
+	C:/Users/Martin/Documents/eval-dev-quality/evaluate/evaluate.go:253
+github.com/symflower/eval-dev-quality/evaluate.Evaluate
+	C:/Users/Martin/Documents/eval-dev-quality/evaluate/evaluate.go:109
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.(*Evaluate).Execute
+	C:/Users/Martin/Documents/eval-dev-quality/cmd/eval-dev-quality/cmd/evaluate.go:284
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute.func1
+	C:/Users/Martin/Documents/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:34
+github.com/jessevdk/go-flags.(*Parser).ParseArgs
+	C:/Users/Martin/go/pkg/mod/github.com/jessevdk/go-flags@v1.5.1-0.20210607101731-3927b71304df/parser.go:333
+github.com/symflower/eval-dev-quality/cmd/eval-dev-quality/cmd.Execute
+	C:/Users/Martin/Documents/eval-dev-quality/cmd/eval-dev-quality/cmd/command.go:37
+main.main
+	C:/Users/Martin/Documents/eval-dev-quality/cmd/eval-dev-quality/main.go:11
+runtime.main
+	C:/Program Files/Go/src/runtime/proc.go:271
+runtime.goexit
+	C:/Program Files/Go/src/runtime/asm_amd64.s:1695
+plain_test.go:1:1: expected 'package', found '<'
+
+=== Errors
+plain_test.go:1:1: expected 'package', found '<'
+
+DONE 0 tests, 1 error in 0.020s
+[0;34mGive us your feedback and let us know how we can improve Symflower at hello@symflower.com or https://github.com/symflower/symflower. Thanks so much for your help![0m
+ERROR: execution failed: exit status 1
+
+plain.go]
