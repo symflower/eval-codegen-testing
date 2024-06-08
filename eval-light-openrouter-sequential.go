@@ -3,8 +3,6 @@ package main
 import (
 	"context"
 	"fmt"
-	"io"
-	"log"
 	"os"
 	"path/filepath"
 	"time"
@@ -12,6 +10,7 @@ import (
 	pkgerrors "github.com/pkg/errors"
 	"github.com/zimmski/osutil"
 
+	"github.com/symflower/eval-dev-quality/log"
 	"github.com/symflower/eval-dev-quality/model"
 	"github.com/symflower/eval-dev-quality/util"
 )
@@ -93,16 +92,30 @@ var models = []string{
 	"openrouter/togethercomputer/stripedhyena-nous-7b",
 	"openrouter/undi95/toppy-m-7b",
 	"openrouter/xwin-lm/xwin-lm-70b",
+
+	"custom-fireworks/accounts/fireworks/models/qwen2-72b-instruct",
 }
 
 func main() {
+	logger := log.STDOUT()
+
+	output, err := util.CommandWithResult(context.Background(), logger, &util.Command{
+		Command: []string{
+			"make",
+			"install-all",
+		},
+	})
+	if err != nil {
+		panic(pkgerrors.WithStack(pkgerrors.WithMessage(err, output)))
+	}
+
 	progress := osutil.ProgressBar(os.Stdout, len(models), "Benchmarking")
 	defer progress.Exit()
 
 	for _, model := range models {
 		progress.Describe("Benchmarking: " + model)
 
-		err := benchmarkModel("evaluation-light-openrouter-sequential", "light", model, 5*time.Minute)
+		err := benchmarkModel(logger, "evaluation-light-openrouter-sequential", "light", model, 90*time.Minute)
 		if err != nil {
 			fmt.Printf("Model %q misbehaved", model)
 		}
@@ -111,14 +124,16 @@ func main() {
 	}
 }
 
-func benchmarkModel(resultPrefix string, repository string, id string, timeout time.Duration) error {
+func benchmarkModel(logger *log.Logger, resultPrefix string, repository string, id string, timeout time.Duration) error {
 	ctx, cancel := context.WithTimeout(context.Background(), timeout)
 	defer cancel()
 
-	output, err := util.CommandWithResult(ctx, log.New(io.Discard, "", 0), &util.Command{
+	output, err := util.CommandWithResult(ctx, logger, &util.Command{
 		Command: []string{
 			"eval-dev-quality",
+			"evaluate",
 			"--runs", "5",
+			"--urls", "custom-fireworks:https://api.fireworks.ai/inference/v1",
 			"--result-path", resultPrefix + model.CleanModelNameForFileSystem(id),
 			"--repository", filepath.Join("java", repository),
 			"--repository", filepath.Join("golang", repository),
