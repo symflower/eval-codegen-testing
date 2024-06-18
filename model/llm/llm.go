@@ -131,6 +131,46 @@ func llmCodeRepairSourceFilePrompt(data *llmCodeRepairSourceFilePromptContext) (
 	return b.String(), nil
 }
 
+// llmTranspileSourceFilePromptContext is the template context for a transpilation LLM prompt.
+type llmTranspileSourceFilePromptContext struct {
+	// llmSourceFilePromptContext holds the context for a source file prompt.
+	llmSourceFilePromptContext
+
+	// TargetLanguage holds the target language for transpilation.
+	TargetLanguage language.Language
+	// StubCode holds the function signature of the language we are transpiling to.
+	StubCode string
+}
+
+// llmTranspileSourceFilePromptTemplate is the template for generating an LLM transpilation prompt.
+var llmTranspileSourceFilePromptTemplate = template.Must(template.New("model-llm-generate-test-for-file-prompt").Parse(bytesutil.StringTrimIndentations(`
+	Given the following {{ .Language.Name }} code file "{{ .FilePath }}" with package "{{ .ImportPath }}", transpile it into a {{ .TargetLanguage.Name }} source file.
+	The response must contain only the transpiled {{ .TargetLanguage.Name }} source code and nothing else.
+
+	` + "```" + `{{ .Language.ID }}
+	{{ .Code }}
+	` + "```" + `
+
+	The transpiled {{ .TargetLanguage.Name }} code file must have the following signature and package:
+
+	` + "```" + `{{ .TargetLanguage.ID }}
+	{{ .StubCode }}
+	` + "```" + `
+`)))
+
+// llmCodeRepairSourceFilePrompt returns the prompt to code repair a source file.
+func llmTranspileSourceFilePrompt(data *llmTranspileSourceFilePromptContext) (message string, err error) {
+	data.Code = strings.TrimSpace(data.Code)
+	data.StubCode = strings.TrimSpace(data.StubCode)
+
+	var b strings.Builder
+	if err := llmTranspileSourceFilePromptTemplate.Execute(&b, data); err != nil {
+		return "", pkgerrors.WithStack(err)
+	}
+
+	return b.String(), nil
+}
+
 var _ model.Model = (*Model)(nil)
 
 // ID returns the unique ID of this model.
@@ -150,6 +190,8 @@ func (m *Model) IsTaskSupported(taskIdentifier task.Identifier) (isSupported boo
 		return true
 	case evaluatetask.IdentifierCodeRepair:
 		return true
+	case evaluatetask.IdentifierTranspile:
+		return true
 	default:
 		return false
 	}
@@ -167,6 +209,13 @@ func (m *Model) RunTask(ctx task.Context, taskIdentifier task.Identifier) (asses
 		}
 
 		return m.repairSourceCodeFile(ctx, codeRepairArguments)
+	case evaluatetask.IdentifierTranspile:
+		transpileArguments, ok := ctx.Arguments.(*evaluatetask.TaskArgumentsTranspile)
+		if !ok {
+			return nil, pkgerrors.Errorf("unexpected type %#v", ctx.Arguments)
+		}
+
+		return m.transpileSourceCodeFile(ctx, transpileArguments)
 	default:
 		return nil, pkgerrors.Wrap(task.ErrTaskUnsupported, string(taskIdentifier))
 	}
@@ -263,6 +312,12 @@ func (m *Model) repairSourceCodeFile(ctx task.Context, codeRepairArguments *eval
 	}
 
 	return assessment, nil
+}
+
+func (m *Model) transpileSourceCodeFile(ctx task.Context, transpileArguments *evaluatetask.TaskArgumentsTranspile) (assessment metrics.Assessments, err error) {
+	assessment = map[metrics.AssessmentKey]uint64{}
+
+	return nil, nil
 }
 
 // Cost returns the cost of the model.

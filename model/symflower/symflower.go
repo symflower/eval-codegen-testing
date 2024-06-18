@@ -45,6 +45,8 @@ func (m *Model) IsTaskSupported(taskIdentifier task.Identifier) (isSupported boo
 		return true
 	case evaluatetask.IdentifierCodeRepair:
 		return false
+	case evaluatetask.IdentifierTranspile:
+		return false
 	default:
 		return false
 	}

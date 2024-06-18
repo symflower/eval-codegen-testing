@@ -35,6 +35,8 @@ var (
 	IdentifierWriteTests = registerIdentifier("write-tests")
 	// IdentifierCodeRepair holds the identifier for the "code repair" task.
 	IdentifierCodeRepair = registerIdentifier("code-repair")
+	// IdentifierTranspile holds the identifier for the "transpile" task.
+	IdentifierTranspile = registerIdentifier("transpile")
 )
 
 // TaskForIdentifier returns a task based on the task identifier.
