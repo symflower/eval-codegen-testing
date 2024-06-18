@@ -206,10 +206,6 @@ func (m *Model) generateTestsForFile(ctx task.Context) (assessment metrics.Asses
 	assessment[metrics.AssessmentKeyResponseCharacterCount] = uint64(len(response))
 	assessment[metrics.AssessmentKeyGenerateTestsForFileCharacterCount] = uint64(len(testContent))
 
-	if err != nil {
-		return nil, pkgerrors.WithStack(err)
-	}
-
 	testFilePath := ctx.Language.TestFilePath(ctx.RepositoryPath, ctx.FilePath)
 	if err := os.MkdirAll(filepath.Join(ctx.RepositoryPath, filepath.Dir(testFilePath)), 0755); err != nil {
 		return nil, pkgerrors.WithStack(err)
