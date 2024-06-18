@@ -68,7 +68,7 @@ func (t *TaskWriteTests) Run(repository evaltask.Repository) (repositoryAssessme
 			t.Logger.Panicf("ERROR: unable to reset temporary repository path: %s", err)
 		}
 
-		ctx := evaltask.Context{
+		modelContext := model.Context{
 			Language: t.Language,
 
 			RepositoryPath: dataPath,
@@ -76,7 +76,7 @@ func (t *TaskWriteTests) Run(repository evaltask.Repository) (repositoryAssessme
 
 			Logger: log,
 		}
-		assessments, err := t.Model.RunTask(ctx, t.Identifier())
+		assessments, err := t.Model.RunTask(modelContext, t.Identifier())
 		if err != nil {
 			problems = append(problems, pkgerrors.WithMessage(err, filePath))
 
