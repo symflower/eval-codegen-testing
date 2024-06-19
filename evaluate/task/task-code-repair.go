@@ -53,15 +53,12 @@ func (t *TaskCodeRepair) Identifier() evaltask.Identifier {
 // Run performs source code repairing in a repository with compilation errors.
 // This task requires the repository to consist of multiple packages, with each containing one faulty implementation file and a corresponding test file.
 func (t *TaskCodeRepair) Run(repository evaltask.Repository) (repositoryAssessment metrics.Assessments, problems []error, err error) {
-	log, logClose, err := log.WithFile(t.Logger, filepath.Join(t.ResultPath, string(t.Identifier()), model.CleanModelNameForFileSystem(t.Model.ID()), t.Language.ID(), repository.Name()+".log"))
+	log, finalizeRun, err := initializeLoggingForRun(t.Logger, t.ResultPath, t, repository, t.Model, t.Language)
 	if err != nil {
 		return nil, nil, err
 	}
-	defer logClose()
-
-	log.Printf("Evaluating model %q on task %q using language %q and repository %q", t.Model.ID(), t.Identifier(), t.Language.ID(), repository.Name())
 	defer func() {
-		log.Printf("Evaluated model %q on task %q using language %q and repository %q: encountered %d problems: %+v", t.Model.ID(), t.Identifier(), t.Language.ID(), repository.Name(), len(problems), problems)
+		finalizeRun(problems)
 	}()
 
 	var packagePaths []string
