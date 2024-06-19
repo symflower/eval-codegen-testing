@@ -19,7 +19,7 @@ import (
 	"github.com/symflower/eval-dev-quality/model"
 	"github.com/symflower/eval-dev-quality/model/llm/prompt"
 	"github.com/symflower/eval-dev-quality/provider"
-	"github.com/symflower/eval-dev-quality/task"
+	"github.com/symflower/eval-dev-quality/task/identifier"
 )
 
 // Model represents a LLM model accessed via a provider.
@@ -121,7 +121,7 @@ func (m *Model) ID() (id string) {
 }
 
 // IsTaskSupported returns whether the model supports the given task or not.
-func (m *Model) IsTaskSupported(taskIdentifier task.Identifier) (isSupported bool) {
+func (m *Model) IsTaskSupported(taskIdentifier identifier.TaskIdentifier) (isSupported bool) {
 	switch taskIdentifier {
 	case evaluatetask.IdentifierWriteTests:
 		return true
@@ -133,7 +133,7 @@ func (m *Model) IsTaskSupported(taskIdentifier task.Identifier) (isSupported boo
 }
 
 // RunTask runs the given task.
-func (m *Model) RunTask(ctx model.Context, taskIdentifier task.Identifier) (assessments metrics.Assessments, err error) {
+func (m *Model) RunTask(ctx model.Context, taskIdentifier identifier.TaskIdentifier) (assessments metrics.Assessments, err error) {
 	switch taskIdentifier {
 	case evaluatetask.IdentifierWriteTests:
 		return m.generateTestsForFile(ctx)
@@ -145,7 +145,7 @@ func (m *Model) RunTask(ctx model.Context, taskIdentifier task.Identifier) (asse
 
 		return m.repairSourceCodeFile(ctx, codeRepairArguments)
 	default:
-		return nil, pkgerrors.Wrap(task.ErrTaskUnsupported, string(taskIdentifier))
+		return nil, pkgerrors.Wrap(identifier.ErrTaskUnsupported, string(taskIdentifier))
 	}
 }
 

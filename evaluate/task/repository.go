@@ -14,12 +14,13 @@ import (
 
 	"github.com/symflower/eval-dev-quality/log"
 	"github.com/symflower/eval-dev-quality/task"
+	"github.com/symflower/eval-dev-quality/task/identifier"
 	"github.com/symflower/eval-dev-quality/util"
 )
 
 // repositoryConfiguration holds the configuration of a repository.
 type repositoryConfiguration struct {
-	Tasks []task.Identifier
+	Tasks []identifier.TaskIdentifier
 }
 
 // validate validates the configuration.
@@ -83,7 +84,7 @@ func (r *Repository) DataPath() (dataPath string) {
 }
 
 // SupportedTasks returns the list of task identifiers the repository supports.
-func (r *Repository) SupportedTasks() (tasks []task.Identifier) {
+func (r *Repository) SupportedTasks() (tasks []identifier.TaskIdentifier) {
 	return r.Tasks
 }
 

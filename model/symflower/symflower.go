@@ -13,7 +13,7 @@ import (
 	evaluatetask "github.com/symflower/eval-dev-quality/evaluate/task"
 	"github.com/symflower/eval-dev-quality/model"
 	"github.com/symflower/eval-dev-quality/provider"
-	"github.com/symflower/eval-dev-quality/task"
+	"github.com/symflower/eval-dev-quality/task/identifier"
 	"github.com/symflower/eval-dev-quality/tools"
 	"github.com/symflower/eval-dev-quality/util"
 )
@@ -34,7 +34,7 @@ func (m *Model) ID() (id string) {
 }
 
 // IsTaskSupported returns whether the model supports the given task or not.
-func (m *Model) IsTaskSupported(taskIdentifier task.Identifier) (isSupported bool) {
+func (m *Model) IsTaskSupported(taskIdentifier identifier.TaskIdentifier) (isSupported bool) {
 	switch taskIdentifier {
 	case evaluatetask.IdentifierWriteTests:
 		return true
@@ -46,12 +46,12 @@ func (m *Model) IsTaskSupported(taskIdentifier task.Identifier) (isSupported boo
 }
 
 // RunTask runs the given task.
-func (m *Model) RunTask(ctx model.Context, taskIdentifier task.Identifier) (assessments metrics.Assessments, err error) {
+func (m *Model) RunTask(ctx model.Context, taskIdentifier identifier.TaskIdentifier) (assessments metrics.Assessments, err error) {
 	switch taskIdentifier {
 	case evaluatetask.IdentifierWriteTests:
 		return m.generateTestsForFile(ctx)
 	default:
-		return nil, pkgerrors.Wrap(task.ErrTaskUnsupported, string(taskIdentifier))
+		return nil, pkgerrors.Wrap(identifier.ErrTaskUnsupported, string(taskIdentifier))
 	}
 }
 

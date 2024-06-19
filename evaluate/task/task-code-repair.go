@@ -11,6 +11,7 @@ import (
 	"github.com/symflower/eval-dev-quality/log"
 	"github.com/symflower/eval-dev-quality/model"
 	evaltask "github.com/symflower/eval-dev-quality/task"
+	"github.com/symflower/eval-dev-quality/task/identifier"
 )
 
 // TaskCodeRepair holds the code repair task.
@@ -46,7 +47,7 @@ func newCodeRepairTask(logger *log.Logger, resultPath string, model model.Model,
 }
 
 // Identifier returns the code repair task identifier.
-func (t *TaskCodeRepair) Identifier() evaltask.Identifier {
+func (t *TaskCodeRepair) Identifier() identifier.TaskIdentifier {
 	return IdentifierCodeRepair
 }
 

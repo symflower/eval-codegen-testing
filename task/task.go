@@ -1,24 +1,16 @@
 package task
 
 import (
-	"errors"
 	"log"
 
 	"github.com/symflower/eval-dev-quality/evaluate/metrics"
+	"github.com/symflower/eval-dev-quality/task/identifier"
 )
-
-var (
-	// ErrTaskUnsupported indicates that a task is unsupported.
-	ErrTaskUnsupported = errors.New("task unsupported")
-)
-
-// Identifier holds the identifier of a task.
-type Identifier string
 
 // Task defines an evaluation task.
 type Task interface {
 	// Identifier returns the task identifier.
-	Identifier() (identifier Identifier)
+	Identifier() (identifier identifier.TaskIdentifier)
 
 	// Run runs a task in a given repository.
 	Run(repository Repository) (assessments metrics.Assessments, problems []error, err error)
@@ -32,7 +24,7 @@ type Repository interface {
 	DataPath() (dataPath string)
 
 	// SupportedTasks returns the list of task identifiers the repository supports.
-	SupportedTasks() (tasks []Identifier)
+	SupportedTasks() (tasks []identifier.TaskIdentifier)
 
 	// Reset resets the repository to its initial state.
 	Reset(logger *log.Logger) (err error)

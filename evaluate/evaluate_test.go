@@ -28,7 +28,7 @@ import (
 	modeltesting "github.com/symflower/eval-dev-quality/model/testing"
 	"github.com/symflower/eval-dev-quality/provider"
 	providertesting "github.com/symflower/eval-dev-quality/provider/testing"
-	"github.com/symflower/eval-dev-quality/task"
+	"github.com/symflower/eval-dev-quality/task/identifier"
 )
 
 var (
@@ -120,7 +120,7 @@ func TestEvaluate(t *testing.T) {
 			assessmentStore, actualTotalScore := Evaluate(tc.Context)
 
 			var actualAssessments metricstesting.AssessmentTuples
-			require.NoError(t, assessmentStore.Walk(func(m evalmodel.Model, l language.Language, r string, ti task.Identifier, a metrics.Assessments) error {
+			require.NoError(t, assessmentStore.Walk(func(m evalmodel.Model, l language.Language, r string, ti identifier.TaskIdentifier, a metrics.Assessments) error {
 				// Normalize assessments.
 				if v, ok := a[metrics.AssessmentKeyProcessingTime]; ok {
 					if assert.Greater(t, v, uint64(0)) {

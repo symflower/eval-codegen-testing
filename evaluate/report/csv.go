@@ -13,7 +13,7 @@ import (
 	"github.com/symflower/eval-dev-quality/evaluate/metrics"
 	"github.com/symflower/eval-dev-quality/language"
 	"github.com/symflower/eval-dev-quality/model"
-	"github.com/symflower/eval-dev-quality/task"
+	"github.com/symflower/eval-dev-quality/task/identifier"
 )
 
 // CSVFormatter defines a formatter for CSV data.
@@ -51,7 +51,7 @@ func (a *AssessmentStore) Header() (header []string) {
 
 // Rows returns all data as CSV rows.
 func (a *AssessmentStore) Rows() (rows [][]string) {
-	_ = a.Walk(func(m model.Model, l language.Language, r string, t task.Identifier, a metrics.Assessments) (err error) {
+	_ = a.Walk(func(m model.Model, l language.Language, r string, t identifier.TaskIdentifier, a metrics.Assessments) (err error) {
 		metrics := a.StringCSV()
 		score := a.Score()
 

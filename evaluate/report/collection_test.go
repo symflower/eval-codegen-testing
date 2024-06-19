@@ -13,7 +13,7 @@ import (
 	languagetesting "github.com/symflower/eval-dev-quality/language/testing"
 	"github.com/symflower/eval-dev-quality/model"
 	modeltesting "github.com/symflower/eval-dev-quality/model/testing"
-	"github.com/symflower/eval-dev-quality/task"
+	"github.com/symflower/eval-dev-quality/task/identifier"
 )
 
 func TestAssessmentPerModelPerLanguagePerRepositoryWalk(t *testing.T) {
@@ -32,7 +32,7 @@ func TestAssessmentPerModelPerLanguagePerRepositoryWalk(t *testing.T) {
 			assessmentLookup := tc.Assessments.ToMap()
 			actualOrder := []metrics.Assessments{}
 
-			assert.NoError(t, assessmentStore.Walk(func(m model.Model, l language.Language, r string, ti task.Identifier, a metrics.Assessments) (err error) {
+			assert.NoError(t, assessmentStore.Walk(func(m model.Model, l language.Language, r string, ti identifier.TaskIdentifier, a metrics.Assessments) (err error) {
 				actualOrder = append(actualOrder, a)
 				metricstesting.AssertAssessmentsEqual(t, assessmentLookup[m][l][r][ti], a)
 

@@ -9,6 +9,7 @@ import (
 	"github.com/symflower/eval-dev-quality/log"
 	"github.com/symflower/eval-dev-quality/model"
 	evaltask "github.com/symflower/eval-dev-quality/task"
+	"github.com/symflower/eval-dev-quality/task/identifier"
 )
 
 // TaskWriteTests holds the write test task.
@@ -38,7 +39,7 @@ func newTaskWriteTests(logger *log.Logger, resultPath string, model model.Model,
 }
 
 // Identifier returns the write test task identifier.
-func (t *TaskWriteTests) Identifier() evaltask.Identifier {
+func (t *TaskWriteTests) Identifier() identifier.TaskIdentifier {
 	return IdentifierWriteTests
 }
 

@@ -5,7 +5,7 @@ import (
 
 	"github.com/symflower/eval-dev-quality/evaluate/metrics"
 	"github.com/symflower/eval-dev-quality/language"
-	"github.com/symflower/eval-dev-quality/task"
+	"github.com/symflower/eval-dev-quality/task/identifier"
 )
 
 // Model defines a model that can be queried for generations.
@@ -14,9 +14,9 @@ type Model interface {
 	ID() (id string)
 
 	// IsTaskSupported returns whether the model supports the given task or not.
-	IsTaskSupported(taskIdentifier task.Identifier) (isSupported bool)
+	IsTaskSupported(taskIdentifier identifier.TaskIdentifier) (isSupported bool)
 	// RunTask runs the given task.
-	RunTask(ctx Context, taskIdentifier task.Identifier) (assessments metrics.Assessments, err error)
+	RunTask(ctx Context, taskIdentifier identifier.TaskIdentifier) (assessments metrics.Assessments, err error)
 }
 
 // Context holds the data needed by a model for running a task.

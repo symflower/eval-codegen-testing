@@ -8,26 +8,27 @@ import (
 	"github.com/symflower/eval-dev-quality/log"
 	"github.com/symflower/eval-dev-quality/model"
 	evaltask "github.com/symflower/eval-dev-quality/task"
+	"github.com/symflower/eval-dev-quality/task/identifier"
 )
 
 var (
 	// AllIdentifiers holds all available task identifiers.
-	AllIdentifiers []evaltask.Identifier
+	AllIdentifiers []identifier.TaskIdentifier
 	// LookupIdentifier holds a map of all available task identifiers.
-	LookupIdentifier = map[evaltask.Identifier]bool{}
+	LookupIdentifier = map[identifier.TaskIdentifier]bool{}
 )
 
 // registerIdentifier registers the given identifier and makes it available.
-func registerIdentifier(name string) (identifier evaltask.Identifier) {
-	identifier = evaltask.Identifier(name)
-	AllIdentifiers = append(AllIdentifiers, identifier)
+func registerIdentifier(name string) (taskIdentifier identifier.TaskIdentifier) {
+	taskIdentifier = identifier.TaskIdentifier(name)
+	AllIdentifiers = append(AllIdentifiers, taskIdentifier)
 
-	if _, ok := LookupIdentifier[identifier]; ok {
-		panic(fmt.Sprintf("task identifier already registered: %s", identifier))
+	if _, ok := LookupIdentifier[taskIdentifier]; ok {
+		panic(fmt.Sprintf("task identifier already registered: %s", taskIdentifier))
 	}
-	LookupIdentifier[identifier] = true
+	LookupIdentifier[taskIdentifier] = true
 
-	return identifier
+	return taskIdentifier
 }
 
 var (
@@ -38,13 +39,13 @@ var (
 )
 
 // TaskForIdentifier returns a task based on the task identifier.
-func TaskForIdentifier(taskIdentifier evaltask.Identifier, logger *log.Logger, resultPath string, model model.Model, language language.Language) (task evaltask.Task, err error) {
+func TaskForIdentifier(taskIdentifier identifier.TaskIdentifier, logger *log.Logger, resultPath string, model model.Model, language language.Language) (task evaltask.Task, err error) {
 	switch taskIdentifier {
 	case IdentifierWriteTests:
 		return newTaskWriteTests(logger, resultPath, model, language), nil
 	case IdentifierCodeRepair:
 		return newCodeRepairTask(logger, resultPath, model, language), nil
 	default:
-		return nil, pkgerrors.Wrap(evaltask.ErrTaskUnsupported, string(taskIdentifier))
+		return nil, pkgerrors.Wrap(identifier.ErrTaskUnsupported, string(taskIdentifier))
 	}
 }
