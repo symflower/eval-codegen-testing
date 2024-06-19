@@ -1,7 +1,6 @@
 package testing
 
 import (
-	"log"
 	"os"
 	"path/filepath"
 	"sort"
@@ -12,6 +11,7 @@ import (
 	"github.com/symflower/eval-dev-quality/evaluate/metrics"
 	metricstesting "github.com/symflower/eval-dev-quality/evaluate/metrics/testing"
 	"github.com/symflower/eval-dev-quality/language"
+	"github.com/symflower/eval-dev-quality/log"
 	"github.com/symflower/eval-dev-quality/model"
 	evaltask "github.com/symflower/eval-dev-quality/task"
 	"github.com/zimmski/osutil"
@@ -31,7 +31,22 @@ type TestCaseTask struct {
 	ExpectedError                error
 }
 
-func (tc *TestCaseTask) Validate(t *testing.T, task evaltask.Task, repository evaltask.Repository, resultPath string, logger *log.Logger) {
+type createRepositoryFunction func(logger *log.Logger, testDataPath string, repositoryPathRelative string) (repository evaltask.Repository, cleanup func(), err error)
+type createTaskFunction func() (task evaltask.Task, err error)
+
+func (tc *TestCaseTask) Validate(t *testing.T, createRepository createRepositoryFunction, createTask createTaskFunction) {
+	resultPath := t.TempDir()
+
+	logOutput, logger := log.Buffer()
+	defer func() {
+		if t.Failed() {
+			t.Logf("Logging output: %s", logOutput.String())
+		}
+	}()
+	repository, cleanup, err := createRepository(logger, tc.TestDataPath, tc.RepositoryPath)
+	assert.NoError(t, err)
+	defer cleanup()
+
 	taskContext := evaltask.Context{
 		Language:   tc.Language,
 		Repository: repository,
@@ -41,6 +56,8 @@ func (tc *TestCaseTask) Validate(t *testing.T, task evaltask.Task, repository ev
 
 		Logger: logger,
 	}
+	task, err := createTask()
+	require.NoError(t, err)
 	actualRepositoryAssessment, actualProblems, actualErr := task.Run(taskContext)
 
 	metricstesting.AssertAssessmentsEqual(t, tc.ExpectedRepositoryAssessment, actualRepositoryAssessment)

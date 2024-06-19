@@ -111,7 +111,7 @@ func Evaluate(ctx *Context) (assessments *report.AssessmentStore, totalScore uin
 					}
 
 					for _, taskIdentifier := range temporaryRepository.SupportedTasks() {
-						task, err := evaluatetask.TaskForIdentifier(taskIdentifier, ctx.Log, ctx.ResultPath, model, language)
+						task, err := evaluatetask.TaskForIdentifier(taskIdentifier)
 						if err != nil {
 							ctx.Log.Fatal(err)
 						}
@@ -220,7 +220,7 @@ func Evaluate(ctx *Context) (assessments *report.AssessmentStore, totalScore uin
 						continue
 					}
 					for _, taskIdentifier := range temporaryRepository.Tasks {
-						task, err := evaluatetask.TaskForIdentifier(taskIdentifier, ctx.Log, ctx.ResultPath, model, language)
+						task, err := evaluatetask.TaskForIdentifier(taskIdentifier)
 						if err != nil {
 							ctx.Log.Fatal(err)
 						}
