@@ -32,8 +32,7 @@ func TestTaskCodeRepairRun(t *testing.T) {
 			assert.NoError(t, err)
 			defer cleanup()
 
-			taskWriteTests := newCodeRepairTask(logger, resultPath, tc.Model, tc.Language)
-			tc.Validate(t, taskWriteTests, repository, resultPath)
+			tc.Validate(t, &TaskCodeRepair{}, repository, resultPath, logger)
 		})
 	}
 

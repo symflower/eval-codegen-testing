@@ -42,9 +42,9 @@ var (
 func TaskForIdentifier(taskIdentifier identifier.TaskIdentifier, logger *log.Logger, resultPath string, model model.Model, language language.Language) (task evaltask.Task, err error) {
 	switch taskIdentifier {
 	case IdentifierWriteTests:
-		return newTaskWriteTests(logger, resultPath, model, language), nil
+		return &TaskWriteTests{}, nil
 	case IdentifierCodeRepair:
-		return newCodeRepairTask(logger, resultPath, model, language), nil
+		return &TaskCodeRepair{}, nil
 	default:
 		return nil, pkgerrors.Wrap(identifier.ErrTaskUnsupported, string(taskIdentifier))
 	}

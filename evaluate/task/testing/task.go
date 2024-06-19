@@ -1,6 +1,7 @@
 package testing
 
 import (
+	"log"
 	"os"
 	"path/filepath"
 	"sort"
@@ -30,8 +31,17 @@ type TestCaseTask struct {
 	ExpectedError                error
 }
 
-func (tc *TestCaseTask) Validate(t *testing.T, task evaltask.Task, repository evaltask.Repository, resultPath string) {
-	actualRepositoryAssessment, actualProblems, actualErr := task.Run(repository)
+func (tc *TestCaseTask) Validate(t *testing.T, task evaltask.Task, repository evaltask.Repository, resultPath string, logger *log.Logger) {
+	taskContext := evaltask.Context{
+		Language:   tc.Language,
+		Repository: repository,
+		Model:      tc.Model,
+
+		ResultPath: resultPath,
+
+		Logger: logger,
+	}
+	actualRepositoryAssessment, actualProblems, actualErr := task.Run(taskContext)
 
 	metricstesting.AssertAssessmentsEqual(t, tc.ExpectedRepositoryAssessment, actualRepositoryAssessment)
 	if assert.Equal(t, len(tc.ExpectedProblemContains), len(actualProblems), "problems count") {

@@ -30,8 +30,7 @@ func TestTaskWriteTestsRun(t *testing.T) {
 			assert.NoError(t, err)
 			defer cleanup()
 
-			taskWriteTests := newTaskWriteTests(logger, resultPath, tc.Model, tc.Language)
-			tc.Validate(t, taskWriteTests, repository, resultPath)
+			tc.Validate(t, &TaskWriteTests{}, repository, resultPath, logger)
 		})
 	}
 

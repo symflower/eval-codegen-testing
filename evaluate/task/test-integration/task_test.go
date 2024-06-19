@@ -36,7 +36,7 @@ func TestTaskWriteTestsRun(t *testing.T) {
 			taskWriteTests, err := evaluatetask.TaskForIdentifier(evaluatetask.IdentifierWriteTests, logger, resultPath, tc.Model, tc.Language)
 			require.NoError(t, err)
 
-			tc.Validate(t, taskWriteTests, repository, resultPath)
+			tc.Validate(t, taskWriteTests, repository, resultPath, logger)
 		})
 	}
 
