@@ -13,6 +13,7 @@ import (
 	"github.com/symflower/eval-dev-quality/language/java"
 	"github.com/symflower/eval-dev-quality/log"
 	modeltesting "github.com/symflower/eval-dev-quality/model/testing"
+	evaltask "github.com/symflower/eval-dev-quality/task"
 	"github.com/zimmski/osutil"
 	"github.com/zimmski/osutil/bytesutil"
 )
@@ -20,20 +21,14 @@ import (
 func TestTaskCodeRepairRun(t *testing.T) {
 	validate := func(t *testing.T, tc *tasktesting.TestCaseTask) {
 		t.Run(tc.Name, func(t *testing.T) {
-			resultPath := t.TempDir()
-
-			logOutput, logger := log.Buffer()
-			defer func() {
-				if t.Failed() {
-					t.Logf("Logging output: %s", logOutput.String())
-				}
-			}()
-			repository, cleanup, err := TemporaryRepository(logger, tc.TestDataPath, tc.RepositoryPath)
-			assert.NoError(t, err)
-			defer cleanup()
-
-			taskWriteTests := newCodeRepairTask(logger, resultPath, tc.Model, tc.Language)
-			tc.Validate(t, taskWriteTests, repository, resultPath)
+			tc.Validate(t,
+				func(logger *log.Logger, testDataPath string, repositoryPathRelative string) (repository evaltask.Repository, cleanup func(), err error) {
+					return TemporaryRepository(logger, testDataPath, repositoryPathRelative)
+				},
+				func() (task evaltask.Task, err error) {
+					return &TaskCodeRepair{}, nil
+				},
+			)
 		})
 	}
 

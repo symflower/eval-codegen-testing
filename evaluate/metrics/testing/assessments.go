@@ -9,7 +9,7 @@ import (
 	"github.com/symflower/eval-dev-quality/evaluate/metrics"
 	"github.com/symflower/eval-dev-quality/language"
 	"github.com/symflower/eval-dev-quality/model"
-	"github.com/symflower/eval-dev-quality/task"
+	"github.com/symflower/eval-dev-quality/task/identifier"
 )
 
 // AssertAssessmentsEqual checks if the given assessments are equal ignoring default and nondeterministic values.
@@ -38,30 +38,30 @@ type AssessmentTuple struct {
 	Model          model.Model
 	Language       language.Language
 	RepositoryPath string
-	Task           task.Identifier
+	Task           identifier.TaskIdentifier
 	Assessment     metrics.Assessments
 }
 
 type AssessmentTuples []*AssessmentTuple
 
-func (at AssessmentTuples) ToMap() (lookup map[model.Model]map[language.Language]map[string]map[task.Identifier]metrics.Assessments) {
-	lookup = map[model.Model]map[language.Language]map[string]map[task.Identifier]metrics.Assessments{}
+func (at AssessmentTuples) ToMap() (lookup map[model.Model]map[language.Language]map[string]map[identifier.TaskIdentifier]metrics.Assessments) {
+	lookup = map[model.Model]map[language.Language]map[string]map[identifier.TaskIdentifier]metrics.Assessments{}
 	for _, t := range at {
 		perLanguageLookup, ok := lookup[t.Model]
 		if !ok {
-			perLanguageLookup = map[language.Language]map[string]map[task.Identifier]metrics.Assessments{}
+			perLanguageLookup = map[language.Language]map[string]map[identifier.TaskIdentifier]metrics.Assessments{}
 			lookup[t.Model] = perLanguageLookup
 		}
 
 		perRepositoryLookup, ok := perLanguageLookup[t.Language]
 		if !ok {
-			perRepositoryLookup = map[string]map[task.Identifier]metrics.Assessments{}
+			perRepositoryLookup = map[string]map[identifier.TaskIdentifier]metrics.Assessments{}
 			perLanguageLookup[t.Language] = perRepositoryLookup
 		}
 
 		perTaskLookup, ok := perRepositoryLookup[t.RepositoryPath]
 		if !ok {
-			perTaskLookup = map[task.Identifier]metrics.Assessments{}
+			perTaskLookup = map[identifier.TaskIdentifier]metrics.Assessments{}
 			perRepositoryLookup[t.RepositoryPath] = perTaskLookup
 		}
 

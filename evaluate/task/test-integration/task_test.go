@@ -1,17 +1,18 @@
 package testintegration
 
 import (
+	"log"
 	"path/filepath"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
-	"github.com/stretchr/testify/require"
 	"github.com/symflower/eval-dev-quality/evaluate/metrics"
 	evaluatetask "github.com/symflower/eval-dev-quality/evaluate/task"
 	tasktesting "github.com/symflower/eval-dev-quality/evaluate/task/testing"
 	"github.com/symflower/eval-dev-quality/language/golang"
-	"github.com/symflower/eval-dev-quality/log"
 	"github.com/symflower/eval-dev-quality/model/symflower"
+	"github.com/symflower/eval-dev-quality/task"
+	evaltask "github.com/symflower/eval-dev-quality/task"
 	"github.com/symflower/eval-dev-quality/tools"
 	toolstesting "github.com/symflower/eval-dev-quality/tools/testing"
 )
@@ -21,22 +22,14 @@ func TestTaskWriteTestsRun(t *testing.T) {
 
 	validate := func(t *testing.T, tc *tasktesting.TestCaseTask) {
 		t.Run(tc.Name, func(t *testing.T) {
-			resultPath := t.TempDir()
-
-			logOutput, logger := log.Buffer()
-			defer func() {
-				if t.Failed() {
-					t.Logf("Logging output: %s", logOutput.String())
-				}
-			}()
-			repository, cleanup, err := evaluatetask.TemporaryRepository(logger, tc.TestDataPath, tc.RepositoryPath)
-			assert.NoError(t, err)
-			defer cleanup()
-
-			taskWriteTests, err := evaluatetask.TaskForIdentifier(evaluatetask.IdentifierWriteTests, logger, resultPath, tc.Model, tc.Language)
-			require.NoError(t, err)
-
-			tc.Validate(t, taskWriteTests, repository, resultPath)
+			tc.Validate(t,
+				func(logger *log.Logger, testDataPath string, repositoryPathRelative string) (repository evaltask.Repository, cleanup func(), err error) {
+					return evaluatetask.TemporaryRepository(logger, testDataPath, repositoryPathRelative)
+				},
+				func() (task task.Task, err error) {
+					return evaluatetask.TaskForIdentifier(evaluatetask.IdentifierWriteTests)
+				},
+			)
 		})
 	}
 

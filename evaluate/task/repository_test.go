@@ -13,7 +13,7 @@ import (
 	"github.com/zimmski/osutil/bytesutil"
 
 	"github.com/symflower/eval-dev-quality/log"
-	"github.com/symflower/eval-dev-quality/task"
+	"github.com/symflower/eval-dev-quality/task/identifier"
 	"github.com/symflower/eval-dev-quality/util"
 )
 
@@ -175,7 +175,7 @@ func TestRepositoryLoadConfiguration(t *testing.T) {
 		RepositoryPath: filepath.Join("golang", "plain"),
 
 		ValidateAfter: func(t *testing.T, repository *Repository) {
-			expectedTaskIdentifiers := []task.Identifier{
+			expectedTaskIdentifiers := []identifier.TaskIdentifier{
 				IdentifierWriteTests,
 			}
 			assert.Equal(t, expectedTaskIdentifiers, repository.Tasks)
