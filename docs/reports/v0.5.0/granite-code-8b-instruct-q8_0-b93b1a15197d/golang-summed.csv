@@ -1,0 +1,2 @@
+model,score,coverage,files-executed,generate-tests-for-file-character-count,processing-time,response-character-count,response-no-error,response-no-excess,response-with-code
+ollama/granite-code:8b-instruct-q8_0,1562,1370,44,79933,8168840,86112,120,5,23
