@@ -341,3 +341,73 @@ func TestLLMCodeRepairSourceFilePrompt(t *testing.T) {
 		`),
 	})
 }
+
+func TestLLMTranspileSourceFilePrompt(t *testing.T) {
+	type testCase struct {
+		Name string
+
+		Data *llmTranspileSourceFilePromptContext
+
+		ExpectedMessage string
+	}
+
+	validate := func(t *testing.T, tc *testCase) {
+		t.Run(tc.Name, func(t *testing.T) {
+			actualMessage, actualErr := llmTranspileSourceFilePrompt(tc.Data)
+			require.NoError(t, actualErr)
+
+			assert.Equal(t, tc.ExpectedMessage, actualMessage)
+		})
+	}
+
+	validate(t, &testCase{
+		Name: "Plain",
+
+		Data: &llmTranspileSourceFilePromptContext{
+			llmSourceFilePromptContext: llmSourceFilePromptContext{
+				Language: &golang.Language{},
+
+				Code: bytesutil.StringTrimIndentations(`
+					package foobar
+
+					func foobar(i int) int {
+						return i + 1
+					}
+				`),
+				FilePath:   "/path/to/foobar.go",
+				ImportPath: "foobar",
+			},
+			TargetLanguage: &java.Language{},
+			StubCode: bytesutil.StringTrimIndentations(`
+				package com.eval;
+
+				class Foobar {
+					static int foobar(int i) {}
+				}
+			`),
+		},
+
+		ExpectedMessage: bytesutil.StringTrimIndentations(`
+			Given the following Go code file "/path/to/foobar.go" with package "foobar", transpile it into a Java source file.
+			The response must contain only the transpiled Java source code and nothing else.
+
+			` + "```" + `golang
+			package foobar
+
+			func foobar(i int) int {
+				return i + 1
+			}
+			` + "```" + `
+
+			The transpiled Java code file must have the following signature and package:
+
+			` + "```" + `java
+			package com.eval;
+
+			class Foobar {
+				static int foobar(int i) {}
+			}
+			` + "```" + `
+		`),
+	})
+}
