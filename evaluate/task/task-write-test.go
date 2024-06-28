@@ -1,8 +1,6 @@
 package task
 
 import (
-	"path/filepath"
-
 	pkgerrors "github.com/pkg/errors"
 	"github.com/symflower/eval-dev-quality/evaluate/metrics"
 	"github.com/symflower/eval-dev-quality/language"
@@ -44,19 +42,15 @@ func (t *TaskWriteTests) Identifier() evaltask.Identifier {
 
 // TaskWriteTests generates test files for the given implementation file in a repository.
 func (t *TaskWriteTests) Run(repository evaltask.Repository) (repositoryAssessment metrics.Assessments, problems []error, err error) {
-	dataPath := repository.DataPath()
-
-	log, logClose, err := log.WithFile(t.Logger, filepath.Join(t.ResultPath, string(t.Identifier()), model.CleanModelNameForFileSystem(t.Model.ID()), t.Language.ID(), repository.Name()+".log"))
+	log, finalizeRun, err := initializeLoggingForRun(t.Logger, t.ResultPath, t, repository, t.Model, t.Language)
 	if err != nil {
 		return nil, nil, err
 	}
-	defer logClose()
-
-	log.Printf("Evaluating model %q on task %q using language %q and repository %q", t.Model.ID(), t.Identifier(), t.Language.ID(), repository.Name())
 	defer func() {
-		log.Printf("Evaluated model %q on task %q using language %q and repository %q: encountered %d problems: %+v", t.Model.ID(), t.Identifier(), t.Language.ID(), repository.Name(), len(problems), problems)
+		finalizeRun(problems)
 	}()
 
+	dataPath := repository.DataPath()
 	filePaths, err := t.Language.Files(log, dataPath)
 	if err != nil {
 		return nil, problems, pkgerrors.WithStack(err)
