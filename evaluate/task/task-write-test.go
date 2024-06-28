@@ -63,6 +63,7 @@ func (t *TaskWriteTests) Run(repository evaltask.Repository) (repositoryAssessme
 	}
 
 	modelAssessment := metrics.NewAssessments()
+	symflowerAssessment := metrics.NewAssessments()
 	for _, filePath := range filePaths {
 		if err := repository.Reset(t.Logger); err != nil {
 			t.Logger.Panicf("ERROR: unable to reset temporary repository path: %s", err)
@@ -93,15 +94,46 @@ func (t *TaskWriteTests) Run(repository evaltask.Repository) (repositoryAssessme
 		if err != nil {
 			problems = append(problems, pkgerrors.WithMessage(err, filePath))
 
-			continue
+			// Run "symflower fix"  if the model response fails to execute.
+			if t.Language.ID() == "golang" { // Currently we only support Go for "symflower fix".
+				log.Print("model response alone failed execution, attempting to fix with \"symflower fix \"")
+
+				assessments := metrics.NewAssessments()
+				duration, err := symflowerFix(log, modelAssessment, dataPath, t.Language)
+				if err != nil {
+					problems = append(problems, err)
+
+					continue
+				}
+				assessments[metrics.AssessmentKeyProcessingTime] = duration
+
+				coverage, ps, err := t.Language.Execute(log, dataPath)
+				problems = append(problems, ps...)
+				if err != nil {
+					problems = append(problems, err)
+
+					continue
+				}
+				log.Printf("with symflower repair: Executes tests with %d coverage objects", coverage)
+
+				assessments.Award(metrics.AssessmentKeyFilesExecuted)
+				assessments.AwardPoints(metrics.AssessmentKeyCoverage, coverage)
+
+				symflowerAssessment.Add(metrics.CombineWithSymflowerFixAssessments(modelAssessment, assessments))
+			}
 		}
 		log.Printf("Executes tests with %d coverage objects", coverage)
 		modelAssessment.Award(metrics.AssessmentKeyFilesExecuted)
 		modelAssessment.AwardPoints(metrics.AssessmentKeyCoverage, coverage)
 	}
 
+	// The symflower fix assessment should show how symflower can improve the result, so merge with the model assessment.
+	if len(symflowerAssessment) == 0 {
+		symflowerAssessment = modelAssessment
+	}
 	repositoryAssessment = map[evaltask.Identifier]metrics.Assessments{
-		IdentifierWriteTests: modelAssessment,
+		IdentifierWriteTests:             modelAssessment,
+		IdentifierWriteTestsSymflowerFix: symflowerAssessment,
 	}
 
 	return repositoryAssessment, problems, nil
