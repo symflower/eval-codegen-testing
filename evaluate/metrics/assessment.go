@@ -152,3 +152,10 @@ func (a Assessments) StringCSV() (row []string) {
 
 	return row
 }
+
+// CombineWithSymflowerFixAssessments combines the model assessments with the ones from "symflower fix".
+func CombineWithSymflowerFixAssessments(modelAssessment Assessments, symflowerFixAssessments Assessments) (assessments Assessments) {
+	symflowerFixAssessments[AssessmentKeyProcessingTime] = modelAssessment[AssessmentKeyProcessingTime] + symflowerFixAssessments[AssessmentKeyProcessingTime]
+
+	return symflowerFixAssessments
+}

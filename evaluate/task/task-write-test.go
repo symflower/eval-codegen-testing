@@ -43,7 +43,7 @@ func (t *TaskWriteTests) Identifier() evaltask.Identifier {
 }
 
 // TaskWriteTests generates test files for the given implementation file in a repository.
-func (t *TaskWriteTests) Run(repository evaltask.Repository) (repositoryAssessment metrics.Assessments, problems []error, err error) {
+func (t *TaskWriteTests) Run(repository evaltask.Repository) (repositoryAssessment map[evaltask.Identifier]metrics.Assessments, problems []error, err error) {
 	dataPath := repository.DataPath()
 
 	log, logClose, err := log.WithFile(t.Logger, filepath.Join(t.ResultPath, string(t.Identifier()), model.CleanModelNameForFileSystem(t.Model.ID()), t.Language.ID(), repository.Name()+".log"))
@@ -62,7 +62,8 @@ func (t *TaskWriteTests) Run(repository evaltask.Repository) (repositoryAssessme
 		return nil, problems, pkgerrors.WithStack(err)
 	}
 
-	repositoryAssessment = metrics.NewAssessments()
+	modelAssessment := metrics.NewAssessments()
+	symflowerAssessment := metrics.NewAssessments()
 	for _, filePath := range filePaths {
 		if err := repository.Reset(t.Logger); err != nil {
 			t.Logger.Panicf("ERROR: unable to reset temporary repository path: %s", err)
@@ -85,19 +86,54 @@ func (t *TaskWriteTests) Run(repository evaltask.Repository) (repositoryAssessme
 		if assessments[metrics.AssessmentKeyProcessingTime] == 0 {
 			return nil, nil, pkgerrors.Errorf("no model response time measurement present for %q at repository %q", t.Model.ID(), repository.Name())
 		}
-		repositoryAssessment.Add(assessments)
-		repositoryAssessment.Award(metrics.AssessmentKeyResponseNoError)
+		modelAssessment.Add(assessments)
+		modelAssessment.Award(metrics.AssessmentKeyResponseNoError)
 
 		coverage, ps, err := t.Language.Execute(log, dataPath)
 		problems = append(problems, ps...)
 		if err != nil {
 			problems = append(problems, pkgerrors.WithMessage(err, filePath))
 
-			continue
+			// Run "symflower fix"  if the model response fails to execute.
+			if t.Language.ID() == "golang" { // Currently we only support Go for "symflower fix".
+				log.Print("model response alone failed execution, attempting to fix with \"symflower fix \"")
+
+				assessments := metrics.NewAssessments()
+				duration, err := symflowerFix(log, modelAssessment, dataPath, t.Language)
+				if err != nil {
+					problems = append(problems, err)
+
+					continue
+				}
+				assessments[metrics.AssessmentKeyProcessingTime] = duration
+
+				coverage, ps, err := t.Language.Execute(log, dataPath)
+				problems = append(problems, ps...)
+				if err != nil {
+					problems = append(problems, err)
+
+					continue
+				}
+				log.Printf("with symflower repair: Executes tests with %d coverage objects", coverage)
+
+				assessments.Award(metrics.AssessmentKeyFilesExecuted)
+				assessments.AwardPoints(metrics.AssessmentKeyCoverage, coverage)
+
+				symflowerAssessment.Add(metrics.CombineWithSymflowerFixAssessments(modelAssessment, assessments))
+			}
 		}
 		log.Printf("Executes tests with %d coverage objects", coverage)
-		repositoryAssessment.Award(metrics.AssessmentKeyFilesExecuted)
-		repositoryAssessment.AwardPoints(metrics.AssessmentKeyCoverage, coverage)
+		modelAssessment.Award(metrics.AssessmentKeyFilesExecuted)
+		modelAssessment.AwardPoints(metrics.AssessmentKeyCoverage, coverage)
+	}
+
+	// The symflower fix assessment should show how symflower can improve the result, so merge with the model assessment.
+	if len(symflowerAssessment) == 0 {
+		symflowerAssessment = modelAssessment
+	}
+	repositoryAssessment = map[evaltask.Identifier]metrics.Assessments{
+		IdentifierWriteTests:             modelAssessment,
+		IdentifierWriteTestsSymflowerFix: symflowerAssessment,
 	}
 
 	return repositoryAssessment, problems, nil
